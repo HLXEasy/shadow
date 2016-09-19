@@ -452,7 +452,6 @@ public:
         LogPrintf("%s", ToString().c_str());
     }
 
-
     bool ReadFromDisk(CTxDB& txdb, COutPoint prevout, CTxIndex& txindexRet);
     bool ReadFromDisk(CTxDB& txdb, COutPoint prevout);
     bool ReadFromDisk(COutPoint prevout);

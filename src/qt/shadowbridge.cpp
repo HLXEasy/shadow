@@ -3,6 +3,8 @@
 #include "shadowgui.h"
 #include "guiutil.h"
 
+#include <boost/algorithm/string.hpp>
+
 #include "editaddressdialog.h"
 
 #include "transactiontablemodel.h"
@@ -104,7 +106,6 @@ public:
 
     void populateRows(int start, int end)
     {
-
         if(start > ROWS_TO_REFRESH)
             return;
 
@@ -123,7 +124,6 @@ public:
 
             start++;
         }
-
         if(!transactions.isEmpty())
             emitTransactions(transactions);
 
@@ -132,14 +132,13 @@ public:
 
     void populatePage()
     {
-        if(!prepare(false))
+
+        if(!prepare())
             return;
 
         QVariantList transactions;
 
         int row = -1;
-
-        running = true;
 
         while(++row < numRows && ttm->index(row, 0).isValid())
             if(visibleTransactions.first() == "*"||visibleTransactions.contains(ttm->index(row, TransactionTableModel::Type).data().toString()))
@@ -171,9 +170,9 @@ private:
     int rowsPerPage;
     bool running;
 
-    bool prepare(bool running=true)
+    bool prepare()
     {
-        if (this->running || (running && clientModel->inInitialBlockDownload()))
+        if (this->running)
             return false;
 
         numRows = ttm->rowCount();
@@ -181,7 +180,7 @@ private:
         rowsPerPage = clientModel->getOptionsModel()->getRowsPerPage();
         visibleTransactions = clientModel->getOptionsModel()->getVisibleTransactions();
 
-        this->running = running;
+        this->running = true;
 
         return true;
     }
@@ -268,17 +267,19 @@ public:
 
     QString addMessage(int row)
     {
-        return QString("{\"id\":\"%10\",\"type\":\"%1\",\"sent_date\":\"%2\",\"received_date\":\"%3\", \"label_value\":\"%4\",\"label\":\"%5\",\"to_address\":\"%6\",\"from_address\":\"%7\",\"message\":\"%8\",\"read\":%9},")
+        //QString message = "{\"id\":\"%10\",\"type\":\"%1\",\"sent_date\":\"%2\",\"received_date\":\"%3\", \"label_value\":\"%4\",\"label\":\"%5\",\"labelTo\":\"%11\",\"to_address\":\"%6\",\"from_address\":\"%7\",\"message\":\"%8\",\"read\":%9},";
+        return QString("{\"id\":\"%10\",\"type\":\"%1\",\"sent_date\":\"%2\",\"received_date\":\"%3\", \"label_value\":\"%4\",\"label\":\"%5\",\"labelTo\":\"%11\",\"to_address\":\"%6\",\"from_address\":\"%7\",\"message\":\"%8\",\"read\":%9},")
                 .arg(mtm->index(row, MessageModel::Type)            .data().toString())
-                .arg(mtm->index(row, MessageModel::SentDateTime)    .data().toDateTime().toTime_t())
-                .arg(mtm->index(row, MessageModel::ReceivedDateTime).data().toDateTime().toTime_t())
+                .arg(QString::number(mtm->index(row, MessageModel::SentDateTime)    .data().toDateTime().toTime_t()).toHtmlEscaped())
+                .arg(QString::number(mtm->index(row, MessageModel::ReceivedDateTime).data().toDateTime().toTime_t()).toHtmlEscaped())
                 .arg(mtm->index(row, MessageModel::Label)           .data(MessageModel::LabelRole).toString())
                 .arg(mtm->index(row, MessageModel::Label)           .data().toString().replace("\\", "\\\\").replace("/", "\\/").replace("\"","\\\""))
                 .arg(mtm->index(row, MessageModel::ToAddress)       .data().toString())
                 .arg(mtm->index(row, MessageModel::FromAddress)     .data().toString())
                 .arg(mtm->index(row, MessageModel::Message)         .data().toString().toHtmlEscaped().replace("\\", "\\\\").replace("\"","\\\"").replace("\n", "\\n"))
                 .arg(mtm->index(row, MessageModel::Read)            .data().toBool())
-                .arg(mtm->index(row, MessageModel::Key)             .data().toString());
+                .arg(mtm->index(row, MessageModel::Key)             .data().toString())
+                .arg(mtm->index(row, MessageModel::LabelTo)         .data().toString().replace("\\", "\\\\").replace("/", "\\/").replace("\"","\\\""));
     }
 
 protected:
@@ -336,6 +337,7 @@ void ShadowBridge::setWalletModel()
 
     connect(window->clientModel->getOptionsModel(), SIGNAL(visibleTransactionsChanged(QStringList)), SLOT(populateTransactionTable()));
 }
+
 
 // This is just a hook, we won't really be setting the model...
 void ShadowBridge::setMessageModel()
@@ -453,12 +455,6 @@ void ShadowBridge::clearRecipients()
 
 bool ShadowBridge::sendCoins(bool fUseCoinControl, QString sChangeAddr)
 {
-    WalletModel::UnlockContext ctx(window->walletModel->requestUnlock());
-
-    // Unlock wallet was cancelled
-    if(!ctx.isValid())
-        return false;
-
     int inputTypes = -1;
     int nAnonOutputs = 0;
     int ringSizes = -1;
@@ -479,12 +475,12 @@ bool ShadowBridge::sendCoins(bool fUseCoinControl, QString sChangeAddr)
                 nAnonOutputs++;
                 break;
             case TXT_ANON_TO_ANON:
-                formatted.append(tr("<b>%1</b>, ring size %2 to SHADOW %3 (%4)").arg(BitcoinUnits::formatWithUnit(BitcoinUnits::SDC, rcp.amount), QString::number(rcp.nRingSize), Qt::escape(rcp.label), rcp.address));
+                formatted.append(tr("<b>%1</b> SHADOW, ring size %2 to SHADOW %3 (%4)").arg(BitcoinUnits::formatWithUnit(BitcoinUnits::SDC, rcp.amount), QString::number(rcp.nRingSize), Qt::escape(rcp.label), rcp.address));
                 inputType = 1;
                 nAnonOutputs++;
                 break;
             case TXT_ANON_TO_SDC:
-                formatted.append(tr("<b>%1</b>, ring size %2 to SDC %3 (%4)").arg(BitcoinUnits::formatWithUnit(BitcoinUnits::SDC, rcp.amount), QString::number(rcp.nRingSize), Qt::escape(rcp.label), rcp.address));
+                formatted.append(tr("<b>%1</b> SHADOW, ring size %2 to SDC %3 (%4)").arg(BitcoinUnits::formatWithUnit(BitcoinUnits::SDC, rcp.amount), QString::number(rcp.nRingSize), Qt::escape(rcp.label), rcp.address));
                 inputType = 1;
                 break;
             default:
@@ -560,6 +556,12 @@ bool ShadowBridge::sendCoins(bool fUseCoinControl, QString sChangeAddr)
         } else
             CoinControlDialog::coinControl->destChange = CNoDestination();
     };
+
+    WalletModel::UnlockContext ctx(window->walletModel->requestUnlock());
+
+    // Unlock wallet was cancelled
+    if(!ctx.isValid())
+        return false;
 
     if (inputTypes == 1 || nAnonOutputs > 0)
         sendstatus = window->walletModel->sendCoinsAnon(recipients, fUseCoinControl ? CoinControlDialog::coinControl : NULL);
@@ -836,6 +838,13 @@ QString ShadowBridge::getAddressLabel(QString address)
 
 void ShadowBridge::updateAddressLabel(QString address, QString label)
 {
+    QString actualLabel = getAddressLabel(address);
+
+    if(actualLabel.startsWith("group_"))
+        label = "group_" + label;
+    else if(label.startsWith("group_"))
+        return;
+
     addressModel->atm->setData(addressModel->atm->index(addressModel->atm->lookupAddress(address), addressModel->atm->Label), QVariant(label), Qt::EditRole);
 }
 
@@ -857,14 +866,15 @@ void ShadowBridge::appendMessages(QString messages, bool reset)
 
 void ShadowBridge::appendMessage(int row)
 {
-    emitMessage(window->messageModel->index(row, MessageModel::Key)             .data().toString(),
-                window->messageModel->index(row, MessageModel::Type)            .data().toString(),
+    emitMessage(window->messageModel->index(row, MessageModel::Key)             .data().toString().toHtmlEscaped(),
+                window->messageModel->index(row, MessageModel::Type)            .data().toString().toHtmlEscaped(),
                 window->messageModel->index(row, MessageModel::SentDateTime)    .data().toDateTime().toTime_t(),
                 window->messageModel->index(row, MessageModel::ReceivedDateTime).data().toDateTime().toTime_t(),
-                window->messageModel->index(row, MessageModel::Label)           .data(MessageModel::LabelRole).toString(),
-                window->messageModel->index(row, MessageModel::Label)           .data().toString().replace("\"","\\\"").replace("\\", "\\\\").replace("/", "\\/"),
-                window->messageModel->index(row, MessageModel::ToAddress)       .data().toString(),
-                window->messageModel->index(row, MessageModel::FromAddress)     .data().toString(),
+                window->messageModel->index(row, MessageModel::Label)           .data(MessageModel::LabelRole).toString().toHtmlEscaped(),
+                window->messageModel->index(row, MessageModel::Label)           .data().toString().replace("\"","\\\"").replace("\\", "\\\\").replace("/", "\\/").toHtmlEscaped(),
+                window->messageModel->index(row, MessageModel::LabelTo)           .data().toString().replace("\"","\\\"").replace("\\", "\\\\").replace("/", "\\/").toHtmlEscaped(),
+                window->messageModel->index(row, MessageModel::ToAddress)       .data().toString().toHtmlEscaped(),
+                window->messageModel->index(row, MessageModel::FromAddress)     .data().toString().toHtmlEscaped(),
                 window->messageModel->index(row, MessageModel::Read)            .data().toBool(),
                 window->messageModel->index(row, MessageModel::Message)         .data().toString().toHtmlEscaped());
 }
@@ -896,11 +906,8 @@ bool ShadowBridge::markMessageAsRead(QString key)
     return window->messageModel->markMessageAsRead(key);
 }
 
-QString ShadowBridge::getPubKey(QString address, QString label)
+QString ShadowBridge::getPubKey(QString address)
 {
-    if(!label.isEmpty())
-        updateAddressLabel(address, label);
-
     return addressModel->atm->pubkeyForAddress(address);;
 }
 
@@ -909,7 +916,8 @@ bool ShadowBridge::setPubKey(QString address, QString pubkey)
     std::string sendTo = address.toStdString();
     std::string pbkey  = pubkey.toStdString();
 
-    return SecureMsgAddAddress(sendTo, pbkey) == 0;
+    int res = SecureMsgAddAddress(sendTo, pbkey);
+    return res == 0||res == 4;
 }
 
 bool ShadowBridge::sendMessage(const QString &address, const QString &message, const QString &from)
@@ -960,6 +968,162 @@ bool ShadowBridge::sendMessage(const QString &address, const QString &message, c
     return true;
 }
 
+QString ShadowBridge::createGroupChat(QString label)
+{
+    //return address to invite to people to.
+    LOCK2(cs_main, pwalletMain->cs_wallet);
+
+    std::string strLabel = "group_" + label.toStdString();
+
+    RandAddSeedPerfmon(); // util.cpp
+    CKey secret; // hey.h
+    secret.MakeNewKey(true);
+    CPubKey pubkey = secret.GetPubKey();
+    CKeyID vchAddress = pubkey.GetID();
+
+    pwalletMain->MarkDirty();
+    CBitcoinAddress addr(vchAddress);
+
+    std::string strAddress = addr.ToString();
+
+    pwalletMain->SetAddressBookName(addr.Get(), strLabel, NULL, true, true);
+
+    if (!pwalletMain->AddKeyPubKey(secret, pubkey))
+        return "false";
+
+    SecureMsgAddWalletAddresses();
+
+    return QString::fromStdString(strAddress);
+}
+
+
+QString ShadowBridge::joinGroupChat(QString privkey, QString label)
+{
+    /*
+    EXPERIMENTAL CODE, UNTESTED.
+    */
+    std::string strSecret = privkey.toStdString();
+    std::string strLabel = "group_" + label.toStdString();
+
+    int64_t nCreateTime = 1;
+    CBitcoinSecret vchSecret;
+    bool fGood = vchSecret.SetString(strSecret);
+
+    if (!fGood) return "false"; //throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid private key");
+    if (fWalletUnlockStakingOnly) return "false"; //throw JSONRPCError(RPC_WALLET_UNLOCK_NEEDED, "Wallet is unlocked for staking only.");
+
+    CKey key = vchSecret.GetKey();
+    CPubKey pubkey = key.GetPubKey();
+    CKeyID vchAddress = pubkey.GetID();
+    {
+        LOCK2(cs_main, pwalletMain->cs_wallet);
+
+        pwalletMain->MarkDirty();
+        pwalletMain->SetAddressBookName(vchAddress, strLabel);
+
+        // Don't throw error in case a key is already there
+        if (pwalletMain->HaveKey(vchAddress))
+            return "false";
+
+        pwalletMain->mapKeyMetadata[vchAddress].nCreateTime = nCreateTime;
+
+        if (!pwalletMain->AddKeyPubKey(key, pubkey))
+            return "false";
+            //throw JSONRPCError(RPC_WALLET_ERROR, "Error adding key to wallet");
+
+        // whenever a key is imported, we need to scan the whole chain
+        pwalletMain->nTimeFirstKey = nCreateTime; // 0 would be considered 'no value'
+
+    }
+
+    SecureMsgAddWalletAddresses();
+    //TODO: return address and appendAddress with javascript
+    CBitcoinAddress addr(vchAddress);
+    return QString::fromStdString(addr.ToString());
+}
+
+
+QVariantList ShadowBridge::inviteGroupChat(QString qsaddress, QVariantList invites, QString from)
+{
+    //TODO: check if part of HD wallet, if it is refuse to send invites.
+    QVariantList r; //Return
+
+    QString actualLabel = getAddressLabel(qsaddress);
+
+    if(!actualLabel.startsWith("group_")){
+        LogPrintf("[inviteGroupChat] -- This should never happen, if it does please notify devteam.\n");
+        QMessageBox::warning(window, tr("Sanity Error!"),
+            tr("Error: a sanity check prevented the transfer of a non-group private key, please close your wallet and report this error to the development team as soon as possible."),
+            QMessageBox::Ok, QMessageBox::Ok);
+    } else {
+        actualLabel.replace("group_","");
+    }
+
+    QString informText = "Are you sure you want to invite the following addresses to this group?\n";
+
+    for(int i = 0; i < invites.size(); i++)
+    {
+        QString inviteAddress = invites.at(i).toString();
+        QString inviteLabel = getAddressLabel(inviteAddress);
+        informText.append(inviteLabel + " -- " + inviteAddress + "\n");
+    }
+
+    QMessageBox msgBox;
+    msgBox.setStyleSheet("QLabel{min-width: 600px;}");
+    msgBox.setText("Inviting to group " + actualLabel);
+    msgBox.setInformativeText(informText);
+    msgBox.setStandardButtons(QMessageBox::Ok | QMessageBox::Cancel);
+    msgBox.setDefaultButton(QMessageBox::Ok);
+
+    if(msgBox.exec() == QMessageBox::Cancel)
+    {
+        LogPrintf("[inviteGroupChat] -- inviteGroupChat aborted.\n");
+        r.append("error");
+        return r;
+    }
+
+    LogPrintf("[inviteGroupChat] -- start\n");
+    CBitcoinAddress address;
+
+    if (!address.SetString(qsaddress.toStdString()))
+    {
+        LogPrintf("[inviteGroupChat] -- SetString address failed.\n");
+        r.append("error");
+        return r;
+    }
+
+    CKeyID keyID;
+    if (!address.GetKeyID(keyID))
+    {
+        LogPrintf("[inviteGroupChat] -- GetKeyID failed.\n");
+        r.append("error");
+        return r;
+    }
+
+    CKey vchSecret;
+
+    if (!pwalletMain->GetKey(keyID, vchSecret))
+    {
+        LogPrintf("[inviteGroupChat] -- GetKey failed.\n");
+        r.append("error");
+        return r;
+    }
+
+    QString message = "/invite " + QString::fromStdString(CBitcoinSecret(vchSecret).ToString()) + " " + actualLabel;
+
+    //SecureString privkey(); //.reserve then .assign(CBitcoinSecret(vchSecret).ToString()))
+
+    for(int i = 0; i < invites.size(); i++)
+    {
+        QString inviteAddress = invites.at(i).toString();
+        LogPrintf("[inviteGroupChat] sending invite!");
+
+        if(thMessage->mtm->sendMessage(inviteAddress, message, from) == MessageModel::OK)
+            r.append(inviteAddress);
+    }
+
+    return invites;
+}
 
 void ShadowBridge::connectSignals()
 {
@@ -1039,12 +1203,12 @@ QVariantMap ShadowBridge::listLatestBlocks()
         };
 
         QVariantMap latestBlock;
-        latestBlock.insert("block_hash"         , QString::fromStdString(recentBlock->GetBlockHash().ToString()));
-        latestBlock.insert("block_height"       , recentBlock->nHeight);
-        latestBlock.insert("block_timestamp"    , DateTimeStrFormat("%x %H:%M:%S", recentBlock->GetBlockTime()).c_str());
-        latestBlock.insert("block_transactions" , QString::number(block.vtx.size() - 1));
-        latestBlock.insert("block_size"         , recentBlock->nBits);
-        latestBlocks.insert(QString::number(x)  , latestBlock);
+        latestBlock.insert("block_hash"        , QString::fromStdString(recentBlock->GetBlockHash().ToString()));
+        latestBlock.insert("block_height"      , recentBlock->nHeight);
+        latestBlock.insert("block_timestamp"   , DateTimeStrFormat("%x %H:%M:%S", recentBlock->GetBlockTime()).c_str());
+        latestBlock.insert("block_transactions", QString::number(block.vtx.size() - 1));
+        latestBlock.insert("block_size"        , recentBlock->nBits);
+        latestBlocks.insert(QString::number(x) , latestBlock);
         recentBlock = recentBlock->pprev;
     }
     return latestBlocks;
@@ -1095,12 +1259,12 @@ QVariantMap ShadowBridge::findBlock(QString searchID)
         return foundBlock;
     };
 
-    foundBlock.insert("block_hash"         , QString::fromStdString(findBlock->GetBlockHash().ToString()));
-    foundBlock.insert("block_height"       , findBlock->nHeight);
-    foundBlock.insert("block_timestamp"    , DateTimeStrFormat("%x %H:%M:%S", findBlock->GetBlockTime()).c_str());
-    foundBlock.insert("block_transactions" , QString::number(block.vtx.size() - 1));
-    foundBlock.insert("block_size"         , findBlock->nBits);
-    foundBlock.insert("error_msg"          , "");
+    foundBlock.insert("block_hash"        , QString::fromStdString(findBlock->GetBlockHash().ToString()));
+    foundBlock.insert("block_height"      , findBlock->nHeight);
+    foundBlock.insert("block_timestamp"   , DateTimeStrFormat("%x %H:%M:%S", findBlock->GetBlockTime()).c_str());
+    foundBlock.insert("block_transactions", QString::number(block.vtx.size() - 1));
+    foundBlock.insert("block_size"        , findBlock->nBits);
+    foundBlock.insert("error_msg"         , "");
 
     return foundBlock;
 }
@@ -1167,21 +1331,21 @@ QVariantMap ShadowBridge::blockDetails(QString blkHash)
     std::string sHashPrev = blkIndex->pprev ? blkIndex->pprev->GetBlockHash().ToString() : "None";
     std::string sHashNext = blkIndex->pnext ? blkIndex->pnext->GetBlockHash().ToString() : "None";
 
-    blockDetail.insert("block_hash"             , QString::fromStdString(blkIndex->GetBlockHash().ToString()));
-    blockDetail.insert("block_transactions"     , QString::number(block.vtx.size() - 1));
-    blockDetail.insert("block_height"           , blkIndex->nHeight);
-    blockDetail.insert("block_type"             , QString::fromStdString(sBlockType));
-    blockDetail.insert("block_reward"           , QString::number(nBlockReward));
-    blockDetail.insert("block_timestamp"        , DateTimeStrFormat("%x %H:%M:%S", blkIndex->GetBlockTime()).c_str());
-    blockDetail.insert("block_merkle_root"      , QString::fromStdString(blkIndex->hashMerkleRoot.ToString()));
-    blockDetail.insert("block_prev_block"       , QString::fromStdString(sHashPrev));
-    blockDetail.insert("block_next_block"       , QString::fromStdString(sHashNext));
-    blockDetail.insert("block_difficulty"       , GetDifficulty(blkIndex));
-    blockDetail.insert("block_bits"             , blkIndex->nBits);
-    blockDetail.insert("block_size"             , (int)::GetSerializeSize(block, SER_NETWORK, PROTOCOL_VERSION));
-    blockDetail.insert("block_version"          , blkIndex->nVersion);
-    blockDetail.insert("block_nonce"            , blkIndex->nNonce);
-    blockDetail.insert("error_msg"              , "");
+    blockDetail.insert("block_hash"        , QString::fromStdString(blkIndex->GetBlockHash().ToString()));
+    blockDetail.insert("block_transactions", QString::number(block.vtx.size() - 1));
+    blockDetail.insert("block_height"      , blkIndex->nHeight);
+    blockDetail.insert("block_type"        , QString::fromStdString(sBlockType));
+    blockDetail.insert("block_reward"      , QString::number(nBlockReward));
+    blockDetail.insert("block_timestamp"   , DateTimeStrFormat("%x %H:%M:%S", blkIndex->GetBlockTime()).c_str());
+    blockDetail.insert("block_merkle_root" , QString::fromStdString(blkIndex->hashMerkleRoot.ToString()));
+    blockDetail.insert("block_prev_block"  , QString::fromStdString(sHashPrev));
+    blockDetail.insert("block_next_block"  , QString::fromStdString(sHashNext));
+    blockDetail.insert("block_difficulty"  , GetDifficulty(blkIndex));
+    blockDetail.insert("block_bits"        , blkIndex->nBits);
+    blockDetail.insert("block_size"        , (int)::GetSerializeSize(block, SER_NETWORK, PROTOCOL_VERSION));
+    blockDetail.insert("block_version"     , blkIndex->nVersion);
+    blockDetail.insert("block_nonce"       , blkIndex->nNonce);
+    blockDetail.insert("error_msg"         , "");
 
     return blockDetail;
 }
@@ -1221,10 +1385,9 @@ QVariantMap ShadowBridge::listTransactionsForBlock(QString blkHash)
         CTransaction txn;
         txn = block.vtx[x];
 
-        blockTxn.insert("transaction_hash"        , QString::fromStdString(txn.GetHash().ToString()));
-        blockTxn.insert("transaction_value"       , QString::number(txn.GetValueOut() / (double)COIN));
-        blkTransactions.insert(QString::number(x) , blockTxn);
-
+        blockTxn.insert("transaction_hash"       , QString::fromStdString(txn.GetHash().ToString()));
+        blockTxn.insert("transaction_value"      , QString::number(txn.GetValueOut() / (double)COIN));
+        blkTransactions.insert(QString::number(x), blockTxn);
     }
 
     return blkTransactions;
@@ -1420,11 +1583,12 @@ QVariantMap ShadowBridge::signMessage(QString address, QString message)
     std::vector<unsigned char> vchSig;
     if (!key.SignCompact(Hash(ss.begin(), ss.end()), vchSig))
     {
-        result.insert("error_msg"       , "Message signing failed.");
+        result.insert("error_msg" , "Message signing failed.");
         return result;
     }
     result.insert("signed_signature", QString::fromStdString(EncodeBase64(&vchSig[0], vchSig.size())));
-    result.insert("error_msg"       , "");
+    result.insert("error_msg", "");
+
     return result;
 }
 
@@ -1472,7 +1636,8 @@ QVariantMap ShadowBridge::verifyMessage(QString address, QString message, QStrin
     }
 
     // If we get here all went well and the message is valid
-    result.insert("error_msg"       , "");
+    result.insert("error_msg", "");
+
     return result;
 }
 
@@ -1530,8 +1695,9 @@ QVariantMap ShadowBridge::getNewMnemonic(QString password, QString language)
     };
 
     result.insert("error_msg", "");
-    result.insert("mnemonic" , QString::fromStdString(sMnemonic));
-    //result.insert("master"   , QString::fromStdString(sKey));
+    result.insert("mnemonic", QString::fromStdString(sMnemonic));
+    //result.insert("master", QString::fromStdString(sKey));
+
     return result;
 }
 
@@ -1952,7 +2118,8 @@ QVariantMap ShadowBridge::extKeyImport(QString inKey, QString inLabel, bool fBip
     newAddress(inLabel + (inLabel.isEmpty() ? "" : " ") + "default Stealth", AT_Stealth, "", false);
 
     // If we get here all went well and the message is valid
-    result.insert("error_msg" , "");
+    result.insert("error_msg", "");
+
     return result;
 }
 
@@ -2012,11 +2179,11 @@ QVariantMap ShadowBridge::extKeySetDefault(QString extKeyID)
         else
             delete sea;
 
-        result.insert("result"      , "Success.");
+        result.insert("result", "Success.");
     } // cs_wallet
 
     // If we get here all went well
-    result.insert("error_msg"   , "");
+    result.insert("error_msg", "");
     return result;
 }
 
@@ -2026,7 +2193,8 @@ QVariantMap ShadowBridge::extKeySetMaster(QString extKeyID)
     std::string sInKey = extKeyID.toStdString();
     if (extKeyID.length() == 0)
     {
-        result.insert("error_msg"       , "Must specify ext key or id.");
+        result.insert("error_msg", "Must specify ext key or id.");
+
         return result;
     };
 
@@ -2047,7 +2215,7 @@ QVariantMap ShadowBridge::extKeySetMaster(QString extKeyID)
         idNewMaster = ekp.GetID();
     } else
     {
-        result.insert("error_msg"       , "Invalid key: " + extKeyID);
+        result.insert("error_msg", "Invalid key: " + extKeyID);
         return result;
     };
 
@@ -2056,7 +2224,7 @@ QVariantMap ShadowBridge::extKeySetMaster(QString extKeyID)
         CWalletDB wdb(pwalletMain->strWalletFile, "r+");
         if (!wdb.TxnBegin())
         {
-            result.insert("error_msg"       , "TxnBegin failed.");
+            result.insert("error_msg", "TxnBegin failed.");
             return result;
         }
 
@@ -2064,19 +2232,20 @@ QVariantMap ShadowBridge::extKeySetMaster(QString extKeyID)
         if (0 != (rv = pwalletMain->ExtKeySetMaster(&wdb, idNewMaster)))
         {
             wdb.TxnAbort();
-            result.insert("error_msg"       , QString::fromStdString(strprintf("ExtKeySetMaster failed, %s.", ExtKeyGetString(rv))));
+            result.insert("error_msg", QString::fromStdString(strprintf("ExtKeySetMaster failed, %s.", ExtKeyGetString(rv))));
             return result;
         };
         if (!wdb.TxnCommit())
         {
-            result.insert("error_msg"       , "TxnCommit failed.");
+            result.insert("error_msg", "TxnCommit failed.");
             return result;
         }
     } // cs_wallet
 
     // If we get here all went well
-    result.insert("error_msg"   , "");
-    result.insert("result"      , "Success.");
+    result.insert("error_msg", "");
+    result.insert("result", "Success.");
+
     return result;
 }
 
@@ -2087,7 +2256,7 @@ QVariantMap ShadowBridge::extKeySetActive(QString extKeyID, QString isActive)
 
     if (extKeyID.length() == 0)
     {
-        result.insert("error_msg"       , "Must specify ext key or id.");
+        result.insert("error_msg", "Must specify ext key or id.");
         return result;
     };
 
@@ -2097,7 +2266,7 @@ QVariantMap ShadowBridge::extKeySetActive(QString extKeyID, QString isActive)
     CKeyID id;
     if (!addr.SetString(sInKey))
     {
-        result.insert("error_msg"       , "Invalid key or account id.");
+        result.insert("error_msg", "Invalid key or account id.");
         return result;
     }
 
@@ -2116,7 +2285,7 @@ QVariantMap ShadowBridge::extKeySetActive(QString extKeyID, QString isActive)
         fAccount = true;
     } else
     {
-        result.insert("error_msg"       , "Invalid key or account id.");
+        result.insert("error_msg", "Invalid key or account id.");
         return result;
     }
 
@@ -2127,7 +2296,7 @@ QVariantMap ShadowBridge::extKeySetActive(QString extKeyID, QString isActive)
         CWalletDB wdb(pwalletMain->strWalletFile, "r+");
         if (!wdb.TxnBegin())
         {
-            result.insert("error_msg"       , "TxnBegin failed.");
+            result.insert("error_msg", "TxnBegin failed.");
             return result;
         }
 
@@ -2146,13 +2315,13 @@ QVariantMap ShadowBridge::extKeySetActive(QString extKeyID, QString isActive)
                     && !wdb.WriteExtKey(id, sek))
                 {
                     wdb.TxnAbort();
-                    result.insert("error_msg"       , "Write failed.");
+                    result.insert("error_msg", "Write failed.");
                     return result;
                 };
             } else
             {
                 wdb.TxnAbort();
-                result.insert("error_msg"       , "Account not in wallet.");
+                result.insert("error_msg", "Account not in wallet.");
                 return result;
             };
         };
@@ -2171,27 +2340,27 @@ QVariantMap ShadowBridge::extKeySetActive(QString extKeyID, QString isActive)
                     && !wdb.WriteExtAccount(id, sea))
                 {
                     wdb.TxnAbort();
-                    result.insert("error_msg"       , "Write failed.");
+                    result.insert("error_msg", "Write failed.");
                     return result;
                 };
             } else
             {
                 wdb.TxnAbort();
-                result.insert("error_msg"       , "Account not in wallet.");
+                result.insert("error_msg", "Account not in wallet.");
                 return result;
             };
         };
 
         if (!wdb.TxnCommit())
         {
-            result.insert("error_msg"       , "TxnCommit failed.");
+            result.insert("error_msg", "TxnCommit failed.");
             return result;
         }
 
     } // cs_wallet
 
     // If we get here all went well
-    result.insert("error_msg"   , "");
-    result.insert("result"      , "Success.");
+    result.insert("error_msg", "");
+    result.insert("result", "Success.");
     return result;
 }

@@ -1,6 +1,7 @@
 ![ShadowCash Logo](https://i.imgur.com/ovemJA3.png)
 
-[![Gitter](https://badges.gitter.im/shadowproject/shadow.svg)](https://gitter.im/shadowproject/shadow?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=body_badge) [![Build Status](https://travis-ci.org/shadowproject/shadow.svg?branch=master)](https://travis-ci.org/shadowproject/shadow) [![Code Climate](https://codeclimate.com/github/shadowproject/shadow/badges/gpa.svg)](https://codeclimate.com/github/shadowproject/shadow) [![Test Coverage](https://codeclimate.com/github/shadowproject/shadow/badges/coverage.svg)](https://codeclimate.com/github/shadowproject/shadow/coverage)
+[![Slack](https://slack.shadowproject.io/badge.svg)](https://slack.shadowproject.io/)
+[![Gitter](https://badges.gitter.im/shadowproject/shadow.svg)](https://gitter.im/shadowproject/shadow?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=body_badge) [![Build Status](https://travis-ci.org/shadowproject/shadow.svg?branch=master)](https://travis-ci.org/shadowproject/shadow) [![Code Climate](https://codeclimate.com/github/shadowproject/shadow/badges/gpa.svg)](https://codeclimate.com/github/shadowproject/shadow) [![Test Coverage](https://codeclimate.com/github/shadowproject/shadow/badges/coverage.svg)](https://codeclimate.com/github/shadowproject/shadow/coverage) 
 
 Introduction
 ===========================
