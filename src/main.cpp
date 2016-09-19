@@ -521,11 +521,6 @@ unsigned int LimitOrphanTxSize(unsigned int nMaxOrphans)
 }
 
 
-
-
-
-
-
 //////////////////////////////////////////////////////////////////////////////
 //
 // CTransaction and CTxIndex

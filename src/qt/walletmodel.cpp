@@ -18,7 +18,8 @@ WalletModel::WalletModel(CWallet *wallet, OptionsModel *optionsModel, QObject *p
     cachedBalance(0), cachedShadowBal(0), cachedStake(0), cachedUnconfirmedBalance(0), cachedImmatureBalance(0),
     cachedNumTransactions(0),
     cachedEncryptionStatus(Unencrypted),
-    cachedNumBlocks(0)
+    cachedNumBlocks(0),
+    fForceCheckBalanceChanged(false)
 {
     addressTableModel = new AddressTableModel(wallet, this);
     transactionTableModel = new TransactionTableModel(wallet, this);
@@ -91,12 +92,22 @@ void WalletModel::pollBalanceChanged()
     if(!lockWallet)
         return;
 
-    if(nBestHeight != cachedNumBlocks)
+    if(fForceCheckBalanceChanged || nBestHeight != cachedNumBlocks)
     {
+        fForceCheckBalanceChanged = false;
+
+        int newNumTransactions = getNumTransactions();
+        if(cachedNumTransactions != newNumTransactions)
+        {
+            cachedNumTransactions = newNumTransactions;
+            emit numTransactionsChanged(newNumTransactions);
+        }
+
         // Balance and number of transactions might have changed
         cachedNumBlocks = nBestHeight;
 
         checkBalanceChanged();
+
         if(transactionTableModel)
             transactionTableModel->updateConfirmations();
     }
@@ -127,18 +138,8 @@ void WalletModel::checkBalanceChanged()
 
 void WalletModel::updateTransaction(const QString &hash, int status)
 {
-    if(transactionTableModel)
-        transactionTableModel->updateTransaction(hash, status);
-
     // Balance and number of transactions might have changed
-    checkBalanceChanged();
-
-    int newNumTransactions = getNumTransactions();
-    if(cachedNumTransactions != newNumTransactions)
-    {
-        cachedNumTransactions = newNumTransactions;
-        emit numTransactionsChanged(newNumTransactions);
-    }
+    fForceCheckBalanceChanged = true;
 }
 
 void WalletModel::updateAddressBook(const QString &address, const QString &label, bool isMine, int status, bool fManual)

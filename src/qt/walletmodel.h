@@ -170,6 +170,7 @@ private:
     qint64 cachedNumTransactions;
     EncryptionStatus cachedEncryptionStatus;
     int cachedNumBlocks;
+    bool fForceCheckBalanceChanged;
 
     QTimer *pollTimer;
 

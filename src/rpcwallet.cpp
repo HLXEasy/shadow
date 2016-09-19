@@ -309,14 +309,11 @@ CBitcoinAddress GetAccountAddress(std::string strAccount, bool bForceNew=false)
     if (!account.vchPubKey.IsValid() || bForceNew || bKeyUsed)
     {
         // Generate a new key that is added to wallet
-        CStoredExtKey *sek = new CStoredExtKey();
- 
-        if (0 != pwalletMain->NewExtKeyFromAccount(strAccount, sek))
-        {
-            delete sek;
-            throw std::runtime_error("NewExtKeyFromAccount failed.");
-        };
-        account.vchPubKey = sek->kp.pubkey;
+        CPubKey newKey;
+
+        if (0 != pwalletMain->NewKeyFromAccount(newKey))
+            throw std::runtime_error("NewKeyFromAccount failed.");
+        account.vchPubKey = newKey;
 
         pwalletMain->SetAddressBookName(account.vchPubKey.GetID(), strAccount);
         walletdb.WriteAccount(strAccount, account);

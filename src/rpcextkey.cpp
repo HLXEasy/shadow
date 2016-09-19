@@ -59,6 +59,7 @@ int ExtractBip32InfoV(std::vector<unsigned char> &vchKey, Object &keyInfo, std::
     
     CKey key;
     key.Set(&vchKey[46], true);
+    keyInfo.push_back(Pair("privkey", strprintf("%s", CBitcoinSecret(key).ToString())));
     CKeyID id = key.GetPubKey().GetID();
     CBitcoinAddress addr;
     addr.Set(id, CChainParams::EXT_KEY_HASH);

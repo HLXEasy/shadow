@@ -1,6 +1,6 @@
 TEMPLATE = app
-TARGET = shadow
-VERSION = 1.4.0.5
+TARGET = umbra
+VERSION = 1.5.0.1
 INCLUDEPATH += src src/json src/qt
 DEFINES += BOOST_THREAD_USE_LIB BOOST_SPIRIT_THREADSAFE
 CONFIG += no_include_pwd
@@ -29,6 +29,7 @@ greaterThan(QT_MAJOR_VERSION, 4) {
 OBJECTS_DIR = build
 MOC_DIR = build
 UI_DIR = build
+RESOURCES = shadow.qrc
 
 android {
     INCLUDEPATH += src/qt/android
@@ -49,14 +50,29 @@ android {
 
     QT += widgets webkitwidgets
 }
-    RESOURCES = shadow.qrc
 
 build_macosx64 {
     QMAKE_TARGET_BUNDLE_PREFIX = co.shadowcoin
+    BOOST_LIB_SUFFIX=-mt
+    BOOST_INCLUDE_PATH=/usr/local/Cellar/boost/1.61.0_1/include
+    BOOST_LIB_PATH=/usr/local/Cellar/boost/1.61.0_1/lib
 
-    QMAKE_CXXFLAGS += -arch x86_64
+    BDB_INCLUDE_PATH=/usr/local/opt/berkeley-db4/include
+    BDB_LIB_PATH=/usr/local/Cellar/berkeley-db4/4.8.30/lib
+
+    OPENSSL_INCLUDE_PATH=/usr/local/opt/openssl/include
+    OPENSSL_LIB_PATH=/usr/local/opt/openssl/lib
+
+    #MINIUPNPC_INCLUDE_PATH=/usr/local/opt/miniupnpc/include
+    #MINIUPNPC_LIB_PATH=/usr/local/Cellar/miniupnpc/1.8.20131007/lib
+    MINIUPNPC_INCLUDE_PATH=/usr/local/Cellar/miniupnpc/2.0/include
+    MINIUPNPC_LIB_PATH=/usr/local/Cellar/miniupnpc/2.0/lib
+
+    QMAKE_CXXFLAGS += -arch x86_64 -stdlib=libc++
     QMAKE_CFLAGS += -arch x86_64
-    QMAKE_LFLAGS += -arch x86_64
+    QMAKE_LFLAGS += -arch x86_64 -stdlib=libc++
+    USE_UPNP=1
+
 }
 build_win32 {
     BOOST_LIB_SUFFIX=-mgw48-mt-s-1_55
@@ -384,7 +400,7 @@ QMAKE_EXTRA_COMPILERS += TSQM
 
 # "Other files" to show in Qt Creator
 OTHER_FILES += \
-    doc/*.rst doc/*.txt doc/README README.md res/bitcoin-qt.rc
+    .travis.yml doc/*.rst doc/*.txt doc/README README.md res/bitcoin-qt.rc contrib/macdeploy/createdmg
 
 # platform specific defaults, if not overridden on command line
 isEmpty(BOOST_LIB_SUFFIX) {
@@ -437,7 +453,7 @@ macx:OBJECTIVE_SOURCES += src/qt/macdockiconhandler.mm \
 macx:LIBS += -framework Foundation -framework ApplicationServices -framework AppKit
 macx:DEFINES += MAC_OSX MSG_NOSIGNAL=0
 macx:ICON = src/qt/res/icons/shadow.icns
-macx:TARGET = "Shadow"
+macx:TARGET = "Umbra"
 macx:QMAKE_CFLAGS_THREAD += -pthread
 macx:QMAKE_LFLAGS_THREAD += -pthread
 macx:QMAKE_CXXFLAGS_THREAD += -pthread

@@ -41,7 +41,7 @@ public:
     /** Get the full transaction details */
     Q_INVOKABLE QString transactionDetails(QString txid);
     /** Get the pubkey for an address */
-    Q_INVOKABLE QString getPubKey(QString address, QString label);
+    Q_INVOKABLE QString getPubKey(QString address);
 
     /** Show debug dialog */
     Q_INVOKABLE QVariantMap userAction(QVariantMap action);
@@ -61,6 +61,9 @@ public:
     Q_INVOKABLE bool sendCoins(bool fUseCoinControl, QString sChangeAddr);
     Q_INVOKABLE bool setPubKey(QString address, QString pubkey);
     Q_INVOKABLE bool sendMessage(const QString &address, const QString &message, const QString &from);
+    Q_INVOKABLE QString joinGroupChat(QString privkey, QString label);
+    Q_INVOKABLE QString createGroupChat(QString label);
+    Q_INVOKABLE QVariantList inviteGroupChat(QString address, QVariantList invites, QString from);
 
     Q_INVOKABLE void updateCoinControlAmount(qint64 amount);
     Q_INVOKABLE void updateCoinControlLabels(unsigned int &quantity, int64_t &amount, int64_t &fee, int64_t &afterfee, unsigned int &bytes, QString &priority, QString low, int64_t &change);
@@ -90,7 +93,7 @@ signals:
     void emitTransactions(QVariantList transactions);
     void emitAddresses(QVariantList addresses);
     void emitMessages(QString messages, bool reset);
-    void emitMessage(QString id, QString type, qint64 sent, qint64 received, QString label_v, QString label, QString to, QString from, bool read, QString message);
+    void emitMessage(QString id, QString type, qint64 sent, qint64 received, QString label_v, QString label, QString labelTo, QString to, QString from, bool read, QString message);
     void emitCoinControlUpdate(unsigned int quantity, qint64 amount, qint64 fee, qint64 afterfee, unsigned int bytes, QString priority, QString low, qint64 change);
     void emitAddressBookReturn(QString address, QString label);
     void emitReceipient(QString address, QString label, QString narration, qint64 amount);

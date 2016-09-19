@@ -71,8 +71,11 @@ public:
                 if (address.IsBIP32())
                 {
                     addrType = AT_BIP32;
-                } else
-                {
+                } else if (strName.startsWith("group_")){
+                     //find way to detect group address here, probably need to add extra parameter to address log
+                    addrType = AT_Group;
+                    strPubkey = parent->pubkeyForAddress(strAddress, false);
+                } else  {
                     addrType = AT_Normal;
                     strPubkey = parent->pubkeyForAddress(strAddress, false);
                 };
@@ -407,6 +410,10 @@ void AddressTableModel::updateEntry(const QString &address, const QString &label
     priv->updateEntry(address, label, isMine, status);
 }
 
+/*
+TODO:
+(+) Handle groupchat more properly, maybe based on &type? instead of addressType?
+*/
 QString AddressTableModel::addRow(const QString &type, const QString &label, const QString &address, int addressType)
 {
     std::string strLabel = label.toStdString();
@@ -499,7 +506,8 @@ QString AddressTableModel::addRow(const QString &type, const QString &label, con
             // - CBitcoinAddress displays public key only
             strAddress = CBitcoinAddress(sek->kp).ToString();
         } else
-        {
+        { //NORMAL OR GROUP
+            //TODO: decouple keygeneration from HD wallet
             CPubKey newKey;
             if (0 != wallet->NewKeyFromAccount(newKey))
             {
