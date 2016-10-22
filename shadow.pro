@@ -1,10 +1,13 @@
 TEMPLATE = app
 TARGET = umbra
-VERSION = 1.5.0.1
+VERSION = 1.5.0.2
 INCLUDEPATH += src src/json src/qt
 DEFINES += BOOST_THREAD_USE_LIB BOOST_SPIRIT_THREADSAFE
 CONFIG += no_include_pwd
 CONFIG += thread
+
+target.path = /usr/local/bin/
+INSTALLS += target
 
 # Mobile devices
 android:ios{
@@ -286,7 +289,8 @@ HEADERS += \
     src/qt/trafficgraphwidget.h \
     src/qt/messagemodel.h \
     src/qt/shadowgui.h \
-    src/qt/shadowbridge.h
+    src/qt/shadowbridge.h \
+    src/qt/bridgetranslations.h
 
 SOURCES += \
     src/alert.cpp \
@@ -368,7 +372,7 @@ SOURCES += \
     src/qt/shadowgui.cpp \
     src/qt/shadow.cpp \
     src/qt/shadowbridge.cpp
-    
+
 
 FORMS += \
     src/qt/forms/coincontroldialog.ui \
@@ -382,8 +386,8 @@ FORMS += \
 CODECFORTR = UTF-8
 
 # for lrelease/lupdate
-# also add new translations to src/qt/bitcoin.qrc under translations/
-TRANSLATIONS = $$files(src/qt/locale/bitcoin_*.ts)
+# also add new translations to shadow.qrc under translations/
+TRANSLATIONS = $$files(src/qt/locale/umbra*.ts)
 
 isEmpty(QMAKE_LRELEASE) {
     win32:QMAKE_LRELEASE = $$[QT_INSTALL_BINS]\\lrelease.exe

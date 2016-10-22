@@ -88,6 +88,8 @@ public:
     Q_INVOKABLE QVariantMap extKeySetMaster(QString extKeyID);
     Q_INVOKABLE QVariantMap extKeySetActive(QString extKeySetActive, QString isActive);
 
+    Q_INVOKABLE QString translateHtmlString(QString string);
+
 signals:
     void emitPaste(QString text);
     void emitTransactions(QVariantList transactions);
