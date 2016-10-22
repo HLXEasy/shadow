@@ -31,6 +31,8 @@
 
 #include "extkey.h"
 
+#include "bridgetranslations.h"
+
 #include <QApplication>
 #include <QThread>
 #include <QWebFrame>
@@ -1171,8 +1173,23 @@ void ShadowBridge::connectSignals()
     connect(addressModel->atm,            SIGNAL(dataChanged(QModelIndex,QModelIndex)), SLOT(updateAddresses(QModelIndex,QModelIndex)));
     connect(addressModel->atm,            SIGNAL(rowsInserted(QModelIndex,int,int)),    SLOT(insertAddresses(QModelIndex,int,int)));
 
-    connect(thMessage->mtm, SIGNAL(rowsInserted(QModelIndex,int,int)),    SLOT(insertMessages(QModelIndex,int,int)));
-    connect(thMessage->mtm, SIGNAL(modelReset()),                         SLOT(populateMessageTable()));
+    connect(thMessage->mtm, SIGNAL(rowsInserted(QModelIndex,int,int)), SLOT(insertMessages(QModelIndex,int,int)));
+    connect(thMessage->mtm, SIGNAL(modelReset()),                      SLOT(populateMessageTable()));
+}
+
+
+QString ShadowBridge::translateHtmlString(QString string)
+{
+    int i = 0;
+    while (html_strings[i] != 0)
+    {
+        if (html_strings[i] == string)
+            return tr(html_strings[i]);
+
+        i++;
+    }
+
+    return string;
 }
 
 QVariantMap ShadowBridge::userAction(QVariantMap action)
