@@ -92,7 +92,7 @@ signals:
     void emitPaste(QString text);
     void emitTransactions(QVariantList transactions);
     void emitAddresses(QVariantList addresses);
-    void emitMessages(QString messages, bool reset);
+    void emitMessages(QVariantList messages, bool reset);
     void emitMessage(QString id, QString type, qint64 sent, qint64 received, QString label_v, QString label, QString labelTo, QString to, QString from, bool read, QString message);
     void emitCoinControlUpdate(unsigned int quantity, qint64 amount, qint64 fee, qint64 afterfee, unsigned int bytes, QString priority, QString low, qint64 change);
     void emitAddressBookReturn(QString address, QString label);
@@ -127,7 +127,7 @@ private slots:
     void insertAddresses(const QModelIndex &parent, int start, int end);
     void insertMessages(const QModelIndex &parent, int start, int end);
 
-    void appendMessages(QString messages, bool reset);
+    void appendMessages(QVariantList messages, bool reset);
 
     void populateMessageTable();
 

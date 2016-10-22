@@ -260,11 +260,12 @@ class MessageThread : public QThread
     Q_OBJECT
 
 signals:
-    void emitMessages(const QString & messages, bool reset);
+    void emitMessages(const QVariantList & messages, bool reset);
 
 public:
     MessageModel *mtm;
 
+    /*
     QString addMessage(int row)
     {
         //QString message = "{\"id\":\"%10\",\"type\":\"%1\",\"sent_date\":\"%2\",\"received_date\":\"%3\", \"label_value\":\"%4\",\"label\":\"%5\",\"labelTo\":\"%11\",\"to_address\":\"%6\",\"from_address\":\"%7\",\"message\":\"%8\",\"read\":%9},";
@@ -280,17 +281,53 @@ public:
                 .arg(mtm->index(row, MessageModel::Read)            .data().toBool())
                 .arg(mtm->index(row, MessageModel::Key)             .data().toString())
                 .arg(mtm->index(row, MessageModel::LabelTo)         .data().toString().replace("\\", "\\\\").replace("/", "\\/").replace("\"","\\\""));
+    }*/
+    QVariantMap addMessage(int row)
+    {
+        QVariantMap r;
+
+        r.insert("id", mtm->index(row, MessageModel::Key)             .data().toString());
+        r.insert("type", mtm->index(row, MessageModel::Type).data().toString());
+
+        //time
+        r.insert("sent_date", QString::number(mtm->index(row, MessageModel::SentDateTime)    .data().toDateTime().toTime_t()).toHtmlEscaped());
+        r.insert("received_date", QString::number(mtm->index(row, MessageModel::ReceivedDateTime)    .data().toDateTime().toTime_t()).toHtmlEscaped());
+
+        //receiver
+        r.insert("to_address", mtm->index(row, MessageModel::ToAddress)       .data().toString());
+        r.insert("label_to", mtm->index(row, MessageModel::LabelTo)       .data().toString());
+
+        //sender
+        r.insert("from_address", mtm->index(row, MessageModel::FromAddress)     .data().toString());
+        r.insert("label_from", mtm->index(row, MessageModel::Label)           .data().toString());
+        r.insert("label_from_role", mtm->index(row, MessageModel::Label)           .data(MessageModel::LabelRole).toString());
+
+        r.insert("message", mtm->index(row, MessageModel::Message)         .data().toString().toHtmlEscaped());
+        r.insert("read", mtm->index(row, MessageModel::Read)            .data().toBool());
+
+
+        return r;
     }
 
 protected:
     void run()
     {
+        /*
         int row = -1;
         QString messages;
         while (mtm->index(++row, 0, QModelIndex()).isValid())
             messages.append(addMessage(row));
 
         emitMessages(messages, true);
+        */
+
+        int row = -1;
+        QVariantList messages;
+        while (mtm->index(++row, 0, QModelIndex()).isValid())
+            messages.append(addMessage(row));
+
+        emitMessages(messages, true);
+        
     }
 
 };
@@ -859,9 +896,10 @@ bool ShadowBridge::deleteAddress(QString address)
 }
 
 // Messages
-void ShadowBridge::appendMessages(QString messages, bool reset)
+void ShadowBridge::appendMessages(QVariantList messages, bool reset)
 {
-    emitMessages("[" + messages + "]", reset);
+    emitMessages(messages, reset);
+    //emitMessages("[" + messages + "]", reset);
 }
 
 void ShadowBridge::appendMessage(int row)
@@ -883,7 +921,7 @@ void ShadowBridge::populateMessageTable()
 {
     thMessage->mtm = window->messageModel;
 
-    connect(thMessage, SIGNAL(emitMessages(QString, bool)), SLOT(appendMessages(QString, bool)));
+    connect(thMessage, SIGNAL(emitMessages(QVariantList, bool)), SLOT(appendMessages(QVariantList, bool)));
     thMessage->start();
 }
 
