@@ -278,8 +278,8 @@ public:
         r.insert("read", mtm->index(row, MessageModel::Read).data().toBool());
 
         //time
-        r.insert("sent_date", QString::number(mtm->index(row, MessageModel::SentDateTime).data().toDateTime().toTime_t()).toHtmlEscaped());
-        r.insert("received_date", QString::number(mtm->index(row, MessageModel::ReceivedDateTime).data().toDateTime().toTime_t()).toHtmlEscaped());
+        r.insert("sent_date", QString::number(mtm->index(row, MessageModel::SentDateTime).data().toDateTime().toTime_t()));
+        r.insert("received_date", QString::number(mtm->index(row, MessageModel::ReceivedDateTime).data().toDateTime().toTime_t()));
 
         //receiver
         r.insert("to_address", mtm->index(row, MessageModel::ToAddress).data().toString().toHtmlEscaped());
@@ -879,8 +879,8 @@ void ShadowBridge::appendMessage(int row)
 {
     emitMessage(window->messageModel->index(row, MessageModel::Key)             .data().toString().toHtmlEscaped(),
                 window->messageModel->index(row, MessageModel::Type)            .data().toString().toHtmlEscaped(),
-                window->messageModel->index(row, MessageModel::SentDateTime)    .data().toDateTime().toTime_t().toHtmlEscaped(),
-                window->messageModel->index(row, MessageModel::ReceivedDateTime).data().toDateTime().toTime_t().toHtmlEscaped(),
+                window->messageModel->index(row, MessageModel::SentDateTime)    .data().toDateTime().toTime_t(),
+                window->messageModel->index(row, MessageModel::ReceivedDateTime).data().toDateTime().toTime_t(),
                 window->messageModel->index(row, MessageModel::Label)           .data(MessageModel::LabelRole).toString().toHtmlEscaped(),
                 window->messageModel->index(row, MessageModel::Label)           .data().toString().replace("\"","\\\"").replace("\\", "\\\\").replace("/", "\\/").toHtmlEscaped(),
                 window->messageModel->index(row, MessageModel::LabelTo)           .data().toString().replace("\"","\\\"").replace("\\", "\\\\").replace("/", "\\/").toHtmlEscaped(),
