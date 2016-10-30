@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2015 The ShadowCoin developers
+// Copyright (c) 2014-2015 The SpectreCoin developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -696,7 +696,7 @@ void ThreadSecureMsg()
             } // cs_vNodes
 
             if(fDebugSmsg)
-                LogPrintf("shadow-smsg thread: ignoring - looked peer %d, status on search %u\n", nPeerId, fExists);
+                LogPrintf("spectre-smsg thread: ignoring - looked peer %d, status on search %u\n", nPeerId, fExists);
         };
 
         MilliSleep(SMSG_THREAD_DELAY * 1000); //  // check every SMSG_THREAD_DELAY seconds
@@ -3273,7 +3273,7 @@ int SecureMsgValidate(uint8_t *pHeader, uint8_t *pPayload, uint32_t nPayload)
             rv = 0; // smsg is valid
         };
 
-        if (sdc::memcmp_nta(psmsg->hash, sha256Hash, 4) != 0)
+        if (spec::memcmp_nta(psmsg->hash, sha256Hash, 4) != 0)
         {
              if (fDebugSmsg)
                 LogPrintf("Checksum mismatch.\n");
@@ -3927,7 +3927,7 @@ int SecureMsgDecrypt(bool fTestOnly, std::string &address, uint8_t *pHeader, uin
         return errorN(1, "%s: Could not generate MAC.", __func__);
     };
 
-    if (sdc::memcmp_nta(MAC, psmsg->mac, 32) != 0)
+    if (spec::memcmp_nta(MAC, psmsg->mac, 32) != 0)
     {
         if (fDebugSmsg)
             LogPrintf("MAC does not match.\n"); // expected if message is not to address on node

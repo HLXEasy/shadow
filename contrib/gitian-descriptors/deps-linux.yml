@@ -1,5 +1,5 @@
 ---
-name: "shadow-deps"
+name: "spectre-deps"
 suites:
 - "trusty"
 architectures:
@@ -102,4 +102,4 @@ script: |
   done
   #
   cd $STAGING
-  find include lib | sort | tar --no-recursion -cJf $OUTDIR/shadow-deps-linux${GBUILD_BITS}-gitian.tar.xz -T -
+  find include lib | sort | tar --no-recursion -cJf $OUTDIR/spectre-deps-linux${GBUILD_BITS}-gitian.tar.xz -T -

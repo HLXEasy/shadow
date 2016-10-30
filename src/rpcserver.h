@@ -215,9 +215,9 @@ extern json_spirit::Value clearwallettransactions(const json_spirit::Array& para
 extern json_spirit::Value scanforalltxns(const json_spirit::Array& params, bool fHelp);
 extern json_spirit::Value scanforstealthtxns(const json_spirit::Array& params, bool fHelp);
 
-extern json_spirit::Value sendsdctoanon(const json_spirit::Array& params, bool fHelp);
+extern json_spirit::Value sendspectoanon(const json_spirit::Array& params, bool fHelp);
 extern json_spirit::Value sendanontoanon(const json_spirit::Array& params, bool fHelp);
-extern json_spirit::Value sendanontosdc(const json_spirit::Array& params, bool fHelp);
+extern json_spirit::Value sendanontospec(const json_spirit::Array& params, bool fHelp);
 extern json_spirit::Value estimateanonfee(const json_spirit::Array& params, bool fHelp);
 extern json_spirit::Value anonoutputs(const json_spirit::Array& params, bool fHelp);
 extern json_spirit::Value anoninfo(const json_spirit::Array& params, bool fHelp);

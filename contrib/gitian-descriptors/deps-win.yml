@@ -1,5 +1,5 @@
 ---
-name: "shadow-deps"
+name: "spectre-deps"
 suites:
 - "trusty"
 architectures:
@@ -171,5 +171,5 @@ script: |
     done
     #
     cd $INSTALLPREFIX
-    find include lib | sort | tar --no-recursion -cJf $OUTDIR/shadow-deps-win$BITS-gitian.tar.xz -T -  
+    find include lib | sort | tar --no-recursion -cJf $OUTDIR/spectre-deps-win$BITS-gitian.tar.xz -T -  
   done # for BITS in

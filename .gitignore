@@ -1,7 +1,7 @@
 src/*.exe
-src/shadowcoin
-src/shadowcoind
-src/test_shadow
+src/spectrecoin
+src/spectrecoind
+src/test_spectre
 src/build.h
 .*.swp
 *.*~*
@@ -13,11 +13,11 @@ src/build.h
 *.patch
 *.dat
 *.autosave
-.shadowcoin
+.spectrecoin
 #compilation and Qt preprocessor part
 *.qm
 Makefile
-shadow
+spectre
 #resources cpp
 qrc_*.cpp
 #qt creator

@@ -1,6 +1,6 @@
 TEMPLATE = app
-TARGET = umbra
-VERSION = 1.5.0.2
+TARGET = spectre
+VERSION = 1.0.0
 INCLUDEPATH += src src/json src/qt
 DEFINES += BOOST_THREAD_USE_LIB BOOST_SPIRIT_THREADSAFE
 CONFIG += no_include_pwd
@@ -29,7 +29,7 @@ greaterThan(QT_MAJOR_VERSION, 4) {
 OBJECTS_DIR = build
 MOC_DIR = build
 UI_DIR = build
-RESOURCES = shadow.qrc
+RESOURCES = spectre.qrc
 
 android {
     INCLUDEPATH += src/qt/android
@@ -52,7 +52,7 @@ android {
 }
 
 build_macosx64 {
-    QMAKE_TARGET_BUNDLE_PREFIX = co.shadowcoin
+    QMAKE_TARGET_BUNDLE_PREFIX = co.spectrecoin
     BOOST_LIB_SUFFIX=-mt
     BOOST_INCLUDE_PATH=/usr/local/Cellar/boost/1.61.0_1/include
     BOOST_LIB_PATH=/usr/local/Cellar/boost/1.61.0_1/lib
@@ -139,8 +139,8 @@ contains(USE_DBUS, 1) {
     QT += dbus
 }
 
-contains(SHADOW_NEED_QT_PLUGINS, 1) {
-    DEFINES += SHADOW_NEED_QT_PLUGINS
+contains(SPECTRE_NEED_QT_PLUGINS, 1) {
+    DEFINES += SPECTRE_NEED_QT_PLUGINS
     QTPLUGIN += qcncodecs qjpcodecs qtwcodecs qkrcodecs qtaccessiblewidgets
 }
 
@@ -285,8 +285,8 @@ HEADERS += \
     src/qt/scicon.h \
     src/qt/trafficgraphwidget.h \
     src/qt/messagemodel.h \
-    src/qt/shadowgui.h \
-    src/qt/shadowbridge.h \
+    src/qt/spectregui.h \
+    src/qt/spectrebridge.h \
     src/qt/bridgetranslations.h
 
 SOURCES += \
@@ -366,9 +366,9 @@ SOURCES += \
     src/qt/scicon.cpp \
     src/qt/trafficgraphwidget.cpp \
     src/qt/messagemodel.cpp \
-    src/qt/shadowgui.cpp \
-    src/qt/shadow.cpp \
-    src/qt/shadowbridge.cpp
+    src/qt/spectregui.cpp \
+    src/qt/spectre.cpp \
+    src/qt/spectrebridge.cpp
     
 
 FORMS += \
@@ -383,7 +383,7 @@ FORMS += \
 CODECFORTR = UTF-8
 
 # for lrelease/lupdate
-# also add new translations to shadow.qrc under translations/
+# also add new translations to spectre.qrc under translations/
 TRANSLATIONS = $$files(src/qt/locale/umbra*.ts)
 
 isEmpty(QMAKE_LRELEASE) {
@@ -453,8 +453,8 @@ macx:OBJECTIVE_SOURCES += src/qt/macdockiconhandler.mm \
                           src/qt/macnotificationhandler.mm
 macx:LIBS += -framework Foundation -framework ApplicationServices -framework AppKit
 macx:DEFINES += MAC_OSX MSG_NOSIGNAL=0
-macx:ICON = src/qt/res/icons/shadow.icns
-macx:TARGET = "Umbra"
+macx:ICON = src/qt/res/icons/spectre.icns
+macx:TARGET = "Spectre"
 macx:QMAKE_CFLAGS_THREAD += -pthread
 macx:QMAKE_LFLAGS_THREAD += -pthread
 macx:QMAKE_CXXFLAGS_THREAD += -pthread

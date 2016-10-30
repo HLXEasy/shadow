@@ -156,7 +156,8 @@ tbody tr.selected td:hover {
 
 .pagination.selected,
 .pagination:hover {
-    background:#E5203D!important;
+    /*background:#E5203D!important;*/
+    background:#0b5f9f!important;
 }
 
 /* Vertical Menu */
@@ -346,7 +347,7 @@ article {
     border-width: 1px 0 0 0;
     background: #ecf0f1;
     overflow:auto;
-    box-shadow:0 -1px 0 0 #dee2e2,
+    box-spectre:0 -1px 0 0 #dee2e2,
                0 -2px 0 0 #f8f8f8;
 }
 
@@ -369,7 +370,7 @@ article {
     background: inherit;
     padding: 10px;
     cursor: pointer;
-    box-shadow: -1px -1px 0 0 #dee2e2, -1px 1px 0 0 #dee2e2, -2px -2px 0 0 #f8f8f8, -2px 2px 0 0 #f8f8f8;
+    box-spectre: -1px -1px 0 0 #dee2e2, -1px 1px 0 0 #dee2e2, -2px -2px 0 0 #f8f8f8, -2px 2px 0 0 #f8f8f8;
     z-index: 10000;
 }
 
@@ -569,12 +570,12 @@ article {
             background: #131218;
             border-radius: 50px;
             padding: 2px;
-            box-shadow: 0 1px 0px 0 rgba(255, 255, 255, 0.2);
+            box-spectre: 0 1px 0px 0 rgba(255, 255, 255, 0.2);
     }
 
     progress::-webkit-progress-value {
             border-radius: 50px;
-            box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.4);
+            box-spectre: inset 0 1px 1px 0 rgba(255, 255, 255, 0.4);
             background:
                     -webkit-linear-gradient(45deg, transparent, transparent 33%, rgba(0, 0, 0, 0.1) 33%, rgba(0, 0, 0, 0.1) 66%, transparent 66%),
                     -webkit-linear-gradient(top, rgba(255, 255, 255, 0.25), rgba(0, 0, 0, 0.2)),
@@ -802,13 +803,13 @@ small screens.
     -moz-osx-font-smoothing: grayscale;
 }
 
-.footable.shadow {
+.footable.spectre {
     border-color: #e5203d;
 }
-.footable.shadow > tfoot > tr > th,
-.footable.shadow > thead > tr > th,
-.footable.shadow > tfoot > tr > td,
-.footable.shadow > thead > tr > td {
+.footable.spectre > tfoot > tr > th,
+.footable.spectre > thead > tr > th,
+.footable.spectre > tfoot > tr > td,
+.footable.spectre > thead > tr > td {
     background-color: #e5203d;
     border-color: #e5203d;
 }
@@ -849,7 +850,7 @@ tr.footable-row-detail {
 }
 
 .transaction-overview span.sent {
-    color: red;
+    color: blue;
 }
 
 .received {
@@ -861,7 +862,7 @@ tr.footable-row-detail {
 }
 
 .outofsync {
-    color: red;
+    color: blue;
 }
 
 
@@ -1252,8 +1253,8 @@ label.recipient {
 
 .button:active,
 .button.is-active {
-  -webkit-box-shadow: none;
-  box-shadow: none;
+  -webkit-box-spectre: none;
+  box-spectre: none;
   text-decoration: none;
 }
 
@@ -1484,7 +1485,7 @@ label.recipient {
 
 /****************************
 
-       ShadowChat
+       SpectreChat
 
 *****************************/
 
@@ -1606,7 +1607,7 @@ label.recipient {
 }
 
 #contact-list ul li .contact-options .message-notifications {
-    background: red;
+    background: blue;
     border-radius: 100%;
     font-size: 10px;
     padding-top: 1px;
@@ -1734,9 +1735,9 @@ label.recipient {
     padding: 10px;
     border-radius: 5px;
     margin-left: 10px;
-    -webkit-box-shadow:  1px 1px 5px rgba(0,0,0,.15);
-    -moz-box-shadow:  1px 1px 5px rgba(0,0,0,.15);
-    box-shadow: 1px 1px 5px rgba(0,0,0,.15);
+    -webkit-box-spectre:  1px 1px 5px rgba(0,0,0,.15);
+    -moz-box-spectre:  1px 1px 5px rgba(0,0,0,.15);
+    box-spectre: 1px 1px 5px rgba(0,0,0,.15);
     font-size: 15px;
     max-width: 75%;
     overflow-wrap: break-word;
@@ -1872,7 +1873,7 @@ label.recipient {
 
 
 /*********************
-    END SHADOWCHAT
+    END SPECTRECHAT
 *********************/
 
 /* Scrollbar */
@@ -2097,7 +2098,7 @@ Hides the menu at `56.625em`, but modify this based on your app's needs.
 
     .user-avatar .user-notifications {
         display: initial;
-        background: red;
+        background: blue;
         color: white;
         padding: 3px;
         font-size: 10px;
@@ -2109,7 +2110,7 @@ Hides the menu at `56.625em`, but modify this based on your app's needs.
 
     .user-avatar .user-notifications span {
         display: initial;
-        background: red;
+        background: blue;
         border-radius: 100%;
         font-size: 10px;
         padding-top: 1px;
@@ -2214,7 +2215,7 @@ Hides the menu at `56.625em`, but modify this based on your app's needs.
     width: 800px;
     background: #fff;
     border-radius: 5px; -moz-border-radius: 5px; -webkit-border-radius: 5px;
-    box-shadow: 0px 0px 4px rgba(0,0,0,0.7); -webkit-box-shadow: 0 0 4px rgba(0,0,0,0.7); -moz-box-shadow: 0 0px 4px rgba(0,0,0,0.7);
+    box-spectre: 0px 0px 4px rgba(0,0,0,0.7); -webkit-box-spectre: 0 0 4px rgba(0,0,0,0.7); -moz-box-spectre: 0 0px 4px rgba(0,0,0,0.7);
     display: none;
 }
 
@@ -2224,7 +2225,7 @@ Hides the menu at `56.625em`, but modify this based on your app's needs.
     width: 800px;
     background: #fff;
     border-radius: 5px; -moz-border-radius: 5px; -webkit-border-radius: 5px;
-    box-shadow: 0px 0px 4px rgba(0,0,0,0.7); -webkit-box-shadow: 0 0 4px rgba(0,0,0,0.7); -moz-box-shadow: 0 0px 4px rgba(0,0,0,0.7);
+    box-spectre: 0px 0px 4px rgba(0,0,0,0.7); -webkit-box-spectre: 0 0 4px rgba(0,0,0,0.7); -moz-box-spectre: 0 0px 4px rgba(0,0,0,0.7);
     display: none;
 }
 
@@ -2234,7 +2235,7 @@ Hides the menu at `56.625em`, but modify this based on your app's needs.
     width: 750px;
     background: #fff;
     border-radius: 5px; -moz-border-radius: 5px; -webkit-border-radius: 5px;
-    box-shadow: 0px 0px 4px rgba(0,0,0,0.7); -webkit-box-shadow: 0 0 4px rgba(0,0,0,0.7); -moz-box-shadow: 0 0px 4px rgba(0,0,0,0.7);
+    box-spectre: 0px 0px 4px rgba(0,0,0,0.7); -webkit-box-spectre: 0 0 4px rgba(0,0,0,0.7); -moz-box-spectre: 0 0px 4px rgba(0,0,0,0.7);
     display: none;
     position: absolute;
 }
@@ -2262,7 +2263,7 @@ Hides the menu at `56.625em`, but modify this based on your app's needs.
     width: 800px;
     background: #fff;
     border-radius: 5px; -moz-border-radius: 5px; -webkit-border-radius: 5px;
-    box-shadow: 0px 0px 4px rgba(0,0,0,0.7); -webkit-box-shadow: 0 0 4px rgba(0,0,0,0.7); -moz-box-shadow: 0 0px 4px rgba(0,0,0,0.7);
+    box-spectre: 0px 0px 4px rgba(0,0,0,0.7); -webkit-box-spectre: 0 0 4px rgba(0,0,0,0.7); -moz-box-spectre: 0 0px 4px rgba(0,0,0,0.7);
     display: none;
     position: absolute;
 }
@@ -2300,7 +2301,7 @@ Hides the menu at `56.625em`, but modify this based on your app's needs.
     width: 400px;
     background: #fff;
     border-radius: 5px; -moz-border-radius: 5px; -webkit-border-radius: 5px;
-    box-shadow: 0px 0px 4px rgba(0,0,0,0.7); -webkit-box-shadow: 0 0 4px rgba(0,0,0,0.7); -moz-box-shadow: 0 0px 4px rgba(0,0,0,0.7);
+    box-spectre: 0px 0px 4px rgba(0,0,0,0.7); -webkit-box-spectre: 0 0 4px rgba(0,0,0,0.7); -moz-box-spectre: 0 0px 4px rgba(0,0,0,0.7);
     display: none;
 }
 
@@ -2321,7 +2322,7 @@ Hides the menu at `56.625em`, but modify this based on your app's needs.
     height: 480px;
     background: #fff;
     border-radius: 5px; -moz-border-radius: 5px; -webkit-border-radius: 5px;
-    box-shadow: 0px 0px 4px rgba(0,0,0,0.7); -webkit-box-shadow: 0 0 4px rgba(0,0,0,0.7); -moz-box-shadow: 0 0px 4px rgba(0,0,0,0.7);
+    box-spectre: 0px 0px 4px rgba(0,0,0,0.7); -webkit-box-spectre: 0 0 4px rgba(0,0,0,0.7); -moz-box-spectre: 0 0px 4px rgba(0,0,0,0.7);
     display: none;
     overflow: auto;
 }
@@ -2333,7 +2334,7 @@ Hides the menu at `56.625em`, but modify this based on your app's needs.
     height: 480px;
     background: #fff;
     border-radius: 5px; -moz-border-radius: 5px; -webkit-border-radius: 5px;
-    box-shadow: 0px 0px 4px rgba(0,0,0,0.7); -webkit-box-shadow: 0 0 4px rgba(0,0,0,0.7); -moz-box-shadow: 0 0px 4px rgba(0,0,0,0.7);
+    box-spectre: 0px 0px 4px rgba(0,0,0,0.7); -webkit-box-spectre: 0 0 4px rgba(0,0,0,0.7); -moz-box-spectre: 0 0px 4px rgba(0,0,0,0.7);
     display: none;
     overflow: auto;
 }
@@ -2346,7 +2347,7 @@ Hides the menu at `56.625em`, but modify this based on your app's needs.
     height: 480px;
     background: #fff;
     border-radius: 5px; -moz-border-radius: 5px; -webkit-border-radius: 5px;
-    box-shadow: 0px 0px 4px rgba(0,0,0,0.7); -webkit-box-shadow: 0 0 4px rgba(0,0,0,0.7); -moz-box-shadow: 0 0px 4px rgba(0,0,0,0.7);
+    box-spectre: 0px 0px 4px rgba(0,0,0,0.7); -webkit-box-spectre: 0 0 4px rgba(0,0,0,0.7); -moz-box-spectre: 0 0px 4px rgba(0,0,0,0.7);
     display: none;
     overflow: auto;
 }
@@ -2358,7 +2359,7 @@ Hides the menu at `56.625em`, but modify this based on your app's needs.
     height: 320px;
     background: #fff;
     border-radius: 5px; -moz-border-radius: 5px; -webkit-border-radius: 5px;
-    box-shadow: 0px 0px 4px rgba(0,0,0,0.7); -webkit-box-shadow: 0 0 4px rgba(0,0,0,0.7); -moz-box-shadow: 0 0px 4px rgba(0,0,0,0.7);
+    box-spectre: 0px 0px 4px rgba(0,0,0,0.7); -webkit-box-spectre: 0 0 4px rgba(0,0,0,0.7); -moz-box-spectre: 0 0px 4px rgba(0,0,0,0.7);
     display: none;
     overflow: auto;
 }
@@ -2373,7 +2374,7 @@ Hides the menu at `56.625em`, but modify this based on your app's needs.
     width: 630px;
     background: #fff;
     border-radius: 5px; -moz-border-radius: 5px; -webkit-border-radius: 5px;
-    box-shadow: 0px 0px 4px rgba(0,0,0,0.7); -webkit-box-shadow: 0 0 4px rgba(0,0,0,0.7); -moz-box-shadow: 0 0px 4px rgba(0,0,0,0.7);
+    box-spectre: 0px 0px 4px rgba(0,0,0,0.7); -webkit-box-spectre: 0 0 4px rgba(0,0,0,0.7); -moz-box-spectre: 0 0px 4px rgba(0,0,0,0.7);
     display: none;
 }
 
@@ -2398,7 +2399,7 @@ Hides the menu at `56.625em`, but modify this based on your app's needs.
     font-size:0.8em;
     color: #F51E3E;
     background: #ecf0f1;
-    box-shadow: -1px -1px 0 0 #dee2e2, -1px 1px 0 0 #dee2e2, -2px -2px 0 0 #f8f8f8, -2px 2px 0 0 #f8f8f8;
+    box-spectre: -1px -1px 0 0 #dee2e2, -1px 1px 0 0 #dee2e2, -2px -2px 0 0 #f8f8f8, -2px 2px 0 0 #f8f8f8;
 }
 
 .network-alerts-icon {

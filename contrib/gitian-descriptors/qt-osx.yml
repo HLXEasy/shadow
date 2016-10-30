@@ -1,5 +1,5 @@
 ---
-name: "shadow-qt"
+name: "spectre-qt"
 suites:
 - "trusty"
 architectures:
@@ -22,13 +22,13 @@ reference_datetime: "2011-01-30 00:00:00"
 remotes: []
 files:
 - "qt-everywhere-opensource-src-5.5.0.tar.xz"
-- "shadow-deps-osx-gitian.zip"
+- "spectre-deps-osx-gitian.zip"
 - "flex-2.5.38.tar.gz"
 - "osxcross.tar.xz"
 script: |
   # Integrity Check
   echo "7ea2a16ecb8088e67db86b0835b887d5316121aeef9565d5d19be3d539a2c2af  qt-everywhere-opensource-src-5.5.0.tar.xz" | sha256sum -c
-  echo "16d68bae5336c0698817bb5a1a4bd9a6804263608fdf553ca63fd90b682ec366  shadow-deps-osx-gitian.zip"                | sha256sum -c
+  echo "16d68bae5336c0698817bb5a1a4bd9a6804263608fdf553ca63fd90b682ec366  spectre-deps-osx-gitian.zip"                | sha256sum -c
   echo "80f7c7188d7611e47e47d2a70c8ef65026c1cf71ddeb4ace9b1be5b8a76ffbd2  flex-2.5.38.tar.gz"                        | sha256sum -c
   #
   # Defines
@@ -67,9 +67,9 @@ script: |
   make install
   cd ..
   #
-  # Need mingw-compiled openssl from shadow-deps:
+  # Need mingw-compiled openssl from spectre-deps:
   cd $DEPSDIR
-  unzip -o $BUILDDIR/shadow-deps-osx-gitian.zip
+  unzip -o $BUILDDIR/spectre-deps-osx-gitian.zip
   tar xf $BUILDDIR/osxcross.tar.xz
   tar xf qt-everywhere-opensource-src-5.5.0.tar.xz
   #

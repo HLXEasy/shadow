@@ -1,5 +1,5 @@
 ---
-name: "shadow-qt"
+name: "spectre-qt"
 suites:
 - "trusty"
 architectures:
@@ -22,14 +22,14 @@ reference_datetime: "2011-01-30 00:00:00"
 remotes: []
 files:
 - "qt-everywhere-opensource-src-5.5.0.tar.xz"
-- "shadow-deps-win32-gitian.tar.xz"
-- "shadow-deps-win64-gitian.tar.xz"
+- "spectre-deps-win32-gitian.tar.xz"
+- "spectre-deps-win64-gitian.tar.xz"
 - "flex-2.5.38.tar.gz"
 script: |
   # Integrity Check
   echo "7ea2a16ecb8088e67db86b0835b887d5316121aeef9565d5d19be3d539a2c2af  qt-everywhere-opensource-src-5.5.0.tar.xz" | sha256sum -c
-  echo "306264166531eecbb35ec645c425b1b5538e8ce3035d7bf599db0b2cc76c730f  shadow-deps-win32-gitian.tar.xz"           | sha256sum -c 
-  echo "1c7c36ca02624fc2e0f026a84853217e84a9f27f8542a5b18d13164ea48edea7  shadow-deps-win64-gitian.tar.xz"           | sha256sum -c 
+  echo "306264166531eecbb35ec645c425b1b5538e8ce3035d7bf599db0b2cc76c730f  spectre-deps-win32-gitian.tar.xz"           | sha256sum -c 
+  echo "1c7c36ca02624fc2e0f026a84853217e84a9f27f8542a5b18d13164ea48edea7  spectre-deps-win64-gitian.tar.xz"           | sha256sum -c 
   echo "80f7c7188d7611e47e47d2a70c8ef65026c1cf71ddeb4ace9b1be5b8a76ffbd2  flex-2.5.38.tar.gz"                        | sha256sum -c
   # Defines
   export TZ=UTC
@@ -76,9 +76,9 @@ script: |
     make install
     cd ..
     #
-    # Need mingw-compiled openssl from shadow-deps:
+    # Need mingw-compiled openssl from spectre-deps:
     cd $DEPSDIR
-    tar xf $INDIR/shadow-deps-win${BITS}-gitian.tar.xz
+    tar xf $INDIR/spectre-deps-win${BITS}-gitian.tar.xz
     #
     ln -sf $DEPSDIR/lib/libsicudt.a $DEPSDIR/lib/libicudt.a
     ln -sf $DEPSDIR/lib/libsicuin.a $DEPSDIR/lib/libicuin.a

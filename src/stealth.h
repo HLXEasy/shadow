@@ -1,9 +1,9 @@
-// Copyright (c) 2014 The ShadowCoin developers
+// Copyright (c) 2014 The SpectreCoin developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file license.txt or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SHADOW_STEALTH_H
-#define SHADOW_STEALTH_H
+#ifndef SPECTRE_STEALTH_H
+#define SPECTRE_STEALTH_H
 
 #include <stdlib.h> 
 #include <stdio.h> 
@@ -90,5 +90,5 @@ int StealthSharedToPublicKey(const ec_point& pkSpend, const ec_secret &sharedS, 
 bool IsStealthAddress(const std::string& encodedAddress);
 
 
-#endif  // SHADOW_STEALTH_H
+#endif  // SPECTRE_STEALTH_H
 

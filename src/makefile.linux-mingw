@@ -69,7 +69,7 @@ OBJS= \
     obj/extkey.o \
     obj/db.o \
     obj/init.o \
-    obj/shadowcoind.o \
+    obj/spectrecoind.o \
     obj/keystore.o \
     obj/miner.o \
     obj/main.o \
@@ -109,7 +109,7 @@ OBJS= \
     obj/state.o \
     obj/bloom.o 
 
-all: shadowcoind.exe
+all: spectrecoind.exe
 
 LIBS += $(CURDIR)/leveldb/libleveldb.a $(CURDIR)/leveldb/libmemenv.a
 DEFS += -I"$(CURDIR)/leveldb/include"
@@ -136,14 +136,14 @@ obj/scrypt-x86_64.o: scrypt-x86_64.S
 obj/scrypt-arm.o: scrypt-arm.S
 	$(CXX) -c $(xCXXFLAGS) -MMD -o $@ $<
 
-shadowcoind.exe: $(OBJS:obj/%=obj/%)
+spectrecoind.exe: $(OBJS:obj/%=obj/%)
 	$(CXX) $(CFLAGS) $(LDFLAGS) -o $@ $(LIBPATHS) $^ $(LIBS) -lshlwapi
-	$(STRIP) shadowcoind.exe
+	$(STRIP) spectrecoind.exe
 
 clean:
 	-rm -f obj/*.o
 	-rm -f obj/zerocoin/*.o
-	-rm -f shadowcoind.exe
+	-rm -f spectrecoind.exe
 	-rm -f obj/build.h
 	cd leveldb && TARGET_OS=OS_WINDOWS_CROSSCOMPILE $(MAKE) clean && cd ..
 

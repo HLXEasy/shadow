@@ -1,8 +1,8 @@
-// Copyright (c) 2014 The ShadowCoin developers
+// Copyright (c) 2014 The SpectreCoin developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file license.txt or http://www.opensource.org/licenses/mit-license.php.
 
-#include "shadowgui.h"
+#include "spectregui.h"
 #include "clientmodel.h"
 #include "walletmodel.h"
 #include "optionsmodel.h"
@@ -23,8 +23,8 @@
 #include <QLibraryInfo>
 #include <QTimer>
 
-#if defined(SHADOW_NEED_QT_PLUGINS) && !defined(_SHADOW_QT_PLUGINS_INCLUDED)
-#define _SHADOW_NEED_QT_PLUGINS
+#if defined(SPECTRE_NEED_QT_PLUGINS) && !defined(_SPECTRE_QT_PLUGINS_INCLUDED)
+#define _SPECTRE_NEED_QT_PLUGINS
 #define __INSURE__
 #include <QtPlugin>
 Q_IMPORT_PLUGIN(qcncodecs)
@@ -35,7 +35,7 @@ Q_IMPORT_PLUGIN(qtaccessiblewidgets)
 #endif
 
 // Need a global reference for the notifications to find the GUI
-static ShadowGUI *guiref;
+static SpectreGUI *guiref;
 static QSplashScreen *splashref;
 
 static void ThreadSafeMessageBox(const std::string& message, const std::string& caption, int style)
@@ -108,11 +108,11 @@ static std::string Translate(const char* psz)
 static void handleRunawayException(std::exception *e)
 {
     PrintExceptionContinue(e, "Runaway exception");
-    QMessageBox::critical(0, "Runaway exception", ShadowGUI::tr("A fatal error occurred. Shadow can no longer continue safely and will quit.") + QString("\n\n") + QString::fromStdString(strMiscWarning));
+    QMessageBox::critical(0, "Runaway exception", SpectreGUI::tr("A fatal error occurred. Spectre can no longer continue safely and will quit.") + QString("\n\n") + QString::fromStdString(strMiscWarning));
     exit(1);
 }
 
-#ifndef SHADOW_QT_TEST
+#ifndef SPECTRE_QT_TEST
 int main(int argc, char *argv[])
 {
     fHaveGUI = true;
@@ -123,7 +123,7 @@ int main(int argc, char *argv[])
     QTextCodec::setCodecForCStrings(QTextCodec::codecForTr());
 #endif
 
-    Q_INIT_RESOURCE(shadow);
+    Q_INIT_RESOURCE(spectre);
     QApplication app(argc, argv);
     
     // Do this early as we don't want to bother initializing if we are just calling IPC
@@ -138,12 +138,12 @@ int main(int argc, char *argv[])
     // Command-line options take precedence:
     ParseParameters(argc, argv);
 
-    // ... then shadowcoin.conf:
+    // ... then spectrecoin.conf:
     if (!boost::filesystem::is_directory(GetDataDir(false)))
     {
         // This message can not be translated, as translation is not initialized yet
         // (which not yet possible because lang=XX can be overridden in bitcoin.conf in the data directory)
-        QMessageBox::critical(0, "Shadow",
+        QMessageBox::critical(0, "Spectre",
                               QString("Error: Specified data directory \"%1\" does not exist.").arg(QString::fromStdString(mapArgs["-datadir"])));
         return 1;
     }
@@ -151,12 +151,12 @@ int main(int argc, char *argv[])
 
     // Application identification (must be set before OptionsModel is initialized,
     // as it is used to locate QSettings)
-    app.setOrganizationName("The Shadow Project");
-    app.setOrganizationDomain("shadow.cash");
+    app.setOrganizationName("The Spectre Project");
+    app.setOrganizationDomain("spectre.cash");
     if(GetBoolArg("-testnet")) // Separate UI settings for testnet
-        app.setApplicationName("Shadow-testnet");
+        app.setApplicationName("Spectre-testnet");
     else
-        app.setApplicationName("Shadow");
+        app.setApplicationName("Spectre");
 
     // ... then GUI settings:
     OptionsModel optionsModel;
@@ -224,7 +224,7 @@ int main(int argc, char *argv[])
         
         boost::thread_group threadGroup;
         
-        ShadowGUI window;
+        SpectreGUI window;
         guiref = &window;
         
         QTimer* pollShutdownTimer = new QTimer(guiref);
@@ -260,7 +260,7 @@ int main(int argc, char *argv[])
                 }
                 
                 // Now that initialization/startup is done, process any command-line
-                // shadow: URIs
+                // spectre: URIs
                 QObject::connect(paymentServer, SIGNAL(receivedURI(QString)), &window, SLOT(handleURI(QString)));
                 QTimer::singleShot(100, paymentServer, SLOT(uiReady()));
 
@@ -273,7 +273,7 @@ int main(int argc, char *argv[])
                 guiref = 0;
             }
             // Shutdown the core and its threads, but don't exit Qt here
-            LogPrintf("ShadowCoin shutdown.\n\n");
+            LogPrintf("SpectreCoin shutdown.\n\n");
             threadGroup.interrupt_all();
             threadGroup.join_all();
             Shutdown();
@@ -291,4 +291,4 @@ int main(int argc, char *argv[])
     }
     return 0;
 }
-#endif // SHADOW_QT_TEST
+#endif // SPECTRE_QT_TEST

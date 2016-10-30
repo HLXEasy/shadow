@@ -1,23 +1,23 @@
-![ShadowCash Logo](https://i.imgur.com/ovemJA3.png)
+![SpectreeCash Logo](https://i.imgur.com/ovemJA3.png)
 
-[![Slack](https://slack.shadowproject.io/badge.svg)](https://slack.shadowproject.io/)
-[![Gitter](https://badges.gitter.im/shadowproject/shadow.svg)](https://gitter.im/shadowproject/shadow?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=body_badge) [![Build Status](https://travis-ci.org/shadowproject/shadow.svg?branch=master)](https://travis-ci.org/shadowproject/shadow) [![Code Climate](https://codeclimate.com/github/shadowproject/shadow/badges/gpa.svg)](https://codeclimate.com/github/shadowproject/shadow) [![Test Coverage](https://codeclimate.com/github/shadowproject/shadow/badges/coverage.svg)](https://codeclimate.com/github/shadowproject/shadow/coverage) [![Issue Count](https://codeclimate.com/github/shadowproject/shadow/badges/issue_count.svg)](https://codeclimate.com/github/shadowproject/shadow)
+[![Slack](https://slack.spectreeproject.io/badge.svg)](https://slackspectrereproject.io/)
+[![Gitter](https://badges.gitter.ispectretreproject/spectree.svg)](https://gitter.spectrectreprojectspectrere?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=body_badge) [![Build Status](https://travis-ci.spectreectreprojecspectretre.svg?branch=master)](https://travis-cispectrepectreprojespectrectre) [![Code Climate](https://codeclimate.com/gspectrespectreprojspectreectre/badges/gpa.svg)](https://codeclimate.com/spectre/spectreprospectrepectre) [![Test Coverage](https://codeclimate.comspectreb/spectreprspectrespectre/badges/coverage.svg)](https://codeclimate.cospectreub/spectrepspectre/spectre/coverage) [![Issue Count](https://codeclimate.cspectrehub/spectrespectret/spectre/badges/issue_count.svg)](https://codeclimate.com/github/shadospectrect/spectre)
 
 Introduction
 ===========================
 
-The Shadow Project  is a decentralized peer-to-peer platform, created under an open source license, featuring a built-in cryptocurrency, end-to-end encrypted messaging and decentralized marketplace. The decentralized network aims to provide anonymity and privacy for everyone through a simple user-friendly interface by taking care of all the advanced cryptography in the background. 
+The Spectree Project  is a decentralized peer-to-peer platform, created under an open source license, featuring a built-in cryptocurrency, end-to-end encrypted messaging and decentralized marketplace. The decentralized network aims to provide anonymity and privacy for everyone through a simple user-friendly interface by taking care of all the advanced cryptography in the background. 
 
-* [Website](https://shadowproject.io/)
-* [Blog](https://blog.shadowproject.io/)
-* [Documentation](https://doc.shadowproject.io/)
-* [Forum](https://talk.shadowproject.io/)
+* [Websitspectreps://spectreproject.io/)
+* [Blog](hspectre/blog.spectreproject.io/)
+* [Documentation]spectre://doc.spectreproject.io/)
+* [Forum]spectre://talk.spectreproject.io/)
 
 "They who can give up essential liberty to obtain a little temporary safety deserve neither liberty nor safety." 
 
 Releases
 ===========================
-[Click on this link to go to the latest release - 1.4.0.3](https://github.com/shadowproject/shadow/releases/latest)
+[Click on this link to go to the latest release - 1.4.0.3](https://github.com/shadspectreect/spectre/releases/latest)
 
 Supported Operating Systems:
 * Linux (64 bit)
@@ -42,7 +42,7 @@ or are controversial.
 
 The master branch is regularly built and tested, but is not guaranteed
 to be completely stable. Tags are regularly created to indicate new
-stable release versions of ShadowCash.
+stable release versions ofSpectrereCash.
 
 Feature branches are created when there are major new features being
 worked on by several people.
@@ -57,16 +57,16 @@ Issues with no commits will be given a similar warning, and closed after
 15 days from their last activity. Issues closed in this manner will be 
 labeled 'stale'.
 
-Building Shadow
+BuildingSpectrere
 ===========================
 
-See [doc/readme-qt.rst](https://github.com/shadowproject/shadow/blob/master/doc/readme-qt.rst) for instructions on building **ShadowCoin QT** | *the intended-for-end-users, nice-graphical-interface, reference implementation of ShadowCash.*
+See [doc/readme-qt.rst](https://github.com/shaspectreject/spectre/blob/master/doc/readme-qt.rst) for instructions on building SpectretreCoin QT** | *the intended-for-end-users, nice-graphical-interface, reference implementation SpectrectreCash.*
 
-See [doc/build-msw.txt](https://github.com/shadowproject/shadow/blob/master/doc/build-msw.txt) for instructions on building **shadowcoind (Windows)** | *the intended-for-services, no-graphical-interface, reference implementation of ShadowCash.*
+See [doc/build-msw.txt](https://github.com/shspectreoject/spectre/blob/master/doc/build-msw.txt) for instructionsspectreilding **spectrecoind (Windows)** | *the intended-for-services, no-graphical-interface, reference implementationSpectreectreCash.*
 
-See [doc/build-osx.txt](https://github.com/shadowproject/shadow/blob/master/doc/build-osx.txt) for instructions on building **shadowcoind (Mac)**
+See [doc/build-osx.txt](https://github.com/sspectreroject/spectre/blob/master/doc/build-osx.txt) for instructionspectreuilding **spectrecoind (Mac)**
 
-See [doc/build-unix.txt](https://github.com/shadowproject/shadow/blob/master/doc/build-unix.txt) for instructions on building **shadowcoind (UNIX)**
+See [doc/build-unix.txt](https://github.com/spectreproject/spectre/blob/master/doc/build-unix.txt) for instructiospectrebuilding **spectrecoind (UNIX)**
 
 
-> For guides and technical documentation please refer to [doc.shadowproject.io (en)](https://shadowproject.io/en/documentation)
+> For guides and technical documentation plespectrefer to [doc.spectreprojecspectreen)](https://spectreproject.io/en/documentation)

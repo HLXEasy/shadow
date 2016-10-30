@@ -1,8 +1,8 @@
-// Copyright (c) 2014 The ShadowCoin developers
+// Copyright (c) 2014 The SpectreCoin developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file license.txt or http://www.opensource.org/licenses/mit-license.php.
 
-#include "shadowgui.h"
+#include "spectregui.h"
 #include "transactiontablemodel.h"
 #include "transactionrecord.h"
 
@@ -57,9 +57,9 @@
 extern CWallet* pwalletMain;
 double GetPoSKernelPS();
 
-ShadowGUI::ShadowGUI(QWidget *parent):
+SpectreGUI::SpectreGUI(QWidget *parent):
     QMainWindow(parent),
-    bridge(new ShadowBridge(this)),
+    bridge(new SpectreBridge(this)),
     clientModel(0),
     walletModel(0),
     messageModel(0),
@@ -86,10 +86,10 @@ ShadowGUI::ShadowGUI(QWidget *parent):
     setCentralWidget(webView);
 
     resize(1280, 720);
-    setWindowTitle(tr("Umbra") + " - " + tr("Client"));
+    setWindowTitle(tr("Spectre") + " - " + tr("Client"));
 #ifndef Q_OS_MAC
-    qApp->setWindowIcon(QIcon(":icons/shadow"));
-    setWindowIcon(QIcon(":icons/shadow"));
+    qApp->setWindowIcon(QIcon(":icons/spectre"));
+    setWindowIcon(QIcon(":icons/spectre"));
 #else
     setUnifiedTitleAndToolBarOnMac(true);
     QApplication::setAttribute(Qt::AA_DontShowIconsInMenus);
@@ -125,9 +125,9 @@ ShadowGUI::ShadowGUI(QWidget *parent):
     connect(documentFrame, SIGNAL(urlChanged(QUrl)),                SLOT(urlClicked(const QUrl&)));
 
 #ifdef Q_OS_WIN
-    QFile html("C:/shadow/index.html");
+    QFile html("C:/spectre/index.html");
 #else
-    QFile html("/opt/shadow/index.html");
+    QFile html("/opt/spectre/index.html");
 #endif
 
     if(html.exists())
@@ -136,7 +136,7 @@ ShadowGUI::ShadowGUI(QWidget *parent):
         webView->setUrl(QUrl("qrc:///src/qt/res/index.html"));
 }
 
-ShadowGUI::~ShadowGUI()
+SpectreGUI::~SpectreGUI()
 {
     if(trayIcon) // Hide tray icon, as deleting will let it linger until quit (on Ubuntu)
         trayIcon->hide();
@@ -147,7 +147,7 @@ ShadowGUI::~ShadowGUI()
 #endif
 }
 
-void ShadowGUI::pageLoaded(bool ok)
+void SpectreGUI::pageLoaded(bool ok)
 {
     if (GetBoolArg("-staking", true))
     {
@@ -159,13 +159,13 @@ void ShadowGUI::pageLoaded(bool ok)
 
 }
 
-void ShadowGUI::addJavascriptObjects()
+void SpectreGUI::addJavascriptObjects()
 {
     documentFrame->addToJavaScriptWindowObject("bridge", bridge);
 
 }
 
-void ShadowGUI::urlClicked(const QUrl & link)
+void SpectreGUI::urlClicked(const QUrl & link)
 {
     if(link.scheme() == "qrc" || link.scheme() == "file")
         return;
@@ -173,23 +173,23 @@ void ShadowGUI::urlClicked(const QUrl & link)
     QDesktopServices::openUrl(link);
 }
 
-void ShadowGUI::createActions()
+void SpectreGUI::createActions()
 {
 
     quitAction = new QAction(QIcon(":/icons/quit"), tr("E&xit"), this);
     quitAction->setToolTip(tr("Quit application"));
     quitAction->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_Q));
     quitAction->setMenuRole(QAction::QuitRole);
-    aboutAction = new QAction(QIcon(":/icons/shadow"), tr("&About ShadowCoin"), this);
-    aboutAction->setToolTip(tr("Show information about ShadowCoin"));
+    aboutAction = new QAction(QIcon(":/icons/spectre"), tr("&About SpectreCoin"), this);
+    aboutAction->setToolTip(tr("Show information about SpectreCoin"));
     aboutAction->setMenuRole(QAction::AboutRole);
     aboutQtAction = new QAction(QIcon(":/trolltech/qmessagebox/images/qtlogo-64.png"), tr("About &Qt"), this);
     aboutQtAction->setToolTip(tr("Show information about Qt"));
     aboutQtAction->setMenuRole(QAction::AboutQtRole);
     optionsAction = new QAction(QIcon(":/icons/options"), tr("&Options..."), this);
-    optionsAction->setToolTip(tr("Modify configuration options for ShadowCoin"));
+    optionsAction->setToolTip(tr("Modify configuration options for SpectreCoin"));
     optionsAction->setMenuRole(QAction::PreferencesRole);
-    toggleHideAction = new QAction(QIcon(":/icons/shadow"), tr("&Show / Hide"), this);
+    toggleHideAction = new QAction(QIcon(":/icons/spectre"), tr("&Show / Hide"), this);
     encryptWalletAction = new QAction(QIcon(":/icons/lock_closed"), tr("&Encrypt Wallet..."), this);
     encryptWalletAction->setToolTip(tr("Encrypt or decrypt wallet"));
     encryptWalletAction->setCheckable(true);
@@ -219,7 +219,7 @@ void ShadowGUI::createActions()
     connect(lockWalletAction, SIGNAL(triggered()), SLOT(lockWallet()));
 }
 
-void ShadowGUI::createMenuBar()
+void SpectreGUI::createMenuBar()
 {
 #ifdef Q_OS_MAC
     // Create a decoupled menu bar on Mac which stays even if the window is closed
@@ -252,7 +252,7 @@ void ShadowGUI::createMenuBar()
     help->addAction(aboutQtAction);
 }
 
-void ShadowGUI::setClientModel(ClientModel *clientModel)
+void SpectreGUI::setClientModel(ClientModel *clientModel)
 {
     this->clientModel = clientModel;
     if (clientModel)
@@ -264,7 +264,7 @@ void ShadowGUI::setClientModel(ClientModel *clientModel)
             if (sMode.length() > 0)
                 sMode[0] = sMode[0].toUpper();
 
-            setWindowTitle(tr("Umbra") + " - " + tr("Wallet") + ", " + sMode);
+            setWindowTitle(tr("Spectre") + " - " + tr("Wallet") + ", " + sMode);
         };
 
         // Replace some strings and icons, when using the testnet
@@ -272,15 +272,15 @@ void ShadowGUI::setClientModel(ClientModel *clientModel)
         {
             setWindowTitle(windowTitle() + QString(" ") + tr("[testnet]"));
 #ifndef Q_OS_MAC
-            qApp->setWindowIcon(QIcon(":icons/shadow_testnet"));
-            setWindowIcon(QIcon(":icons/shadow_testnet"));
+            qApp->setWindowIcon(QIcon(":icons/spectre_testnet"));
+            setWindowIcon(QIcon(":icons/spectre_testnet"));
 #else
-            MacDockIconHandler::instance()->setIcon(QIcon(":icons/shadow_testnet"));
+            MacDockIconHandler::instance()->setIcon(QIcon(":icons/spectre_testnet"));
 #endif
             if(trayIcon)
             {
-                trayIcon->setToolTip(tr("Umbra client") + QString(" ") + tr("[testnet]"));
-                trayIcon->setIcon(QIcon(":/icons/shadow_testnet"));
+                trayIcon->setToolTip(tr("Spectre client") + QString(" ") + tr("[testnet]"));
+                trayIcon->setIcon(QIcon(":/icons/spectre_testnet"));
                 toggleHideAction->setIcon(QIcon(":/icons/toolbar_testnet"));
             }
 
@@ -299,7 +299,7 @@ void ShadowGUI::setClientModel(ClientModel *clientModel)
     }
 }
 
-void ShadowGUI::setWalletModel(WalletModel *walletModel)
+void SpectreGUI::setWalletModel(WalletModel *walletModel)
 {
     this->walletModel = walletModel;
     if(walletModel)
@@ -335,7 +335,7 @@ void ShadowGUI::setWalletModel(WalletModel *walletModel)
     }
 }
 
-void ShadowGUI::setMessageModel(MessageModel *messageModel)
+void SpectreGUI::setMessageModel(MessageModel *messageModel)
 {
     this->messageModel = messageModel;
     if(messageModel)
@@ -346,15 +346,15 @@ void ShadowGUI::setMessageModel(MessageModel *messageModel)
     }
 }
 
-void ShadowGUI::createTrayIcon()
+void SpectreGUI::createTrayIcon()
 {
     QMenu *trayIconMenu;
 #ifndef Q_OS_MAC
     trayIcon = new QSystemTrayIcon(this);
     trayIconMenu = new QMenu(this);
     trayIcon->setContextMenu(trayIconMenu);
-    trayIcon->setToolTip(tr("Umbra client"));
-    trayIcon->setIcon(QIcon(":/icons/shadow"));
+    trayIcon->setToolTip(tr("Spectre client"));
+    trayIcon->setIcon(QIcon(":/icons/spectre"));
     connect(trayIcon, SIGNAL(activated(QSystemTrayIcon::ActivationReason)),
           this, SLOT(trayIconActivated(QSystemTrayIcon::ActivationReason)));
     trayIcon->show();
@@ -380,7 +380,7 @@ void ShadowGUI::createTrayIcon()
 }
 
 #ifndef Q_OS_MAC
-void ShadowGUI::trayIconActivated(QSystemTrayIcon::ActivationReason reason)
+void SpectreGUI::trayIconActivated(QSystemTrayIcon::ActivationReason reason)
 {
     if(reason == QSystemTrayIcon::Trigger)
     {
@@ -390,14 +390,14 @@ void ShadowGUI::trayIconActivated(QSystemTrayIcon::ActivationReason reason)
 }
 #endif
 
-void ShadowGUI::aboutClicked()
+void SpectreGUI::aboutClicked()
 {
     AboutDialog dlg;
     dlg.setModel(clientModel);
     dlg.exec();
 }
 
-void ShadowGUI::setNumConnections(int count)
+void SpectreGUI::setNumConnections(int count)
 {
     QWebElement connectionsIcon = documentFrame->findFirstElement("#connectionsIcon");
 
@@ -416,10 +416,10 @@ void ShadowGUI::setNumConnections(int count)
 
     connectionsIcon.setAttribute("class", className);
     connectionsIcon.setAttribute("src", "qrc:///icons/" + className.replace("-", "_"));
-    connectionsIcon.setAttribute("data-title", tr("%n active connection(s) to ShadowCoin network", "", count));
+    connectionsIcon.setAttribute("data-title", tr("%n active connection(s) to SpectreCoin network", "", count));
 }
 
-void ShadowGUI::setNumBlocks(int count, int nTotalBlocks)
+void SpectreGUI::setNumBlocks(int count, int nTotalBlocks)
 {
     QWebElement blocksIcon  = documentFrame->findFirstElement("#blocksIcon");
     QWebElement syncingIcon = documentFrame->findFirstElement("#syncingIcon");
@@ -566,7 +566,7 @@ void ShadowGUI::setNumBlocks(int count, int nTotalBlocks)
     syncProgressBar.setAttribute("max",   QString::number(nTotalBlocks));
 }
 
-void ShadowGUI::error(const QString &title, const QString &message, bool modal)
+void SpectreGUI::error(const QString &title, const QString &message, bool modal)
 {
     // Report errors from network/worker thread
     if(modal)
@@ -578,7 +578,7 @@ void ShadowGUI::error(const QString &title, const QString &message, bool modal)
     }
 }
 
-void ShadowGUI::changeEvent(QEvent *e)
+void SpectreGUI::changeEvent(QEvent *e)
 {
     QMainWindow::changeEvent(e);
 #ifndef Q_OS_MAC // Ignored on Mac
@@ -597,7 +597,7 @@ void ShadowGUI::changeEvent(QEvent *e)
 #endif
 }
 
-void ShadowGUI::closeEvent(QCloseEvent *event)
+void SpectreGUI::closeEvent(QCloseEvent *event)
 {
     if(clientModel)
     {
@@ -612,20 +612,20 @@ void ShadowGUI::closeEvent(QCloseEvent *event)
     QMainWindow::closeEvent(event);
 }
 
-void ShadowGUI::askFee(qint64 nFeeRequired, bool *payFee)
+void SpectreGUI::askFee(qint64 nFeeRequired, bool *payFee)
 {
     QString strMessage =
         tr("This transaction is over the size limit.  You can still send it for a fee of %1, "
           "which goes to the nodes that process your transaction and helps to support the network.  "
           "Do you want to pay the fee?").arg(
-                BitcoinUnits::formatWithUnit(BitcoinUnits::SDC, nFeeRequired));
+                BitcoinUnits::formatWithUnit(BitcoinUnits::SPEC, nFeeRequired));
     QMessageBox::StandardButton retval = QMessageBox::question(
           this, tr("Confirm transaction fee"), strMessage,
           QMessageBox::Yes|QMessageBox::Cancel, QMessageBox::Yes);
     *payFee = (retval == QMessageBox::Yes);
 }
 
-void ShadowGUI::incomingTransaction(const QModelIndex & parent, int start, int end)
+void SpectreGUI::incomingTransaction(const QModelIndex & parent, int start, int end)
 {
     if(!walletModel || !clientModel || clientModel->inInitialBlockDownload() || nNodeState != NS_READY)
         return;
@@ -660,7 +660,7 @@ void ShadowGUI::incomingTransaction(const QModelIndex & parent, int start, int e
                           .arg(address), icon);
 }
 
-void ShadowGUI::incomingMessage(const QModelIndex & parent, int start, int end)
+void SpectreGUI::incomingMessage(const QModelIndex & parent, int start, int end)
 {
     if(!messageModel)
         return;
@@ -693,25 +693,25 @@ void ShadowGUI::incomingMessage(const QModelIndex & parent, int start, int end)
     };
 }
 
-void ShadowGUI::optionsClicked()
+void SpectreGUI::optionsClicked()
 {
     bridge->triggerElement("#navitems a[href=#options]", "click");
     showNormalIfMinimized();
 }
 
-void ShadowGUI::dragEnterEvent(QDragEnterEvent *event)
+void SpectreGUI::dragEnterEvent(QDragEnterEvent *event)
 {
     // Accept only URIs
     if(event->mimeData()->hasUrls())
         event->acceptProposedAction();
 }
 
-void ShadowGUI::dragMoveEvent(QDragMoveEvent *event)
+void SpectreGUI::dragMoveEvent(QDragMoveEvent *event)
 {
     event->accept();
 }
 
-void ShadowGUI::dropEvent(QDropEvent *event)
+void SpectreGUI::dropEvent(QDropEvent *event)
 {
     if(event->mimeData()->hasUrls())
     {
@@ -727,13 +727,13 @@ void ShadowGUI::dropEvent(QDropEvent *event)
         if (nValidUrisFound)
             bridge->triggerElement("#navitems a[href=#send]", "click");
         else
-            notificator->notify(Notificator::Warning, tr("URI handling"), tr("URI can not be parsed! This can be caused by an invalid ShadowCoin address or malformed URI parameters."));
+            notificator->notify(Notificator::Warning, tr("URI handling"), tr("URI can not be parsed! This can be caused by an invalid SpectreCoin address or malformed URI parameters."));
     }
 
     event->acceptProposedAction();
 }
 
-void ShadowGUI::handleURI(QString strURI)
+void SpectreGUI::handleURI(QString strURI)
 {
 
     SendCoinsRecipient rv;
@@ -750,10 +750,10 @@ void ShadowGUI::handleURI(QString strURI)
         showNormalIfMinimized();
     }
     else
-        notificator->notify(Notificator::Warning, tr("URI handling"), tr("URI can not be parsed! This can be caused by an invalid ShadowCoin address or malformed URI parameters."));
+        notificator->notify(Notificator::Warning, tr("URI handling"), tr("URI can not be parsed! This can be caused by an invalid SpectreCoin address or malformed URI parameters."));
 }
 
-void ShadowGUI::setEncryptionStatus(int status)
+void SpectreGUI::setEncryptionStatus(int status)
 {
     QWebElement encryptionIcon    = documentFrame->findFirstElement("#encryptionIcon");
     QWebElement encryptButton     = documentFrame->findFirstElement("#encryptWallet");
@@ -843,7 +843,7 @@ void ShadowGUI::setEncryptionStatus(int status)
     }
 }
 
-void ShadowGUI::encryptWallet(bool status)
+void SpectreGUI::encryptWallet(bool status)
 {
     if(!walletModel)
         return;
@@ -855,7 +855,7 @@ void ShadowGUI::encryptWallet(bool status)
     setEncryptionStatus(walletModel->getEncryptionStatus());
 }
 
-void ShadowGUI::backupWallet()
+void SpectreGUI::backupWallet()
 {
     QString saveDir = QDesktopServices::storageLocation(QDesktopServices::DocumentsLocation);
     QString filename = QFileDialog::getSaveFileName(this, tr("Backup Wallet"), saveDir, tr("Wallet Data (*.dat)"));
@@ -868,14 +868,14 @@ void ShadowGUI::backupWallet()
     }
 }
 
-void ShadowGUI::changePassphrase()
+void SpectreGUI::changePassphrase()
 {
     AskPassphraseDialog dlg(AskPassphraseDialog::ChangePass, this);
     dlg.setModel(walletModel);
     dlg.exec();
 }
 
-void ShadowGUI::unlockWallet()
+void SpectreGUI::unlockWallet()
 {
     if(!walletModel)
         return;
@@ -892,7 +892,7 @@ void ShadowGUI::unlockWallet()
     }
 }
 
-void ShadowGUI::lockWallet()
+void SpectreGUI::lockWallet()
 {
     if(!walletModel)
         return;
@@ -900,7 +900,7 @@ void ShadowGUI::lockWallet()
     walletModel->setWalletLocked(true);
 }
 
-void ShadowGUI::toggleLock()
+void SpectreGUI::toggleLock()
 {
     if(!walletModel)
         return;
@@ -919,7 +919,7 @@ void ShadowGUI::toggleLock()
 
 }
 
-void ShadowGUI::showNormalIfMinimized(bool fToggleHidden)
+void SpectreGUI::showNormalIfMinimized(bool fToggleHidden)
 {
     // activateWindow() (sometimes) helps with keyboard focus on Windows
     if (isHidden())
@@ -941,12 +941,12 @@ void ShadowGUI::showNormalIfMinimized(bool fToggleHidden)
         hide();
 }
 
-void ShadowGUI::toggleHidden()
+void SpectreGUI::toggleHidden()
 {
     showNormalIfMinimized(true);
 }
 
-void ShadowGUI::updateWeight()
+void SpectreGUI::updateWeight()
 {
     if (!pwalletMain)
         return;
@@ -962,7 +962,7 @@ void ShadowGUI::updateWeight()
     nWeight = pwalletMain->GetStakeWeight();
 }
 
-void ShadowGUI::updateStakingIcon()
+void SpectreGUI::updateStakingIcon()
 {
     QWebElement stakingIcon = documentFrame->findFirstElement("#stakingIcon");
     uint64_t nNetworkWeight = 0;
@@ -1010,7 +1010,7 @@ void ShadowGUI::updateStakingIcon()
     }
 }
 
-void ShadowGUI::detectShutdown()
+void SpectreGUI::detectShutdown()
 {
     if (ShutdownRequested())
         QMetaObject::invokeMethod(QCoreApplication::instance(), "quit", Qt::QueuedConnection);

@@ -3,7 +3,7 @@
 #include "wallet.h"
 #include "base58.h"
 
-#include "shadowgui.h"
+#include "spectregui.h"
 
 /* Return positive answer if transaction should be shown in list.
  */
@@ -20,22 +20,22 @@ QString TransactionRecord::getTypeLabel(const int &type)
     switch(type)
     {
     case RecvWithAddress:
-        return ShadowGUI::tr("Received with");
+        return SpectreGUI::tr("Received with");
     case RecvFromOther:
-        return ShadowGUI::tr("Received from");
+        return SpectreGUI::tr("Received from");
     case SendToAddress:
     case SendToOther:
-        return ShadowGUI::tr("Sent to");
+        return SpectreGUI::tr("Sent to");
     case SendToSelf:
-        return ShadowGUI::tr("Payment to yourself");
+        return SpectreGUI::tr("Payment to yourself");
     case Generated:
-        return ShadowGUI::tr("Mined");
-    case RecvShadow:
-        return ShadowGUI::tr("Received shadow");
-    case SendShadow:
-        return ShadowGUI::tr("Sent shadow");
+        return SpectreGUI::tr("Mined");
+    case RecvSpectre:
+        return SpectreGUI::tr("Received spectre");
+    case SendSpectre:
+        return SpectreGUI::tr("Sent spectre");
     case Other:
-        return ShadowGUI::tr("Other");
+        return SpectreGUI::tr("Other");
     default:
         return "";
     }
@@ -49,11 +49,11 @@ QString TransactionRecord::getTypeShort(const int &type)
         return "mined";
     case TransactionRecord::RecvWithAddress:
     case TransactionRecord::RecvFromOther:
-    case TransactionRecord::RecvShadow:
+    case TransactionRecord::RecvSpectre:
         return "input";
     case TransactionRecord::SendToAddress:
     case TransactionRecord::SendToOther:
-    case TransactionRecord::SendShadow:
+    case TransactionRecord::SendSpectre:
         return "output";
     default:
         return "inout";
@@ -68,9 +68,9 @@ QList<TransactionRecord> TransactionRecord::decomposeTransaction(const CWallet *
     QList<TransactionRecord> parts;
     int64_t nTime = wtx.GetTxTime();
 
-    int64_t nCredSDC, nCredShadow;
-    wtx.GetCredit(nCredSDC, nCredShadow, true);
-    int64_t nCredit = nCredSDC + nCredShadow;
+    int64_t nCredSPEC, nCredSpectre;
+    wtx.GetCredit(nCredSPEC, nCredSpectre, true);
+    int64_t nCredit = nCredSPEC + nCredSpectre;
     int64_t nDebit = wtx.GetDebit();
     int64_t nNet = nCredit - nDebit;
     uint256 hash = wtx.GetHash(), hashPrev = 0;
@@ -80,10 +80,10 @@ QList<TransactionRecord> TransactionRecord::decomposeTransaction(const CWallet *
 
     if (wtx.nVersion == ANON_TXN_VERSION)
     {
-        if (nNet > 0 && nCredShadow > 0)
+        if (nNet > 0 && nCredSpectre > 0)
         {
             // -- credit
-            TransactionRecord sub(hash, nTime, TransactionRecord::RecvShadow, "", "", nNet, 0);
+            TransactionRecord sub(hash, nTime, TransactionRecord::RecvSpectre, "", "", nNet, 0);
 
             for (unsigned int nOut = 0; nOut < wtx.vout.size(); nOut++)
             {
@@ -103,7 +103,7 @@ QList<TransactionRecord> TransactionRecord::decomposeTransaction(const CWallet *
         if (nNet <= 0)
         {
             // -- debit
-            TransactionRecord sub(hash, nTime, TransactionRecord::SendShadow, "", "", nNet, 0);
+            TransactionRecord sub(hash, nTime, TransactionRecord::SendSpectre, "", "", nNet, 0);
 
             for (unsigned int nOut = 0; nOut < wtx.vout.size(); nOut++)
             {
@@ -148,7 +148,7 @@ QList<TransactionRecord> TransactionRecord::decomposeTransaction(const CWallet *
 
                     sub.credit = txout.nValue;
 
-                    sub.type = TransactionRecord::RecvShadow;
+                    sub.type = TransactionRecord::RecvSpectre;
                     sub.address = CBitcoinAddress(ckidD).ToString();
                     //sub.address = wallet->mapAddressBook[ckidD]
 
@@ -223,7 +223,7 @@ QList<TransactionRecord> TransactionRecord::decomposeTransaction(const CWallet *
                 if (!walletdb.ReadOwnedAnonOutput(vchImage, oao))
                 {
                     fAllFromMe = false;
-                    break; // display as send/recv shadow
+                    break; // display as send/recv spectre
                 };
                 continue;
             };
@@ -241,7 +241,7 @@ QList<TransactionRecord> TransactionRecord::decomposeTransaction(const CWallet *
                 && txout.IsAnonOutput())
             {
                 fAllToMe = false;
-                break; // display as send/recv shadow
+                break; // display as send/recv spectre
             }
             opcodetype firstOpCode;
             CScript::const_iterator pc = txout.scriptPubKey.begin();
@@ -298,7 +298,7 @@ QList<TransactionRecord> TransactionRecord::decomposeTransaction(const CWallet *
                     sub.idx = parts.size(); // sequence number
                     sub.credit = txout.nValue;
 
-                    sub.type = TransactionRecord::SendShadow;
+                    sub.type = TransactionRecord::SendSpectre;
                     sub.address = CBitcoinAddress(ckidD).ToString();
 
                 } else

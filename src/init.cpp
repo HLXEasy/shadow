@@ -165,13 +165,13 @@ void HandleSIGHUP(int)
 
 bool static InitError(const std::string &str)
 {
-    uiInterface.ThreadSafeMessageBox(str, _("ShadowCoin"), CClientUIInterface::BTN_OK | CClientUIInterface::MODAL);
+    uiInterface.ThreadSafeMessageBox(str, _("SpectreCoin"), CClientUIInterface::BTN_OK | CClientUIInterface::MODAL);
     return false;
 }
 
 bool static InitWarning(const std::string &str)
 {
-    uiInterface.ThreadSafeMessageBox(str, _("ShadowCoin"), CClientUIInterface::BTN_OK | CClientUIInterface::ICON_WARNING | CClientUIInterface::MODAL);
+    uiInterface.ThreadSafeMessageBox(str, _("SpectreCoin"), CClientUIInterface::BTN_OK | CClientUIInterface::ICON_WARNING | CClientUIInterface::MODAL);
     return true;
 }
 
@@ -197,8 +197,8 @@ std::string HelpMessage()
 {
     std::string strUsage = _("Options:") + "\n";
     strUsage += "  -?                     " + _("This help message") + "\n";
-    strUsage += "  -conf=<file>           " + _("Specify configuration file (default: shadowcoin.conf)") + "\n";
-    strUsage += "  -pid=<file>            " + _("Specify pid file (default: shadowcoind.pid)") + "\n";
+    strUsage += "  -conf=<file>           " + _("Specify configuration file (default: spectrecoin.conf)") + "\n";
+    strUsage += "  -pid=<file>            " + _("Specify pid file (default: spectrecoind.pid)") + "\n";
     strUsage += "  -datadir=<dir>         " + _("Specify data directory") + "\n";
     strUsage += "  -wallet=<dir>          " + _("Specify wallet file (within data directory)") + "\n";
     strUsage += "  -dbcache=<n>           " + _("Set database cache size in megabytes (default: 25)") + "\n";
@@ -208,7 +208,7 @@ std::string HelpMessage()
     strUsage += "  -socks=<n>             " + _("Select the version of socks proxy to use (4-5, default: 5)") + "\n";
     strUsage += "  -tor=<ip:port>         " + _("Use proxy to reach tor hidden services (default: same as -proxy)") + "\n";
     strUsage += "  -dns                   " + _("Allow DNS lookups for -addnode, -seednode and -connect") + "\n";
-    strUsage += "  -port=<port>           " + _("Listen for connections on <port> (default: 51737 or testnet: 51997)") + "\n";
+    strUsage += "  -port=<port>           " + _("Listen for connections on <port> (default: 37347 or testnet: 37111)") + "\n";
     strUsage += "  -maxconnections=<n>    " + _("Maintain at most <n> connections to peers (default: 125)") + "\n";
     strUsage += "  -addnode=<ip>          " + _("Add a node to connect to and attempt to keep the connection open") + "\n";
     strUsage += "  -connect=<ip>          " + _("Connect only to the specified node(s)") + "\n";
@@ -259,7 +259,7 @@ std::string HelpMessage()
     strUsage += "  -printtodebuglog       " + _("Send trace/debug info to debug.log file") + "\n";
     strUsage += "  -rpcuser=<user>        " + _("Username for JSON-RPC connections") + "\n";
     strUsage += "  -rpcpassword=<pw>      " + _("Password for JSON-RPC connections") + "\n";
-    strUsage += "  -rpcport=<port>        " + _("Listen for JSON-RPC connections on <port> (default: 51736 or testnet: 51996)") + "\n";
+    strUsage += "  -rpcport=<port>        " + _("Listen for JSON-RPC connections on <port> (default: 36657 or testnet: 36757)") + "\n";
     strUsage += "  -rpcallowip=<ip>       " + _("Allow JSON-RPC connections from specified IP address") + "\n";
     
     if (!fHaveGUI)
@@ -550,7 +550,7 @@ bool AppInit2(boost::thread_group& threadGroup)
     // ********************************************************* Step 4: application initialization: dir lock, daemonize, pidfile, debug log
     // Sanity check
     if (!InitSanityCheck())
-        return InitError(_("Initialization sanity check failed. ShadowCoin is shutting down."));
+        return InitError(_("Initialization sanity check failed. SpectreCoin is shutting down."));
 
     
     std::string strDataDir = GetDataDir().string();
@@ -568,13 +568,13 @@ bool AppInit2(boost::thread_group& threadGroup)
 
     static boost::interprocess::file_lock lock(pathLockFile.string().c_str());
     if (!lock.try_lock())
-        return InitError(strprintf(_("Cannot obtain a lock on data directory %s.  ShadowCoin is probably already running."), strDataDir.c_str()));
+        return InitError(strprintf(_("Cannot obtain a lock on data directory %s.  SpectreCoin is probably already running."), strDataDir.c_str()));
     
     if (GetBoolArg("-shrinkdebugfile", !fDebug))
         ShrinkDebugFile();
 
     LogPrintf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-    LogPrintf("ShadowCoin version %s (%s)\n", FormatFullVersion().c_str(), CLIENT_DATE.c_str());
+    LogPrintf("SpectreCoin version %s (%s)\n", FormatFullVersion().c_str(), CLIENT_DATE.c_str());
     LogPrintf("Operating in %s mode.\n", GetNodeModeName(nNodeMode));
     LogPrintf("Using OpenSSL version %s\n", SSLeay_version(SSLEAY_VERSION));
 
@@ -588,7 +588,7 @@ bool AppInit2(boost::thread_group& threadGroup)
 
     if (fDaemon)
     {
-        fprintf(stdout, "ShadowCoin server starting\n");
+        fprintf(stdout, "SpectreCoin server starting\n");
         fflush(stdout);
     };
     
@@ -691,7 +691,7 @@ bool AppInit2(boost::thread_group& threadGroup)
                 " Original wallet.dat saved as wallet.{timestamp}.bak in %s; if"
                 " your balance or transactions are incorrect you should"
                 " restore from a backup."), strDataDir.c_str());
-            uiInterface.ThreadSafeMessageBox(msg, _("ShadowCoin"), CClientUIInterface::BTN_OK | CClientUIInterface::ICON_WARNING | CClientUIInterface::MODAL);
+            uiInterface.ThreadSafeMessageBox(msg, _("SpectreCoin"), CClientUIInterface::BTN_OK | CClientUIInterface::ICON_WARNING | CClientUIInterface::MODAL);
         };
 
         if (r == CDBEnv::RECOVER_FAIL)
@@ -909,15 +909,15 @@ bool AppInit2(boost::thread_group& threadGroup)
         {
             std::string msg(_("Warning: error reading wallet.dat! All keys read correctly, but transaction data"
                          " or address book entries might be missing or incorrect."));
-            uiInterface.ThreadSafeMessageBox(msg, _("ShadowCoin"), CClientUIInterface::BTN_OK | CClientUIInterface::ICON_WARNING | CClientUIInterface::MODAL);
+            uiInterface.ThreadSafeMessageBox(msg, _("SpectreCoin"), CClientUIInterface::BTN_OK | CClientUIInterface::ICON_WARNING | CClientUIInterface::MODAL);
         } else
         if (nLoadWalletRet == DB_TOO_NEW)
         {
-            strErrors << _("Error loading wallet.dat: Wallet requires newer version of ShadowCoin") << "\n";
+            strErrors << _("Error loading wallet.dat: Wallet requires newer version of SpectreCoin") << "\n";
         } else
         if (nLoadWalletRet == DB_NEED_REWRITE)
         {
-            strErrors << _("Wallet needed to be rewritten: restart ShadowCoin to complete") << "\n";
+            strErrors << _("Wallet needed to be rewritten: restart SpectreCoin to complete") << "\n";
             LogPrintf("%s", strErrors.str().c_str());
             return InitError(strErrors.str());
         } else

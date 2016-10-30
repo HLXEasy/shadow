@@ -3,24 +3,24 @@
     <name>AboutDialog</name>
     <message>
         <location filename="../forms/aboutdialog.ui" line="+14"/>
-        <source>About ShadowCoin</source>
-        <translation>Vad du behöver veta om ShadowCoin</translation>
+        <source>About SpectreCoin</source>
+        <translation>Vad du behöver veta om SpectreCoin</translation>
     </message>
     <message>
         <location line="+39"/>
-        <source>&lt;b&gt;ShadowCoin&lt;/b&gt; version</source>
-        <translation>&lt;b&gt;ShadowCoin&lt;/b&gt; version</translation>
+        <source>&lt;b&gt;SpectreCoin&lt;/b&gt; version</source>
+        <translation>&lt;b&gt;SpectreCoin&lt;/b&gt; version</translation>
     </message>
     <message>
         <location line="+41"/>
         <source>Copyright © 2009-2014 The Bitcoin developers
 Copyright © 2012-2014 The NovaCoin developers
 Copyright © 2014 The BlackCoin developers
-Copyright © 2014-2015 The ShadowCoin developers</source>
+Copyright © 2016 The Spectre developers</source>
         <translation>Copyright © 2009-2014 The Bitcoin developers
 Copyright © 2012-2014 The NovaCoin developers
 Copyright © 2014 The BlackCoin developers
-Copyright © 2014-2015 The ShadowCoin developers</translation>
+Copyright © 2016 The Spectre developers</translation>
     </message>
     <message>
         <location line="+16"/>
@@ -177,8 +177,8 @@ This product includes software developed by the OpenSSL Project for use in the O
     </message>
     <message>
         <location line="-58"/>
-        <source>ShadowCoin will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your coins from being stolen by malware infecting your computer.</source>
-        <translation>ShadowCoin plånboken kommer nu att stängas för att slutföra krypteringen: Kom ihåg att även en krypterad plånboks säkerhet kan äventyras genom keyloggers eller dylika malwares.</translation>
+        <source>SpectreCoin will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your coins from being stolen by malware infecting your computer.</source>
+        <translation>SpectreCoin plånboken kommer nu att stängas för att slutföra krypteringen: Kom ihåg att även en krypterad plånboks säkerhet kan äventyras genom keyloggers eller dylika malwares.</translation>
     </message>
     <message>
         <location line="+13"/>
@@ -516,7 +516,7 @@ Detta betyder att en avgift på minst %2 krävs.</translation>
     <message>
         <location line="+10"/>
         <source>The label associated with this address book entry</source>
-        <translation>Namnet som kopplats till denna ShadowCoin-adress</translation>
+        <translation>Namnet som kopplats till denna SpectreCoin-adress</translation>
     </message>
     <message>
         <location line="+7"/>
@@ -560,8 +560,8 @@ Detta betyder att en avgift på minst %2 krävs.</translation>
     </message>
     <message>
         <location line="-5"/>
-        <source>The entered address &quot;%1&quot; is not a valid ShadowCoin address.</source>
-        <translation>Den inslagna adressen &quot;%1&quot; är inte en giltig ShadowCoin adress.</translation>
+        <source>The entered address &quot;%1&quot; is not a valid SpectreCoin address.</source>
+        <translation>Den inslagna adressen &quot;%1&quot; är inte en giltig SpectreCoin adress.</translation>
     </message>
     <message>
         <location line="+10"/>
@@ -584,7 +584,7 @@ Detta betyder att en avgift på minst %2 krävs.</translation>
     <message>
         <location line="+0"/>
         <location line="+12"/>
-        <source>Shadow</source>
+        <source>Spectre</source>
         <translation type="unfinished"/>
     </message>
     <message>
@@ -676,7 +676,7 @@ Detta betyder att en avgift på minst %2 krävs.</translation>
     <name>PaymentServer</name>
     <message>
         <location filename="../paymentserver.cpp" line="+107"/>
-        <source>Cannot start shadow: click-to-pay handler</source>
+        <source>Cannot start spectre: click-to-pay handler</source>
         <translation type="unfinished"/>
     </message>
 </context>
@@ -786,12 +786,12 @@ Detta betyder att en avgift på minst %2 krävs.</translation>
     </message>
     <message>
         <location line="-10"/>
-        <source>Shadow - Debug window</source>
+        <source>Spectre - Debug window</source>
         <translation type="unfinished"/>
     </message>
     <message>
         <location line="+25"/>
-        <source>Shadow Core</source>
+        <source>Spectre Core</source>
         <translation type="unfinished"/>
     </message>
     <message>
@@ -826,7 +826,7 @@ Detta betyder att en avgift på minst %2 krävs.</translation>
     </message>
     <message>
         <location line="+157"/>
-        <source>Show the Shadow help message to get a list with possible Shadow command-line options.</source>
+        <source>Show the Spectre help message to get a list with possible Spectre command-line options.</source>
         <translation type="unfinished"/>
     </message>
     <message>
@@ -965,7 +965,7 @@ Detta betyder att en avgift på minst %2 krävs.</translation>
     </message>
     <message>
         <location line="+49"/>
-        <source>Open the Shadow debug log file from the current data directory. This can take a few seconds for large log files.</source>
+        <source>Open the Spectre debug log file from the current data directory. This can take a few seconds for large log files.</source>
         <translation type="unfinished"/>
     </message>
     <message>
@@ -1005,7 +1005,7 @@ Detta betyder att en avgift på minst %2 krävs.</translation>
     </message>
     <message>
         <location filename="../rpcconsole.cpp" line="-197"/>
-        <source>Welcome to the Shadow Core RPC console.</source>
+        <source>Welcome to the Spectre Core RPC console.</source>
         <translation type="unfinished"/>
     </message>
     <message>
@@ -1052,9 +1052,9 @@ Detta betyder att en avgift på minst %2 krävs.</translation>
     </message>
 </context>
 <context>
-    <name>ShadowBridge</name>
+    <name>SpectreBridge</name>
     <message>
-        <location filename="../shadowbridge.cpp" line="+401"/>
+        <location filename="../spectrebridge.cpp" line="+401"/>
         <source>Incoming Message</source>
         <translation type="unfinished"/>
     </message>
@@ -1070,17 +1070,17 @@ Detta betyder att en avgift på minst %2 krävs.</translation>
     </message>
     <message>
         <location line="+4"/>
-        <source>&lt;b&gt;%1&lt;/b&gt; to SHADOW %2 (%3)</source>
+        <source>&lt;b&gt;%1&lt;/b&gt; to SPECTRE %2 (%3)</source>
         <translation type="unfinished"/>
     </message>
     <message>
         <location line="+5"/>
-        <source>&lt;b&gt;%1&lt;/b&gt; SHADOW, ring size %2 to SHADOW %3 (%4)</source>
+        <source>&lt;b&gt;%1&lt;/b&gt; SPECTRE, ring size %2 to SPECTRE %3 (%4)</source>
         <translation type="unfinished"/>
     </message>
     <message>
         <location line="+5"/>
-        <source>&lt;b&gt;%1&lt;/b&gt; SHADOW, ring size %2 to SDC %3 (%4)</source>
+        <source>&lt;b&gt;%1&lt;/b&gt; SPECTRE, ring size %2 to SPEC %3 (%4)</source>
         <translation type="unfinished"/>
     </message>
     <message>
@@ -1223,7 +1223,7 @@ Ring size of one is not anonymous, and harms the network.</source>
     </message>
     <message>
         <location line="+5"/>
-        <source>The total exceeds your shadow balance when the %1 transaction fee is included.</source>
+        <source>The total exceeds your spectre balance when the %1 transaction fee is included.</source>
         <translation type="unfinished"/>
     </message>
     <message>
@@ -1392,7 +1392,7 @@ Ring size of one is not anonymous, and harms the network.</source>
     </message>
     <message>
         <location line="+1"/>
-        <source>About Shadow</source>
+        <source>About Spectre</source>
         <translation type="unfinished"/>
     </message>
     <message>
@@ -1637,7 +1637,7 @@ Ring size of one is not anonymous, and harms the network.</source>
     </message>
     <message>
         <location line="+1"/>
-        <source>0 active connection(s) to ShadowCash network</source>
+        <source>0 active connection(s) to SpectreCoin network</source>
         <translation type="unfinished"/>
     </message>
     <message>
@@ -1677,7 +1677,7 @@ Ring size of one is not anonymous, and harms the network.</source>
     </message>
     <message>
         <location line="+1"/>
-        <source>Enter a ShadowCash address to sign the message with (e.g. SaKYqfD8J3vw4RTnqtgk2K9B67CBaL3mhV)</source>
+        <source>Enter a SpectreCoin address to sign the message with (e.g. SaKYqfD8J3vw4RTnqtgk2K9B67CBaL3mhV)</source>
         <translation type="unfinished"/>
     </message>
     <message>
@@ -1697,7 +1697,7 @@ Ring size of one is not anonymous, and harms the network.</source>
     </message>
     <message>
         <location line="+1"/>
-        <source>Enter a ShadowCash address to verify the message with (e.g. SaKYqfD8J3vw4RTnqtgk2K9B67CBaL3mhV)</source>
+        <source>Enter a SpectreCoin address to verify the message with (e.g. SaKYqfD8J3vw4RTnqtgk2K9B67CBaL3mhV)</source>
         <translation type="unfinished"/>
     </message>
     <message>
@@ -1707,7 +1707,7 @@ Ring size of one is not anonymous, and harms the network.</source>
     </message>
     <message>
         <location line="+1"/>
-        <source>Enter a ShadowCash signature</source>
+        <source>Enter a SpectreCoin signature</source>
         <translation type="unfinished"/>
     </message>
     <message>
@@ -1927,14 +1927,14 @@ Ring size of one is not anonymous, and harms the network.</source>
     </message>
 </context>
 <context>
-    <name>ShadowGUI</name>
+    <name>SpectreGUI</name>
     <message>
-        <location filename="../shadow.cpp" line="+111"/>
-        <source>A fatal error occurred. Shadow can no longer continue safely and will quit.</source>
+        <location filename="../spectre.cpp" line="+111"/>
+        <source>A fatal error occurred. Spectre can no longer continue safely and will quit.</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../shadowgui.cpp" line="+89"/>
+        <location filename="../spectregui.cpp" line="+89"/>
         <location line="+178"/>
         <source>Umbra</source>
         <translation type="unfinished"/>
@@ -1956,12 +1956,12 @@ Ring size of one is not anonymous, and harms the network.</source>
     </message>
     <message>
         <location line="+3"/>
-        <source>&amp;About ShadowCoin</source>
+        <source>&amp;About SpectreCoin</source>
         <translation type="unfinished"/>
     </message>
     <message>
         <location line="+1"/>
-        <source>Show information about ShadowCoin</source>
+        <source>Show information about SpectreCoin</source>
         <translation type="unfinished"/>
     </message>
     <message>
@@ -1981,7 +1981,7 @@ Ring size of one is not anonymous, and harms the network.</source>
     </message>
     <message>
         <location line="+1"/>
-        <source>Modify configuration options for ShadowCoin</source>
+        <source>Modify configuration options for SpectreCoin</source>
         <translation type="unfinished"/>
     </message>
     <message>
@@ -2083,7 +2083,7 @@ Ring size of one is not anonymous, and harms the network.</source>
     </message>
     <message numerus="yes">
         <location line="+63"/>
-        <source>%n active connection(s) to ShadowCoin network</source>
+        <source>%n active connection(s) to SpectreCoin network</source>
         <translation type="unfinished"><numerusform></numerusform><numerusform></numerusform></translation>
     </message>
     <message>
@@ -2242,7 +2242,7 @@ Message: %4
     <message>
         <location line="-23"/>
         <location line="+23"/>
-        <source>URI can not be parsed! This can be caused by an invalid ShadowCoin address or malformed URI parameters.</source>
+        <source>URI can not be parsed! This can be caused by an invalid SpectreCoin address or malformed URI parameters.</source>
         <translation type="unfinished"/>
     </message>
     <message>
@@ -2380,12 +2380,12 @@ Expected time to earn reward is %3</source>
     </message>
     <message>
         <location line="+2"/>
-        <source>Received shadow</source>
+        <source>Received spectre</source>
         <translation type="unfinished"/>
     </message>
     <message>
         <location line="+2"/>
-        <source>Sent shadow</source>
+        <source>Sent spectre</source>
         <translation type="unfinished"/>
     </message>
     <message>
@@ -2721,8 +2721,8 @@ Expected time to earn reward is %3</source>
     <name>bitcoin-core</name>
     <message>
         <location filename="../bitcoinstrings.cpp" line="+33"/>
-        <source>ShadowCoin version</source>
-        <translation>ShadowCoin version</translation>
+        <source>SpectreCoin version</source>
+        <translation>SpectreCoin version</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -2731,8 +2731,8 @@ Expected time to earn reward is %3</source>
     </message>
     <message>
         <location line="+1"/>
-        <source>Send command to -server or shadowcoind</source>
-        <translation>Skicka kommando till -server eller shadowcoind</translation>
+        <source>Send command to -server or spectrecoind</source>
+        <translation>Skicka kommando till -server eller spectrecoind</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -2751,13 +2751,13 @@ Expected time to earn reward is %3</source>
     </message>
     <message>
         <location line="+2"/>
-        <source>Specify configuration file (default: shadowcoin.conf)</source>
-        <translation>Ange konfigurationsfilen (standard: shadowcoin.conf)</translation>
+        <source>Specify configuration file (default: spectrecoin.conf)</source>
+        <translation>Ange konfigurationsfilen (standard: spectrecoin.conf)</translation>
     </message>
     <message>
         <location line="+1"/>
-        <source>Specify pid file (default: shadowcoind.pid)</source>
-        <translation>Ange pid filen (standard shadowcoind.pid)</translation>
+        <source>Specify pid file (default: spectrecoind.pid)</source>
+        <translation>Ange pid filen (standard spectrecoind.pid)</translation>
     </message>
     <message>
         <location line="+2"/>
@@ -2781,8 +2781,8 @@ Expected time to earn reward is %3</source>
     </message>
     <message>
         <location line="+6"/>
-        <source>Listen for connections on &lt;port&gt; (default: 51737 or testnet: 51997)</source>
-        <translation>Lyssna efter anslutningar på &lt;port&gt; (standard: 51737 eller testnät: 51997)</translation>
+        <source>Listen for connections on &lt;port&gt; (default: 37347 or testnet: 37111)</source>
+        <translation>Lyssna efter anslutningar på &lt;port&gt; (standard: 37347 eller testnät: 37111)</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -2841,8 +2841,8 @@ Expected time to earn reward is %3</source>
     </message>
     <message>
         <location line="-87"/>
-        <source>Listen for JSON-RPC connections on &lt;port&gt; (default: 51736 or testnet: 51996)</source>
-        <translation>Lyssna efter JSON-RPC anslutningar på &lt;port&gt; (standard: 51736 eller testnät: 51996)</translation>
+        <source>Listen for JSON-RPC connections on &lt;port&gt; (default: 36657 or testnet: 36757)</source>
+        <translation>Lyssna efter JSON-RPC anslutningar på &lt;port&gt; (standard: 36657 eller testnät: 36757)</translation>
     </message>
     <message>
         <location line="-11"/>
@@ -2906,8 +2906,8 @@ Expected time to earn reward is %3</source>
     </message>
     <message>
         <location line="+61"/>
-        <source>Warning: Please check that your computer&apos;s date and time are correct! If your clock is wrong ShadowCoin will not work properly.</source>
-        <translation>Varning: Kolla att din dators tid och datum är rätt. ShadowCoin kan inte fungera ordentligt om tiden i datorn är fel.</translation>
+        <source>Warning: Please check that your computer&apos;s date and time are correct! If your clock is wrong SpectreCoin will not work properly.</source>
+        <translation>Varning: Kolla att din dators tid och datum är rätt. SpectreCoin kan inte fungera ordentligt om tiden i datorn är fel.</translation>
     </message>
     <message>
         <location line="-31"/>
@@ -3096,24 +3096,24 @@ Expected time to earn reward is %3</source>
         <source>%s, you must set a rpcpassword in the configuration file:
  %s
 It is recommended you use the following random password:
-rpcuser=shadowcoinrpc
+rpcuser=spectrecoinrpc
 rpcpassword=%s
 (you do not need to remember this password)
 The username and password MUST NOT be the same.
 If the file does not exist, create it with owner-readable-only file permissions.
 It is also recommended to set alertnotify so you are notified of problems;
-for example: alertnotify=echo %%s | mail -s &quot;ShadowCoin Alert&quot; admin@foo.com
+for example: alertnotify=echo %%s | mail -s &quot;SpectreCoin Alert&quot; admin@foo.com
 </source>
         <translation>%s, du måste sätta rpcpassword i konfigurationsfilen:
  %s
 Det är rekommenderat att du använder följande slumpmässiga lösenord:
-rpcuser=shadowcoinrpc
+rpcuser=spectrecoinrpc
 rpcpassword=%s
 (du behöver inte komma ihåg detta lösenord)
 Användarnamnet och lösenordet FÅR INTE vara samma.
 Om filen inte finns, skapa den med endast ägarrättigheter.
 Det är också rekommenderat att sätta alertnotify så du blir notifierad om problem;
-till exempel: alertnotify=echo %%s | mail -s &quot;ShadowCoin Varning&quot; admin@foo.com
+till exempel: alertnotify=echo %%s | mail -s &quot;SpectreCoin Varning&quot; admin@foo.com
 </translation>
     </message>
     <message>
@@ -3238,13 +3238,13 @@ till exempel: alertnotify=echo %%s | mail -s &quot;ShadowCoin Varning&quot; admi
     </message>
     <message>
         <location line="+1"/>
-        <source>Cannot obtain a lock on data directory %s.  ShadowCoin is probably already running.</source>
-        <translation>Kan inte låsa datan i mappen %s. ShadowCoin är kanske redan startad.</translation>
+        <source>Cannot obtain a lock on data directory %s.  SpectreCoin is probably already running.</source>
+        <translation>Kan inte låsa datan i mappen %s. SpectreCoin är kanske redan startad.</translation>
     </message>
     <message>
         <location line="-98"/>
-        <source>ShadowCoin</source>
-        <translation>ShadowCoin</translation>
+        <source>SpectreCoin</source>
+        <translation>SpectreCoin</translation>
     </message>
     <message>
         <location line="+140"/>
@@ -3278,13 +3278,13 @@ till exempel: alertnotify=echo %%s | mail -s &quot;ShadowCoin Varning&quot; admi
     </message>
     <message>
         <location line="+4"/>
-        <source>Error loading wallet.dat: Wallet requires newer version of ShadowCoin</source>
-        <translation>Kunde inte ladda wallet.dat: En nyare version av ShadowCoin krävs</translation>
+        <source>Error loading wallet.dat: Wallet requires newer version of SpectreCoin</source>
+        <translation>Kunde inte ladda wallet.dat: En nyare version av SpectreCoin krävs</translation>
     </message>
     <message>
         <location line="+1"/>
-        <source>Wallet needed to be rewritten: restart ShadowCoin to complete</source>
-        <translation>Plånboken måste skrivas om: Starta om ShadowCoin för att slutföra</translation>
+        <source>Wallet needed to be rewritten: restart SpectreCoin to complete</source>
+        <translation>Plånboken måste skrivas om: Starta om SpectreCoin för att slutföra</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -3353,8 +3353,8 @@ till exempel: alertnotify=echo %%s | mail -s &quot;ShadowCoin Varning&quot; admi
     </message>
     <message>
         <location line="+122"/>
-        <source>Unable to bind to %s on this computer. ShadowCoin is probably already running.</source>
-        <translation>Kan inte binda till %s på denna dator. ShadowCoin är sannolikt redan startad.</translation>
+        <source>Unable to bind to %s on this computer. SpectreCoin is probably already running.</source>
+        <translation>Kan inte binda till %s på denna dator. SpectreCoin är sannolikt redan startad.</translation>
     </message>
     <message>
         <location line="-97"/>

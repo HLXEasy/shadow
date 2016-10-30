@@ -1,4 +1,4 @@
-// Copyright (c) 2014 The ShadowCoin developers
+// Copyright (c) 2014 The SpectreCoin developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file license.txt or http://www.opensource.org/licenses/mit-license.php.
 
@@ -47,7 +47,7 @@ enum
     SMSG_RELAY   = (1 << 4),
 };
 
-const int64_t GENESIS_BLOCK_TIME = 1405769613;
+const int64_t GENESIS_BLOCK_TIME = 1476954000;
 
 static const int64_t COIN = 100000000;
 static const int64_t CENT = 1000000;

@@ -1,9 +1,9 @@
-// Copyright (c) 2014 The ShadowCoin developers
+// Copyright (c) 2014 The SpectreCoin developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file license.txt or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SHADOWGUI_H
-#define SHADOWGUI_H
+#ifndef SPECTREGUI_H
+#define SPECTREGUI_H
 
 #include <QMainWindow>
 #include <QWebView>
@@ -13,7 +13,7 @@
 
 #include <QModelIndex>
 
-#include "shadowbridge.h"
+#include "spectrebridge.h"
 #include "rpcconsole.h"
 
 #include <stdint.h>
@@ -32,15 +32,15 @@ class QUrl;
 QT_END_NAMESPACE
 
 /**
-  Shadow GUI main class. This class represents the main window of the Shadow UI. It communicates with both the client and
+  Spectre GUI main class. This class represents the main window of the Spectre UI. It communicates with both the client and
   wallet models to give the user an up-to-date view of the current core state.
 */
-class ShadowGUI : public QMainWindow
+class SpectreGUI : public QMainWindow
 {
     Q_OBJECT
 public:
-    explicit ShadowGUI(QWidget *parent = 0);
-    ~ShadowGUI();
+    explicit SpectreGUI(QWidget *parent = 0);
+    ~SpectreGUI();
 
     /** Set the client model.
         The client model represents the part of the core that communicates with the P2P network, and is wallet-agnostic.
@@ -68,7 +68,7 @@ private:
     QWebView *webView;
     QWebFrame *documentFrame;
 
-    ShadowBridge *bridge;
+    SpectreBridge *bridge;
 
     ClientModel *clientModel;
     WalletModel *walletModel;
@@ -103,7 +103,7 @@ private:
     /** Create system tray (notification) icon */
     void createTrayIcon();
 
-    friend class ShadowBridge;
+    friend class SpectreBridge;
 
 private slots:
     /** Page finished loading */

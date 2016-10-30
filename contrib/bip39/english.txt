@@ -1572,7 +1572,7 @@ session
 settle
 setup
 seven
-shadow
+spectre
 shaft
 shallow
 share

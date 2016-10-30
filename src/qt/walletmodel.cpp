@@ -15,7 +15,7 @@
 WalletModel::WalletModel(CWallet *wallet, OptionsModel *optionsModel, QObject *parent) :
     QObject(parent), wallet(wallet), optionsModel(optionsModel), addressTableModel(0),
     transactionTableModel(0),
-    cachedBalance(0), cachedShadowBal(0), cachedStake(0), cachedUnconfirmedBalance(0), cachedImmatureBalance(0),
+    cachedBalance(0), cachedSpectreBal(0), cachedStake(0), cachedUnconfirmedBalance(0), cachedImmatureBalance(0),
     cachedNumTransactions(0),
     cachedEncryptionStatus(Unencrypted),
     cachedNumBlocks(0),
@@ -42,9 +42,9 @@ qint64 WalletModel::getBalance() const
     return wallet->GetBalance();
 }
 
-qint64 WalletModel::getShadowBalance() const
+qint64 WalletModel::getSpectreBalance() const
 {
-    return wallet->GetShadowBalance();
+    return wallet->GetSpectreBalance();
 }
 
 qint64 WalletModel::getUnconfirmedBalance() const
@@ -116,23 +116,23 @@ void WalletModel::pollBalanceChanged()
 void WalletModel::checkBalanceChanged()
 {
     qint64 newBalance = getBalance();
-    qint64 newShadowBal = getShadowBalance();
+    qint64 newSpectreBal = getSpectreBalance();
     qint64 newStake = getStake();
     qint64 newUnconfirmedBalance = getUnconfirmedBalance();
     qint64 newImmatureBalance = getImmatureBalance();
 
     if (cachedBalance != newBalance
-        || cachedShadowBal != newShadowBal
+        || cachedSpectreBal != newSpectreBal
         || cachedStake != newStake
         || cachedUnconfirmedBalance != newUnconfirmedBalance
         || cachedImmatureBalance != newImmatureBalance)
     {
         cachedBalance = newBalance;
-        cachedShadowBal = newShadowBal;
+        cachedSpectreBal = newSpectreBal;
         cachedStake = newStake;
         cachedUnconfirmedBalance = newUnconfirmedBalance;
         cachedImmatureBalance = newImmatureBalance;
-        emit balanceChanged(newBalance, newShadowBal, newStake, newUnconfirmedBalance, newImmatureBalance);
+        emit balanceChanged(newBalance, newSpectreBal, newStake, newUnconfirmedBalance, newImmatureBalance);
     }
 }
 
@@ -454,7 +454,7 @@ WalletModel::SendCoinsReturn WalletModel::sendCoinsAnon(const QList<SendCoinsRec
         return SendCoinsReturn(SCR_ErrorWithMsg, 0, QString::fromStdString("Block chain must be fully synced first."));
 
     if (vNodes.empty())
-        return SendCoinsReturn(SCR_ErrorWithMsg, 0, QString::fromStdString("ShadowCoin is not connected!"));
+        return SendCoinsReturn(SCR_ErrorWithMsg, 0, QString::fromStdString("SpectreCoin is not connected!"));
 
 
     // -- verify input type and ringsize
@@ -465,12 +465,12 @@ WalletModel::SendCoinsReturn WalletModel::sendCoinsAnon(const QList<SendCoinsRec
         int inputType = 0;
         switch(rcp.txnTypeInd)
         {
-            case TXT_SDC_TO_SDC:
-            case TXT_SDC_TO_ANON:
+            case TXT_SPEC_TO_SPEC:
+            case TXT_SPEC_TO_ANON:
                 inputType = 0;
                 break;
             case TXT_ANON_TO_ANON:
-            case TXT_ANON_TO_SDC:
+            case TXT_ANON_TO_SPEC:
                 inputType = 1;
                 break;
             default:
@@ -506,9 +506,9 @@ WalletModel::SendCoinsReturn WalletModel::sendCoinsAnon(const QList<SendCoinsRec
             return SendCoinsReturn(AmountWithFeeExceedsBalance, nTransactionFee);
     } else
     {
-        nBalance = wallet->GetShadowBalance();
+        nBalance = wallet->GetSpectreBalance();
         if ((nTotalOut + MIN_TX_FEE_ANON) > nBalance)
-            return SendCoinsReturn(SCR_AmountWithFeeExceedsShadowBalance, MIN_TX_FEE_ANON);
+            return SendCoinsReturn(SCR_AmountWithFeeExceedsSpectreBalance, MIN_TX_FEE_ANON);
     };
 
     {
@@ -532,10 +532,10 @@ WalletModel::SendCoinsReturn WalletModel::sendCoinsAnon(const QList<SendCoinsRec
             int64_t nValue = rcp.amount;
             std::string sNarr = rcp.narration.toStdString();
 
-            if (rcp.txnTypeInd == TXT_SDC_TO_SDC
-                || rcp.txnTypeInd == TXT_ANON_TO_SDC)
+            if (rcp.txnTypeInd == TXT_SPEC_TO_SPEC
+                || rcp.txnTypeInd == TXT_ANON_TO_SPEC)
             {
-                // -- out sdc
+                // -- out spec
                 std::string sError;
                 if (!wallet->CreateStealthOutput(&sxAddrTo, nValue, sNarr, vecSend, mapStealthNarr, sError))
                 {
@@ -545,7 +545,7 @@ WalletModel::SendCoinsReturn WalletModel::sendCoinsAnon(const QList<SendCoinsRec
 
             } else
             {
-                // -- out shadow
+                // -- out spectre
                 CScript scriptNarration; // needed to match output id of narr
                 if (!wallet->CreateAnonOutputs(&sxAddrTo, nValue, sNarr, vecSend, scriptNarration))
                 {
@@ -573,7 +573,7 @@ WalletModel::SendCoinsReturn WalletModel::sendCoinsAnon(const QList<SendCoinsRec
 
         if (inputTypes == 0)
         {
-            // -- in sdc
+            // -- in spec
 
             for (uint32_t i = 0; i < vecSend.size(); ++i)
                 wtxNew.vout.push_back(CTxOut(vecSend[i].second, vecSend[i].first));
@@ -605,7 +605,7 @@ WalletModel::SendCoinsReturn WalletModel::sendCoinsAnon(const QList<SendCoinsRec
 
         } else
         {
-            // -- in shadow
+            // -- in spectre
 
             std::string sError;
             if (!wallet->AddAnonInputs(RING_SIG_2, nTotalOut, nRingSize, vecSend, vecChange, wtxNew, nFeeRequired, false, sError))

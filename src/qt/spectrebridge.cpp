@@ -1,6 +1,6 @@
-#include "shadowbridge.h"
+#include "spectrebridge.h"
 
-#include "shadowgui.h"
+#include "spectregui.h"
 #include "guiutil.h"
 
 #include <boost/algorithm/string.hpp>
@@ -297,9 +297,9 @@ protected:
 
 };
 
-#include "shadowbridge.moc"
+#include "spectrebridge.moc"
 
-ShadowBridge::ShadowBridge(ShadowGUI *window, QObject *parent) :
+SpectreBridge::SpectreBridge(SpectreGUI *window, QObject *parent) :
     QObject         (parent),
     window          (window),
     transactionModel(new TransactionModel()),
@@ -311,7 +311,7 @@ ShadowBridge::ShadowBridge(ShadowGUI *window, QObject *parent) :
     async->start();
 }
 
-ShadowBridge::~ShadowBridge()
+SpectreBridge::~SpectreBridge()
 {
     delete transactionModel;
     delete addressModel;
@@ -321,7 +321,7 @@ ShadowBridge::~ShadowBridge()
 }
 
 // This is just a hook, we won't really be setting the model...
-void ShadowBridge::setClientModel()
+void SpectreBridge::setClientModel()
 {
     info->insert("version", CLIENT_VERSION);
     info->insert("build",   window->clientModel->formatFullVersion());
@@ -332,7 +332,7 @@ void ShadowBridge::setClientModel()
 }
 
 // This is just a hook, we won't really be setting the model...
-void ShadowBridge::setWalletModel()
+void SpectreBridge::setWalletModel()
 {
     populateTransactionTable();
     populateAddressTable();
@@ -342,24 +342,24 @@ void ShadowBridge::setWalletModel()
 
 
 // This is just a hook, we won't really be setting the model...
-void ShadowBridge::setMessageModel()
+void SpectreBridge::setMessageModel()
 {
     populateMessageTable();
     connectSignals();
 }
 
-void ShadowBridge::copy(QString text)
+void SpectreBridge::copy(QString text)
 {
     QApplication::clipboard()->setText(text);
 }
 
-void ShadowBridge::paste()
+void SpectreBridge::paste()
 {
     emitPaste(QApplication::clipboard()->text());
 }
 
 // Options
-void ShadowBridge::populateOptions()
+void SpectreBridge::populateOptions()
 {
     OptionsModel *optionsModel(window->clientModel->getOptionsModel());
 
@@ -426,7 +426,7 @@ void ShadowBridge::populateOptions()
 }
 
 // Transactions
-bool ShadowBridge::addRecipient(QString address, QString label, QString narration, qint64 amount, int txnType, int nRingSize)
+bool SpectreBridge::addRecipient(QString address, QString label, QString narration, qint64 amount, int txnType, int nRingSize)
 {
     SendCoinsRecipient rv;
 
@@ -450,12 +450,12 @@ bool ShadowBridge::addRecipient(QString address, QString label, QString narratio
     return true;
 }
 
-void ShadowBridge::clearRecipients()
+void SpectreBridge::clearRecipients()
 {
     recipients.clear();
 }
 
-bool ShadowBridge::sendCoins(bool fUseCoinControl, QString sChangeAddr)
+bool SpectreBridge::sendCoins(bool fUseCoinControl, QString sChangeAddr)
 {
     int inputTypes = -1;
     int nAnonOutputs = 0;
@@ -464,25 +464,25 @@ bool ShadowBridge::sendCoins(bool fUseCoinControl, QString sChangeAddr)
     QStringList formatted;
     foreach(const SendCoinsRecipient &rcp, recipients)
     {
-        int inputType; // 0 SDC, 1 Shadow
+        int inputType; // 0 SPEC, 1 Spectre
         switch(rcp.txnTypeInd)
         {
-            case TXT_SDC_TO_SDC:
-                formatted.append(tr("<b>%1</b> to %2 (%3)").arg(BitcoinUnits::formatWithUnit(BitcoinUnits::SDC, rcp.amount), Qt::escape(rcp.label), rcp.address));
+            case TXT_SPEC_TO_SPEC:
+                formatted.append(tr("<b>%1</b> to %2 (%3)").arg(BitcoinUnits::formatWithUnit(BitcoinUnits::SPEC, rcp.amount), Qt::escape(rcp.label), rcp.address));
                 inputType = 0;
                 break;
-            case TXT_SDC_TO_ANON:
-                formatted.append(tr("<b>%1</b> to SHADOW %2 (%3)").arg(BitcoinUnits::formatWithUnit(BitcoinUnits::SDC, rcp.amount), Qt::escape(rcp.label), rcp.address));
+            case TXT_SPEC_TO_ANON:
+                formatted.append(tr("<b>%1</b> to SPECTRE %2 (%3)").arg(BitcoinUnits::formatWithUnit(BitcoinUnits::SPEC, rcp.amount), Qt::escape(rcp.label), rcp.address));
                 inputType = 0;
                 nAnonOutputs++;
                 break;
             case TXT_ANON_TO_ANON:
-                formatted.append(tr("<b>%1</b> SHADOW, ring size %2 to SHADOW %3 (%4)").arg(BitcoinUnits::formatWithUnit(BitcoinUnits::SDC, rcp.amount), QString::number(rcp.nRingSize), Qt::escape(rcp.label), rcp.address));
+                formatted.append(tr("<b>%1</b> SPECTRE, ring size %2 to SPECTRE %3 (%4)").arg(BitcoinUnits::formatWithUnit(BitcoinUnits::SPEC, rcp.amount), QString::number(rcp.nRingSize), Qt::escape(rcp.label), rcp.address));
                 inputType = 1;
                 nAnonOutputs++;
                 break;
-            case TXT_ANON_TO_SDC:
-                formatted.append(tr("<b>%1</b> SHADOW, ring size %2 to SDC %3 (%4)").arg(BitcoinUnits::formatWithUnit(BitcoinUnits::SDC, rcp.amount), QString::number(rcp.nRingSize), Qt::escape(rcp.label), rcp.address));
+            case TXT_ANON_TO_SPEC:
+                formatted.append(tr("<b>%1</b> SPECTRE, ring size %2 to SPEC %3 (%4)").arg(BitcoinUnits::formatWithUnit(BitcoinUnits::SPEC, rcp.amount), QString::number(rcp.nRingSize), Qt::escape(rcp.label), rcp.address));
                 inputType = 1;
                 break;
             default:
@@ -590,7 +590,7 @@ bool ShadowBridge::sendCoins(bool fUseCoinControl, QString sChangeAddr)
         case WalletModel::AmountWithFeeExceedsBalance:
             QMessageBox::warning(window, tr("Send Coins"),
                 tr("The total exceeds your balance when the %1 transaction fee is included.").
-                arg(BitcoinUnits::formatWithUnit(BitcoinUnits::SDC, sendstatus.fee)),
+                arg(BitcoinUnits::formatWithUnit(BitcoinUnits::SPEC, sendstatus.fee)),
                 QMessageBox::Ok, QMessageBox::Ok);
             return false;
         case WalletModel::DuplicateAddress:
@@ -633,9 +633,9 @@ bool ShadowBridge::sendCoins(bool fUseCoinControl, QString sChangeAddr)
                 tr("Error: Invalid Stealth Address."),
                 QMessageBox::Ok, QMessageBox::Ok);
             return false;
-        case WalletModel::SCR_AmountWithFeeExceedsShadowBalance:
+        case WalletModel::SCR_AmountWithFeeExceedsSpectreBalance:
             QMessageBox::warning(window, tr("Send Coins"),
-                tr("The total exceeds your shadow balance when the %1 transaction fee is included.").arg(BitcoinUnits::formatWithUnit(BitcoinUnits::SDC, sendstatus.fee)),
+                tr("The total exceeds your spectre balance when the %1 transaction fee is included.").arg(BitcoinUnits::formatWithUnit(BitcoinUnits::SPEC, sendstatus.fee)),
                 QMessageBox::Ok, QMessageBox::Ok);
             return false;
         case WalletModel::SCR_Error:
@@ -663,7 +663,7 @@ bool ShadowBridge::sendCoins(bool fUseCoinControl, QString sChangeAddr)
     return true;
 }
 
-void ShadowBridge::openCoinControl()
+void SpectreBridge::openCoinControl()
 {
     if (!window || !window->walletModel)
         return;
@@ -675,19 +675,19 @@ void ShadowBridge::openCoinControl()
     CoinControlDialog::updateLabels(window->walletModel, 0, this);
 }
 
-void ShadowBridge::updateCoinControlAmount(qint64 amount)
+void SpectreBridge::updateCoinControlAmount(qint64 amount)
 {
     CoinControlDialog::payAmounts.clear();
     CoinControlDialog::payAmounts.append(amount);
     CoinControlDialog::updateLabels(window->walletModel, 0, this);
 }
 
-void ShadowBridge::updateCoinControlLabels(unsigned int &quantity, int64_t &amount, int64_t &fee, int64_t &afterfee, unsigned int &bytes, QString &priority, QString low, int64_t &change)
+void SpectreBridge::updateCoinControlLabels(unsigned int &quantity, int64_t &amount, int64_t &fee, int64_t &afterfee, unsigned int &bytes, QString &priority, QString low, int64_t &change)
 {
     emitCoinControlUpdate(quantity, amount, fee, afterfee, bytes, priority, low, change);
 }
 
-QVariantMap ShadowBridge::listAnonOutputs()
+QVariantMap SpectreBridge::listAnonOutputs()
 {
     QVariantMap anonOutputs;
     typedef std::map<int64_t, int> outputCount;
@@ -733,7 +733,7 @@ QVariantMap ShadowBridge::listAnonOutputs()
     return anonOutputs;
 };
 
-void ShadowBridge::populateTransactionTable()
+void SpectreBridge::populateTransactionTable()
 {
     if(transactionModel->thread() == thread())
     {
@@ -745,26 +745,26 @@ void ShadowBridge::populateTransactionTable()
     transactionModel->populatePage();
 }
 
-void ShadowBridge::updateTransactions(QModelIndex topLeft, QModelIndex bottomRight)
+void SpectreBridge::updateTransactions(QModelIndex topLeft, QModelIndex bottomRight)
 {
     // Updated transactions...
     if(topLeft.column() == TransactionTableModel::Status)
         transactionModel->populateRows(topLeft.row(), bottomRight.row());
 }
 
-void ShadowBridge::insertTransactions(const QModelIndex & parent, int start, int end)
+void SpectreBridge::insertTransactions(const QModelIndex & parent, int start, int end)
 {
     // New Transactions...
     transactionModel->populateRows(start, end);
 }
 
-QString ShadowBridge::transactionDetails(QString txid)
+QString SpectreBridge::transactionDetails(QString txid)
 {
     return window->walletModel->getTransactionTableModel()->index(window->walletModel->getTransactionTableModel()->lookupTransaction(txid), 0).data(TransactionTableModel::LongDescriptionRole).toString();
 }
 
 // Addresses
-void ShadowBridge::populateAddressTable()
+void SpectreBridge::populateAddressTable()
 {
     if(addressModel->thread() == thread())
     {
@@ -777,12 +777,12 @@ void ShadowBridge::populateAddressTable()
     addressModel->populateAddressTable();
 }
 
-void ShadowBridge::updateAddresses(QModelIndex topLeft, QModelIndex bottomRight)
+void SpectreBridge::updateAddresses(QModelIndex topLeft, QModelIndex bottomRight)
 {
     addressModel->poplateRows(topLeft.row(), bottomRight.row());
 }
 
-void ShadowBridge::insertAddresses(const QModelIndex & parent, int start, int end)
+void SpectreBridge::insertAddresses(const QModelIndex & parent, int start, int end)
 {
     // NOTE: Check inInitialBlockDownload here as many stealth addresses uncovered can slow wallet
     //       fPassGuiAddresses allows addresses added manually to still reflect
@@ -793,7 +793,7 @@ void ShadowBridge::insertAddresses(const QModelIndex & parent, int start, int en
     addressModel->poplateRows(start, end);
 }
 
-QString ShadowBridge::newAddress(QString addressLabel, int addressType, QString address, bool send)
+QString SpectreBridge::newAddress(QString addressLabel, int addressType, QString address, bool send)
 {
     // Generate a new address to associate with given label
 
@@ -805,7 +805,7 @@ QString ShadowBridge::newAddress(QString addressLabel, int addressType, QString 
     return rv;
 }
 
-QString ShadowBridge::lastAddressError()
+QString SpectreBridge::lastAddressError()
 {
     QString sError;
     AddressTableModel::EditStatus status = addressModel->atm->getEditStatus();
@@ -833,12 +833,12 @@ QString ShadowBridge::lastAddressError()
     return sError;
 }
 
-QString ShadowBridge::getAddressLabel(QString address)
+QString SpectreBridge::getAddressLabel(QString address)
 {
     return addressModel->atm->labelForAddress(address);
 }
 
-void ShadowBridge::updateAddressLabel(QString address, QString label)
+void SpectreBridge::updateAddressLabel(QString address, QString label)
 {
     QString actualLabel = getAddressLabel(address);
 
@@ -850,23 +850,23 @@ void ShadowBridge::updateAddressLabel(QString address, QString label)
     addressModel->atm->setData(addressModel->atm->index(addressModel->atm->lookupAddress(address), addressModel->atm->Label), QVariant(label), Qt::EditRole);
 }
 
-bool ShadowBridge::validateAddress(QString address)
+bool SpectreBridge::validateAddress(QString address)
 {
     return window->walletModel->validateAddress(address);
 }
 
-bool ShadowBridge::deleteAddress(QString address)
+bool SpectreBridge::deleteAddress(QString address)
 {
     return addressModel->atm->removeRow(addressModel->atm->lookupAddress(address));
 }
 
 // Messages
-void ShadowBridge::appendMessages(QString messages, bool reset)
+void SpectreBridge::appendMessages(QString messages, bool reset)
 {
     emitMessages("[" + messages + "]", reset);
 }
 
-void ShadowBridge::appendMessage(int row)
+void SpectreBridge::appendMessage(int row)
 {
     emitMessage(window->messageModel->index(row, MessageModel::Key)             .data().toString().toHtmlEscaped(),
                 window->messageModel->index(row, MessageModel::Type)            .data().toString().toHtmlEscaped(),
@@ -881,7 +881,7 @@ void ShadowBridge::appendMessage(int row)
                 window->messageModel->index(row, MessageModel::Message)         .data().toString().toHtmlEscaped());
 }
 
-void ShadowBridge::populateMessageTable()
+void SpectreBridge::populateMessageTable()
 {
     thMessage->mtm = window->messageModel;
 
@@ -889,7 +889,7 @@ void ShadowBridge::populateMessageTable()
     thMessage->start();
 }
 
-void ShadowBridge::insertMessages(const QModelIndex & parent, int start, int end)
+void SpectreBridge::insertMessages(const QModelIndex & parent, int start, int end)
 {
     while(start <= end)
     {
@@ -898,22 +898,22 @@ void ShadowBridge::insertMessages(const QModelIndex & parent, int start, int end
     }
 }
 
-bool ShadowBridge::deleteMessage(QString key)
+bool SpectreBridge::deleteMessage(QString key)
 {
     return window->messageModel->removeRow(thMessage->mtm->lookupMessage(key));
 }
 
-bool ShadowBridge::markMessageAsRead(QString key)
+bool SpectreBridge::markMessageAsRead(QString key)
 {
     return window->messageModel->markMessageAsRead(key);
 }
 
-QString ShadowBridge::getPubKey(QString address)
+QString SpectreBridge::getPubKey(QString address)
 {
     return addressModel->atm->pubkeyForAddress(address);;
 }
 
-bool ShadowBridge::setPubKey(QString address, QString pubkey)
+bool SpectreBridge::setPubKey(QString address, QString pubkey)
 {
     std::string sendTo = address.toStdString();
     std::string pbkey  = pubkey.toStdString();
@@ -922,7 +922,7 @@ bool ShadowBridge::setPubKey(QString address, QString pubkey)
     return res == 0||res == 4;
 }
 
-bool ShadowBridge::sendMessage(const QString &address, const QString &message, const QString &from)
+bool SpectreBridge::sendMessage(const QString &address, const QString &message, const QString &from)
 {
     WalletModel::UnlockContext ctx(window->walletModel->requestUnlock());
 
@@ -970,7 +970,7 @@ bool ShadowBridge::sendMessage(const QString &address, const QString &message, c
     return true;
 }
 
-QString ShadowBridge::createGroupChat(QString label)
+QString SpectreBridge::createGroupChat(QString label)
 {
     //return address to invite to people to.
     LOCK2(cs_main, pwalletMain->cs_wallet);
@@ -999,7 +999,7 @@ QString ShadowBridge::createGroupChat(QString label)
 }
 
 
-QString ShadowBridge::joinGroupChat(QString privkey, QString label)
+QString SpectreBridge::joinGroupChat(QString privkey, QString label)
 {
     /*
     EXPERIMENTAL CODE, UNTESTED.
@@ -1045,7 +1045,7 @@ QString ShadowBridge::joinGroupChat(QString privkey, QString label)
 }
 
 
-QVariantList ShadowBridge::inviteGroupChat(QString qsaddress, QVariantList invites, QString from)
+QVariantList SpectreBridge::inviteGroupChat(QString qsaddress, QVariantList invites, QString from)
 {
     //TODO: check if part of HD wallet, if it is refuse to send invites.
     QVariantList r; //Return
@@ -1127,7 +1127,7 @@ QVariantList ShadowBridge::inviteGroupChat(QString qsaddress, QVariantList invit
     return invites;
 }
 
-void ShadowBridge::connectSignals()
+void SpectreBridge::connectSignals()
 {
     connect(transactionModel->getModel(), SIGNAL(dataChanged(QModelIndex,QModelIndex)), SLOT(updateTransactions(QModelIndex,QModelIndex)));
     connect(transactionModel->getModel(), SIGNAL(rowsInserted(QModelIndex,int,int)),    SLOT(insertTransactions(QModelIndex,int,int)));
@@ -1140,7 +1140,7 @@ void ShadowBridge::connectSignals()
 }
 
 
-QString ShadowBridge::translateHtmlString(QString string)
+QString SpectreBridge::translateHtmlString(QString string)
 {
     int i = 0;
     while (html_strings[i] != 0)
@@ -1154,7 +1154,7 @@ QString ShadowBridge::translateHtmlString(QString string)
     return string;
 }
 
-QVariantMap ShadowBridge::userAction(QVariantMap action)
+QVariantMap SpectreBridge::userAction(QVariantMap action)
 {
     QVariantMap::iterator it(action.begin());
 
@@ -1201,7 +1201,7 @@ QVariantMap ShadowBridge::userAction(QVariantMap action)
 }
 
 // Blocks
-QVariantMap ShadowBridge::listLatestBlocks()
+QVariantMap SpectreBridge::listLatestBlocks()
 {
     CBlockIndex* recentBlock = pindexBest;
     CBlock block;
@@ -1231,7 +1231,7 @@ QVariantMap ShadowBridge::listLatestBlocks()
     return latestBlocks;
 }
 
-QVariantMap ShadowBridge::findBlock(QString searchID)
+QVariantMap SpectreBridge::findBlock(QString searchID)
 {
     CBlockIndex* findBlock;
 
@@ -1286,7 +1286,7 @@ QVariantMap ShadowBridge::findBlock(QString searchID)
     return foundBlock;
 }
 
-QVariantMap ShadowBridge::blockDetails(QString blkHash)
+QVariantMap SpectreBridge::blockDetails(QString blkHash)
 {
     QVariantMap blockDetail;
 
@@ -1367,7 +1367,7 @@ QVariantMap ShadowBridge::blockDetails(QString blkHash)
     return blockDetail;
 }
 
-QVariantMap ShadowBridge::listTransactionsForBlock(QString blkHash)
+QVariantMap SpectreBridge::listTransactionsForBlock(QString blkHash)
 {
     QVariantMap blkTransactions;
 
@@ -1410,7 +1410,7 @@ QVariantMap ShadowBridge::listTransactionsForBlock(QString blkHash)
     return blkTransactions;
 }
 
-QVariantMap ShadowBridge::txnDetails(QString blkHash, QString txnHash)
+QVariantMap SpectreBridge::txnDetails(QString blkHash, QString txnHash)
 {
     QVariantMap txnDetail;
 
@@ -1475,7 +1475,7 @@ QVariantMap ShadowBridge::txnDetails(QString blkHash, QString txnHash)
             if (txn.nVersion == ANON_TXN_VERSION
                 && txin.IsAnonInput())
             {
-                sAddr = "Shadow";
+                sAddr = "Spectre";
                 std::vector<uint8_t> vchImage;
                 txin.ExtractKeyImage(vchImage);
 
@@ -1531,7 +1531,7 @@ QVariantMap ShadowBridge::txnDetails(QString blkHash, QString txnHash)
 
              if( txn.nVersion == ANON_TXN_VERSION
                  && txout.IsAnonOutput() )
-                 sAddr = "Shadow";
+                 sAddr = "Spectre";
              else
              {
                  CTxDestination address;
@@ -1562,7 +1562,7 @@ QVariantMap ShadowBridge::txnDetails(QString blkHash, QString txnHash)
     return txnDetail;
 }
 
-QVariantMap ShadowBridge::signMessage(QString address, QString message)
+QVariantMap SpectreBridge::signMessage(QString address, QString message)
 {
     QVariantMap result;
 
@@ -1609,7 +1609,7 @@ QVariantMap ShadowBridge::signMessage(QString address, QString message)
     return result;
 }
 
-QVariantMap ShadowBridge::verifyMessage(QString address, QString message, QString signature)
+QVariantMap SpectreBridge::verifyMessage(QString address, QString message, QString signature)
 {
     QVariantMap result;
 
@@ -1658,7 +1658,7 @@ QVariantMap ShadowBridge::verifyMessage(QString address, QString message, QStrin
     return result;
 }
 
-QVariantMap ShadowBridge::getNewMnemonic(QString password, QString language)
+QVariantMap SpectreBridge::getNewMnemonic(QString password, QString language)
 {
     QVariantMap result;
     int nLanguage = language.toInt();
@@ -1718,7 +1718,7 @@ QVariantMap ShadowBridge::getNewMnemonic(QString password, QString language)
     return result;
 }
 
-QVariantMap ShadowBridge::importFromMnemonic(QString inMnemonic, QString inPassword, QString inLabel, bool fBip44, int64_t nCreateTime)
+QVariantMap SpectreBridge::importFromMnemonic(QString inMnemonic, QString inPassword, QString inLabel, bool fBip44, int64_t nCreateTime)
 {
     std::string sPassword = inPassword.toStdString();
     std::string sMnemonic = inMnemonic.toStdString();
@@ -2019,7 +2019,7 @@ public:
     QVariantMap *resultMap;
 };
 
-QVariantMap ShadowBridge::extKeyAccList() {
+QVariantMap SpectreBridge::extKeyAccList() {
     QVariantMap result;
 
     GUIListExtCallback extKeys(&result, 10 );
@@ -2036,7 +2036,7 @@ QVariantMap ShadowBridge::extKeyAccList() {
     return result;
 }
 
-QVariantMap ShadowBridge::extKeyList() {
+QVariantMap SpectreBridge::extKeyList() {
     QVariantMap result;
 
     GUIListExtCallback extKeys(&result, 10 );
@@ -2049,7 +2049,7 @@ QVariantMap ShadowBridge::extKeyList() {
     return result;
 }
 
-QVariantMap ShadowBridge::extKeyImport(QString inKey, QString inLabel, bool fBip44, int64_t nCreateTime)
+QVariantMap SpectreBridge::extKeyImport(QString inKey, QString inLabel, bool fBip44, int64_t nCreateTime)
 {
     QVariantMap result;
     std::string sInKey = inKey.toStdString();
@@ -2065,7 +2065,7 @@ QVariantMap ShadowBridge::extKeyImport(QString inKey, QString inLabel, bool fBip
         if (!eKey58.IsValid(CChainParams::EXT_SECRET_KEY)
          && !eKey58.IsValid(CChainParams::EXT_PUBLIC_KEY_BTC))
         {
-            result.insert("error_msg", "Import failed - Key must begin with Shadowcoin prefix.");
+            result.insert("error_msg", "Import failed - Key must begin with Spectrecoin prefix.");
             return result;
         }
 
@@ -2140,7 +2140,7 @@ QVariantMap ShadowBridge::extKeyImport(QString inKey, QString inLabel, bool fBip
     return result;
 }
 
-QVariantMap ShadowBridge::extKeySetDefault(QString extKeyID)
+QVariantMap SpectreBridge::extKeySetDefault(QString extKeyID)
 {
     QVariantMap result;
 
@@ -2204,7 +2204,7 @@ QVariantMap ShadowBridge::extKeySetDefault(QString extKeyID)
     return result;
 }
 
-QVariantMap ShadowBridge::extKeySetMaster(QString extKeyID)
+QVariantMap SpectreBridge::extKeySetMaster(QString extKeyID)
 {
     QVariantMap result;
     std::string sInKey = extKeyID.toStdString();
@@ -2266,7 +2266,7 @@ QVariantMap ShadowBridge::extKeySetMaster(QString extKeyID)
     return result;
 }
 
-QVariantMap ShadowBridge::extKeySetActive(QString extKeyID, QString isActive)
+QVariantMap SpectreBridge::extKeySetActive(QString extKeyID, QString isActive)
 {
     QVariantMap result;
     std::string sInKey = extKeyID.toStdString();

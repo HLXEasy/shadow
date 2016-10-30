@@ -3,7 +3,7 @@
 # Distributed under the MIT/X11 software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-# Mac OS X makefile for shadowcoin
+# Mac OS X makefile for spectrecoin
 # Originally by Laszlo Hanyecz (solar@heliacal.net)
 USE_UPNP:=0
 CXX=llvm-g++
@@ -59,7 +59,7 @@ OBJS= \
     obj/extkey.o \
     obj/db.o \
     obj/init.o \
-    obj/shadowcoind.o \
+    obj/spectrecoind.o \
     obj/keystore.o \
     obj/miner.o \
     obj/main.o \
@@ -101,10 +101,10 @@ OBJS= \
 
 
 
-all: shadowcoind
+all: spectrecoind
 
-test check: test_shadow FORCE
-	./test_shadow
+test check: test_spectre FORCE
+	./test_spectre
 LIBS += $(CURDIR)/leveldb/libleveldb.a $(CURDIR)/leveldb/libmemenv.a
 DEFS += $(addprefix -I,$(CURDIR)/leveldb/include)
 DEFS += $(addprefix -I,$(CURDIR)/leveldb/helpers)
@@ -134,7 +134,7 @@ obj/%.o: %.cpp
 	      -e '/^$$/ d' -e 's/$$/ :/' < $(@:%.o=%.d) >> $(@:%.o=%.P); \
 	  rm -f $(@:%.o=%.d)
 
-shadowcoind: $(OBJS:obj/%=obj/%)
+spectrecoind: $(OBJS:obj/%=obj/%)
 	$(LINK) $(CFLAGS) -o $@ $^ $(xLDFLAGS) $(LIBS)
 
 
@@ -149,15 +149,15 @@ obj-test/%.o: test/%.cpp
 	      -e '/^$$/ d' -e 's/$$/ :/' < $(@:%.o=%.d) >> $(@:%.o=%.P); \
 	  rm -f $(@:%.o=%.d)
 
-test_shadow: $(TESTOBJS) $(filter-out obj/init.o obj/shadowcoind.o,$(OBJS:obj/%=obj/%))
+test_spectre: $(TESTOBJS) $(filter-out obj/init.o obj/spectrecoind.o,$(OBJS:obj/%=obj/%))
 	$(LINK) $(CFLAGS) -o $@ $(LIBPATHS) $^ $(TESTLIBS) $(xLDFLAGS) $(LIBS)
 
 clean:
-	-rm -f shadowcoind
+	-rm -f spectrecoind
 	-rm -f obj/*.o
 	-rm -f obj/*.P
 	-rm -f obj/build.h
-	-rm -f test_shadow
+	-rm -f test_spectre
 	-rm -f obj-test/*.o
 	-rm -f obj-test/*.P
 	-cd leveldb && $(MAKE) clean || true

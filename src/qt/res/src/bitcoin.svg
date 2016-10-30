@@ -73,7 +73,7 @@
      gridtolerance="10"
      guidetolerance="10"
      inkscape:pageopacity="0"
-     inkscape:pageshadow="2"
+     inkscape:pagespectre="2"
      inkscape:window-width="1204"
      inkscape:window-height="972"
      id="namedview4"
@@ -88,7 +88,7 @@
   <g
      inkscape:groupmode="layer"
      id="layer2"
-     inkscape:label="Shadow"
+     inkscape:label="Spectre"
      style="display:inline"
      sodipodi:insensitive="true">
     <path

@@ -1,7 +1,7 @@
-#ifndef SHADOWBRIDGE_H
-#define SHADOWBRIDGE_H
+#ifndef SPECTREBRIDGE_H
+#define SPECTREBRIDGE_H
 
-class ShadowGUI;
+class SpectreGUI;
 class TransactionModel;
 class WalletModel;
 class BlockExplorerModel;
@@ -16,15 +16,15 @@ class SendCoinsRecipient;
 
 
 
-class ShadowBridge : public QObject
+class SpectreBridge : public QObject
 {
     Q_OBJECT
 
     /** Information about the client */
     Q_PROPERTY(QVariantMap info READ getInfo);
 public:
-    explicit ShadowBridge(ShadowGUI *window, QObject *parent = 0);
-    ~ShadowBridge();
+    explicit SpectreBridge(SpectreGUI *window, QObject *parent = 0);
+    ~SpectreBridge();
 
     void setClientModel();
     void setWalletModel();
@@ -103,7 +103,7 @@ signals:
     void networkAlert(QString alert);
 
 private:
-    ShadowGUI *window;
+    SpectreGUI *window;
     TransactionModel *transactionModel;
     AddressModel *addressModel;
     MessageThread *thMessage;
@@ -111,7 +111,7 @@ private:
     QVariantMap *info;
     QThread *async;
 
-    friend class ShadowGUI;
+    friend class SpectreGUI;
 
     inline QVariantMap getInfo() const { return *info; };
 
@@ -135,4 +135,4 @@ private slots:
 
 };
 
-#endif // SHADOWBRIDGE_H
+#endif // SPECTREBRIDGE_H

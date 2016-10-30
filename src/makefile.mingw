@@ -88,7 +88,7 @@ OBJS= \
     obj/extkey.o \
     obj/db.o \
     obj/init.o \
-    obj/shadowcoind.o \
+    obj/spectrecoind.o \
     obj/keystore.o \
     obj/miner.o \
     obj/main.o \
@@ -128,10 +128,10 @@ OBJS= \
     obj/state.o \
     obj/bloom.o 
 
-all: shadowcoind.exe
+all: spectrecoind.exe
 
-test check: test_shadow FORCE
-	./test_shadow
+test check: test_spectre FORCE
+	./test_spectre
 
 LIBS += $(CURDIR)/leveldb/libleveldb.a $(CURDIR)/leveldb/libmemenv.a
 DEFS += $(addprefix -I,$(CURDIR)/leveldb/include)
@@ -150,9 +150,9 @@ DEFS += -DHAVE_BUILD_INFO
 obj/%.o: %.cpp $(HEADERS)
 	$(CXX) -c $(CFLAGS) -o $@ $<
 
-shadowcoind.exe: $(OBJS:obj/%=obj/%)
+spectrecoind.exe: $(OBJS:obj/%=obj/%)
 	$(CXX) $(CFLAGS) $(LDFLAGS) -o $@ $(LIBPATHS) $^ $(LIBS) -lshlwapi
-	strip shadowcoind.exe
+	strip spectrecoind.exe
 
 obj/scrypt-x86.o: scrypt-x86.S
 	$(CXX) -c $(xCXXFLAGS) -MMD -o $@ $<
@@ -174,15 +174,15 @@ obj-test/%.o: test/%.cpp
 		-e '/^$$/ d' -e 's/$$/ :/' < $(@:%.o=%.d) >> $(@:%.o=%.P); \
 	rm -f $(@:%.o=%.d)
 
-test_shadow.exe: $(TESTOBJS) $(filter-out obj/init.o obj/shadowcoind.o,$(OBJS:obj/%=obj/%))
+test_spectre.exe: $(TESTOBJS) $(filter-out obj/init.o obj/spectrecoind.o,$(OBJS:obj/%=obj/%))
 	$(LINK) $(xCXXFLAGS) $(CFLAGS) $(LDFLAGS) -o $@ $(LIBPATHS) $^ $(TESTLIBS) $(xLDFLAGS) $(LIBS)
 
 clean:
 	-rm -f obj/*.o
-	-rm -f shadowcoind.exe
+	-rm -f spectrecoind.exe
 	-rm -f obj/build.h
 	cd leveldb && TARGET_OS=NATIVE_WINDOWS $(MAKE) clean && cd ..
-	-rm -f test_shadow.exe
+	-rm -f test_spectre.exe
 	-rm -f obj-test/*.o
 	-rm -f obj-test/*.P
 

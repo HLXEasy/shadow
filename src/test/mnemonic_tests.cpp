@@ -1,4 +1,4 @@
-// Copyright (c) 2015 The ShadowCoin developers
+// Copyright (c) 2015 The SpectreCoin developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -59,7 +59,7 @@ Object read_json_object(const std::string &filename)
     return v.get_obj();
 };
 
-// test_shadow --log_level=all  --run_test=mnemonic_tests
+// test_spectre --log_level=all  --run_test=mnemonic_tests
 
 void TestMnemonic(int nLanguage, const Array &va)
 {

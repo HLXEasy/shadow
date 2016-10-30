@@ -20,7 +20,7 @@ public:
     enum OptionID {
         /// Main Options
         Fee,                 /**< Transaction Fee. qint64 - Optional transaction fee per kB that helps make sure your transactions are processed quickly.
-                               *< Most transactions are 1 kB. Fee 0.01 recommended. 0.0001 SDC */
+                               *< Most transactions are 1 kB. Fee 0.01 recommended. 0.0001 SPEC */
         ReserveBalance,      /**< Reserve Balance. qint64 - Reserved amount does not participate in staking and is therefore spendable at any time. */
         StartAtStartup,      /**< Default Transaction Fee. bool */
         DetachDatabases,     /**< Default Transaction Fee. bool */
@@ -31,7 +31,7 @@ public:
         ThinFullIndex,
         ThinIndexWindow,
         AutoRingSize,        /**< Default Transaction Fee. bool */
-        AutoRedeemShadow,    /**< Default Transaction Fee. bool */
+        AutoRedeemSpectre,    /**< Default Transaction Fee. bool */
         MinRingSize,         /**< Default Transaction Fee. int */
         MaxRingSize,         /**< Default Transaction Fee. int */
         /// Network Related Options
@@ -69,7 +69,7 @@ public:
     bool getMinimizeOnClose();
     bool getDisplayAddresses();
     bool getAutoRingSize();
-    bool getAutoRedeemShadow();
+    bool getAutoRedeemSpectre();
     int getDisplayUnit();
     int getRowsPerPage();
     int getMinRingSize();
@@ -87,7 +87,7 @@ private:
     bool fMinimizeToTray;
     bool fMinimizeOnClose;
     bool fAutoRingSize;
-    bool fAutoRedeemShadow;
+    bool fAutoRedeemSpectre;
     QString language;
     QStringList notifications;
     QStringList visibleTransactions;

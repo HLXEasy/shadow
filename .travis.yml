@@ -9,11 +9,11 @@ matrix:
 env:
   global:
     - MAKEJOBS=-j3
-    - DEPS_URL=https://deps.shadow.cash/
+    - DEPS_URL=https://deps.spectre.cash/
   matrix:
     - BUILD=win32 HOST=i686-w64-mingw32   DISTNAME=i686-win   PACKAGES="mingw-w64 g++-mingw-w64" BITS=32 MAKEFILE=makefile.linux-mingw BOOST_LIB_SUFFIX="-mt-s" OUTPUT_SUFFIX=".exe" QMAKEOPTS="-xplatform win32-g++" BOOST_THREAD_LIB_SUFFIX="_win32-mt-s"
     - BUILD=win64 HOST=x86_64-w64-mingw32 DISTNAME=x86_64-win PACKAGES="mingw-w64 g++-mingw-w64" BITS=64 MAKEFILE=makefile.linux-mingw BOOST_LIB_SUFFIX="-mt-s" OUTPUT_SUFFIX=".exe" QMAKEOPTS="-xplatform win32-g++" BOOST_THREAD_LIB_SUFFIX="_win32-mt-s"
-    - BUILD=macosx HOST=x86_64-apple-darwin14 DISTNAME=x86_64-darwin PACKAGES="clang llvm-dev"  BOOST_LIB_SUFFIX="-mt-s" BOOST_THREAD_LIB_SUFFIX="-mt-s" DEPS=shadow-deps-osx.tar.xz EXTRADEPS=osxcross.tar.xz
+    - BUILD=macosx HOST=x86_64-apple-darwin14 DISTNAME=x86_64-darwin PACKAGES="clang llvm-dev"  BOOST_LIB_SUFFIX="-mt-s" BOOST_THREAD_LIB_SUFFIX="-mt-s" DEPS=spectre-deps-osx.tar.xz EXTRADEPS=osxcross.tar.xz
       QMAKE_CXXFLAGS="-I/home/vagrant/deps/SDK/MacOSX10.9/usr/include -DBOOST_HAS_INT128=1" QMAKEOPTS="-xplatform macx-clang-linux" OTOOL=${HOST}-otool INSTALLNAMETOOL=${HOST}-install_name_tool STRIP=${HOST}-strip
     - BUILD=linux64 MAKEFILE=makefile.unix  BOOST_LIB_SUFFIX="-mt" BITS=64
 #    - BUILD=macosx MAKEFILE=makefile.osx  BOOST_LIB_SUFFIX="-mt" TODO: osx daemon!!
@@ -22,7 +22,7 @@ before_install:
   - sudo apt-get -qq update
 
 install:
-  - if [ "$DEPS" == "" ]; then export DEPS=shadow-deps-${BUILD}.tar.xz; fi
+  - if [ "$DEPS" == "" ]; then export DEPS=spectre-deps-${BUILD}.tar.xz; fi
   - export INDIR=$HOME/inputs
   - export DEPSDIR=$HOME/deps${BITS}
   - export PATH=$DEPSDIR/host/bin:$DEPSDIR:$DEPSDIR/bin:$PATH
@@ -36,7 +36,7 @@ script:
   - echo 'Build Daemon' && echo -en 'travis_fold:start:script.daemon\\r'
 
   - cd $TRAVIS_BUILD_DIR/src
-  - if [ "$MAKEFILE" != "" ]; then make $MAKEJOBS -f $MAKEFILE HOST="$HOST" STATIC=1 OPENSSL_INCLUDE_PATH="$DEPSDIR/include" OPENSSL_LIB_PATH="$DEPSDIR/lib" DEPSDIR="$DEPSDIR" CURDIR="$TRAVIS_BUILD_DIR/src" USE_UPNP=1 BOOST_LIB_SUFFIX="$BOOST_LIB_SUFFIX" DEBUGFLAGS= && install -s shadowcoind${OUTPUT_SUFFIX} $INDIR/; fi
+  - if [ "$MAKEFILE" != "" ]; then make $MAKEJOBS -f $MAKEFILE HOST="$HOST" STATIC=1 OPENSSL_INCLUDE_PATH="$DEPSDIR/include" OPENSSL_LIB_PATH="$DEPSDIR/lib" DEPSDIR="$DEPSDIR" CURDIR="$TRAVIS_BUILD_DIR/src" USE_UPNP=1 BOOST_LIB_SUFFIX="$BOOST_LIB_SUFFIX" DEBUGFLAGS= && install -s spectrecoind${OUTPUT_SUFFIX} $INDIR/; fi
 
   - echo -en 'travis_fold:end:script.daemon\\r'
 
@@ -44,7 +44,7 @@ script:
   - echo 'Build Qt' && echo -en 'travis_fold:start:script.qt\\r'
 
   - cd $TRAVIS_BUILD_DIR
-  - qmake $QMAKEOPTS QMAKE_LRELEASE="$DEPSDIR/host/bin/lrelease" INCLUDEPATH="$DEPSDIR/include" LIBS="-L$DEPSDIR/lib" BOOST_LIB_SUFFIX="$BOOST_LIB_SUFFIX" BOOST_THREAD_LIB_SUFFIX="$BOOST_THREAD_LIB_SUFFIX" RELEASE=1 DEFINES=BOOST_THREAD_USE_LIB QMAKE_CXXFLAGS="-frandom-seed=shadow $QMAKE_CXXFLAGS" USE_BUILD_INFO=1 USE_O3=1
+  - qmake $QMAKEOPTS QMAKE_LRELEASE="$DEPSDIR/host/bin/lrelease" INCLUDEPATH="$DEPSDIR/include" LIBS="-L$DEPSDIR/lib" BOOST_LIB_SUFFIX="$BOOST_LIB_SUFFIX" BOOST_THREAD_LIB_SUFFIX="$BOOST_THREAD_LIB_SUFFIX" RELEASE=1 DEFINES=BOOST_THREAD_USE_LIB QMAKE_CXXFLAGS="-frandom-seed=spectre $QMAKE_CXXFLAGS" USE_BUILD_INFO=1 USE_O3=1
   - if [[ "$BUILD" =~ "linux" ]]; then sed -i 's^,-whole-archive -lleveldb -Wl,^,-lleveldb,^' Makefile; fi
   - make $MAKEJOBS
 
@@ -60,7 +60,7 @@ script:
   - if [ -d Umbra.app ]; then contrib/macdeploy/createdmg; mv umbra.macosx.dmg $INDIR/${BUILD}.dmg; export UPLOAD=${BUILD}.dmg; fi
 
   - cd $INDIR
-  - if [ -f umbra${OUTPUT_SUFFIX} ]; then zip $INDIR/$UPLOAD umbra${OUTPUT_SUFFIX} shadowcoind${OUTPUT_SUFFIX}; fi
+  - if [ -f umbra${OUTPUT_SUFFIX} ]; then zip $INDIR/$UPLOAD umbra${OUTPUT_SUFFIX} spectrecoind${OUTPUT_SUFFIX}; fi
   - sha256sum $UPLOAD > $INDIR/${UPLOAD}.sha256sum.txt
 
   - echo -en 'travis_fold:end:script.package\\r'

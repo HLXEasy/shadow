@@ -1,9 +1,9 @@
-// Copyright (c) 2014 The ShadowCoin developers
+// Copyright (c) 2014 The SpectreCoin developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file license.txt or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SDC_CORE_H
-#define SDC_CORE_H
+#ifndef SPEC_CORE_H
+#define SPEC_CORE_H
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -429,5 +429,5 @@ public:
     int64_t nTime;
 };
 
-#endif  // SDC_CORE_H
+#endif  // SPEC_CORE_H
 

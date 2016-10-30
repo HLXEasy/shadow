@@ -5,7 +5,7 @@ OTOOL=${HOST}-otool INSTALLNAMETOOL=${HOST}-install_name_tool STRIP=${HOST}-stri
 mkdir -p dist/.background
 install contrib/macdeploy/background.png dist/.background
 install contrib/macdeploy/DS_Store dist/.DS_Store
-install src/qt/res/icons/shadow.icns dist/.VolumeIcon.icns
+install src/qt/res/icons/spectre.icns dist/.VolumeIcon.icns
 cd dist
 ln -sf /Applications Applications
 cd ..

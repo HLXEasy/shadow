@@ -1,9 +1,9 @@
-// Copyright (c) 2014 The ShadowCoin developers
+// Copyright (c) 2014 The SpectreCoin developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file license.txt or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SDC_RINGSIG_H
-#define SDC_RINGSIG_H
+#ifndef SPEC_RINGSIG_H
+#define SPEC_RINGSIG_H
 
 #include "stealth.h"
 #include "state.h"
@@ -45,5 +45,5 @@ int generateRingSignatureAB(data_chunk &keyImage, uint256 &txnHash, int nRingSiz
 int verifyRingSignatureAB(data_chunk &keyImage, uint256 &txnHash, int nRingSize, const uint8_t *pPubkeys, const data_chunk &sigC, const uint8_t *pSigS);
 
 
-#endif  // SDC_RINGSIG_H
+#endif  // SPEC_RINGSIG_H
 

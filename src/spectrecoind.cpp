@@ -24,7 +24,7 @@ void ThreadCli()
     fd_set rfds;
     struct timeval tv;
     
-    printf("Shadow CLI ready:\n> ");
+    printf("Spectre CLI ready:\n> ");
     fflush(stdout);
     
     for (;;)
@@ -127,7 +127,7 @@ void WaitForShutdown(boost::thread_group* threadGroup)
         fShutdown = ShutdownRequested();
     };
     
-    LogPrintf("ShadowCoin shutdown.\n\n");
+    LogPrintf("SpectreCoin shutdown.\n\n");
     
     if (threadGroup)
     {
@@ -163,12 +163,12 @@ bool AppInit(int argc, char* argv[])
         if (mapArgs.count("-?") || mapArgs.count("--help"))
         {
             // First part of help message is specific to bitcoind / RPC client
-            std::string strUsage = _("ShadowCoin version") + " " + FormatFullVersion() + "\n\n" +
+            std::string strUsage = _("SpectreCoin version") + " " + FormatFullVersion() + "\n\n" +
                 _("Usage:") + "\n" +
-                  "  shadowcoind [options]                     " + "\n" +
-                  "  shadowcoind [options] <command> [params]  " + _("Send command to -server or shadowcoind") + "\n" +
-                  "  shadowcoind [options] help                " + _("List commands") + "\n" +
-                  "  shadowcoind [options] help <command>      " + _("Get help for a command") + "\n";
+                  "  spectrecoind [options]                     " + "\n" +
+                  "  spectrecoind [options] <command> [params]  " + _("Send command to -server or spectrecoind") + "\n" +
+                  "  spectrecoind [options] help                " + _("List commands") + "\n" +
+                  "  spectrecoind [options] help <command>      " + _("Get help for a command") + "\n";
 
             strUsage += "\n" + HelpMessage();
 
@@ -178,7 +178,7 @@ bool AppInit(int argc, char* argv[])
 
         // Command-line RPC
         for (int i = 1; i < argc; i++)
-            if (!IsSwitchChar(argv[i][0]) && !boost::algorithm::istarts_with(argv[i], "shadowcoin:"))
+            if (!IsSwitchChar(argv[i][0]) && !boost::algorithm::istarts_with(argv[i], "spectrecoin:"))
                 fCommandLine = true;
 
         if (fCommandLine)
@@ -253,7 +253,7 @@ int main(int argc, char* argv[])
     bool fRet = false;
     fHaveGUI = false;
     
-    // Connect shadowcoind signal handlers
+    // Connect spectrecoind signal handlers
     noui_connect();
     
     fRet = AppInit(argc, argv);

@@ -1,4 +1,4 @@
-// Copyright (c) 2015 The ShadowCoin developers
+// Copyright (c) 2015 The SpectreCoin developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -24,7 +24,7 @@
 
 #include <boost/assign/list_of.hpp>
 
-// test_shadow --log_level=all  --run_test=bip32_tests,extkey_tests
+// test_spectre --log_level=all  --run_test=bip32_tests,extkey_tests
 
 namespace ba = boost::assign;
 
@@ -224,28 +224,28 @@ void RunDeriveTests()
     
     std::vector<DeriveTestData> vMainNetPairs = {
         DeriveTestData(0,
-            std::string("sdcvmnKmFxG9k6UnN3wyLpTv83G1wgYEz1m21rZTUUimoDrYYMrZXUycudse21EZJTmkBBPN3k6Qhfzx5td8xzd9W893YhNozA3bZW3yVLVdrZU2"),
-            std::string("sdcpmphCJNSUos9rNqn6FNi3ztvMW1wft1PVbifvBrwhm6JnhD9yk8rSNFTGfozGbmBsr8vZv9mGYSTfmEMpbfTTMb8TQfj7JRABmvBFKgA2xG8J")),
+            std::string("specvmnKmFxG9k6UnN3wyLpTv83G1wgYEz1m21rZTUUimoDrYYMrZXUycudse21EZJTmkBBPN3k6Qhfzx5td8xzd9W893YhNozA3bZW3yVLVdrZU2"),
+            std::string("specpmphCJNSUos9rNqn6FNi3ztvMW1wft1PVbifvBrwhm6JnhD9yk8rSNFTGfozGbmBsr8vZv9mGYSTfmEMpbfTTMb8TQfj7JRABmvBFKgA2xG8J")),
         DeriveTestData(1,
-            std::string("sdcvmnMjfkum2tHDUJ9dJVLw6pitrnbvAHwQrxoukwSxU1zm9H3iEsx2a9R8J1ZncvjwZFdYd9QN33zUX7WvqEUzXUWKumZYnAB4Vgo4zD8jsyYq"),
-            std::string("sdcpmpjAiB666exHV5ykD3b4ygPER81M4HZtSpvNUKftRtT1J8M8TXpr2kzkwpJr3awQ1XaEYVSC1FTVEAxJV3rah692fvg9MpKNpwsRVfTnZVvh")),
+            std::string("specvmnMjfkum2tHDUJ9dJVLw6pitrnbvAHwQrxoukwSxU1zm9H3iEsx2a9R8J1ZncvjwZFdYd9QN33zUX7WvqEUzXUWKumZYnAB4Vgo4zD8jsyYq"),
+            std::string("specpmpjAiB666exHV5ykD3b4ygPER81M4HZtSpvNUKftRtT1J8M8TXpr2kzkwpJr3awQ1XaEYVSC1FTVEAxJV3rah692fvg9MpKNpwsRVfTnZVvh")),
         
         DeriveTestData(350,
-            std::string("sdcvmqPip8zYeR3ofPsSajfM5QtRqa8iZk6Z2bskpAJ7fiysxCAdqkG7fYHzNc5zReSHpYZgxtJ5GKTvcRqZW6a8rhurBuXCTqXfANNy5p7qTemf"),
-            std::string("sdcpmsm9rZAsiBisgBhZVHuUxGYmPuY9Tjj2cTzDXYX3dbS873U44Q8w89sd2QriazFKyFGwTTcizkeNvaksc2gLpTVmpzcGxmBGeSNbRwykttFP")),
+            std::string("specvmqPip8zYeR3ofPsSajfM5QtRqa8iZk6Z2bskpAJ7fiysxCAdqkG7fYHzNc5zReSHpYZgxtJ5GKTvcRqZW6a8rhurBuXCTqXfANNy5p7qTemf"),
+            std::string("specpmsm9rZAsiBisgBhZVHuUxGYmPuY9Tjj2cTzDXYX3dbS873U44Q8w89sd2QriazFKyFGwTTcizkeNvaksc2gLpTVmpzcGxmBGeSNbRwykttFP")),
     };
     
     std::vector<DeriveTestData> vTestNetPairs = {
         DeriveTestData(0,
-            std::string("SDCVTZWtnQrSZ1LBHScXxi5amgw4Q1zGaRuAy5S12NAttbx3Bmsm1jDYh1B5P5qTPZaWpUZZ5mmubGTYjXPB1cQ9btJmhDoBLHZnwAGUBVH42gB3"),
-            std::string("SDCPTTad968GGU17vZThYUhb4WKgaLQ22ffBVjTnZGGCAcU1vfVFcJEroz4QeZjFZLs5a1dkpZxsKfB2Adnun1axAGuzrfBweXWSxuXu2Wj3AaGp")),
+            std::string("SPECVTZWtnQrSZ1LBHScXxi5amgw4Q1zGaRuAy5S12NAttbx3Bmsm1jDYh1B5P5qTPZaWpUZZ5mmubGTYjXPB1cQ9btJmhDoBLHZnwAGUBVH42gB3"),
+            std::string("SPECPTTad968GGU17vZThYUhb4WKgaLQ22ffBVjTnZGGCAcU1vfVFcJEroz4QeZjFZLs5a1dkpZxsKfB2Adnun1axAGuzrfBweXWSxuXu2Wj3AaGp")),
         DeriveTestData(1,
-            std::string("SDCVTZYsCDW3qo8cPgpBvNxbkUPwK83wki5ZpBgTJpu5ZQ6Fnh4uj8BxMWiZf6Agi2YiCYojfB5rveT5AkGxsrFzdEg44Hyv8HhFsM1ZgN1keP5r"),
-            std::string("SDCPTTcbYtmsZFoZ2ofMW9ac3HnZVSThCwqaLqiEqizNqQcEXagQKhDGUVbtva3q1AcbjQHRSudnnUAqdaPPfPz5Vmva7v8yhvfe1wE5CW1VbMPQ")),
+            std::string("SPECVTZYsCDW3qo8cPgpBvNxbkUPwK83wki5ZpBgTJpu5ZQ6Fnh4uj8BxMWiZf6Agi2YiCYojfB5rveT5AkGxsrFzdEg44Hyv8HhFsM1ZgN1keP5r"),
+            std::string("SPECPTTcbYtmsZFoZ2ofMW9ac3HnZVSThCwqaLqiEqizNqQcEXagQKhDGUVbtva3q1AcbjQHRSudnnUAqdaPPfPz5Vmva7v8yhvfe1wE5CW1VbMPQ")),
         
         DeriveTestData(350,
-            std::string("SDCVTcarLbaqTKuCanY1CdH1j4ZUHuakAAEhypkJN3kEm75NbcBqKzW3SubRjggtWkF4Tqjszuya9uvXG4bbYiM8xU5aLRwZoy3rY2bTmxwvGxui"),
-            std::string("SDCPTWeahGrfAna9DuPAnPu21sx6UDzVcPziWUn5twqY37bMLVoKvZXMZtUm1AbhYZvXh7z8MspKmyMjKzBxnNoqd9HKGz57JsXXqRjF8nXws6C5")),
+            std::string("SPECVTcarLbaqTKuCanY1CdH1j4ZUHuakAAEhypkJN3kEm75NbcBqKzW3SubRjggtWkF4Tqjszuya9uvXG4bbYiM8xU5aLRwZoy3rY2bTmxwvGxui"),
+            std::string("SPECPTWeahGrfAna9DuPAnPu21sx6UDzVcPziWUn5twqY37bMLVoKvZXMZtUm1AbhYZvXh7z8MspKmyMjKzBxnNoqd9HKGz57JsXXqRjF8nXws6C5")),
     };
     CBitcoinExtKey extKey58;
     
@@ -319,7 +319,7 @@ void RunSerialiseTests()
     CStoredExtKey skInvalid, skInvalid_;
     
     CExtKey58 eKey58;
-    BOOST_CHECK(0 == eKey58.Set58("sdcvmnKmFxG9k6UnN3wyLpTv83G1wgYEz1m21rZTUUimoDrYYMrZXUycudse21EZJTmkBBPN3k6Qhfzx5td8xzd9W893YhNozA3bZW3yVLVdrZU2"));
+    BOOST_CHECK(0 == eKey58.Set58("specvmnKmFxG9k6UnN3wyLpTv83G1wgYEz1m21rZTUUimoDrYYMrZXUycudse21EZJTmkBBPN3k6Qhfzx5td8xzd9W893YhNozA3bZW3yVLVdrZU2"));
     
     sk.kp = eKey58.GetKey();
     sk.sLabel = "sk label";
@@ -328,10 +328,10 @@ void RunSerialiseTests()
     sk.mapValue[EKVT_CREATED_AT] = SetCompressedInt64(v, nTest8);
     
     eKey58.SetKey(sk.kp, CChainParams::EXT_PUBLIC_KEY);
-    BOOST_CHECK(eKey58.ToString() == "sdcpmphCJNSUos9rNqn6FNi3ztvMW1wft1PVbifvBrwhm6JnhD9yk8rSNFTGfozGbmBsr8vZv9mGYSTfmEMpbfTTMb8TQfj7JRABmvBFKgA2xG8J");
+    BOOST_CHECK(eKey58.ToString() == "specpmphCJNSUos9rNqn6FNi3ztvMW1wft1PVbifvBrwhm6JnhD9yk8rSNFTGfozGbmBsr8vZv9mGYSTfmEMpbfTTMb8TQfj7JRABmvBFKgA2xG8J");
     
     eKey58.SetKeyV(sk.kp);
-    BOOST_CHECK(eKey58.ToString() == "sdcvmnKmFxG9k6UnN3wyLpTv83G1wgYEz1m21rZTUUimoDrYYMrZXUycudse21EZJTmkBBPN3k6Qhfzx5td8xzd9W893YhNozA3bZW3yVLVdrZU2");
+    BOOST_CHECK(eKey58.ToString() == "specvmnKmFxG9k6UnN3wyLpTv83G1wgYEz1m21rZTUUimoDrYYMrZXUycudse21EZJTmkBBPN3k6Qhfzx5td8xzd9W893YhNozA3bZW3yVLVdrZU2");
     
     
     CDataStream ss(SER_NETWORK, PROTOCOL_VERSION);
@@ -494,7 +494,7 @@ void RunSerialiseTests()
     CExtKeyPair kp, kpT;
     CTxDestination dest;
     
-    BOOST_CHECK(0 == eKey58.Set58("sdcpmphCJNSUos9rNqn6FNi3ztvMW1wft1PVbifvBrwhm6JnhD9yk8rSNFTGfozGbmBsr8vZv9mGYSTfmEMpbfTTMb8TQfj7JRABmvBFKgA2xG8J"));
+    BOOST_CHECK(0 == eKey58.Set58("specpmphCJNSUos9rNqn6FNi3ztvMW1wft1PVbifvBrwhm6JnhD9yk8rSNFTGfozGbmBsr8vZv9mGYSTfmEMpbfTTMb8TQfj7JRABmvBFKgA2xG8J"));
     kp = eKey58.GetKey();
     CBitcoinAddress addrB(kp);
     BOOST_CHECK(addrB.IsValid() == true);
@@ -503,7 +503,7 @@ void RunSerialiseTests()
     BOOST_CHECK(addr.IsValid() == true);
     BOOST_CHECK(addr.IsValid(CChainParams::EXT_SECRET_KEY) == false);
     BOOST_CHECK(addr.IsValid(CChainParams::EXT_PUBLIC_KEY) == true);
-    BOOST_CHECK(addr.ToString() == "sdcpmphCJNSUos9rNqn6FNi3ztvMW1wft1PVbifvBrwhm6JnhD9yk8rSNFTGfozGbmBsr8vZv9mGYSTfmEMpbfTTMb8TQfj7JRABmvBFKgA2xG8J");
+    BOOST_CHECK(addr.ToString() == "specpmphCJNSUos9rNqn6FNi3ztvMW1wft1PVbifvBrwhm6JnhD9yk8rSNFTGfozGbmBsr8vZv9mGYSTfmEMpbfTTMb8TQfj7JRABmvBFKgA2xG8J");
     dest = addr.Get();
     BOOST_CHECK(dest.type() == typeid(CExtKeyPair));
     kpT = boost::get<CExtKeyPair>(dest);
@@ -524,9 +524,9 @@ void RunSerialiseTests()
     BOOST_CHECK_MESSAGE(addr.ToString() == "XCUfUzXMYkXYvP9RVtdzibVVpMP2bhfWRQ", addr.ToString());
     
     
-    BOOST_CHECK(0 == eKey58.Set58("SDCPTTad968GGU17vZThYUhb4WKgaLQ22ffBVjTnZGGCAcU1vfVFcJEroz4QeZjFZLs5a1dkpZxsKfB2Adnun1axAGuzrfBweXWSxuXu2Wj3AaGp"));
+    BOOST_CHECK(0 == eKey58.Set58("SPECPTTad968GGU17vZThYUhb4WKgaLQ22ffBVjTnZGGCAcU1vfVFcJEroz4QeZjFZLs5a1dkpZxsKfB2Adnun1axAGuzrfBweXWSxuXu2Wj3AaGp"));
     kp = eKey58.GetKey();
-    CBitcoinAddress addrC("SDCVTZWtnQrSZ1LBHScXxi5amgw4Q1zGaRuAy5S12NAttbx3Bmsm1jDYh1B5P5qTPZaWpUZZ5mmubGTYjXPB1cQ9btJmhDoBLHZnwAGUBVH42gB3");
+    CBitcoinAddress addrC("SPECVTZWtnQrSZ1LBHScXxi5amgw4Q1zGaRuAy5S12NAttbx3Bmsm1jDYh1B5P5qTPZaWpUZZ5mmubGTYjXPB1cQ9btJmhDoBLHZnwAGUBVH42gB3");
     BOOST_CHECK(addrC.IsValid() == true);
     BOOST_CHECK(addrC.IsValid(CChainParams::EXT_PUBLIC_KEY) == true);
     
@@ -534,7 +534,7 @@ void RunSerialiseTests()
     BOOST_CHECK(addr.IsValid() == true);
     BOOST_CHECK(addr.IsValid(CChainParams::EXT_SECRET_KEY) == false);
     BOOST_CHECK(addr.IsValid(CChainParams::EXT_PUBLIC_KEY) == true);
-    BOOST_CHECK(addr.ToString() == "SDCPTTad968GGU17vZThYUhb4WKgaLQ22ffBVjTnZGGCAcU1vfVFcJEroz4QeZjFZLs5a1dkpZxsKfB2Adnun1axAGuzrfBweXWSxuXu2Wj3AaGp");
+    BOOST_CHECK(addr.ToString() == "SPECPTTad968GGU17vZThYUhb4WKgaLQ22ffBVjTnZGGCAcU1vfVFcJEroz4QeZjFZLs5a1dkpZxsKfB2Adnun1axAGuzrfBweXWSxuXu2Wj3AaGp");
     dest = addr.Get();
     BOOST_CHECK(dest.type() == typeid(CExtKeyPair));
     kpT = boost::get<CExtKeyPair>(dest);

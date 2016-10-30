@@ -5,7 +5,7 @@
 #include "smessage.h"
 #include "init.h" // for pwalletMain
 
-// test_shadow --log_level=all  --run_test=smsg_tests
+// test_spectre --log_level=all  --run_test=smsg_tests
 
 BOOST_AUTO_TEST_SUITE(smsg_tests)
 
@@ -13,8 +13,8 @@ BOOST_AUTO_TEST_CASE(smsg_test)
 {
     
     const std::string sTestMessage =
-        "Shadow is a STATE OF THE ART, Proof of Stake crypto currency, utilizing cutting edge technology, "
-        "such as instant p2p encrypted messaging (ShadowChat), and anonymous dual-key stealth addresses (ShadowSend). "
+        "Spectre is a STATE OF THE ART, Proof of Stake crypto currency, utilizing cutting edge technology, "
+        "such as instant p2p encrypted messaging (SpectreChat), and anonymous dual-key stealth addresses (SpectreSend). "
         "Initial distribution was done using Proof of Work and Proof of Stake.";
     
     fSecMsgEnabled = true;

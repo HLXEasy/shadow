@@ -602,7 +602,7 @@ Value rewindchain(const Array& params, bool fHelp)
             uint32_t findPos = sizeof(buffer);
             while (findPos > MESSAGE_START_SIZE)
             {
-                if ((nFind = sdc::memrchr(buffer, Params().MessageStart()[0], findPos-MESSAGE_START_SIZE)))
+                if ((nFind = spec::memrchr(buffer, Params().MessageStart()[0], findPos-MESSAGE_START_SIZE)))
                 {
                     if (memcmp(nFind, Params().MessageStart(), MESSAGE_START_SIZE) == 0)
                     {
@@ -726,7 +726,7 @@ Value rewindchain(const Array& params, bool fHelp)
 
     // -- need restart, setStakeSeen etc
     if (nRemoved > 0)
-        result.push_back(Pair("Please restart shadowcoin", ""));
+        result.push_back(Pair("Please restart spectrecoin", ""));
 
     if (nRemoved == nNumber)
         result.push_back(Pair("result", "success"));
