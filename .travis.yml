@@ -29,7 +29,7 @@ install:
   - export QTDIR=$TRAVIS_BUILD_DIR
   - sudo apt-get install build-essential $PACKAGES
   - mkdir -p $INDIR $DEPSDIR
-  - cd $INDIR && wget --user="$AUTH_USER" --password="$AUTH_PASSWORD" $DEPS_URL/$DEPS `[ $EXTRADEPS != "" ] && echo $DEPS_URL/$EXTRADEPS`
+  - cd $INDIR && wget $DEPS_URL/$DEPS `[ "$EXTRADEPS" != "" ] && echo $DEPS_URL/$EXTRADEPS`
   - cd $DEPSDIR && tar xf $INDIR/$DEPS
   - if [ $EXTRADEPS != "" ]; then tar xf $INDIR/$EXTRADEPS; fi
 script:
