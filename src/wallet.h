@@ -24,6 +24,7 @@
 
 
 extern bool fWalletUnlockStakingOnly;
+extern bool fWalletUnlockMessagingEnabled;
 extern bool fConfChange;
 class CAccountingEntry;
 class CWalletTx;
