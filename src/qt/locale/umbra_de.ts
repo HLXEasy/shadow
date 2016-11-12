@@ -1271,7 +1271,7 @@ Ring Größe von eins ist nicht anonym und schädigt das Netzwerk.</translation>
     <message>
         <location filename="../bridgetranslations.h" line="+8"/>
         <source>Overview</source>
-        <translation type="unfinished"/>
+        <translation>Übersicht</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -1281,22 +1281,22 @@ Ring Größe von eins ist nicht anonym und schädigt das Netzwerk.</translation>
     <message>
         <location line="+1"/>
         <source>Send</source>
-        <translation type="unfinished"/>
+        <translation>Senden</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Receive</source>
-        <translation type="unfinished"/>
+        <translation>Empfangen</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Transactions</source>
-        <translation type="unfinished"/>
+        <translation>Transaktionen</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Address Book</source>
-        <translation type="unfinished"/>
+        <translation>Adressbuch</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -1306,12 +1306,12 @@ Ring Größe von eins ist nicht anonym und schädigt das Netzwerk.</translation>
     <message>
         <location line="+1"/>
         <source>Notifications</source>
-        <translation type="unfinished"/>
+        <translation>Benachrichtigungen</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Options</source>
-        <translation type="unfinished"/>
+        <translation>Optionen</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -1321,92 +1321,92 @@ Ring Größe von eins ist nicht anonym und schädigt das Netzwerk.</translation>
     <message>
         <location line="+1"/>
         <source>Add New Wallet</source>
-        <translation type="unfinished"/>
+        <translation>Neue Wallet generieren</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Import Wallet</source>
-        <translation type="unfinished"/>
+        <translation>Wallet importieren</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Advanced</source>
-        <translation type="unfinished"/>
+        <translation>Fortgeschritten</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Backup</source>
-        <translation type="unfinished"/>
+        <translation>Wallet Kopie Sichern</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Backup Wallet</source>
-        <translation type="unfinished"/>
+        <translation>Wallet Kopie Sichern</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Encrypt Wallet</source>
-        <translation type="unfinished"/>
+        <translation>Wallet verschlüsseln</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Change Passphrase</source>
-        <translation type="unfinished"/>
+        <translation>Passphrase ändern</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>(Un)lock Wallet</source>
-        <translation type="unfinished"/>
+        <translation>Wallet entsperren</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Tools</source>
-        <translation type="unfinished"/>
+        <translation>Werkzeuge</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Chain Data</source>
-        <translation type="unfinished"/>
+        <translation>Block Chain Daten</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Block Explorer</source>
-        <translation type="unfinished"/>
+        <translation>Block Explorer</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Sign Message</source>
-        <translation type="unfinished"/>
+        <translation>Nachricht unterzeichnen</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Verify Message</source>
-        <translation type="unfinished"/>
+        <translation>Nachricht verifizieren</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Debug</source>
-        <translation type="unfinished"/>
+        <translation>Debug</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>About Shadow</source>
-        <translation type="unfinished"/>
+        <translation>Über Shadow</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>About QT</source>
-        <translation type="unfinished"/>
+        <translation>Über QT</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>QR code</source>
-        <translation type="unfinished"/>
+        <translation>QR Code</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Address:</source>
-        <translation type="unfinished"/>
+        <translation>Adresse:</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -1416,512 +1416,1153 @@ Ring Größe von eins ist nicht anonym und schädigt das Netzwerk.</translation>
     <message>
         <location line="+1"/>
         <source>Narration:</source>
-        <translation type="unfinished"/>
+        <translation>Narration</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Amount:</source>
+        <translation>Betrag:</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>SDC</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>mSDC</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>µSDC</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Shadowshi</source>
         <translation type="unfinished"/>
     </message>
     <message>
         <location line="+1"/>
         <source>Add new receive address</source>
-        <translation type="unfinished"/>
+        <translation>Neue Empfangsadresse</translation>
     </message>
     <message>
-        <location line="+1"/>
+        <location line="+4"/>
         <source>Add Address</source>
-        <translation type="unfinished"/>
+        <translation>Adresse hinzufügen</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Add a new contact</source>
-        <translation type="unfinished"/>
+        <translation>Neuen Kontakt hinzufügen</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Address Lookup</source>
-        <translation type="unfinished"/>
+        <translation>Adressbuch</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Address Type</source>
-        <translation type="unfinished"/>
+        <translation>Adressen Typ</translation>
     </message>
     <message>
-        <location line="+1"/>
+        <location line="-6"/>
         <source>Normal</source>
-        <translation type="unfinished"/>
+        <translation>Normal</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Stealth</source>
-        <translation type="unfinished"/>
+        <translation>Stealth</translation>
     </message>
     <message>
-        <location line="+1"/>
+        <location line="+6"/>
         <source>Group</source>
-        <translation type="unfinished"/>
+        <translation>Gruppe</translation>
     </message>
     <message>
-        <location line="+1"/>
+        <location line="-5"/>
         <source>BIP32</source>
-        <translation type="unfinished"/>
+        <translation>BIP32</translation>
     </message>
     <message>
-        <location line="+1"/>
+        <location line="+6"/>
         <source>Label</source>
         <translation>Bezeichnung</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Address</source>
-        <translation type="unfinished"/>
+        <translation>Adresse</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Public Key</source>
-        <translation type="unfinished"/>
+        <translation>Öffentlicher Schlüssel</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Transaction Hash</source>
-        <translation type="unfinished"/>
+        <translation>Transaktions-ID</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Recent Transactions</source>
-        <translation type="unfinished"/>
+        <translation>Neueste Transaktion</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Market</source>
-        <translation type="unfinished"/>
+        <translation>Markt</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Advanced Options</source>
-        <translation type="unfinished"/>
+        <translation>weitere Optionen</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Coin Control</source>
-        <translation type="unfinished"/>
+        <translation>Münzen Kontrolle</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Make payment</source>
-        <translation type="unfinished"/>
+        <translation>Bezahlung tätigen</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Balance transfer</source>
-        <translation type="unfinished"/>
+        <translation>Betrag überweisen</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Select Inputs</source>
-        <translation type="unfinished"/>
+        <translation>Wert auswählen</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Automatically selected</source>
-        <translation type="unfinished"/>
+        <translation>Automatisch ausgewählt</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Quantity:</source>
-        <translation type="unfinished"/>
+        <translation>Anzahl:</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Fee:</source>
-        <translation type="unfinished"/>
+        <translation>Gebühr:</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>After Fee:</source>
-        <translation type="unfinished"/>
+        <translation>Abzüglich Gebühr:</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Bytes:</source>
-        <translation type="unfinished"/>
+        <translation>Byte:</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Priority:</source>
-        <translation type="unfinished"/>
+        <translation>Priorität:</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>LowOutput:</source>
-        <translation type="unfinished"/>
+        <translation>LowOutput:</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Change:</source>
-        <translation type="unfinished"/>
+        <translation>Wechselgeld:</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Custom change address</source>
-        <translation type="unfinished"/>
+        <translation>Custom change address</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>From account</source>
-        <translation type="unfinished"/>
+        <translation>Von Account:</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>PUBLIC</source>
-        <translation type="unfinished"/>
+        <translation>Öffentlich</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>PRIVATE</source>
-        <translation type="unfinished"/>
+        <translation>Privat</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Balance:</source>
-        <translation type="unfinished"/>
+        <translation>Kontostand:</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Ring Size:</source>
-        <translation type="unfinished"/>
+        <translation>Ring Größe:</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>To account</source>
-        <translation type="unfinished"/>
+        <translation>Zu Account</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Pay to</source>
-        <translation type="unfinished"/>
+        <translation>Bezahlen zu</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>(no label)</source>
-        <translation>(keine Bezeichnung)</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Catching up...                                    downloaded 0 blocks of history...</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location line="+2"/>
+        <location line="+135"/>
         <source>Tor connection offline</source>
-        <translation type="unfinished"/>
+        <translation>Tor Verbindung offline</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>i2p connection offline</source>
-        <translation type="unfinished"/>
+        <translation>i2p Verbindung offline</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Wallet is encrypted and currently locked</source>
-        <translation type="unfinished"/>
+        <translation>Wallet ist verschlüsselt und derzeit geschlossen</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Not staking because wallet is locked</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location line="+1"/>
-        <source>0 active connection(s) to ShadowCash network</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <location line="+1"/>
+        <location line="+3"/>
         <source>Wallet is syncing</source>
-        <translation type="unfinished"/>
+        <translation>Wallet synchronisiert </translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Open chat list</source>
-        <translation type="unfinished"/>
+        <translation>Öffne Chat Liste</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Enter a label for this address to add it to your address book</source>
-        <translation type="unfinished"/>
+        <translation>Gebe einen Namen für diese Adresse ein, um sie dem Adressbuch hinzuzufügen</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Enter a address to add it to your address book</source>
-        <translation type="unfinished"/>
+        <translation>Eine Adresse eingeben um sie zum Adressbuch hinzuzufügen</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Inputs</source>
-        <translation type="unfinished"/>
+        <translation>Inputs</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Values</source>
-        <translation type="unfinished"/>
+        <translation>Werte</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Outputs</source>
-        <translation type="unfinished"/>
+        <translation>Outputs</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Enter a ShadowCash address to sign the message with (e.g. SaKYqfD8J3vw4RTnqtgk2K9B67CBaL3mhV)</source>
-        <translation type="unfinished"/>
+        <translation>Gebe eine ShadowCash Adresse ein um die Nachricht zu signieren (zbs. SaKYqfD8J3vw4RTnqtgk2K9B67CBaL3mhV)</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Enter the message you want to sign</source>
-        <translation type="unfinished"/>
+        <translation>Gebe die Nachricht ein die unterzeichnet werden soll</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Click sign message to generate signature</source>
-        <translation type="unfinished"/>
+        <translation>Klicke Nachricht unterzeichnen um eine Signatur zu generieren</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Copy the signed message signature</source>
-        <translation type="unfinished"/>
+        <translation>Kopiere die unterzeichnete Nachricht Signatur</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Enter a ShadowCash address to verify the message with (e.g. SaKYqfD8J3vw4RTnqtgk2K9B67CBaL3mhV)</source>
-        <translation type="unfinished"/>
+        <translation>Gebe eine ShadowCash Adresse ein um die Nachricht zu signieren (zbs. SaKYqfD8J3vw4RTnqtgk2K9B67CBaL3mhV)</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Enter the message you want to verify</source>
-        <translation type="unfinished"/>
+        <translation>Gebe die Nachricht ein die unterzeichnet werden soll</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Enter a ShadowCash signature</source>
-        <translation type="unfinished"/>
+        <translation>ShadowCash Signatur eingeben</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Paste signature from clipboard</source>
-        <translation type="unfinished"/>
+        <translation>Signatur von Zwischenablage einfügen</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Your total balance</source>
-        <translation type="unfinished"/>
+        <translation>Dein totaler Wert</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Balances overview</source>
-        <translation type="unfinished"/>
+        <translation>Wert Übersicht</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Recent in/out transactions or stakes</source>
-        <translation type="unfinished"/>
+        <translation>Neueste Transaktionen oder Stakes</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Select inputs to spend</source>
-        <translation type="unfinished"/>
+        <translation>Wert auswählen</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Optional address to receive transaction change</source>
-        <translation type="unfinished"/>
+        <translation>Optional address to receive transaction change</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Choose from address book</source>
-        <translation type="unfinished"/>
+        <translation>Von Adressbuch auswählen</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Paste address from clipboard</source>
-        <translation type="unfinished"/>
+        <translation>Adresse von Zwischenablage einfügen</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Remove this recipient</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Send from public or private</source>
-        <translation type="unfinished"/>
+        <translation>Diesen Empfänger entfernen</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Current spendable send payment balance</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Send to public or private</source>
-        <translation type="unfinished"/>
+        <translation>Derzeitiger auszugebender Betrag</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Current spendable balance to account</source>
-        <translation type="unfinished"/>
+        <translation>Derzeitiger auszugebender Kontostand zur Adresse</translation>
     </message>
     <message>
-        <location line="+1"/>
-        <source>The address transfer the balance to</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <location line="+1"/>
+        <location line="+4"/>
         <source>The address to transfer the balance to</source>
-        <translation type="unfinished"/>
+        <translation>Empfängeradresse</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>The label for this address</source>
-        <translation type="unfinished"/>
+        <translation>Die Kennzeichnung dieser Adresse</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Amount to transfer</source>
-        <translation type="unfinished"/>
+        <translation>Anzahl zum transferieren</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Send to multiple recipients at once</source>
+        <translation>Zu mehreren Empfängern gleichzeitig senden</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Double click to edit</source>
         <translation type="unfinished"/>
     </message>
     <message>
         <location line="+1"/>
         <source>Date and time that the transaction was received.</source>
-        <translation type="unfinished"/>
+        <translation>Datum und Uhrzeit als die Transaktion empfangen wurde.</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Transaction status. Hover over this field to show number of confirmations.</source>
-        <translation type="unfinished"/>
+        <translation>Transaktionsstatus. Fahren Sie mit der Maus über dieses Feld, um die Anzahl der Bestätigungen zu sehen.</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Type of transaction.</source>
-        <translation type="unfinished"/>
+        <translation>Art der Transaktion</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Destination address of transaction.</source>
-        <translation type="unfinished"/>
+        <translation>Zieladresse der Transaktion</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Short payment note.</source>
-        <translation type="unfinished"/>
+        <translation>Kurze Transaktions Notiz</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Amount removed from or added to balance.</source>
-        <translation type="unfinished"/>
+        <translation>Der Betrag, der dem Kontostand abgezogen oder hinzugefügt wurde.</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>The address to send the payment to  (e.g. SXywGBZBowrppUwwNUo1GCRDTibzJi7g2M)</source>
-        <translation type="unfinished"/>
+        <translation>Die Adresse, die eine Zahlung erhalten soll (zbs. SXywGBZBowrppUwwNUo1GCRDTibzJi7g2M)</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Choose address from address book</source>
-        <translation type="unfinished"/>
+        <translation>Eine Adresse vom Adressbuch auswählen</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Enter a public key for the address above</source>
-        <translation type="unfinished"/>
+        <translation>Einen öffentlichen Schlüssel für die obige Adresse einfügen</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Enter a label for this group</source>
-        <translation type="unfinished"/>
+        <translation>Eine Kennzeichnung für diese Gruppe eingeben</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Name for this Wallet</source>
-        <translation type="unfinished"/>
+        <translation>Name für dieses Wallet</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Enter a password</source>
-        <translation type="unfinished"/>
+        <translation>Passphrase eingeben</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Would you like to create a bip44 path?</source>
-        <translation type="unfinished"/>
+        <translation>Möchtest du ein bip44 Wallet erzeugen ?</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Your recovery phrase (Keep this safe!)</source>
-        <translation type="unfinished"/>
+        <translation>Dein Backup Schlüssel (Sicher verwahren !)</translation>
     </message>
     <message>
-        <location line="+1"/>
+        <location line="-80"/>
         <source>Recovery Phrase</source>
+        <translation>Backup Schlüssel</translation>
+    </message>
+    <message>
+        <location line="+26"/>
+        <source>Make Default</source>
         <translation type="unfinished"/>
     </message>
     <message>
         <location line="+1"/>
-        <source>Wallet Name for recovered account</source>
+        <source>Activate/Deactivate</source>
         <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Set as Master</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Not staking because wallet is offline</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>0 active connections to ShadowCoin network</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+26"/>
+        <source>The address to send the payment to</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Enter a label for this address</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Enter a short note to send with payment (max 24 characters)</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+20"/>
+        <source>Wallet Name for recovered account</source>
+        <translation>Wallet Name für wiederhergestellten Account</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Enter the password for the wallet you are trying to recover</source>
-        <translation type="unfinished"/>
+        <translation>Gib das Passwort für das Wallet ein was du wiederherstellen möchtest</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Is this a bip44 path?</source>
+        <translation>Ist dies ein bip44 Pfad ?</translation>
+    </message>
+    <message>
+        <location line="-66"/>
+        <source>ID</source>
+        <translation>ID</translation>
+    </message>
+    <message>
+        <location line="-122"/>
+        <source>Narration</source>
         <translation type="unfinished"/>
     </message>
     <message>
         <location line="+1"/>
-        <source>ID</source>
+        <source>Amount</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Default Stealth Address</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Add Recipient</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Clear All</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Suggest Ring Size</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Send Payment</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>RECEIVE</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Filter by type..</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Type</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Show QR Code</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>New Address</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Copy Address</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>TRANSACTIONS</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Date</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>ADDRESSBOOK</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Delete</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Start Private Conversation</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Name:</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Public Key:</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Start Conversation</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Choose identity</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Identity:</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Start Group Conversation</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Group name:</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Create Group</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Invite others</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Search</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Invite others to group</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Invite to Group</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Invite</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>GROUP</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>BOOK</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Start private conversation</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Start group conversation</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>CHAT</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Leave Group</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>CHAIN DATA</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Coin Value</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Owned (Mature)</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>System (Mature)</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Spends</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Least Depth</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>BLOCK EXPLORER</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Refresh</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Hash</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Height</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Timestamp</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Value Out</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>OPTIONS</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Main</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Network</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Window</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Display</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>I2P</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Tor</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Start Shadow on system login</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Detach databases at shutdown</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Pay transaction fee:</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Optional transaction fee per kB that helps make sure your transactions are processed quickly.</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Most transactions are 1kB. Fee 0.01 recommended.</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Enable Staking</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Reserve:</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Reserved amount does not participate in staking and is therefore spendable at any time.</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Minimum Stake Interval</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Minimum Ring size:</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Maximum Ring size:</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Automatically select ring size</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Enable Secure messaging</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Thin Mode (Requires Restart)</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Thin Full Index</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Thin Index Window</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Map port using UPnP</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Connect through SOCKS proxy:</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Details</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Proxy IP:</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Port:</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>SOCKS Version:</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Minimize to the tray instead of the taskbar</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Minimize on close</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>User Interface language:</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Unit to show amounts in:</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Rows per page:</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Display addresses in transaction list</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Notifications:</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Visible Transaction Types:</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>I2P (coming soon)</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>TOR (coming soon)</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Cancel</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Apply</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Ok</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Lets create a New Wallet and Account to get you started!</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Wallet Name</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Password</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Add an optional Password to secure the Recovery Phrase (shown on next page)</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Would you like to create a Multi-Account HD Key? (BIP44)</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Language</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>English</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>French</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Japanese</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Spanish</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Chinese (Simplified)</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Chinese (Traditional)</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Next Step</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Write your Wallet Recovery Phrase</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Important!</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>You need the Wallet Recovery Phrase to restore this wallet. Write it down and keep them somewhere safe.
+                                                          You will be asked to confirm the Wallet Recovery Phrase in the next screen to ensure you have written it down correctly</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Back</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Please confirm your Wallet Recovery Phrase</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Congratulations! You have successfully created a New Wallet and Account</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>You can now use your Account to send and receive funds :)
+                            Remember to keep your Wallet Recovery Phrase and Password (if set) safe in case you ever need to recover your wallet</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Lets import your Wallet</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>The Wallet Recovery Phrase could require a password to be imported</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Is this a Multi-Account HD Key (BIP44)</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Recovery Phrase (Usually 24 words)</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Congratulations! You have successfully imported your Wallet from your Recovery Phrase</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>You can now use your Account to send and receive funds :)
+                            Remember to keep your Wallet Recovery Phrase and Password safe in case you ever need to recover your wallet again!</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Accounts</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Name</source>
         <translation type="unfinished"/>
     </message>
     <message>
         <location line="+1"/>
         <source>Created</source>
-        <translation type="unfinished"/>
+        <translation>Erstellt</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Active Account</source>
-        <translation type="unfinished"/>
+        <translation>Aktiver Account</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Default</source>
+        <translation>Standard</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Wallet Keys</source>
         <translation type="unfinished"/>
     </message>
     <message>
         <location line="+1"/>
         <source>Path</source>
-        <translation type="unfinished"/>
+        <translation>Pfad</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Active</source>
-        <translation type="unfinished"/>
+        <translation>Aktiv</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Master</source>
-        <translation type="unfinished"/>
+        <translation>Master</translation>
     </message>
 </context>
 <context>
@@ -2082,7 +2723,7 @@ Ring Größe von eins ist nicht anonym und schädigt das Netzwerk.</translation>
     <message numerus="yes">
         <location line="+63"/>
         <source>%n active connection(s) to ShadowCoin network</source>
-        <translation type="unfinished"><numerusform></numerusform><numerusform></numerusform></translation>
+        <translation><numerusform>%n Aktive Verbindungen zum ShadowCoin Netzwerk</numerusform><numerusform>0 aktive Verbindung(en) zum ShadowCash Netzwerk</numerusform></translation>
     </message>
     <message>
         <location line="+18"/>
@@ -2123,7 +2764,7 @@ Ring Größe von eins ist nicht anonym und schädigt das Netzwerk.</translation>
     <message>
         <location line="+14"/>
         <source>Importing blocks...</source>
-        <translation type="unfinished"/>
+        <translation>Importiere Blöcke</translation>
     </message>
     <message numerus="yes">
         <location line="+5"/>

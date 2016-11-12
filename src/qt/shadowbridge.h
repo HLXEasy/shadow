@@ -14,7 +14,7 @@ class SendCoinsRecipient;
 #include <QModelIndex>
 
 
-
+extern bool fWalletUnlockMessagingEnabled;
 
 class ShadowBridge : public QObject
 {

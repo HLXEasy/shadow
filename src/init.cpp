@@ -560,7 +560,7 @@ bool AppInit2(boost::thread_group& threadGroup)
     if (strWalletFileName != fs::basename(strWalletFileName) + fs::extension(strWalletFileName))
         return InitError(strprintf(_("Wallet %s resides outside data directory %s."), strWalletFileName.c_str(), strDataDir.c_str()));
 
-    // Make sure only a single Bitcoin process is using the data directory.
+    // Make sure only a single Shadow process is using the data directory.
     fs::path pathLockFile = GetDataDir() / ".lock";
     FILE* file = fopen(pathLockFile.string().c_str(), "a"); // empty lock file; created if it doesn't exist.
     if (file)
