@@ -938,11 +938,7 @@ bool ShadowBridge::sendMessage(const QString &address, const QString &message, c
     //only care about fWalletUnlockMessagingEnabled if wallet is encrypted.
     if(is_encrypted){
         if(!fWalletUnlockMessagingEnabled){
-            WalletModel::UnlockContext ctx(window->walletModel->requestUnlock());
-
-            // Unlock wallet was cancelled
-            if(!ctx.isValid())
-                return false;
+            window->toggleLock();
         }
 
         //check again if the unlocked it
