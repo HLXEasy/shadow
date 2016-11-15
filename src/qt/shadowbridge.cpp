@@ -262,33 +262,42 @@ class MessageThread : public QThread
     Q_OBJECT
 
 signals:
-    void emitMessages(const QString & messages, bool reset);
+    void emitMessages(const QVariantList & messages, bool reset);
 
 public:
     MessageModel *mtm;
 
-    QString addMessage(int row)
+    QVariantMap addMessage(int row)
     {
-        //QString message = "{\"id\":\"%10\",\"type\":\"%1\",\"sent_date\":\"%2\",\"received_date\":\"%3\", \"label_value\":\"%4\",\"label\":\"%5\",\"labelTo\":\"%11\",\"to_address\":\"%6\",\"from_address\":\"%7\",\"message\":\"%8\",\"read\":%9},";
-        return QString("{\"id\":\"%10\",\"type\":\"%1\",\"sent_date\":\"%2\",\"received_date\":\"%3\", \"label_value\":\"%4\",\"label\":\"%5\",\"labelTo\":\"%11\",\"to_address\":\"%6\",\"from_address\":\"%7\",\"message\":\"%8\",\"read\":%9},")
-                .arg(mtm->index(row, MessageModel::Type)            .data().toString())
-                .arg(QString::number(mtm->index(row, MessageModel::SentDateTime)    .data().toDateTime().toTime_t()).toHtmlEscaped())
-                .arg(QString::number(mtm->index(row, MessageModel::ReceivedDateTime).data().toDateTime().toTime_t()).toHtmlEscaped())
-                .arg(mtm->index(row, MessageModel::Label)           .data(MessageModel::LabelRole).toString())
-                .arg(mtm->index(row, MessageModel::Label)           .data().toString().replace("\\", "\\\\").replace("/", "\\/").replace("\"","\\\""))
-                .arg(mtm->index(row, MessageModel::ToAddress)       .data().toString())
-                .arg(mtm->index(row, MessageModel::FromAddress)     .data().toString())
-                .arg(mtm->index(row, MessageModel::Message)         .data().toString().toHtmlEscaped().replace("\\", "\\\\").replace("\"","\\\"").replace("\n", "\\n"))
-                .arg(mtm->index(row, MessageModel::Read)            .data().toBool())
-                .arg(mtm->index(row, MessageModel::Key)             .data().toString())
-                .arg(mtm->index(row, MessageModel::LabelTo)         .data().toString().replace("\\", "\\\\").replace("/", "\\/").replace("\"","\\\""));
+        QVariantMap r;
+
+        //message
+        r.insert("id", mtm->index(row, MessageModel::Key).data().toString().toHtmlEscaped());
+        r.insert("type", mtm->index(row, MessageModel::Type).data().toString().toHtmlEscaped());
+        r.insert("message", mtm->index(row, MessageModel::Message).data().toString().toHtmlEscaped());
+        r.insert("read", mtm->index(row, MessageModel::Read).data().toBool());
+
+        //time
+        r.insert("sent_date", QString::number(mtm->index(row, MessageModel::SentDateTime).data().toDateTime().toTime_t()));
+        r.insert("received_date", QString::number(mtm->index(row, MessageModel::ReceivedDateTime).data().toDateTime().toTime_t()));
+
+        //receiver
+        r.insert("to_address", mtm->index(row, MessageModel::ToAddress).data().toString().toHtmlEscaped());
+        r.insert("label_to", mtm->index(row, MessageModel::LabelTo).data().toString().toHtmlEscaped());
+
+        //sender
+        r.insert("from_address", mtm->index(row, MessageModel::FromAddress).data().toString().toHtmlEscaped());
+        r.insert("label_from", mtm->index(row, MessageModel::Label).data().toString().toHtmlEscaped());
+        r.insert("label_from_role", mtm->index(row, MessageModel::Label).data(MessageModel::LabelRole).toString().toHtmlEscaped());
+
+        return r;
     }
 
 protected:
     void run()
     {
         int row = -1;
-        QString messages;
+        QVariantList messages;
         while (mtm->index(++row, 0, QModelIndex()).isValid())
             messages.append(addMessage(row));
 
@@ -861,9 +870,9 @@ bool ShadowBridge::deleteAddress(QString address)
 }
 
 // Messages
-void ShadowBridge::appendMessages(QString messages, bool reset)
+void ShadowBridge::appendMessages(QVariantList messages, bool reset)
 {
-    emitMessages("[" + messages + "]", reset);
+    emitMessages(messages, reset);
 }
 
 void ShadowBridge::appendMessage(int row)
@@ -885,7 +894,7 @@ void ShadowBridge::populateMessageTable()
 {
     thMessage->mtm = window->messageModel;
 
-    connect(thMessage, SIGNAL(emitMessages(QString, bool)), SLOT(appendMessages(QString, bool)));
+    connect(thMessage, SIGNAL(emitMessages(QVariantList, bool)), SLOT(appendMessages(QVariantList, bool)));
     thMessage->start();
 }
 
@@ -931,11 +940,17 @@ bool ShadowBridge::setPubKey(QString address, QString pubkey)
 
 bool ShadowBridge::sendMessage(const QString &address, const QString &message, const QString &from)
 {
-    WalletModel::UnlockContext ctx(window->walletModel->requestUnlock());
+    if(!fWalletUnlockMessagingEnabled){
+        WalletModel::UnlockContext ctx(window->walletModel->requestUnlock());
 
-    // Unlock wallet was cancelled
-    if(!ctx.isValid())
+        // Unlock wallet was cancelled
+        if(!ctx.isValid())
+            return false;
+    }
+
+    if(!fWalletUnlockMessagingEnabled){
         return false;
+    }
 
     MessageModel::StatusCode sendstatus = thMessage->mtm->sendMessage(address, message, from);
 
@@ -1019,7 +1034,6 @@ QString ShadowBridge::joinGroupChat(QString privkey, QString label)
     bool fGood = vchSecret.SetString(strSecret);
 
     if (!fGood) return "false"; //throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid private key");
-    if (fWalletUnlockStakingOnly) return "false"; //throw JSONRPCError(RPC_WALLET_UNLOCK_NEEDED, "Wallet is unlocked for staking only.");
 
     CKey key = vchSecret.GetKey();
     CPubKey pubkey = key.GetPubKey();
