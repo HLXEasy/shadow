@@ -933,16 +933,22 @@ bool ShadowBridge::setPubKey(QString address, QString pubkey)
 
 bool ShadowBridge::sendMessage(const QString &address, const QString &message, const QString &from)
 {
-    if(!fWalletUnlockMessagingEnabled){
-        WalletModel::UnlockContext ctx(window->walletModel->requestUnlock());
+    bool is_encrypted = window->walletModel->getEncryptionStatus() != WalletModel::Unencrypted;
 
-        // Unlock wallet was cancelled
-        if(!ctx.isValid())
+    //only care about fWalletUnlockMessagingEnabled if wallet is encrypted.
+    if(is_encrypted){
+        if(!fWalletUnlockMessagingEnabled){
+            WalletModel::UnlockContext ctx(window->walletModel->requestUnlock());
+
+            // Unlock wallet was cancelled
+            if(!ctx.isValid())
+                return false;
+        }
+
+        //check again if the unlocked it
+        if(!fWalletUnlockMessagingEnabled){
             return false;
-    }
-
-    if(!fWalletUnlockMessagingEnabled){
-        return false;
+        }
     }
 
     MessageModel::StatusCode sendstatus = thMessage->mtm->sendMessage(address, message, from);
