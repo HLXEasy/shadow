@@ -1593,7 +1593,8 @@ Value walletpassphrase(const Array& params, bool fHelp)
         throw std::runtime_error(
             "walletpassphrase <passphrase> <timeout> [stakingonly]\n"
             "Stores the wallet decryption key in memory for <timeout> seconds.\n"
-            "if [stakingonly] is true sending functions are disabled.");
+            "if [stakingonly] is true sending functions are disabled.\n"
+            "if [stakingonly] is true and <timeout> is 0, the wallet will remain unlocked for staking until manually locked again.");
     if (fHelp)
         return true;
     if (!pwalletMain->IsCrypted())
@@ -1620,16 +1621,24 @@ Value walletpassphrase(const Array& params, bool fHelp)
     };
 
     pwalletMain->TopUpKeyPool();
-    int64_t nSleepTime = params[1].get_int64();
-    LOCK(cs_nWalletUnlockTime);
-    nWalletUnlockTime = GetTime() + nSleepTime;
-    RPCRunLater("lockwallet", boost::bind(LockWallet, pwalletMain), nSleepTime);
 
     // ppcoin: if user OS account compromised prevent trivial sendmoney commands
-    if (params.size() > 2)
+    if (params.size() > 2){
         fWalletUnlockStakingOnly = params[2].get_bool();
-    else
+    }
+    else {
         fWalletUnlockStakingOnly = false;
+    }
+
+
+    int64_t nSleepTime = params[1].get_int64();
+
+    // Only allow unlimited timeout (nSleepTime=0) on staking.
+    if(nSleepTime > 0 || !fWalletUnlockStakingOnly){
+        LOCK(cs_nWalletUnlockTime);
+        nWalletUnlockTime = GetTime() + nSleepTime;
+        RPCRunLater("lockwallet", boost::bind(LockWallet, pwalletMain), nSleepTime);
+    }
 
     return Value::null;
 }

@@ -928,10 +928,10 @@ int SecureMsgBuildBucketSet()
 
 /*
 SecureMsgAddWalletAddresses
-Enumerates the AddressBook, filters out anon outputs and checks the "real addresses"
-Adds these to the vector smsgAddresses to be used for decryption
+    Enumerates the AddressBook, filters out anon outputs and checks the "real addresses"
+    Adds these to the vector smsgAddresses to be used for decryption
 
-Returns  on success!
+    Returns 0 on success
 */
 
 int SecureMsgAddWalletAddresses()
@@ -1330,23 +1330,34 @@ bool SecureMsgReceiveData(CNode* pfrom, std::string strCommand, CDataStream& vRe
     */
 
     /*
+
+        TODO:
+        Explain better and make use of better terminology such as
+        Node A <-> Node B <-> Node C
+
         Commands
         + smsgInv =
             (1) received inventory of other node.
                 (1.1) sanity checks
             (2) loop through buckets
                 (2.1) sanity checks
-                (2.2) check if bucket is locked to another node, if so continue but don't match. TODO: handle this properly, add critical section, lock on write. On read: nothing changes = no lock
+                (2.2) check if bucket is locked to node C, if so continue but don't match. TODO: handle this properly, add critical section, lock on write. On read: nothing changes = no lock
                     (2.2.3) If our bucket is not locked to another node then add hash to buffer to be requested..
             (3) send smsgShow with list of hashes to request.
 
         + smsgShow =
+            (1) received a list of requested bucket hashes which the other party does not have.
+            (2) respond with smsgHave - contains all the message hashes within the requested buckets. 
         + smsgHave =
+            (1) A list of all the message hashes which a node has in response to smsgShow.
         + smsgWant =
-        + smsgMsg = ??
-        + smsgPing
-        + smsgPong
-        + smsgMatch
+            (1) A list of the message hashes that a node does not have and wants to retrieve from the node who sent smsgHave
+        + smsgMsg = 
+            (1) In response to 
+        + smsgPing = ping request
+        + smsgPong = pong response
+        + smsgMatch =
+            Obsolete, it used tell a node up to which time their messages were synced in response to smsg, but this is overhead because we know exactly when we sent them
 
     */
 
