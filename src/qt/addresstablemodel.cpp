@@ -627,6 +627,25 @@ QString AddressTableModel::pubkeyForAddress(const QString &address, const bool l
     return index(row, Pubkey).data(Qt::EditRole).toString();
 }
 
+QString AddressTableModel::addressForPubkey(const QString &pubkey) const
+{
+    if (pubkey.isEmpty())
+        return "";
+
+    std::vector<uint8_t> vchTest;
+    
+    
+    DecodeBase58(pubkey.toStdString().c_str(), vchTest);
+    CPubKey cpk(vchTest);
+
+    if (!cpk.IsValid())
+        return "";
+
+    CBitcoinAddress address(cpk.GetID());
+
+    return QString::fromStdString(address.ToString());
+}
+
 int AddressTableModel::lookupAddress(const QString &address) const
 {
     QModelIndexList lst = match(index(0, Address, QModelIndex()),

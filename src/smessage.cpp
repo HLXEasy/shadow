@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2015 The ShadowCoin developers
+// Copyright (c) 2014-2016 The ShadowCoin developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -3441,7 +3441,7 @@ int SecureMsgEncrypt(SecureMessage &smsg, const std::string &addressFrom, const 
     };
 
     smsg.version[0] = 1;
-    smsg.version[1] = 1;
+    smsg.version[1] = 2; // Add IV to HMAC
     smsg.timestamp = GetTime();
 
     CBitcoinAddress coinAddrFrom;
@@ -3633,7 +3633,7 @@ int SecureMsgEncrypt(SecureMessage &smsg, const std::string &addressFrom, const 
 
 
     // -- Calculate a 32 byte MAC with HMACSHA256, using key_m as salt
-    //    Message authentication code, (hash of timestamp + destination + payload)
+    //    Message authentication code, (hash of timestamp + iv + destination + payload)
     bool fHmacOk = true;
     uint32_t nBytes = 32;
     HMAC_CTX ctx;
@@ -3641,6 +3641,7 @@ int SecureMsgEncrypt(SecureMessage &smsg, const std::string &addressFrom, const 
 
     if (!HMAC_Init_ex(&ctx, &key_m[0], 32, EVP_sha256(), NULL)
         || !HMAC_Update(&ctx, (uint8_t*) &smsg.timestamp, sizeof(smsg.timestamp))
+        || !HMAC_Update(&ctx, (uint8_t*) smsg.iv, sizeof(smsg.iv))
         || !HMAC_Update(&ctx, &vchCiphertext[0], vchCiphertext.size())
         || !HMAC_Final(&ctx, smsg.mac, &nBytes)
         || nBytes != 32)
@@ -3917,19 +3918,31 @@ int SecureMsgDecrypt(bool fTestOnly, std::string &address, uint8_t *pHeader, uin
     std::vector<uint8_t> key_m(&vchHashedDec[32], &vchHashedDec[32]+32);
 
 
-    // -- Message authentication code, (hash of timestamp + destination + payload)
+    // -- Message authentication code, (hash of timestamp + iv + destination + payload)
     uint8_t MAC[32];
     bool fHmacOk = true;
     uint32_t nBytes = 32;
     HMAC_CTX ctx;
     HMAC_CTX_init(&ctx);
 
-    if (!HMAC_Init_ex(&ctx, &key_m[0], 32, EVP_sha256(), NULL)
-        || !HMAC_Update(&ctx, (uint8_t*) &psmsg->timestamp, sizeof(psmsg->timestamp))
-        || !HMAC_Update(&ctx, pPayload, nPayload)
-        || !HMAC_Final(&ctx, MAC, &nBytes)
-        || nBytes != 32)
-        fHmacOk = false;
+    if (psmsg->version[1] == 1)
+    {
+        if (!HMAC_Init_ex(&ctx, &key_m[0], 32, EVP_sha256(), NULL)
+            || !HMAC_Update(&ctx, (uint8_t*) &psmsg->timestamp, sizeof(psmsg->timestamp))
+            || !HMAC_Update(&ctx, pPayload, nPayload)
+            || !HMAC_Final(&ctx, MAC, &nBytes)
+            || nBytes != 32)
+            fHmacOk = false;
+    } else
+    {
+        if (!HMAC_Init_ex(&ctx, &key_m[0], 32, EVP_sha256(), NULL)
+            || !HMAC_Update(&ctx, (uint8_t*) &psmsg->timestamp, sizeof(psmsg->timestamp))
+            || !HMAC_Update(&ctx, (uint8_t*) psmsg->iv, sizeof(psmsg->iv))
+            || !HMAC_Update(&ctx, pPayload, nPayload)
+            || !HMAC_Final(&ctx, MAC, &nBytes)
+            || nBytes != 32)
+            fHmacOk = false;
+    }
 
     HMAC_CTX_cleanup(&ctx);
 

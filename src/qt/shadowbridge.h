@@ -42,7 +42,9 @@ public:
     Q_INVOKABLE QString transactionDetails(QString txid);
     /** Get the pubkey for an address */
     Q_INVOKABLE QString getPubKey(QString address);
-
+    /** Derive the address for a pubkey */
+    Q_INVOKABLE QString addressForPubKey(QString pubkey);
+    
     /** Show debug dialog */
     Q_INVOKABLE QVariantMap userAction(QVariantMap action);
 

@@ -16,11 +16,11 @@
         <source>Copyright © 2009-2014 The Bitcoin developers
 Copyright © 2012-2014 The NovaCoin developers
 Copyright © 2014 The BlackCoin developers
-Copyright © 2014-2015 The ShadowCoin developers</source>
+Copyright © 2014-[CLIENT_LAST_COPYRIGHT] The ShadowCoin developers</source>
         <translation>Copyright © 2009-2014 The Bitcoin developers
 Copyright © 2012-2014 The NovaCoin developers
 Copyright © 2014 The BlackCoin developers
-Copyright © 2014-2015 The ShadowCoin developers</translation>
+Copyright © 2014-[CLIENT_LAST_COPYRIGHT] The ShadowCoin developers</translation>
     </message>
     <message>
         <location line="+16"/>
