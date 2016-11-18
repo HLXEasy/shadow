@@ -16,10 +16,15 @@
         <source>Copyright © 2009-2014 The Bitcoin developers
 Copyright © 2012-2014 The NovaCoin developers
 Copyright © 2014 The BlackCoin developers
+Copyright © 2014-%1 The ShadowCoin developers</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Copyright © 2009-2014 The Bitcoin developers
+Copyright © 2012-2014 The NovaCoin developers
+Copyright © 2014 The BlackCoin developers
 Copyright © 2014-[CLIENT_LAST_COPYRIGHT] The ShadowCoin developers</source>
-        <translation>Copyright © 2009-2014 De Bitcoin ontwikkelaars
-Copyright © 2012-2014 De NovaCoin ontwikkelaars
-Copyright © 2014-[CLIENT_LAST_COPYRIGHT] De ShadowCash ontwikkelaars</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location line="+16"/>
@@ -35,7 +40,7 @@ This product includes software developed by the OpenSSL Project for use in the O
 <context>
     <name>AddressTableModel</name>
     <message>
-        <location filename="../addresstablemodel.cpp" line="+217"/>
+        <location filename="../addresstablemodel.cpp" line="+218"/>
         <source>Label</source>
         <translation>Label</translation>
     </message>
@@ -94,16 +99,22 @@ This product includes software developed by the OpenSSL Project for use in the O
     </message>
     <message>
         <location line="+33"/>
+        <location line="+16"/>
         <source>Serves to disable the trivial sendmoney when OS account compromised. Provides no real security.</source>
         <translation>Bedoeld om het command &apos;sendmoney&apos; uit te schakelen indien het OS niet meer veilig is. Geeft geen echte beveiliging.</translation>
     </message>
     <message>
-        <location line="+3"/>
+        <location line="-13"/>
         <source>For staking only</source>
         <translation>Alleen voor staking</translation>
     </message>
     <message>
-        <location filename="../askpassphrasedialog.cpp" line="+37"/>
+        <location line="+16"/>
+        <source>Enable messaging</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../askpassphrasedialog.cpp" line="+39"/>
         <source>Enter the new passphrase to the wallet.&lt;br/&gt;Please use a passphrase of &lt;b&gt;10 or more random characters&lt;/b&gt;, or &lt;b&gt;eight or more words&lt;/b&gt;.</source>
         <translation>Vul een nieuw wachtwoord in voor uw portemonnee. &lt;br/&gt; Gebruik een wachtwoord van &lt;b&gt;10 of meer verschillende karakters&lt;/b&gt;, of &lt;b&gt; acht of meer woorden&lt;/b&gt; . </translation>
     </message>
@@ -113,7 +124,7 @@ This product includes software developed by the OpenSSL Project for use in the O
         <translation>Versleutel portemonnee</translation>
     </message>
     <message>
-        <location line="+7"/>
+        <location line="+11"/>
         <source>This operation needs your wallet passphrase to unlock the wallet.</source>
         <translation>Deze operatie vereist uw portemonneewachtwoord om de portemonnee te openen.</translation>
     </message>
@@ -163,49 +174,49 @@ This product includes software developed by the OpenSSL Project for use in the O
         <translation>BELANGRIJK: Elke eerder gemaakte backup van uw portemonneebestand dient u te vervangen door het nieuw gegenereerde, versleutelde portemonneebestand. Om veiligheidsredenen zullen eerdere backups van het niet-versleutelde portemonneebestand onbruikbaar worden zodra u uw nieuwe, versleutelde, portemonnee begint te gebruiken.</translation>
     </message>
     <message>
-        <location line="+103"/>
+        <location line="+104"/>
         <location line="+24"/>
         <source>Warning: The Caps Lock key is on!</source>
         <translation>Waarschuwing: De Caps-Lock-toets staat aan!</translation>
     </message>
     <message>
-        <location line="-133"/>
-        <location line="+60"/>
+        <location line="-134"/>
+        <location line="+61"/>
         <source>Wallet encrypted</source>
         <translation>Portemonnee versleuteld</translation>
     </message>
     <message>
-        <location line="-58"/>
+        <location line="-59"/>
         <source>ShadowCoin will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your coins from being stolen by malware infecting your computer.</source>
         <translation>ShadowCoin zal nu sluiten om het versleutel proces te voltooien. Onthou dat het versleutelen van je portemonnee je niet volledig beschermt tegen diefstal van munten door malware op je computer.</translation>
     </message>
     <message>
         <location line="+13"/>
         <location line="+7"/>
-        <location line="+44"/>
+        <location line="+45"/>
         <location line="+6"/>
         <source>Wallet encryption failed</source>
         <translation>Portemonneeversleuteling mislukt</translation>
     </message>
     <message>
-        <location line="-56"/>
+        <location line="-57"/>
         <source>Wallet encryption failed due to an internal error. Your wallet was not encrypted.</source>
         <translation>Portemonneeversleuteling mislukt door een interne fout. Uw portemonnee is niet versleuteld.</translation>
     </message>
     <message>
         <location line="+7"/>
-        <location line="+50"/>
+        <location line="+51"/>
         <source>The supplied passphrases do not match.</source>
         <translation>De opgegeven wachtwoorden komen niet overeen</translation>
     </message>
     <message>
-        <location line="-38"/>
+        <location line="-39"/>
         <source>Wallet unlock failed</source>
         <translation>Portemonnee openen mislukt</translation>
     </message>
     <message>
         <location line="+1"/>
-        <location line="+12"/>
+        <location line="+13"/>
         <location line="+19"/>
         <source>The passphrase entered for the wallet decryption was incorrect.</source>
         <translation>Het opgegeven wachtwoord voor de portemonnee-ontsleuteling is niet correct.</translation>
@@ -620,7 +631,7 @@ Dit betekend dat een fee van %2 is vereist.</translation>
 <context>
     <name>MessageModel</name>
     <message>
-        <location filename="../messagemodel.cpp" line="+375"/>
+        <location filename="../messagemodel.cpp" line="+376"/>
         <source>Type</source>
         <translation>Type</translation>
     </message>
@@ -1053,7 +1064,7 @@ Dit betekend dat een fee van %2 is vereist.</translation>
 <context>
     <name>ShadowBridge</name>
     <message>
-        <location filename="../shadowbridge.cpp" line="+401"/>
+        <location filename="../shadowbridge.cpp" line="+410"/>
         <source>Incoming Message</source>
         <translation>Inkomend Bericht</translation>
     </message>
@@ -1161,12 +1172,12 @@ Kring grootte van één is niet geheim en tast het netwerk aan.</translation>
     </message>
     <message>
         <location line="+25"/>
-        <location line="+362"/>
+        <location line="+376"/>
         <source>The recipient address is not valid, please recheck.</source>
         <translation>Het ontvangstadres is niet geldig, controleer uw invoer.</translation>
     </message>
     <message>
-        <location line="-357"/>
+        <location line="-371"/>
         <source>The amount to pay must be larger than 0.</source>
         <translation>Het ingevoerde bedrag moet groter zijn dan 0.</translation>
     </message>
@@ -1182,12 +1193,12 @@ Kring grootte van één is niet geheim en tast het netwerk aan.</translation>
     </message>
     <message>
         <location line="+6"/>
-        <location line="+351"/>
+        <location line="+365"/>
         <source>Duplicate address found, can only send to each address once per send operation.</source>
         <translation>Dubbel adres gevonden, u kunt slechts eenmaal naar een bepaald adres verzenden per transactie</translation>
     </message>
     <message>
-        <location line="-346"/>
+        <location line="-360"/>
         <source>Error: Transaction creation failed.</source>
         <translation>Fout: Creëren van transactie mislukt.</translation>
     </message>
@@ -1237,7 +1248,7 @@ Kring grootte van één is niet geheim en tast het netwerk aan.</translation>
         <translation>Fout generen transactie: %1</translation>
     </message>
     <message>
-        <location line="+290"/>
+        <location line="+304"/>
         <location line="+5"/>
         <location line="+5"/>
         <location line="+5"/>
@@ -2898,12 +2909,26 @@ Bericht: %4
         <translation>URI kan niet ontleedt worden! Mogelijke oorzaken zijn een ongeldig ShadowCoin adres of incorrecte URI parameters.</translation>
     </message>
     <message>
-        <location line="+39"/>
+        <location line="+42"/>
+        <source>Wallet is &lt;b&gt;encrypted&lt;/b&gt; and currently &lt;b&gt;unlocked&lt;/b&gt; for staking and messaging only.</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Wallet is &lt;b&gt;encrypted&lt;/b&gt; and currently &lt;b&gt;unlocked&lt;/b&gt; for messaging only.</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Wallet is &lt;b&gt;encrypted&lt;/b&gt; and currently &lt;b&gt;unlocked&lt;/b&gt; for staking only.</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
         <source>Wallet is &lt;b&gt;encrypted&lt;/b&gt; and currently &lt;b&gt;unlocked&lt;/b&gt; for staking only</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location line="+9"/>
+        <location line="+12"/>
         <source>Wallet is &lt;b&gt;encrypted&lt;/b&gt; and currently &lt;b&gt;unlocked&lt;/b&gt;</source>
         <translation>Portemonnee is &lt;b&gt;gecodeerd&lt;/b&gt; en momenteel &lt;b&gt;ontgrendeld&lt;/b&gt;</translation>
     </message>

@@ -16,11 +16,15 @@
         <source>Copyright © 2009-2014 The Bitcoin developers
 Copyright © 2012-2014 The NovaCoin developers
 Copyright © 2014 The BlackCoin developers
-Copyright © 2014-[CLIENT_LAST_COPYRIGHT] The ShadowCoin developers</source>
-        <translation>Copyright © 2009-2014 The Bitcoin developers
+Copyright © 2014-%1 The ShadowCoin developers</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Copyright © 2009-2014 The Bitcoin developers
 Copyright © 2012-2014 The NovaCoin developers
 Copyright © 2014 The BlackCoin developers
-Copyright © 2014-[CLIENT_LAST_COPYRIGHT] The ShadowCoin developers</translation>
+Copyright © 2014-[CLIENT_LAST_COPYRIGHT] The ShadowCoin developers</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location line="+16"/>
@@ -36,7 +40,7 @@ This product includes software developed by the OpenSSL Project for use in the O
 <context>
     <name>AddressTableModel</name>
     <message>
-        <location filename="../addresstablemodel.cpp" line="+217"/>
+        <location filename="../addresstablemodel.cpp" line="+218"/>
         <source>Label</source>
         <translation>Etichetă</translation>
     </message>
@@ -95,16 +99,22 @@ This product includes software developed by the OpenSSL Project for use in the O
     </message>
     <message>
         <location line="+33"/>
+        <location line="+16"/>
         <source>Serves to disable the trivial sendmoney when OS account compromised. Provides no real security.</source>
         <translation>Servește pentru a dezactiva sendmoneyl atunci când sistemul de operare este compromis. Nu oferă nicio garanție reală.</translation>
     </message>
     <message>
-        <location line="+3"/>
+        <location line="-13"/>
         <source>For staking only</source>
         <translation>Doar pentru staking</translation>
     </message>
     <message>
-        <location filename="../askpassphrasedialog.cpp" line="+37"/>
+        <location line="+16"/>
+        <source>Enable messaging</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../askpassphrasedialog.cpp" line="+39"/>
         <source>Enter the new passphrase to the wallet.&lt;br/&gt;Please use a passphrase of &lt;b&gt;10 or more random characters&lt;/b&gt;, or &lt;b&gt;eight or more words&lt;/b&gt;.</source>
         <translation>Introdu noua parolă a portofelului electronic.&lt;br/&gt;Te rog folosește &lt;b&gt;minim 10 caractere aleatoare&lt;/b&gt;, sau &lt;b&gt;minim 8 cuvinte&lt;/b&gt;.</translation>
     </message>
@@ -114,7 +124,7 @@ This product includes software developed by the OpenSSL Project for use in the O
         <translation>Criptează portofelul</translation>
     </message>
     <message>
-        <location line="+7"/>
+        <location line="+11"/>
         <source>This operation needs your wallet passphrase to unlock the wallet.</source>
         <translation>Această acțiune necesită fraza ta de acces pentru deblocarea portofelului.</translation>
     </message>
@@ -164,49 +174,49 @@ This product includes software developed by the OpenSSL Project for use in the O
         <translation>IMPORTANT: Orice copie de siguranta facuta in prealabil portofelului dumneavoastra ar trebui inlocuita cu cea generata cel mai recent fisier criptat al portofelului. Pentru siguranta, copiile de siguranta vechi ale portofelului ne-criptat vor deveni inutile de indata ce veti incepe folosirea noului fisier criptat al portofelului.</translation>
     </message>
     <message>
-        <location line="+103"/>
+        <location line="+104"/>
         <location line="+24"/>
         <source>Warning: The Caps Lock key is on!</source>
         <translation>Atentie! Caps Lock este pornit</translation>
     </message>
     <message>
-        <location line="-133"/>
-        <location line="+60"/>
+        <location line="-134"/>
+        <location line="+61"/>
         <source>Wallet encrypted</source>
         <translation>Portofel criptat</translation>
     </message>
     <message>
-        <location line="-58"/>
+        <location line="-59"/>
         <source>ShadowCoin will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your coins from being stolen by malware infecting your computer.</source>
         <translation>ShadowCoin se va inchide pentru a termina procesul de encriptie. Amintiți-vă, criptarea portofelul dumneavoastră nu poate proteja pe deplin monedele dvs. de a fi furate de  infectarea cu malware a computerului.</translation>
     </message>
     <message>
         <location line="+13"/>
         <location line="+7"/>
-        <location line="+44"/>
+        <location line="+45"/>
         <location line="+6"/>
         <source>Wallet encryption failed</source>
         <translation>Criptarea portofelului a eșuat</translation>
     </message>
     <message>
-        <location line="-56"/>
+        <location line="-57"/>
         <source>Wallet encryption failed due to an internal error. Your wallet was not encrypted.</source>
         <translation>Criptarea portofelului a eșuat din cauza unei erori interne. Portofelul tău nu a fost criptat.</translation>
     </message>
     <message>
         <location line="+7"/>
-        <location line="+50"/>
+        <location line="+51"/>
         <source>The supplied passphrases do not match.</source>
         <translation>Frazele de acces introduse nu se potrivesc.</translation>
     </message>
     <message>
-        <location line="-38"/>
+        <location line="-39"/>
         <source>Wallet unlock failed</source>
         <translation>Deblocarea portofelului a eșuat</translation>
     </message>
     <message>
         <location line="+1"/>
-        <location line="+12"/>
+        <location line="+13"/>
         <location line="+19"/>
         <source>The passphrase entered for the wallet decryption was incorrect.</source>
         <translation>Fraza de acces introdusă pentru decriptarea portofelului a fost incorectă.</translation>
@@ -621,7 +631,7 @@ Acest lucru înseamnă că o taxă de cel puțin %2 este necesară</translation>
 <context>
     <name>MessageModel</name>
     <message>
-        <location filename="../messagemodel.cpp" line="+375"/>
+        <location filename="../messagemodel.cpp" line="+376"/>
         <source>Type</source>
         <translation type="unfinished"/>
     </message>
@@ -1054,7 +1064,7 @@ Acest lucru înseamnă că o taxă de cel puțin %2 este necesară</translation>
 <context>
     <name>ShadowBridge</name>
     <message>
-        <location filename="../shadowbridge.cpp" line="+401"/>
+        <location filename="../shadowbridge.cpp" line="+410"/>
         <source>Incoming Message</source>
         <translation type="unfinished"/>
     </message>
@@ -1161,12 +1171,12 @@ Ring size of one is not anonymous, and harms the network.</source>
     </message>
     <message>
         <location line="+25"/>
-        <location line="+362"/>
+        <location line="+376"/>
         <source>The recipient address is not valid, please recheck.</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location line="-357"/>
+        <location line="-371"/>
         <source>The amount to pay must be larger than 0.</source>
         <translation type="unfinished"/>
     </message>
@@ -1182,12 +1192,12 @@ Ring size of one is not anonymous, and harms the network.</source>
     </message>
     <message>
         <location line="+6"/>
-        <location line="+351"/>
+        <location line="+365"/>
         <source>Duplicate address found, can only send to each address once per send operation.</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location line="-346"/>
+        <location line="-360"/>
         <source>Error: Transaction creation failed.</source>
         <translation type="unfinished"/>
     </message>
@@ -1237,7 +1247,7 @@ Ring size of one is not anonymous, and harms the network.</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location line="+290"/>
+        <location line="+304"/>
         <location line="+5"/>
         <location line="+5"/>
         <location line="+5"/>
@@ -2887,12 +2897,26 @@ Message: %4
         <translation type="unfinished"/>
     </message>
     <message>
-        <location line="+39"/>
+        <location line="+42"/>
+        <source>Wallet is &lt;b&gt;encrypted&lt;/b&gt; and currently &lt;b&gt;unlocked&lt;/b&gt; for staking and messaging only.</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Wallet is &lt;b&gt;encrypted&lt;/b&gt; and currently &lt;b&gt;unlocked&lt;/b&gt; for messaging only.</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Wallet is &lt;b&gt;encrypted&lt;/b&gt; and currently &lt;b&gt;unlocked&lt;/b&gt; for staking only.</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
         <source>Wallet is &lt;b&gt;encrypted&lt;/b&gt; and currently &lt;b&gt;unlocked&lt;/b&gt; for staking only</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location line="+9"/>
+        <location line="+12"/>
         <source>Wallet is &lt;b&gt;encrypted&lt;/b&gt; and currently &lt;b&gt;unlocked&lt;/b&gt;</source>
         <translation type="unfinished"/>
     </message>

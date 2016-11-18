@@ -16,10 +16,15 @@
         <source>Copyright © 2009-2014 The Bitcoin developers
 Copyright © 2012-2014 The NovaCoin developers
 Copyright © 2014 The BlackCoin developers
+Copyright © 2014-%1 The ShadowCoin developers</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Copyright © 2009-2014 The Bitcoin developers
+Copyright © 2012-2014 The NovaCoin developers
+Copyright © 2014 The BlackCoin developers
 Copyright © 2014-[CLIENT_LAST_COPYRIGHT] The ShadowCoin developers</source>
-        <translation>Все права защищены © 2009-2014 Разработчики Bitcoin
-Все права защищены © 2012-2014 Разработчики NovaCoin
-Все права защищены © 2014-[CLIENT_LAST_COPYRIGHT] Разработчики ShadowCoin</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location line="+16"/>
@@ -35,7 +40,7 @@ This product includes software developed by the OpenSSL Project for use in the O
 <context>
     <name>AddressTableModel</name>
     <message>
-        <location filename="../addresstablemodel.cpp" line="+217"/>
+        <location filename="../addresstablemodel.cpp" line="+218"/>
         <source>Label</source>
         <translation>Метка</translation>
     </message>
@@ -94,16 +99,22 @@ This product includes software developed by the OpenSSL Project for use in the O
     </message>
     <message>
         <location line="+33"/>
+        <location line="+16"/>
         <source>Serves to disable the trivial sendmoney when OS account compromised. Provides no real security.</source>
         <translation>Служит для предотвращения тривиальной отправки монет, если ваша система скомпрометирована. Не предоставляет реальной безопасности.</translation>
     </message>
     <message>
-        <location line="+3"/>
+        <location line="-13"/>
         <source>For staking only</source>
         <translation>Только для участия в доле</translation>
     </message>
     <message>
-        <location filename="../askpassphrasedialog.cpp" line="+37"/>
+        <location line="+16"/>
+        <source>Enable messaging</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../askpassphrasedialog.cpp" line="+39"/>
         <source>Enter the new passphrase to the wallet.&lt;br/&gt;Please use a passphrase of &lt;b&gt;10 or more random characters&lt;/b&gt;, or &lt;b&gt;eight or more words&lt;/b&gt;.</source>
         <translation>Введите новый пароль для бумажника. &lt;br/&gt; Пожалуйста, используйте фразы из &lt;b&gt;10 или более случайных символов,&lt;/b&gt; или &lt;b&gt;восьми и более слов.&lt;/b&gt;</translation>
     </message>
@@ -113,7 +124,7 @@ This product includes software developed by the OpenSSL Project for use in the O
         <translation>Зашифровать бумажник</translation>
     </message>
     <message>
-        <location line="+7"/>
+        <location line="+11"/>
         <source>This operation needs your wallet passphrase to unlock the wallet.</source>
         <translation>Для выполнения операции требуется пароль вашего бумажника.</translation>
     </message>
@@ -163,49 +174,49 @@ This product includes software developed by the OpenSSL Project for use in the O
         <translation>ВАЖНО: все предыдущие резервные копии вашего кошелька должны быть заменены новым зашифрованным файлом. В целях безопасности предыдущие резервные копии нешифрованного кошелька станут бесполезны, как только вы начнёте использовать новый шифрованный кошелёк.</translation>
     </message>
     <message>
-        <location line="+103"/>
+        <location line="+104"/>
         <location line="+24"/>
         <source>Warning: The Caps Lock key is on!</source>
         <translation>Внимание: Caps Lock включен!</translation>
     </message>
     <message>
-        <location line="-133"/>
-        <location line="+60"/>
+        <location line="-134"/>
+        <location line="+61"/>
         <source>Wallet encrypted</source>
         <translation>Бумажник зашифрован</translation>
     </message>
     <message>
-        <location line="-58"/>
+        <location line="-59"/>
         <source>ShadowCoin will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your coins from being stolen by malware infecting your computer.</source>
         <translation>Сейчас программа закроется для завершения процесса шифрования. Помните, что шифрование вашего бумажника не может полностью защитить ваши монеты от кражи с помощью инфицирования вашего компьютера вредоносным ПО.</translation>
     </message>
     <message>
         <location line="+13"/>
         <location line="+7"/>
-        <location line="+44"/>
+        <location line="+45"/>
         <location line="+6"/>
         <source>Wallet encryption failed</source>
         <translation>Не удалось зашифровать бумажник</translation>
     </message>
     <message>
-        <location line="-56"/>
+        <location line="-57"/>
         <source>Wallet encryption failed due to an internal error. Your wallet was not encrypted.</source>
         <translation>Шифрование бумажника не удалось из-за внутренней ошибки. Ваш бумажник не был зашифрован.</translation>
     </message>
     <message>
         <location line="+7"/>
-        <location line="+50"/>
+        <location line="+51"/>
         <source>The supplied passphrases do not match.</source>
         <translation>Введённые пароли не совпадают.</translation>
     </message>
     <message>
-        <location line="-38"/>
+        <location line="-39"/>
         <source>Wallet unlock failed</source>
         <translation>Разблокировка бумажника не удалась</translation>
     </message>
     <message>
         <location line="+1"/>
-        <location line="+12"/>
+        <location line="+13"/>
         <location line="+19"/>
         <source>The passphrase entered for the wallet decryption was incorrect.</source>
         <translation>Указанный пароль не подходит.</translation>
@@ -606,7 +617,7 @@ This label turns red, if the priority is smaller than &quot;medium&quot;.
 <context>
     <name>MessageModel</name>
     <message>
-        <location filename="../messagemodel.cpp" line="+375"/>
+        <location filename="../messagemodel.cpp" line="+376"/>
         <source>Type</source>
         <translation type="unfinished"/>
     </message>
@@ -1039,7 +1050,7 @@ This label turns red, if the priority is smaller than &quot;medium&quot;.
 <context>
     <name>ShadowBridge</name>
     <message>
-        <location filename="../shadowbridge.cpp" line="+401"/>
+        <location filename="../shadowbridge.cpp" line="+410"/>
         <source>Incoming Message</source>
         <translation type="unfinished"/>
     </message>
@@ -1146,12 +1157,12 @@ Ring size of one is not anonymous, and harms the network.</source>
     </message>
     <message>
         <location line="+25"/>
-        <location line="+362"/>
+        <location line="+376"/>
         <source>The recipient address is not valid, please recheck.</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location line="-357"/>
+        <location line="-371"/>
         <source>The amount to pay must be larger than 0.</source>
         <translation type="unfinished"/>
     </message>
@@ -1167,12 +1178,12 @@ Ring size of one is not anonymous, and harms the network.</source>
     </message>
     <message>
         <location line="+6"/>
-        <location line="+351"/>
+        <location line="+365"/>
         <source>Duplicate address found, can only send to each address once per send operation.</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location line="-346"/>
+        <location line="-360"/>
         <source>Error: Transaction creation failed.</source>
         <translation type="unfinished"/>
     </message>
@@ -1222,7 +1233,7 @@ Ring size of one is not anonymous, and harms the network.</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location line="+290"/>
+        <location line="+304"/>
         <location line="+5"/>
         <location line="+5"/>
         <location line="+5"/>
@@ -2872,12 +2883,26 @@ Message: %4
         <translation type="unfinished"/>
     </message>
     <message>
-        <location line="+39"/>
+        <location line="+42"/>
+        <source>Wallet is &lt;b&gt;encrypted&lt;/b&gt; and currently &lt;b&gt;unlocked&lt;/b&gt; for staking and messaging only.</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Wallet is &lt;b&gt;encrypted&lt;/b&gt; and currently &lt;b&gt;unlocked&lt;/b&gt; for messaging only.</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Wallet is &lt;b&gt;encrypted&lt;/b&gt; and currently &lt;b&gt;unlocked&lt;/b&gt; for staking only.</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
         <source>Wallet is &lt;b&gt;encrypted&lt;/b&gt; and currently &lt;b&gt;unlocked&lt;/b&gt; for staking only</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location line="+9"/>
+        <location line="+12"/>
         <source>Wallet is &lt;b&gt;encrypted&lt;/b&gt; and currently &lt;b&gt;unlocked&lt;/b&gt;</source>
         <translation type="unfinished"/>
     </message>
