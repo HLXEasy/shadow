@@ -1222,7 +1222,7 @@ Ring Größe von eins ist nicht anonym und schädigt das Netzwerk.</translation>
     <message>
         <location line="+5"/>
         <source>The total exceeds your shadow balance when the %1 transaction fee is included.</source>
-        <translation>Der Totalwert übersteigt ihre Shadow Bilanz wenn die Transaktionsgebühr 1% mit eingerechnet wird.</translation>
+        <translation>Der Totalwert übersteigt ihre Shadow Bilanz wenn die Transaktionsgebühr %1 mit eingerechnet wird.</translation>
     </message>
     <message>
         <location line="+5"/>
