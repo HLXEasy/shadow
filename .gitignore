@@ -18,6 +18,7 @@ src/build.h
 *.qm
 Makefile
 shadow
+umbra
 #resources cpp
 qrc_*.cpp
 #qt creator

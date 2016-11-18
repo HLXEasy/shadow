@@ -5260,8 +5260,8 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
                         LogPrintf("force request: %s\n", inv.ToString());
                 }
 
-	            // Track requests for our stuff
-	            Inventory(inv.hash);
+                // Track requests for our stuff
+                Inventory(inv.hash);
             };
         } else
         {
@@ -5645,7 +5645,7 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
             };
         } // cs_main
     }
-	else if (strCommand == "block" && !fImporting && !fReindexing) // Ignore blocks received while importing
+    else if (strCommand == "block" && !fImporting && !fReindexing) // Ignore blocks received while importing
     {
         if (nNodeMode != NT_FULL)
         {
@@ -5750,8 +5750,6 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
             if (addr.nTime > nCutOff)
                 pfrom->PushAddress(addr);
     }
-
-
     else if (strCommand == "mempool")
     {
         LOCK2(cs_main, pfrom->cs_filter);
@@ -5812,7 +5810,7 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
 
         LogPrint("net", "peer %s chain height %d\n", pfrom->addr.ToString().c_str(), nPeerHeight);
     }
-	else if (strCommand == "pong")
+    else if (strCommand == "pong")
     {
         int64_t pingUsecEnd = nTimeReceived;
         uint64_t nonce = 0;

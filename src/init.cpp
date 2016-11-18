@@ -850,6 +850,7 @@ bool AppInit2(boost::thread_group& threadGroup)
             break;
     };
     
+    
     // as LoadBlockIndex can take several minutes, it's possible the user
     // requested to kill bitcoin-qt during the last operation. If so, exit.
     // As the program has not fully started yet, Shutdown() is possibly overkill.
@@ -969,7 +970,7 @@ bool AppInit2(boost::thread_group& threadGroup)
         BOOST_FOREACH(std::string strFile, mapMultiArgs["-loadblock"])
             vImportFiles.push_back(strFile);
     };
-	threadGroup.create_thread(boost::bind(&ThreadImport, vImportFiles));
+    threadGroup.create_thread(boost::bind(&ThreadImport, vImportFiles));
     
     if (mapArgs.count("-reindex"))
     {
