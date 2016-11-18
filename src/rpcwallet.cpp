@@ -1623,7 +1623,8 @@ Value walletpassphrase(const Array& params, bool fHelp)
     pwalletMain->TopUpKeyPool();
 
     // ppcoin: if user OS account compromised prevent trivial sendmoney commands
-    if (params.size() > 2){
+    if (params.size() > 2)
+    {
         fWalletUnlockStakingOnly = params[2].get_bool();
     }
     else {
@@ -1634,7 +1635,8 @@ Value walletpassphrase(const Array& params, bool fHelp)
     int64_t nSleepTime = params[1].get_int64();
 
     // Only allow unlimited timeout (nSleepTime=0) on staking.
-    if(nSleepTime > 0 || !fWalletUnlockStakingOnly){
+    if (nSleepTime > 0 || !fWalletUnlockStakingOnly)
+    {
         LOCK(cs_nWalletUnlockTime);
         nWalletUnlockTime = GetTime() + nSleepTime;
         RPCRunLater("lockwallet", boost::bind(LockWallet, pwalletMain), nSleepTime);
@@ -2218,7 +2220,7 @@ Value sendtostealthaddress(const Array& params, bool fHelp)
     if (params.size() == 3 || params.size() == 5)
     {
         int nNarr = params.size() - 1;
-        if(params[nNarr].type() != null_type && !params[nNarr].get_str().empty())
+        if (params[nNarr].type() != null_type && !params[nNarr].get_str().empty())
             sNarr = params[nNarr].get_str();
     }
 

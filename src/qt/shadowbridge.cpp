@@ -936,15 +936,14 @@ bool ShadowBridge::sendMessage(const QString &address, const QString &message, c
     bool is_encrypted = window->walletModel->getEncryptionStatus() != WalletModel::Unencrypted;
 
     //only care about fWalletUnlockMessagingEnabled if wallet is encrypted.
-    if(is_encrypted){
-        if(!fWalletUnlockMessagingEnabled){
+    if (is_encrypted)
+    {
+        if (!fWalletUnlockMessagingEnabled)
             window->toggleLock();
-        }
 
         //check again if the unlocked it
-        if(!fWalletUnlockMessagingEnabled){
+        if (!fWalletUnlockMessagingEnabled)
             return false;
-        }
     }
 
     MessageModel::StatusCode sendstatus = thMessage->mtm->sendMessage(address, message, from);
@@ -1068,7 +1067,8 @@ QVariantList ShadowBridge::inviteGroupChat(QString qsaddress, QVariantList invit
 
     QString actualLabel = getAddressLabel(qsaddress);
 
-    if(!actualLabel.startsWith("group_")){
+    if (!actualLabel.startsWith("group_"))
+    {
         LogPrintf("[inviteGroupChat] -- This should never happen, if it does please notify devteam.\n");
         QMessageBox::warning(window, tr("Sanity Error!"),
             tr("Error: a sanity check prevented the transfer of a non-group private key, please close your wallet and report this error to the development team as soon as possible."),

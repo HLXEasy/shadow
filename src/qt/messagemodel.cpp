@@ -86,7 +86,8 @@ public:
                     label = parent->getWalletModel()->getAddressTableModel()->labelForAddress(QString::fromStdString(msg.sFromAddress));
                     labelTo = parent->getWalletModel()->getAddressTableModel()->labelForAddress(QString::fromStdString(smsgStored.sAddrTo)); //returns "" if not found.
 
-                    if (fDebugSmsg){
+                    if (fDebugSmsg)
+                    {
                         LogPrintf("refreshMessageTable: addressTo: %s\n", smsgStored.sAddrTo);
                         LogPrintf("refreshMessageTable: addressFrom: %s\n", msg.sFromAddress);
                     }
