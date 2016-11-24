@@ -17,7 +17,7 @@ The Shadow Project  is a decentralized peer-to-peer platform, created under an o
 
 Releases
 ===========================
-[Click on this link to go to the latest release - 1.4.0.3](https://github.com/shadowproject/shadow/releases/latest)
+[Click on this link to go to the latest release - 1.5.0.3](https://github.com/shadowproject/shadow/releases/latest)
 
 Supported Operating Systems:
 * Linux (64 bit)
