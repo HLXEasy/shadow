@@ -13,7 +13,7 @@ env:
   matrix:
     - BUILD=win32 HOST=i686-w64-mingw32   DISTNAME=i686-win   PACKAGES="mingw-w64 g++-mingw-w64" BITS=32 MAKEFILE=makefile.linux-mingw BOOST_LIB_SUFFIX="-mt-s" OUTPUT_SUFFIX=".exe" QMAKEOPTS="-xplatform win32-g++" BOOST_THREAD_LIB_SUFFIX="_win32-mt-s"
     - BUILD=win64 HOST=x86_64-w64-mingw32 DISTNAME=x86_64-win PACKAGES="mingw-w64 g++-mingw-w64" BITS=64 MAKEFILE=makefile.linux-mingw BOOST_LIB_SUFFIX="-mt-s" OUTPUT_SUFFIX=".exe" QMAKEOPTS="-xplatform win32-g++" BOOST_THREAD_LIB_SUFFIX="_win32-mt-s"
-    - BUILD=macosx HOST=x86_64-apple-darwin14 DISTNAME=x86_64-darwin PACKAGES="clang llvm-dev"  BOOST_LIB_SUFFIX="-mt-s" BOOST_THREAD_LIB_SUFFIX="-mt-s" DEPS=shadow-deps-osx.tar.xz EXTRADEPS=osxcross.tar.xz
+    - BUILD=macosx HOST=x86_64-apple-darwin14 DISTNAME=x86_64-darwin PACKAGES="clang llvm-dev genisoimage"  BOOST_LIB_SUFFIX="-mt-s" BOOST_THREAD_LIB_SUFFIX="-mt-s" DEPS=shadow-deps-osx.tar.xz EXTRADEPS=osxcross.tar.xz
       QMAKE_CXXFLAGS="-I/home/vagrant/deps/SDK/MacOSX10.9/usr/include -DBOOST_HAS_INT128=1" QMAKEOPTS="-xplatform macx-clang-linux" OTOOL=${HOST}-otool INSTALLNAMETOOL=${HOST}-install_name_tool STRIP=${HOST}-strip
     - BUILD=linux64 MAKEFILE=makefile.unix  BOOST_LIB_SUFFIX="-mt" BITS=64
 #    - BUILD=macosx MAKEFILE=makefile.osx  BOOST_LIB_SUFFIX="-mt" TODO: osx daemon!!
