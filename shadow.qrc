@@ -98,6 +98,7 @@
         <file alias="assets/img/progress/progress-circle-primary.svg">src/qt/res/assets/img/progress/progress-circle-primary.svg</file>
         <file alias="assets/img/progress/progress-circle-success.svg">src/qt/res/assets/img/progress/progress-circle-success.svg</file>
         <file alias="assets/img/progress/progress-circle-warning.svg">src/qt/res/assets/img/progress/progress-circle-warning.svg</file>
+        <file alias="assets/img/sdc_leak_image.jpg">src/qt/res/assets/img/sdc_leak_image.jpg</file>
         <file alias="assets/img/sdc-vertical.png">src/qt/res/assets/img/sdc-vertical.png</file>
         <file alias="assets/img/shadow_logo.png">src/qt/res/assets/img/shadow_logo.png</file>
         <file alias="assets/img/shoppingcart.png">src/qt/res/assets/img/shoppingcart.png</file>
