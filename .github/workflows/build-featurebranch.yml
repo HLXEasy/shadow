@@ -85,7 +85,8 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: aliascash/docker-aliaswalletd:${{ needs.buildLinuxBinariesAlsoForDockerImage.outputs.alias_release }}
+          context: .
+          tags: aliascash/docker-aliaswalletd:latest,aliascash/docker-aliaswalletd:${{ needs.buildLinuxBinariesAlsoForDockerImage.outputs.alias_release }}
           build-args: |
             DOWNLOAD_URL=https://github.com/aliascash/alias-wallet/releases/download/gh-actions5/Alias-gh-actions5-e1fa0f87-Ubuntu-20-04.tgz
           #arg2=value2
