@@ -137,9 +137,6 @@ jobs:
   buildARM:
     runs-on: ubuntu-latest
     needs: prepareRelease
-    strategy:
-      matrix:
-        distro: [ RaspberryPi/Dockerfile_Buster]
     steps:
       - uses: actions/checkout@v2
         with:
@@ -154,7 +151,7 @@ jobs:
         run: >
           docker build
           -t local
-          -f Docker/${{ matrix.distro }}
+          -f Docker/RaspberryPi/Dockerfile_Buster
           --build-arg BUILD_THREADS=2
           --build-arg GITHUB_CI_TOKEN=${{ secrets.GITHUB_TOKEN }}
           --build-arg GIT_COMMIT=${{ needs.prepareRelease.outputs.github_sha_short }}

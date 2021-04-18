@@ -27,9 +27,6 @@ jobs:
   # Build aarch64 version (Raspberry PI ARMv8)
   buildARM:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        distro: [ RaspberryPi/Dockerfile_Buster]
     steps:
       - uses: actions/checkout@v2
         with:
@@ -41,7 +38,7 @@ jobs:
           image: tonistiigi/binfmt:latest
           platforms: arm64
       - name: Build binaries
-        run: docker build -t local -f Docker/${{ matrix.distro }}_noUpload --build-arg BUILD_THREADS=2 .
+        run: docker build -t local -f Docker/RaspberryPi/Dockerfile_Buster_noUpload --build-arg BUILD_THREADS=2 .
         env:
           GITHUB_CI_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
