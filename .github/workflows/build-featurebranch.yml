@@ -104,7 +104,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: aliascash/docker-aliaswalletd:${{ needs.buildForDockerImage.outputs.alias_release }}
+          tags: aliascash/docker-aliaswalletd:${{ needs.buildLinuxBinariesAlsoForDockerImage.outputs.alias_release }}
           build-args: |
             DOWNLOAD_URL=https://github.com/aliascash/alias-wallet/releases/download/${{ needs.buildLinuxBinariesAlsoForDockerImage.outputs.alias_release }}/Alias-${{ needs.buildLinuxBinariesAlsoForDockerImage.outputs.alias_release }}-${{ needs.buildLinuxBinariesAlsoForDockerImage.outputs.github_sha_short }}-Ubuntu-20-04.tgz
           #arg2=value2
