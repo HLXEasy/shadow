@@ -18,7 +18,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           persist-credentials: false
-      - name: Build docker images
+      - name: Build binaries
         run: docker build -t local -f Docker/${{ matrix.distro }}_noUpload --build-arg BUILD_THREADS=2 .
         env:
           GITHUB_CI_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -40,7 +40,7 @@ jobs:
         with:
           image: tonistiigi/binfmt:latest
           platforms: arm64
-      - name: Build docker images
+      - name: Build binaries
         run: docker build -t local -f Docker/${{ matrix.distro }}_noUpload --build-arg BUILD_THREADS=2 .
         env:
           GITHUB_CI_TOKEN: ${{ secrets.GITHUB_TOKEN }}
