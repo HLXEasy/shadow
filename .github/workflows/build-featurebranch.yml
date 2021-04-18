@@ -39,17 +39,6 @@ jobs:
               echo "::set-output name=alias_release::gh-actions${{ github.run_number }}"
           fi
 
-      # First create the plain release, so the upload URL could be exported
-      - name: Create release
-        id: create_release
-        uses: softprops/action-gh-release@v1
-        with:
-          tag_name: ${{ steps.determine_release.outputs.alias_release }}
-          draft: false
-          prerelease: false
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
   # ==========================================================================
   # Build Ubuntu 20.04 version, which is also base for Alias Docker image
   # This steps is followed by the Docker image build
@@ -65,15 +54,7 @@ jobs:
           persist-credentials: false
       - name: Build docker image
         run: >
-          docker build
-          -t local
-          -f Docker/Ubuntu/Dockerfile_20_04
-          --build-arg BUILD_THREADS=2
-          --build-arg GITHUB_CI_TOKEN=${{ secrets.GITHUB_TOKEN }}
-          --build-arg GIT_COMMIT=${{ needs.prepareRelease.outputs.github_sha_short }}
-          --build-arg ALIAS_RELEASE=${{ needs.prepareRelease.outputs.alias_release }}
-          --build-arg REPLACE_EXISTING_ARCHIVE=--replace
-          .
+          echo "Skipped for now...
         env:
           GITHUB_CI_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -106,7 +87,7 @@ jobs:
           push: true
           tags: aliascash/docker-aliaswalletd:${{ needs.buildLinuxBinariesAlsoForDockerImage.outputs.alias_release }}
           build-args: |
-            DOWNLOAD_URL=https://github.com/aliascash/alias-wallet/releases/download/${{ needs.buildLinuxBinariesAlsoForDockerImage.outputs.alias_release }}/Alias-${{ needs.buildLinuxBinariesAlsoForDockerImage.outputs.alias_release }}-${{ needs.buildLinuxBinariesAlsoForDockerImage.outputs.github_sha_short }}-Ubuntu-20-04.tgz
+            DOWNLOAD_URL=https://github.com/aliascash/alias-wallet/releases/download/gh-actions5/Alias-gh-actions5-e1fa0f87-Ubuntu-20-04.tgz
           #arg2=value2
 
       - name: Image digest
