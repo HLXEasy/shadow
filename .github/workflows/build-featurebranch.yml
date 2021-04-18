@@ -54,7 +54,7 @@ jobs:
           persist-credentials: false
       - name: Build docker image
         run: >
-          echo "Skipped for now...
+          echo "Skipped for now..."
         env:
           GITHUB_CI_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
