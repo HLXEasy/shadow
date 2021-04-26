@@ -50,6 +50,7 @@ SPDX-License-Identifier: MIT
 - Localization of installer and Shell-UI
 - [#280](https://github.com/aliascash/alias-wallet-archive/issues/280) Fixed cmdline option `-help` (`-h`)
 - Update of Fedora build to Fedora 33
+- Update of minimal Mac version to 10.14 (Mojave)
 
 ## 4.3.1 (released 2020-12-08)
 - Update to Qt 5.12.10 (Mac)
