@@ -60,8 +60,6 @@ jobs:
 
       - name: Install dependencies
         run: |
-#          curl -L https://bintray.com/homebrew/bottles/download_file?file_path=boost-1.74.0.high_sierra.bottle.tar.gz -o boost-1.74.0.high_sierra.bottle.tar.gz
-#          brew install -f boost-1.74.0.high_sierra.bottle.tar.gz
           brew install berkeley-db@4 boost
 
       - name: Cache build dependencies
