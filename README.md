@@ -1,8 +1,8 @@
 # Alias
 [![GitHub version](https://badge.fury.io/gh/aliascash%2Falias-wallet.svg)](https://badge.fury.io/gh/aliascash%2Falias-wallet)
 [![HitCount](http://hits.dwyl.com/aliascash/alias-wallet.svg)](http://hits.dwyl.com/aliascash/alias-wallet)
-[![Build Status Master](https://github.com/aliascash/alias-wallet/actions/workflows/build-develop.yml/badge.svg?branch=master)](https://github.com/aliascash/alias-wallet/actions)
-[![Build Status Develop](https://github.com/aliascash/alias-wallet/actions/workflows/build-develop.yml/badge.svg?branch=develop)](https://github.com/aliascash/alias-wallet/actions)
+[![Build Status Master](https://github.com/aliascash/alias-wallet/actions/workflows/build-master.yml/badge.svg)](https://github.com/aliascash/alias-wallet/actions)
+[![Build Status Develop](https://github.com/aliascash/alias-wallet/actions/workflows/build-develop.yml/badge.svg)](https://github.com/aliascash/alias-wallet/actions)
 
 Alias is a Secure Proof-of-Stake (PoSv3) Network with Anonymous Transaction Capability.
 
