@@ -313,6 +313,16 @@ checkBoostArchive() {
     else
         info " -> Using existing Boost archive"
     fi
+
+    info " -> Verifying Boost archive checksum"
+    determinedChecksum=$(sha256sum boost_${BOOST_VERSION//./_}.tar.gz | awk '{ print $1 }')
+    info "    Expected checksum:   ${BOOST_ARCHIVE_HASH}"
+    info "    Determined checksum: ${determinedChecksum}"
+    if [[ "${BOOST_ARCHIVE_HASH}" != "${determinedChecksum}" ]] ; then
+        die 2 " => Checksum of downloaded Boost archive not matching expected value!"
+    else
+        info " -> Checksum OK"
+    fi
 }
 
 buildBoost() {

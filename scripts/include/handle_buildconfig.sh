@@ -23,8 +23,8 @@ ANDROID_NDK_VERSION=r21d
 ANDROID_SDK_ROOT=${HOME}/Archives/Android/Sdk
 
 ##### ### # Boost # ### #####################################################
-BOOST_VERSION=1.73.0
-BOOST_ARCHIVE_HASH=9a2c2819310839ea373f42d69e733c339b4e9a19deab6bfec448281554aa4dbb
+BOOST_VERSION=1.75.0
+BOOST_ARCHIVE_HASH=aeb26f80e80945e82ee93e5939baebdca47b9dee80a07d3144be1e1a6a66dd6a
 
 ##### ### # Qt # ### ########################################################
 # Path to the folder which contains the Qt installation
