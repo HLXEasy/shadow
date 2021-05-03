@@ -1107,9 +1107,9 @@ static const char *strMainNetOnionSeed[][1] = {
     // project-maintained nodes
     {"gji6yid3u2gozq5hvoufkfyybcvj3ftajvrlhmjjrtzv42o7oeosllqd.onion"},
     {"nounwopyxdcwe72v5xey5jgjf6ypsmyitzolambc7c4vgvheyquekmyd.onion"},
-    {"zhn7wjfhk232kkmb.onion"},
-	{"qe6swgcfktc5l3l7.onion"},
-	{"r5mk35ekwr6j7ccb.onion"},
+    {"vz2a5ivpeodhydehc4n433n3wrn4exck5i6audy5hbe3pnyi5nudbqid.onion"},
+    {"thje6hx5tpj65ujrnizkp6vkg276lcuba5faephxyp65xrwviz452rid.onion"},
+    {"34mek66nmcgc4hb4u55zq3pjay5fz3qqmmopqqw6vaqlfxbqtuudkhad.onion"},
 
     // other stable nodes that are monitored by the project
     {NULL}
@@ -1118,10 +1118,10 @@ static const char *strMainNetOnionSeed[][1] = {
 static const char *strTestNetOnionSeed[][1] = {
     // project-maintained nodes
     {"f3kcqb22tae4twfvd6lrsanwp4ikfocltsuo4onsjdapcsgatoyw7oid.onion"},
-    {"iw5cbprcpm2md7l2.onion"},
-    {"glyxixwz4uk6n7w6.onion"},
-    {"almrpkxuhk2r35sw.onion"},
-    {"vwxv3bstufb7kfsr.onion"},
+    {"k2chqlj5s5q6xejbkznjqptidqmdbdtnm4jozbe5d5o7mmugikuwzsyd.onion"},
+    {"srrfkizif7t7t46s4n37remlzjslryzo5vwibm2l2ewcfsbfgesie7yd.onion"},
+    {"f3htcdks3hspr4b52ham4btbxvvtvdqamxpdojexbf42mgkqei5kdcid.onion"},
+    {"cuvepsg3uezrchf3cezopd6thrp4osoagi6ngmayakme5qik3f2toiqd.onion"},
     {NULL}
 };
 
