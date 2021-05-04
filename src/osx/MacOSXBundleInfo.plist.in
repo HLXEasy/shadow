@@ -28,7 +28,7 @@
         <key>CFBundleLongVersionString</key>
         <string>${MACOSX_BUNDLE_LONG_VERSION_STRING}</string>
         <key>LSMinimumSystemVersion</key>
-        <string>10.13</string>
+        <string>10.14</string>
         <key>NSPrincipalClass</key>
         <string>NSApplication</string>
         <key>NSHumanReadableCopyright</key>

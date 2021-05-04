@@ -18,7 +18,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           persist-credentials: false
-      - name: Build docker images
+      - name: Build binaries
         run: docker build -t local -f Docker/${{ matrix.distro }}_noUpload --build-arg BUILD_THREADS=2 .
         env:
           GITHUB_CI_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -27,9 +27,6 @@ jobs:
   # Build aarch64 version (Raspberry PI ARMv8)
   buildARM:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        distro: [ RaspberryPi/Dockerfile_Buster]
     steps:
       - uses: actions/checkout@v2
         with:
@@ -40,8 +37,8 @@ jobs:
         with:
           image: tonistiigi/binfmt:latest
           platforms: arm64
-      - name: Build docker images
-        run: docker build -t local -f Docker/${{ matrix.distro }}_noUpload --build-arg BUILD_THREADS=2 .
+      - name: Build binaries
+        run: docker build -t local -f Docker/RaspberryPi/Dockerfile_Buster_noUpload --build-arg BUILD_THREADS=2 .
         env:
           GITHUB_CI_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -63,9 +60,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          curl -L https://bintray.com/homebrew/bottles/download_file?file_path=boost-1.74.0.high_sierra.bottle.tar.gz -o boost-1.74.0.high_sierra.bottle.tar.gz
-          brew install -f boost-1.74.0.high_sierra.bottle.tar.gz
-          brew install berkeley-db@4
+          brew install berkeley-db@4 boost
 
       - name: Cache build dependencies
         uses: actions/cache@v2
@@ -82,7 +77,7 @@ jobs:
         run: ./scripts/cmake-build-mac.sh -g
         env:
           MAC_QT_DIR: ${{ env.Qt5_DIR }}
-          BOOST_VERSION_MAC: 1.74.0
+          BOOST_VERSION_MAC: 1.75.0_2
 
   # ==========================================================================
   # Build Windows version

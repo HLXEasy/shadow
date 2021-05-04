@@ -45,17 +45,19 @@ SPDX-License-Identifier: MIT
 
 ### Changelog
 ## 4.4.0 (released 2021-??-??)
-- [#14](https://github.com/aliascash/alias-wallet/issues/14)
+- [#14](https://github.com/aliascash/alias-wallet-archive/issues/14)
   Localization of main wallet
 - Localization of installer and Shell-UI
-- [#280](https://github.com/aliascash/alias-wallet/issues/280) Fixed cmdline option `-help` (`-h`)
+- [#280](https://github.com/aliascash/alias-wallet-archive/issues/280) Fixed cmdline option `-help` (`-h`)
+- Update of Fedora build to Fedora 33
+- Update of minimal Mac version to 10.14 (Mojave)
 
 ## 4.3.1 (released 2020-12-08)
 - Update to Qt 5.12.10 (Mac)
-- [#227](https://github.com/aliascash/alias-wallet/issues/227) On startup, always require password if wallet is encrypted.
+- [#227](https://github.com/aliascash/alias-wallet-archive/issues/227) On startup, always require password if wallet is encrypted.
 - SetupWalletWizard
   - Encryption of wallet.dat is now part of the wizard and mandatory.
-  - [#248](https://github.com/aliascash/alias-wallet/issues/248) Added password verification field next to password.
+  - [#248](https://github.com/aliascash/alias-wallet-archive/issues/248) Added password verification field next to password.
 - RPC method `listsinceblock`: add attribute `vout` for public outputs
 - UI changes:
   - Increase icon size of buttons in send page.
@@ -74,7 +76,7 @@ SPDX-License-Identifier: MIT
   migrated from 32Bit to 64Bit, which also means a complete new setup of
   the Raspberry Pi is required.
 
-#### 4.3.0 (released 2020-10-01)
+## 4.3.0 (released 2020-10-01)
 - Update to Qt 5.12.9 (Windows / Mac)
 - Streamlined licensing headers a.s.o. to make the whole project compliant to [REUSE Software](https://reuse.software/)
 - Refactored overall namings according to project rebranding
@@ -103,7 +105,7 @@ SPDX-License-Identifier: MIT
 - Added build for Ubuntu 20.04
 - Wipe out build for Ubuntu 19.x as it's EOL
 
-#### 4.2.0 (released 2020-05-02)
+## 4.2.0 (released 2020-05-02)
 - Update to Qt 5.12.8
 - Replace QtWebEngine with QtWebView to support mobile platforms.
 - Open 'Unlock Wallet' Dialog on incoming anon staking reward with unknown sender.
@@ -113,42 +115,42 @@ SPDX-License-Identifier: MIT
   - 'Initializing staking...' is now shown instead 'Not staking because you don't have mature coins' during staker thread initialization
 - Improve synchronization tooltip: blockchain synchronization state is now updated every 500ms. (Tooltips in general are now updated when open and underlying data changes)
 - Improve splash screen with progress messages to reduce UI freezes during startup.
-- [#183](https://github.com/aliascash/alias-wallet/issues/183) Reduce UI freezes during blockchain sync.
+- [#183](https://github.com/aliascash/alias-wallet-archive/issues/183) Reduce UI freezes during blockchain sync.
 
-#### 4.1.0 (released 2019-10-13)
-- [#82](https://github.com/aliascash/alias-wallet/issues/82) Wallet.dat creation with mnemonic seed words (BIP39).
+## 4.1.0 (released 2019-10-13)
+- [#82](https://github.com/aliascash/alias-wallet-archive/issues/82) Wallet.dat creation with mnemonic seed words (BIP39).
   If no `wallet.dat` file was detected during startup, the wallet opens a wizard with these three options:
   - Create new `wallet.dat` file based on mnemonic seed words.
   - Restore `wallet.dat` from mnemonic seed words.
   - Import existing `wallet.dat` file.
 
   For further details see [here](https://medium.com/coinmonks/mnemonic-generation-bip39-simply-explained-e9ac18db9477).
-  Duplicated by [#115](https://github.com/aliascash/alias-wallet/issues/115)
+  Duplicated by [#115](https://github.com/aliascash/alias-wallet-archive/issues/115)
 
-- [#214](https://github.com/aliascash/alias-wallet/issues/214) Migrate Debian/Raspbian build to Buster.
+- [#214](https://github.com/aliascash/alias-wallet-archive/issues/214) Migrate Debian/Raspbian build to Buster.
   Binaries for both Stretch and Buster will be provided.
 
-- [#216](https://github.com/aliascash/alias-wallet/issues/216) Tor Hidden Service v3 implementation + minor Tor improvements.
+- [#216](https://github.com/aliascash/alias-wallet-archive/issues/216) Tor Hidden Service v3 implementation + minor Tor improvements.
   - Implementation of Tor Hidden Service v3.
   - Creation of launch argument `-onionv2`, allowing the usage of legacy v2 addresses.
   - Creation of an torrc-defaults file on Linux.
   - By default, Tor will now use hardware crypto acceleration if available, only connect to Hidden Services,
     and will write to disk less frequently, preserving the lifespan of SD cards on Raspbian.
 
-- [#218](https://github.com/aliascash/alias-wallet/issues/218) Provide binaries for Ubuntu 19.04.
+- [#218](https://github.com/aliascash/alias-wallet-archive/issues/218) Provide binaries for Ubuntu 19.04.
   Binaries for both Ubuntu 18.04 and 19.04 will be provided.
 
 - Updated packaged Tor for MacOS and Windows to 0.4.1.5
 
-#### 4.0.0 (released 2019-09-08)
+## 4.0.0 (released 2019-09-08)
 **V4 blockchain fork consensus changes / Fork time is GMT: Friday, 27. September 2019 20:00:00 (1569614400 unix epoch time)**
 - One-time 3'000'000 XSPEC staking reward for foundation address SSGCEMb6xESgmuGXkx7yozGDxhVSXzBP3a
 
-#### 3.x release notes
+## 3.x release notes
 
 See [ReleaseNotes for Pre-4.x](./ReleaseNotes_Pre4.0.md)
 
-#### 2.x release notes
+## 2.x release notes
 
 See [ReleaseNotes for Pre-3.x](./ReleaseNotes_Pre3.0.md)
 
