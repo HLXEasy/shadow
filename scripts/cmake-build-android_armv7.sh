@@ -309,7 +309,7 @@ checkBoostArchive() {
     cd ${BOOST_ARCHIVE_LOCATION} || die 1 "Unable to cd into ${BOOST_ARCHIVE_LOCATION}"
     if [[ ! -e "boost_${BOOST_VERSION//./_}.tar.gz" ]]; then
         info " -> Downloading Boost archive"
-        wget https://dl.bintray.com/boostorg/release/${BOOST_VERSION}/source/boost_${BOOST_VERSION//./_}.tar.gz
+        wget https://boostorg.jfrog.io/artifactory/main/release/${BOOST_VERSION}/source/boost_${BOOST_VERSION//./_}.tar.gz
     else
         info " -> Using existing Boost archive"
     fi
