@@ -50,6 +50,9 @@ SPDX-License-Identifier: MIT
 - Localization of installer and Shell-UI
 - [#280](https://github.com/aliascash/alias-wallet-archive/issues/280) Fixed cmdline option `-help` (`-h`)
 - Update of Fedora build to Fedora 33
+- Update of minimal Mac version to 10.14 (Mojave)
+- Update used Boost version to 1.75.0
+- Replaced old Tor v2 seednode addresses with new v3 addresses. For details see [v2 deprecation timeline](https://blog.torproject.org/v2-deprecation-timeline).
 
 ## 4.3.1 (released 2020-12-08)
 - Update to Qt 5.12.10 (Mac)
