@@ -1,9 +1,9 @@
 # Alias
 [![Discord](https://img.shields.io/discord/426769724018524161?logo=discord)](https://discord.gg/ckkrb8m)
 [![Reddit](https://img.shields.io/badge/reddit-join-orange?logo=reddit)](https://www.reddit.com/r/AliasCash/)
-<!-- [![GitHub version](https://badge.fury.io/gh/aliascash%2Falias-wallet.svg)](https://badge.fury.io/gh/aliascash%2Falias-wallet) -->
 [![Build Status Master](https://github.com/aliascash/alias-wallet/actions/workflows/build-master.yml/badge.svg)](https://github.com/aliascash/alias-wallet/actions)
 [![Build Status Develop](https://github.com/aliascash/alias-wallet/actions/workflows/build-develop.yml/badge.svg)](https://github.com/aliascash/alias-wallet/actions)
+<!-- [![GitHub version](https://badge.fury.io/gh/aliascash%2Falias-wallet.svg)](https://badge.fury.io/gh/aliascash%2Falias-wallet) -->
 
 Alias is a Secure Proof-of-Stake (PoSv3) Network with Anonymous Transaction Capability.
 
