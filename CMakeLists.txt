@@ -89,8 +89,10 @@ elseif (CMAKE_SYSTEM_NAME STREQUAL "Windows")
     # Handle build type
     if("${CMAKE_BUILD_TYPE}" STREQUAL "Debug")
         set(DEPLOY_QT_BINARY_TYPE_OPTION "--debug")
+        set(WINDEPLOYQT_TARGET_FOLDER "Debug")
     else()
         set(DEPLOY_QT_BINARY_TYPE_OPTION "--release")
+        set(WINDEPLOYQT_TARGET_FOLDER "Release")
     endif()
 
     # Check if unzip is installed
