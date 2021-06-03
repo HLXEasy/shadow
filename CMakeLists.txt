@@ -90,9 +90,11 @@ elseif (CMAKE_SYSTEM_NAME STREQUAL "Windows")
     if("${CMAKE_BUILD_TYPE}" STREQUAL "Debug")
         set(DEPLOY_QT_BINARY_TYPE_OPTION "--debug")
         set(WINDEPLOYQT_TARGET_FOLDER "Debug")
+        set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG "${CMAKE_BINARY_DIR}/delivery/${WINDEPLOYQT_TARGET_FOLDER}")
     else()
         set(DEPLOY_QT_BINARY_TYPE_OPTION "--release")
         set(WINDEPLOYQT_TARGET_FOLDER "Release")
+        set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE "${CMAKE_BINARY_DIR}/delivery/${WINDEPLOYQT_TARGET_FOLDER}")
     endif()
 
     # Check if unzip is installed

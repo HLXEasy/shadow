@@ -650,11 +650,10 @@ if (ENABLE_GUI)
                 )
             set_target_properties(Aliaswallet PROPERTIES
                     OUTPUT_NAME Alias
-                    RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/delivery/${WINDEPLOYQT_TARGET_FOLDER}
                     )
             target_link_libraries(Aliaswallet "Shlwapi")
             add_custom_command(TARGET Aliaswallet POST_BUILD
-#                    COMMAND ${CMAKE_COMMAND} -E remove_directory ${CMAKE_BINARY_DIR}/Alias
+                    COMMAND ${CMAKE_COMMAND} -E remove_directory ${CMAKE_BINARY_DIR}/delivery/Alias
                     COMMAND "${CMAKE_COMMAND}" -E
                     env PATH="${_qt_bin_dir}" "${WINDEPLOYQT_EXECUTABLE}"
                     --force
@@ -668,9 +667,8 @@ if (ENABLE_GUI)
                     "$<TARGET_FILE:Aliaswallet>"
                     COMMAND unzip -o ${VCRUNTIME_ARCHIVE} -d ${CMAKE_BINARY_DIR}/delivery/${WINDEPLOYQT_TARGET_FOLDER}/
                     COMMAND unzip -o ${TOR_ARCHIVE} -d ${CMAKE_BINARY_DIR}/delivery/${WINDEPLOYQT_TARGET_FOLDER}/
-#                    COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_BINARY_DIR}/delivery/Release/ ${CMAKE_BINARY_DIR}/delivery/
-#                    COMMAND ${CMAKE_COMMAND} -E remove_directory ${CMAKE_BINARY_DIR}/delivery/Release
-#                    COMMAND ${CMAKE_COMMAND} -E rename ${CMAKE_BINARY_DIR}/delivery ${CMAKE_BINARY_DIR}/Alias
+                    COMMAND ${CMAKE_COMMAND} -E rename ${CMAKE_BINARY_DIR}/delivery/${WINDEPLOYQT_TARGET_FOLDER} ${CMAKE_BINARY_DIR}/delivery/Alias
+                    COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_BINARY_DIR}/delivery/${WINDEPLOYQT_TARGET_FOLDER}
                     COMMENT "Running windeployqt..."
                     )
         else()
