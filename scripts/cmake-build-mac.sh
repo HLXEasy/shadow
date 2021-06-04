@@ -132,6 +132,8 @@ checkOpenSSL() {
     opensslVersion=$(brew ls --versions openssl)
     if [ $? -eq 0 ] ; then
         info " -> Found ${opensslVersion}"
+        OPENSSL_VERSION_MAC=$(echo ${opensslVersion#* } | xargs)
+        OPENSSL_FOLDERNAME=$(echo ${opensslVersion% *} | xargs)
     else
         error " -> Required OpenSSL dependency not found!"
         error "    You need to install homebrew and install OpenSSL:"
@@ -318,6 +320,8 @@ checkLevelDB() {
     leveldbVersion=$(brew ls --versions leveldb)
     if [ $? -eq 0 ] ; then
         info " -> Found ${leveldbVersion}"
+        # Use only version from "boost 1.2.3" and trim potential whitespaces
+        LEVELDB_VERSION_MAC=$(echo ${leveldbVersion#* } | xargs)
     else
         error " -> Required LevelDB dependency not found!"
         error "    You need to install homebrew and install LevelDB:"
@@ -747,10 +751,10 @@ cmake \
     -DBerkeleyDB_ROOT_DIR=/usr/local/opt/berkeley-db@4 \
     -DBERKELEYDB_INCLUDE_DIR=/usr/local/opt/berkeley-db@4/include \
     \
-    -Dleveldb_DIR=${DEPENDENCIES_BUILD_DIR}/${BUILD_DIR}/local/lib/cmake/leveldb \
-    -DLEVELDB_INCLUDE_DIR=${DEPENDENCIES_BUILD_DIR}/${BUILD_DIR}/local/include \
+    -Dleveldb_DIR=/usr/local/Cellar/leveldb/${LEVELDB_VERSION_MAC}/lib/cmake/leveldb \
+    -DLEVELDB_INCLUDE_DIR=/usr/local/Cellar/leveldb/${LEVELDB_VERSION_MAC}/include \
     \
-    -DOPENSSL_ROOT_DIR=${DEPENDENCIES_BUILD_DIR}/${BUILD_DIR}/usr/local/lib;${DEPENDENCIES_BUILD_DIR}/${BUILD_DIR}/usr/local/include \
+    -DOPENSSL_ROOT_DIR=/usr/local/Cellar/${OPENSSL_FOLDERNAME}/${OPENSSL_VERSION_MAC}/lib;/usr/local/Cellar/${OPENSSL_FOLDERNAME}/${OPENSSL_VERSION_MAC}/include \
     \
     -DTOR_ARCHIVE=${TOR_ARCHIVE_LOCATION}/${TOR_RESOURCE_ARCHIVE}
 EOM
