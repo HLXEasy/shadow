@@ -25,7 +25,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          brew install berkeley-db@4 boost
+          brew install berkeley-db@4 boost leveldb openssl
 
       - name: Cache build dependencies
         uses: actions/cache@v2
