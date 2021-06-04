@@ -44,17 +44,6 @@ BOOST_REQUIRED_LIBS='chrono filesystem iostreams program_options system thread r
 QT_ARCHIVE_LOCATION=${ARCHIVES_ROOT_DIR}/Qt
 QT_REQUIRED_LIBS='Core Widgets WebView WebChannel WebSockets QuickWidgets Quick Gui Qml Network'
 
-##### ### # BerkeleyDB # ### ################################################
-# Location of archive will be resolved like this:
-# ${BERKELEYDB_ARCHIVE_LOCATION}/db-${BERKELEYDB_BUILD_VERSION}.tar.gz
-BERKELEYDB_ARCHIVE_LOCATION=${ARCHIVES_ROOT_DIR}/BerkeleyDB
-
-##### ### # OpenSSL # ### ###################################################
-# Location of archive will be resolved like this:
-# ${OPENSSL_ARCHIVE_LOCATION}/openssl-${OPENSSL_BUILD_VERSION}.tar.gz
-#OPENSSL_ARCHIVE_LOCATION=https://mirror.viaduck.org/openssl
-OPENSSL_ARCHIVE_LOCATION=${ARCHIVES_ROOT_DIR}/OpenSSL
-
 ##### ### # EventLib # ### ##################################################
 # Location of archive will be resolved like this:
 # ${LIBEVENT_ARCHIVE_LOCATION}/libevent-${LIBEVENT_BUILD_VERSION}-stable.tar.gz
@@ -130,8 +119,8 @@ checkHomebrew() {
         info " -> Found ${homebrewVersion/$'\n'*/}"
     else
         error " -> Homebrew not found!"
-        error "    You need to install homebrew and after that BerkeleyDB v4 and Boost:"
-        error "    brew install berkeley-db@4 boost"
+        error "    You need to install homebrew and after that BerkeleyDB v4, Boost, LevelDB and OpenSSL:"
+        error "    brew install berkeley-db@4 boost leveldb openssl"
         error ""
         die 40 "Stopping build because of missing Homebrew"
     fi
@@ -141,87 +130,19 @@ checkHomebrew() {
 # ============================================================================
 
 # ===== Start of openssl functions ===========================================
-checkOpenSSLArchive() {
-    if [[ -e "${OPENSSL_ARCHIVE_LOCATION}/openssl-${OPENSSL_BUILD_VERSION}.tar.gz" ]]; then
-        info " -> Using OpenSSL archive ${OPENSSL_ARCHIVE_LOCATION}/openssl-${OPENSSL_BUILD_VERSION}.tar.gz"
-    else
-        OPENSSL_ARCHIVE_URL=https://mirror.viaduck.org/openssl/openssl-${OPENSSL_BUILD_VERSION}.tar.gz
-        info " -> Downloading OpenSSL archive ${OPENSSL_ARCHIVE_URL}"
-        if [[ ! -e ${OPENSSL_ARCHIVE_LOCATION} ]]; then
-            mkdir -p ${OPENSSL_ARCHIVE_LOCATION}
-        fi
-        cd ${OPENSSL_ARCHIVE_LOCATION}
-        wget ${OPENSSL_ARCHIVE_URL}
-        cd - >/dev/null
-    fi
-}
-
-# For OpenSSL we're using a fork of https://github.com/viaduck/openssl-cmake
-# with some slight modifications for Alias
-checkOpenSSLClone() {
-    local currentDir=$(pwd)
-    cd ${ownLocation}/../external
-    if [[ -d openssl-cmake ]]; then
-        info " -> Updating openssl-cmake clone"
-        cd openssl-cmake
-        git pull --prune
-    else
-        info " -> Cloning openssl-cmake"
-        git clone --branch alias https://github.com/aliascash/openssl-cmake.git openssl-cmake
-    fi
-    cd "${currentDir}"
-}
-
-checkOpenSSLBuild() {
-    mkdir -p ${DEPENDENCIES_BUILD_DIR}/${BUILD_DIR}/openssl
-    cd ${DEPENDENCIES_BUILD_DIR}/${BUILD_DIR}/openssl || die 1 "Unable to cd into ${DEPENDENCIES_BUILD_DIR}/${BUILD_DIR}/openssl"
-
-    info " -> Generating build configuration"
-    read -r -d '' cmd <<EOM
-cmake \
-    -DBUILD_OPENSSL=ON \
-    -DOPENSSL_ARCHIVE_LOCATION=${OPENSSL_ARCHIVE_LOCATION} \
-    -DOPENSSL_BUILD_VERSION=${OPENSSL_BUILD_VERSION} \
-    -DOPENSSL_API_COMPAT=0x00908000L \
-    -DOPENSSL_ARCHIVE_HASH=${OPENSSL_ARCHIVE_HASH} \
-    ${ownLocation}/../external/openssl-cmake
-EOM
-
-    echo "=============================================================================="
-    echo "Executing the following CMake cmd:"
-    echo "${cmd}"
-    echo "=============================================================================="
-    #    read a
-    ${cmd}
-    #    read a
-
-    info ""
-    info " -> Building with ${CORES_TO_USE} cores:"
-    CORES_TO_USE=${CORES_TO_USE} cmake \
-        --build . \
-        -- \
-        -j "${CORES_TO_USE}"
-
-    rtc=$?
-    info ""
-    if [[ ${rtc} = 0 ]]; then
-        info " -> Finished openssl build and install"
-    else
-        die ${rtc} " => OpenSSL build failed with return code ${rtc}"
-    fi
-
-    cd - >/dev/null
-}
-
 checkOpenSSL() {
     info ""
     info "OpenSSL:"
-    if [[ -f ${DEPENDENCIES_BUILD_DIR}/${BUILD_DIR}/usr/local/lib/libssl.a ]]; then
-        info " -> Found ${DEPENDENCIES_BUILD_DIR}/${BUILD_DIR}/usr/local/lib/libssl.a, skip build"
+    info " -> Searching required Homebrew OpenSSL package"
+    opensslVersion=$(brew ls --versions openssl)
+    if [ $? -eq 0 ] ; then
+        info " -> Found ${opensslVersion}"
     else
-        checkOpenSSLArchive
-        checkOpenSSLClone
-        checkOpenSSLBuild
+        error " -> Required OpenSSL dependency not found!"
+        error "    You need to install homebrew and install OpenSSL:"
+        error "    brew install openssl"
+        error ""
+        die 41 "Stopping build because of missing OpenSSL"
     fi
 }
 # ===== End of openssl functions =============================================
@@ -389,72 +310,42 @@ checkEventLib() {
 # ============================================================================
 
 # ===== Start of leveldb functions ===========================================
-checkLevelDBClone() {
-    local currentDir=$(pwd)
-    cd ${ownLocation}/../external
-    if [[ -d leveldb ]]; then
-        info " -> Updating LevelDB clone"
-        cd leveldb
-        git pull --prune
-    else
-        info " -> Cloning LevelDB"
-        git clone https://github.com/google/leveldb.git leveldb
-        cd leveldb
-    fi
-    info " -> Checkout release ${LEVELDB_VERSION}"
-    git checkout ${LEVELDB_VERSION_TAG}
-    cd "${currentDir}"
-}
-
-checkLevelDBBuild() {
-    mkdir -p ${DEPENDENCIES_BUILD_DIR}/${BUILD_DIR}/libleveldb
-    cd ${DEPENDENCIES_BUILD_DIR}/${BUILD_DIR}/libleveldb
-
-    info " -> Generating build configuration"
-    read -r -d '' cmd <<EOM
-cmake \
-    -DCMAKE_INSTALL_PREFIX=${DEPENDENCIES_BUILD_DIR}/${BUILD_DIR}/local \
-    ${ownLocation}/../external/leveldb
-EOM
-
-    echo "=============================================================================="
-    echo "Executing the following CMake cmd:"
-    echo "${cmd}"
-    echo "=============================================================================="
-    #    read a
-    ${cmd}
-    #    read a
-
-    info ""
-    info " -> Building with ${CORES_TO_USE} cores:"
-    CORES_TO_USE=${CORES_TO_USE} cmake \
-        --build . \
-        -- \
-        -j "${CORES_TO_USE}"
-
-    rtc=$?
-    info ""
-    if [[ ${rtc} = 0 ]]; then
-        info " -> Finished libevent build, installing..."
-        make install || die $? "Error during installation of libleveldb"
-    else
-        die ${rtc} " => libleveldb build failed with return code ${rtc}"
-    fi
-    #    read a
-    cd - >/dev/null
-}
-
 checkLevelDB() {
     info ""
     info "LevelDB:"
-    if [[ -f ${DEPENDENCIES_BUILD_DIR}/${BUILD_DIR}/local/lib/libleveldb.a ]]; then
-        info " -> Found ${DEPENDENCIES_BUILD_DIR}/${BUILD_DIR}/local/lib/libleveldb.a, skip build"
+    info " -> Searching required Homebrew LevelDB package"
+    leveldbVersion=$(brew ls --versions leveldb)
+    if [ $? -eq 0 ] ; then
+        info " -> Found ${leveldbVersion}"
     else
-        checkLevelDBClone
-        checkLevelDBBuild
+        error " -> Required LevelDB dependency not found!"
+        error "    You need to install homebrew and install LevelDB:"
+        error "    brew install leveldb"
+        error ""
+        die 41 "Stopping build because of missing LevelDB"
     fi
 }
 # ===== End of leveldb functions =============================================
+
+# ============================================================================
+
+# ===== Start of wget functions ===========================================
+checkWget() {
+    info ""
+    info "Wget:"
+    info " -> Searching required Homebrew wget package"
+    wgetVersion=$(brew ls --versions wget)
+    if [ $? -eq 0 ] ; then
+        info " -> Found ${wgetVersion}"
+    else
+        error " -> Required wget dependency not found!"
+        error "    You need to install homebrew and install wget:"
+        error "    brew install wget"
+        error ""
+        die 41 "Stopping build because of missing wget"
+    fi
+}
+# ===== End of wget functions =============================================
 
 # ============================================================================
 
@@ -797,6 +688,7 @@ checkBoost
 checkBerkeleyDB
 checkLevelDB
 checkOpenSSL
+checkWget
 if ${WITH_TOR}; then
     checkXZLib
     checkZStdLib
