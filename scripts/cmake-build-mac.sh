@@ -31,11 +31,6 @@ MAC_QT_LIBRARYDIR=${MAC_QT_DIR}/lib
 
 ##### ### # Boost # ### #####################################################
 # Trying to find required Homebrew Boost libs
-if [[ -z "${BOOST_VERSION_MAC}" ]]; then
-    BOOST_VERSION_MAC=1.73.0
-fi
-BOOST_INCLUDEDIR=/usr/local/Cellar/boost/${BOOST_VERSION_MAC}/include
-BOOST_LIBRARYDIR=/usr/local/Cellar/boost/${BOOST_VERSION_MAC}/lib
 BOOST_REQUIRED_LIBS='chrono filesystem iostreams program_options system thread regex date_time atomic'
 # regex date_time atomic
 
@@ -256,6 +251,9 @@ checkBoost() {
     boostVersion=$(brew ls --versions boost)
     if [ $? -eq 0 ] ; then
         info " -> Found ${boostVersion}"
+        if [[ -z "${BOOST_VERSION_MAC}" ]]; then
+            BOOST_VERSION_MAC=${boostVersion}
+        fi
     else
         error " -> Required Boost dependencies not found!"
         error "    You need to install homebrew and install Boost:"
@@ -263,6 +261,8 @@ checkBoost() {
         error ""
         die 42 "Stopping build because of missing Boost"
     fi
+    BOOST_INCLUDEDIR=/usr/local/Cellar/boost/${BOOST_VERSION_MAC}/include
+    BOOST_LIBRARYDIR=/usr/local/Cellar/boost/${BOOST_VERSION_MAC}/lib
 }
 # ===== End of boost functions ===============================================
 
