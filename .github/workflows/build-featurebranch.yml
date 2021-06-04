@@ -77,7 +77,7 @@ jobs:
         run: ./scripts/cmake-build-mac.sh -g
         env:
           MAC_QT_DIR: ${{ env.Qt5_DIR }}
-          BOOST_VERSION_MAC: 1.75.0_3
+#          BOOST_VERSION_MAC: 1.75.0_3
 
   # ==========================================================================
   # Build Windows version
