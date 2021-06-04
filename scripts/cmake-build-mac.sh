@@ -252,8 +252,8 @@ checkBoost() {
     if [ $? -eq 0 ] ; then
         info " -> Found ${boostVersion}"
         if [[ -z "${BOOST_VERSION_MAC}" ]]; then
-            # We need to strip whitespaces
-            BOOST_VERSION_MAC=$(echo ${boostVersion} | xargs)
+            # Use only version from "boost 1.2.3" and trim potential whitespaces
+            BOOST_VERSION_MAC=$(echo ${boostVersion#* } | xargs)
         fi
     else
         error " -> Required Boost dependencies not found!"
