@@ -169,7 +169,7 @@ jobs:
         run: ./scripts/cmake-build-mac.sh -g
         env:
           MAC_QT_DIR: ${{ env.Qt5_DIR }}
-          BOOST_VERSION_MAC: 1.75.0_3
+#          BOOST_VERSION_MAC: 1.75.0_3
 
       - name: Create MacOS dmg sha256 checksum file
         run: |
@@ -235,7 +235,7 @@ jobs:
 
       - name: Create zip archive and sha256 checksum
         run: |
-          powershell Compress-Archive build/Alias Alias.zip
+          powershell Compress-Archive build/delivery/Alias Alias.zip
           powershell "(Get-FileHash Alias.zip).Hash > Alias.sha256"
           powershell "(Get-Content Alias.sha256) | Out-File Alias.sha256 -Encoding ascii"
           type Alias.sha256
