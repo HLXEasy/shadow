@@ -150,7 +150,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          brew install berkeley-db@4 boost leveldb openssl
+          brew install berkeley-db@4 boost leveldb openssl snappy
 
       - name: Cache build dependencies
         uses: actions/cache@v2
