@@ -114,8 +114,8 @@ checkHomebrew() {
         info " -> Found ${homebrewVersion/$'\n'*/}"
     else
         error " -> Homebrew not found!"
-        error "    You need to install homebrew and after that BerkeleyDB v4, Boost, LevelDB and OpenSSL:"
-        error "    brew install berkeley-db@4 boost leveldb openssl"
+        error "    You need to install homebrew and after that BerkeleyDB v4, Boost and OpenSSL:"
+        error "    brew install berkeley-db@4 boost openssl"
         error ""
         die 40 "Stopping build because of missing Homebrew"
     fi
@@ -313,21 +313,69 @@ checkEventLib() {
 # ============================================================================
 
 # ===== Start of leveldb functions ===========================================
+checkLevelDBClone() {
+    local currentDir=$(pwd)
+    cd ${ownLocation}/../external
+    if [[ -d leveldb ]]; then
+        info " -> Updating LevelDB clone"
+        cd leveldb
+        git pull --prune
+    else
+        info " -> Cloning LevelDB"
+        git clone https://github.com/google/leveldb.git leveldb
+        cd leveldb
+    fi
+    info " -> Checkout release ${LEVELDB_VERSION}"
+    git checkout ${LEVELDB_VERSION_TAG}
+    cd "${currentDir}"
+}
+
+checkLevelDBBuild() {
+    mkdir -p ${DEPENDENCIES_BUILD_DIR}/${BUILD_DIR}/libleveldb
+    cd ${DEPENDENCIES_BUILD_DIR}/${BUILD_DIR}/libleveldb
+
+    info " -> Generating build configuration"
+    read -r -d '' cmd <<EOM
+cmake \
+    -DCMAKE_INSTALL_PREFIX=${DEPENDENCIES_BUILD_DIR}/${BUILD_DIR}/local \
+    ${ownLocation}/../external/leveldb
+EOM
+
+    echo "=============================================================================="
+    echo "Executing the following CMake cmd:"
+    echo "${cmd}"
+    echo "=============================================================================="
+    #    read a
+    ${cmd}
+    #    read a
+
+    info ""
+    info " -> Building with ${CORES_TO_USE} cores:"
+    CORES_TO_USE=${CORES_TO_USE} cmake \
+        --build . \
+        -- \
+        -j "${CORES_TO_USE}"
+
+    rtc=$?
+    info ""
+    if [[ ${rtc} = 0 ]]; then
+        info " -> Finished libevent build, installing..."
+        make install || die $? "Error during installation of libleveldb"
+    else
+        die ${rtc} " => libleveldb build failed with return code ${rtc}"
+    fi
+    #    read a
+    cd - >/dev/null
+}
+
 checkLevelDB() {
     info ""
     info "LevelDB:"
-    info " -> Searching required Homebrew LevelDB package"
-    leveldbVersion=$(brew ls --versions leveldb)
-    if [ $? -eq 0 ] ; then
-        info " -> Found ${leveldbVersion}"
-        # Use only version from "boost 1.2.3" and trim potential whitespaces
-        LEVELDB_VERSION_MAC=$(echo ${leveldbVersion#* } | xargs)
+    if [[ -f ${DEPENDENCIES_BUILD_DIR}/${BUILD_DIR}/local/lib/libleveldb.a ]]; then
+        info " -> Found ${DEPENDENCIES_BUILD_DIR}/${BUILD_DIR}/local/lib/libleveldb.a, skip build"
     else
-        error " -> Required LevelDB dependency not found!"
-        error "    You need to install homebrew and install LevelDB:"
-        error "    brew install leveldb"
-        error ""
-        die 41 "Stopping build because of missing LevelDB"
+        checkLevelDBClone
+        checkLevelDBBuild
     fi
 }
 # ===== End of leveldb functions =============================================
@@ -751,8 +799,8 @@ cmake \
     -DBerkeleyDB_ROOT_DIR=/usr/local/opt/berkeley-db@4 \
     -DBERKELEYDB_INCLUDE_DIR=/usr/local/opt/berkeley-db@4/include \
     \
-    -Dleveldb_DIR=/usr/local/Cellar/leveldb/${LEVELDB_VERSION_MAC}/lib/cmake/leveldb \
-    -DLEVELDB_INCLUDE_DIR=/usr/local/Cellar/leveldb/${LEVELDB_VERSION_MAC}/include \
+    -Dleveldb_DIR=${DEPENDENCIES_BUILD_DIR}/${BUILD_DIR}/local/lib/cmake/leveldb \
+    -DLEVELDB_INCLUDE_DIR=${DEPENDENCIES_BUILD_DIR}/${BUILD_DIR}/local/include \
     \
     -DOPENSSL_ROOT_DIR=/usr/local/Cellar/${OPENSSL_FOLDERNAME}/${OPENSSL_VERSION_MAC}/lib;/usr/local/Cellar/${OPENSSL_FOLDERNAME}/${OPENSSL_VERSION_MAC}/include \
     \
