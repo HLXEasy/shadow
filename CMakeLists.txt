@@ -77,7 +77,8 @@ elseif (CMAKE_SYSTEM_NAME STREQUAL "Darwin")
     endif()
 
     # Handle direct access linker warnings with Boost
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -frtti -fvisibility-inlines-hidden -fvisibility=hidden")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -frtti -fvisibility-inlines-hidden -fvisibility=hidden -Wno-deprecated-declarations")
+
 elseif (CMAKE_SYSTEM_NAME STREQUAL "Windows")
     message(STATUS "Configuring on/for Windows")
     #    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /EHc-")
