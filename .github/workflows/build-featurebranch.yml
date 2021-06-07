@@ -30,7 +30,7 @@ jobs:
       - name: Cache build dependencies
         uses: actions/cache@v2
         env:
-          cache-name: cache-build-dependencies-mac
+          cache-name: cache-build-dependencies-mac-v2
         with:
           path: |
             ${{ github.workspace }}/cmake-build-cmdline-mac/*
