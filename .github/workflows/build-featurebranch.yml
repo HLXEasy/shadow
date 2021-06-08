@@ -106,3 +106,33 @@ jobs:
           VSDIR: 'C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise'
           CMAKEDIR: 'C:\Program Files\CMake\bin'
           VCPKGDIR: ${{ github.workspace }}/vcpkg
+
+  # ==========================================================================
+  # Build Windows x86 version
+  buildWindowsX86:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+      - name: Install Qt
+        uses: jurplel/install-qt-action@v2
+        with:
+          version: '5.12.9'
+          setup-python: 'false'
+          modules: 'qtwebengine'
+          arch: 'win32_msvc2017'
+      - name: Install vcpkg and packages with cache
+        uses: lukka/run-vcpkg@v6
+        with:
+          vcpkgArguments: 'berkeleydb boost leveldb openssl'
+          vcpkgGitCommitId: a037d826492039db9d58af47a1e1248037d15f40
+          vcpkgTriplet: x86-windows
+      - name: Build Windows binaries
+        run: ./scripts/cmake-build-win-x86.bat
+        env:
+          VCPKG_DEFAULT_TRIPLET: x86-windows
+          QTDIR_x86: ${{ env.Qt5_Dir }}
+          VSDIR: 'C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise'
+          CMAKEDIR_x86: 'C:\Program Files\CMake\bin'
+          VCPKGDIR: ${{ github.workspace }}/vcpkg
