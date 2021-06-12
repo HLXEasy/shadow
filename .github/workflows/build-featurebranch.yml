@@ -79,7 +79,7 @@ jobs:
           MAC_QT_DIR: ${{ env.Qt5_DIR }}
 
   # ==========================================================================
-  # Build Windows version
+  # Build Windows x64 version
   buildWindows:
     runs-on: windows-latest
     steps:
