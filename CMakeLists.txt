@@ -10,6 +10,8 @@ project(Alias
         C
         )
 
+message(STATUS "")
+message(STATUS "=== Setting defaults =======================================================")
 # The version number.
 set(CLIENT_VERSION_MAJOR 4)
 set(CLIENT_VERSION_MINOR 4)
@@ -121,6 +123,7 @@ endif ()
 message(STATUS "CMAKE_CXX_FLAGS: ${CMAKE_CXX_FLAGS}")
 
 # ============================================================================================
+message(STATUS "")
 message(STATUS "=== Helper functions =======================================================")
 # Include own cmake modules
 set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake" ${CMAKE_MODULE_PATH})
@@ -137,6 +140,7 @@ message(STATUS "Building in '${CMAKE_BUILD_TYPE}' mode")
 
 # ============================================================================================
 # Env var BOOST_ROOT should point to local Boost installation
+message(STATUS "")
 message(STATUS "=== Boost ==================================================================")
 if(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
     message(STATUS "Using dynamic Boost libs on Mac")
@@ -184,6 +188,7 @@ message(STATUS "Boost_LIBRARIES:    ${Boost_LIBRARIES}")
 
 
 # ============================================================================================
+message(STATUS "")
 message(STATUS "=== Qt =====================================================================")
 if (ENABLE_GUI)
     if ("${QT_CMAKE_MODULE_PATH}" STREQUAL "")
@@ -286,6 +291,7 @@ else()
     message(STATUS "Building without UI, skipping Qt detection")
 endif ()
 
+message(STATUS "")
 if(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
     message(STATUS "=== Tor binary archive =====================================================")
     if (NOT TOR_ARCHIVE)
@@ -307,6 +313,7 @@ elseif(CMAKE_SYSTEM_NAME STREQUAL "Windows")
         set(WINDOWS_VCRUNTIME_ARCHIVE_HASH "${VCRUNTIME_ARCHIVE_WIN32_HASH}")
     endif()
     if (NOT TOR_ARCHIVE)
+        message(STATUS "Downloading Tor archive")
         include(DownloadFile)
         set(TOR_ARCHIVE "${CMAKE_BINARY_DIR}/Tor.libraries.${WINDOWS_ARCH_SUFFIX}.zip")
         download_file(https://github.com/aliascash/resources/raw/master/resources/Tor.libraries.${WINDOWS_ARCH_SUFFIX}.zip ${TOR_ARCHIVE} SHA1 ${WINDOWS_TOR_ARCHIVE_HASH})
@@ -314,6 +321,7 @@ elseif(CMAKE_SYSTEM_NAME STREQUAL "Windows")
         message(STATUS "Using Tor archive from given path")
     endif()
     if (NOT VCRUNTIME_ARCHIVE)
+        message(STATUS "Downloading VCRuntime archive")
         include(DownloadFile)
         set(VCRUNTIME_ARCHIVE "${CMAKE_BINARY_DIR}/VCRuntime.libraries.${WINDOWS_ARCH_SUFFIX}.zip")
         download_file(https://github.com/aliascash/resources/raw/master/resources/VCRuntime.libraries.${WINDOWS_ARCH_SUFFIX}.zip ${VCRUNTIME_ARCHIVE} SHA1 ${WINDOWS_VCRUNTIME_ARCHIVE_HASH})
@@ -325,6 +333,7 @@ endif()
 # ============================================================================================
 # Requires lib and include dir at once, separated by ";":
 #     -DOPENSSL_ROOT_DIR=${BUILD_DIR}/usr/local/lib;${BUILD_DIR}/usr/local/include
+message(STATUS "")
 message(STATUS "=== OpenSSL ================================================================")
 set(OPENSSL_USE_STATIC_LIBS TRUE)
 find_package(OpenSSL)
@@ -340,18 +349,21 @@ message(STATUS "OPENSSL_VERSION: ${OPENSSL_VERSION}")
 # Requires:
 #     -DBerkeleyDB_ROOT_DIR=${BUILD_DIR}/libdb/libdb-install
 #     -DBERKELEYDB_INCLUDE_DIR=${BUILD_DIR}/libdb/libdb-install/include
+message(STATUS "")
 message(STATUS "=== Berkeley DB ============================================================")
 find_package(BerkeleyDB)
 
 # ============================================================================================
 # Requires:
 #     -Dleveldb_DIR=${BUILD_DIR}/usr/local/lib/cmake/leveldb
+message(STATUS "")
 message(STATUS "=== LevelDB ================================================================")
 find_package(leveldb)
 message(STATUS "LevelDB directory: ${leveldb_DIR}")
 message(STATUS "LevelDB version: ${leveldb_VERSION}")
 
 # ============================================================================================
+message(STATUS "")
 message(STATUS "=== Dive into subdirs... ===================================================")
 add_subdirectory(src)
 
