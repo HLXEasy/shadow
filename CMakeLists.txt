@@ -10,6 +10,8 @@ project(Alias
         C
         )
 
+message(STATUS "")
+message(STATUS "=== Setting defaults =======================================================")
 # The version number.
 set(CLIENT_VERSION_MAJOR 4)
 set(CLIENT_VERSION_MINOR 4)
@@ -22,6 +24,11 @@ set(CMAKE_VERBOSE_MAKEFILE OFF)
 
 #set(ANDROID 1)
 set(ANDROID_PACKAGE_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/src/android")
+
+set(TOR_ARCHIVE_WIN64_HASH "d4dfe7f6402d993631265ef60c89ad0eee1f63b5")
+set(TOR_ARCHIVE_WIN32_HASH "541012e6c23d550c89563d42dca272b4175409b8")
+set(VCRUNTIME_ARCHIVE_WIN64_HASH "85cffbf41e957dcc9c5dd528af84c03474e76b8c")
+set(VCRUNTIME_ARCHIVE_WIN32_HASH "9af511350e0772bf1f543abd375304af2e616273")
 
 # Compiler flags
 set(CMAKE_CXX_STANDARD 17)
@@ -116,6 +123,7 @@ endif ()
 message(STATUS "CMAKE_CXX_FLAGS: ${CMAKE_CXX_FLAGS}")
 
 # ============================================================================================
+message(STATUS "")
 message(STATUS "=== Helper functions =======================================================")
 # Include own cmake modules
 set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake" ${CMAKE_MODULE_PATH})
@@ -132,6 +140,7 @@ message(STATUS "Building in '${CMAKE_BUILD_TYPE}' mode")
 
 # ============================================================================================
 # Env var BOOST_ROOT should point to local Boost installation
+message(STATUS "")
 message(STATUS "=== Boost ==================================================================")
 if(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
     message(STATUS "Using dynamic Boost libs on Mac")
@@ -179,6 +188,7 @@ message(STATUS "Boost_LIBRARIES:    ${Boost_LIBRARIES}")
 
 
 # ============================================================================================
+message(STATUS "")
 message(STATUS "=== Qt =====================================================================")
 if (ENABLE_GUI)
     if ("${QT_CMAKE_MODULE_PATH}" STREQUAL "")
@@ -281,6 +291,7 @@ else()
     message(STATUS "Building without UI, skipping Qt detection")
 endif ()
 
+message(STATUS "")
 if(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
     message(STATUS "=== Tor binary archive =====================================================")
     if (NOT TOR_ARCHIVE)
@@ -289,22 +300,40 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
         download_file(https://github.com/aliascash/resources/raw/master/resources/Tor.libraries.MacOS.zip ${TOR_ARCHIVE} SHA1 0be391e0cad9e93d33c226d6bff719f568b56093)
     endif ()
 elseif(CMAKE_SYSTEM_NAME STREQUAL "Windows")
-    message(STATUS "=== Tor binary archive =====================================================")
+    message(STATUS "=== Tor and VCRuntime binary archives ======================================")
+    if (CMAKE_CL_64)
+        message(STATUS "Using x64 archives")
+        set(WINDOWS_ARCH_SUFFIX "Win64")
+        set(WINDOWS_TOR_ARCHIVE_HASH "${TOR_ARCHIVE_WIN64_HASH}")
+        set(WINDOWS_VCRUNTIME_ARCHIVE_HASH "${VCRUNTIME_ARCHIVE_WIN64_HASH}")
+    else()
+        message(STATUS "Using x86 archives")
+        set(WINDOWS_ARCH_SUFFIX "Win32")
+        set(WINDOWS_TOR_ARCHIVE_HASH "${TOR_ARCHIVE_WIN32_HASH}")
+        set(WINDOWS_VCRUNTIME_ARCHIVE_HASH "${VCRUNTIME_ARCHIVE_WIN32_HASH}")
+    endif()
     if (NOT TOR_ARCHIVE)
+        message(STATUS "Downloading Tor archive")
         include(DownloadFile)
-        set(TOR_ARCHIVE "${CMAKE_BINARY_DIR}/Tor.libraries.Win64.zip")
-        download_file(https://github.com/aliascash/resources/raw/master/resources/Tor.libraries.Win64.zip ${TOR_ARCHIVE} SHA1 ac40fae3eee1040d7ffab64b9b7b7356ca75b37c)
+        set(TOR_ARCHIVE "${CMAKE_BINARY_DIR}/Tor.libraries.${WINDOWS_ARCH_SUFFIX}.zip")
+        download_file(https://github.com/aliascash/resources/raw/master/resources/Tor.libraries.${WINDOWS_ARCH_SUFFIX}.zip ${TOR_ARCHIVE} SHA1 ${WINDOWS_TOR_ARCHIVE_HASH})
+    else()
+        message(STATUS "Using Tor archive from given path")
     endif()
     if (NOT VCRUNTIME_ARCHIVE)
+        message(STATUS "Downloading VCRuntime archive")
         include(DownloadFile)
-        set(VCRUNTIME_ARCHIVE "${CMAKE_BINARY_DIR}/VCRuntime.libraries.Win64.zip")
-        download_file(https://github.com/aliascash/resources/raw/master/resources/VCRuntime.libraries.Win64.zip ${VCRUNTIME_ARCHIVE} SHA1 8f52e83d99d88362946e97a66a748975bd78347f)
+        set(VCRUNTIME_ARCHIVE "${CMAKE_BINARY_DIR}/VCRuntime.libraries.${WINDOWS_ARCH_SUFFIX}.zip")
+        download_file(https://github.com/aliascash/resources/raw/master/resources/VCRuntime.libraries.${WINDOWS_ARCH_SUFFIX}.zip ${VCRUNTIME_ARCHIVE} SHA1 ${WINDOWS_VCRUNTIME_ARCHIVE_HASH})
+    else()
+        message(STATUS "Using VCRuntime archive from given path")
     endif()
 endif()
 
 # ============================================================================================
 # Requires lib and include dir at once, separated by ";":
 #     -DOPENSSL_ROOT_DIR=${BUILD_DIR}/usr/local/lib;${BUILD_DIR}/usr/local/include
+message(STATUS "")
 message(STATUS "=== OpenSSL ================================================================")
 set(OPENSSL_USE_STATIC_LIBS TRUE)
 find_package(OpenSSL)
@@ -320,18 +349,21 @@ message(STATUS "OPENSSL_VERSION: ${OPENSSL_VERSION}")
 # Requires:
 #     -DBerkeleyDB_ROOT_DIR=${BUILD_DIR}/libdb/libdb-install
 #     -DBERKELEYDB_INCLUDE_DIR=${BUILD_DIR}/libdb/libdb-install/include
+message(STATUS "")
 message(STATUS "=== Berkeley DB ============================================================")
 find_package(BerkeleyDB)
 
 # ============================================================================================
 # Requires:
 #     -Dleveldb_DIR=${BUILD_DIR}/usr/local/lib/cmake/leveldb
+message(STATUS "")
 message(STATUS "=== LevelDB ================================================================")
 find_package(leveldb)
 message(STATUS "LevelDB directory: ${leveldb_DIR}")
 message(STATUS "LevelDB version: ${leveldb_VERSION}")
 
 # ============================================================================================
+message(STATUS "")
 message(STATUS "=== Dive into subdirs... ===================================================")
 add_subdirectory(src)
 

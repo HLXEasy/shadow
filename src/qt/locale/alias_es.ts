@@ -19,8 +19,12 @@
 © 2014 BlackCoin developers
 © 2012 NovaCoin developers
 © 2009 Bitcoin developers</source>
-        <translation>©2020 Desarrolladores de alias © 2016 desarrolladores de Spectrecoin © 2014 desarrolladores de ShadowCash © 2014 desarrolladores de BlackCoin © 2012 desarrolladores de NovaCoin © 2009 desarrolladores de Bitcoin
- </translation>
+        <translation>©2020 Desarrolladores de alias 
+© 2016 desarrolladores de Spectrecoin 
+© 2014 desarrolladores de ShadowCash 
+© 2014 desarrolladores de BlackCoin 
+© 2012 desarrolladores de NovaCoin 
+© 2009 desarrolladores de Bitcoin</translation>
     </message>
     <message>
         <location filename="../forms/aboutdialog.ui" line="234"/>
@@ -29,7 +33,11 @@
 Distributed under the MIT/X11 software license, see the accompanying file COPYING or &lt;a href=&quot;http://www.opensource.org/licenses/mit-license.php&quot;&gt;http://www.opensource.org/licenses/mit-license.php&lt;/a&gt;.
 
 This product includes software developed by the OpenSSL Project for use in the OpenSSL Toolkit (&lt;a href=&quot;https://www.openssl.org/&quot;&gt;https://www.openssl.org/&lt;/a&gt;) and cryptographic software written by Eric Young (&lt;a href=&quot;mailto:eay@cryptsoft.com&quot;&gt;eay@cryptsoft.com&lt;/a&gt;) and UPnP software written by Thomas Bernard.</source>
-        <translation>Este es un software experimental.Distribuido bajo la licencia de software MIT/X11, véase el archivo adjunto COPYING o &lt;a href=&quot;http://www.opensource.org/licenses/mit-license.php&quot;&gt;http://www.opensource.org/licenses/mit-license.php. &lt;/a&gt;Este producto incluye software desarrollado por el Proyecto OpenSSL para su uso en el OpenSSL Toolkit &lt;a href=&quot;https://www.openssl.org/&quot;&gt;(https://www.openssl.org/&lt;/a&gt;) y software criptográfico escrito por Eric Young (&lt;a href=&quot;mailto:eay@cryptsoft.com&quot;&gt;eay@cryptsoft.com&lt;/a&gt;) y software UPnP escrito por Thomas Bernard.</translation>
+        <translation>Este es un software experimental.
+
+Distribuido bajo la licencia de software MIT/X11, véase el archivo adjunto COPYING o &lt;a href=&quot;http://www.opensource.org/licenses/mit-license.php&quot;&gt;http://www.opensource.org/licenses/mit-license.php. &lt;/a&gt;
+
+Este producto incluye software desarrollado por el Proyecto OpenSSL para su uso en el OpenSSL Toolkit &lt;a href=&quot;https://www.openssl.org/&quot;&gt;(https://www.openssl.org/&lt;/a&gt;) y software criptográfico escrito por Eric Young (&lt;a href=&quot;mailto:eay@cryptsoft.com&quot;&gt;eay@cryptsoft.com&lt;/a&gt;) y software UPnP escrito por Thomas Bernard.</translation>
     </message>
 </context>
 <context>
