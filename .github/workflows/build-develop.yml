@@ -389,7 +389,7 @@ jobs:
   # Based on the content of https://github.com/aliascash/installer
   createWindowsX86Installer:
     runs-on: windows-latest
-    needs: buildWindows
+    needs: buildWindowsX86
     steps:
       # Get installer repo content
       - uses: actions/checkout@v2
