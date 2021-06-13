@@ -399,7 +399,7 @@ jobs:
       - name: Download content to install
         uses: carlosperate/download-file-action@v1.0.3
         with:
-          file-url: https://github.com/aliascash/alias-wallet/releases/download/${{ needs.buildWindows.outputs.alias_release }}/Alias-${{ needs.buildWindows.outputs.alias_release }}-${{ needs.buildWindows.outputs.github_sha_short }}-Win32.zip
+          file-url: https://github.com/aliascash/alias-wallet/releases/download/${{ needs.buildWindowsX86.outputs.alias_release }}/Alias-${{ needs.buildWindowsX86.outputs.alias_release }}-${{ needs.buildWindowsX86.outputs.github_sha_short }}-Win32.zip
           file-name: Alias.zip
           location: ${{ github.workspace }}
 
@@ -428,8 +428,8 @@ jobs:
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: ${{ github.workspace }}/windows/Alias-Installer.exe
-          asset_name: Alias-${{ needs.buildWindows.outputs.alias_release }}-${{ needs.buildWindows.outputs.github_sha_short }}-Win32-Installer.exe
-          tag: ${{ needs.buildWindows.outputs.alias_release }}
+          asset_name: Alias-${{ needs.buildWindowsX86.outputs.alias_release }}-${{ needs.buildWindowsX86.outputs.github_sha_short }}-Win32-Installer.exe
+          tag: ${{ needs.buildWindowsX86.outputs.alias_release }}
           overwrite: true
 
       - name: Upload installer checksum
@@ -438,8 +438,8 @@ jobs:
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: ${{ github.workspace }}/windows/Alias-Installer.sha256
-          asset_name: Alias-${{ needs.buildWindows.outputs.alias_release }}-${{ needs.buildWindows.outputs.github_sha_short }}-Win32-Installer.sha256
-          tag: ${{ needs.buildWindows.outputs.alias_release }}
+          asset_name: Alias-${{ needs.buildWindowsX86.outputs.alias_release }}-${{ needs.buildWindowsX86.outputs.github_sha_short }}-Win32-Installer.sha256
+          tag: ${{ needs.buildWindowsX86.outputs.alias_release }}
           overwrite: true
 
   # ==========================================================================
