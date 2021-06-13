@@ -297,7 +297,7 @@ jobs:
 
       - name: Create zip archive and sha256 checksum
         run: |
-          powershell Compress-Archive build/delivery/Alias Alias.zip
+          powershell Compress-Archive build-x86/delivery/Alias Alias.zip
           powershell "(Get-FileHash Alias.zip).Hash > Alias.sha256"
           powershell "(Get-Content Alias.sha256) | Out-File Alias.sha256 -Encoding ascii"
           type Alias.sha256

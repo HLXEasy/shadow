@@ -23,7 +23,7 @@ IF "%VCPKGDIR%" == "" GOTO NOVCPKG
 :YESVS
 
 set SRC_DIR=%cd%
-set BUILD_DIR=%cd%\build
+set BUILD_DIR=%cd%\build-x86
 
 :: "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvars64.bat"
 call "%VSDIR%\VC\Auxiliary\Build\vcvars32.bat"
