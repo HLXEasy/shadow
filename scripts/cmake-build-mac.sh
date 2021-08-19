@@ -159,7 +159,7 @@ checkBerkeleyDB() {
         error "    You need to install homebrew and install BerkeleyDB v4:"
         error "    brew install berkeley-db@4"
         error ""
-        die 41 "Stopping build because of missing Boost"
+        die 41 "Stopping build because of missing BerkeleyDB"
     fi
 }
 # ===== End of berkeleydb functions ==========================================
@@ -359,7 +359,7 @@ EOM
     rtc=$?
     info ""
     if [[ ${rtc} = 0 ]]; then
-        info " -> Finished libevent build, installing..."
+        info " -> Finished libleveldb build, installing..."
         make install || die $? "Error during installation of libleveldb"
     else
         die ${rtc} " => libleveldb build failed with return code ${rtc}"
