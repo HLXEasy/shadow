@@ -187,6 +187,7 @@ message(STATUS "Boost_INCLUDE_DIRS: ${Boost_INCLUDE_DIRS}")
 message(STATUS "Boost_LIBRARY_DIRS: ${Boost_LIBRARY_DIRS}")
 message(STATUS "Boost_LIBRARIES:    ${Boost_LIBRARIES}")
 
+add_compile_definitions(BOOST_SPIRIT_THREADSAFE)
 
 # ============================================================================================
 message(STATUS "")
@@ -352,7 +353,7 @@ message(STATUS "OPENSSL_VERSION: ${OPENSSL_VERSION}")
 #     -DBERKELEYDB_INCLUDE_DIR=${BUILD_DIR}/libdb/libdb-install/include
 message(STATUS "")
 message(STATUS "=== Berkeley DB ============================================================")
-find_package(BerkeleyDB)
+find_package(BerkeleyDB 4)
 
 # ============================================================================================
 # Requires:
