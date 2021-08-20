@@ -138,7 +138,7 @@ jobs:
   # ==========================================================================
   # Build MacOS version
   buildMacOS:
-    runs-on: macos-latest
+    runs-on: macos-11
     needs: prepareRelease
     steps:
       - uses: actions/checkout@v2
