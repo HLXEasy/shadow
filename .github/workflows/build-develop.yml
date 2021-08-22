@@ -157,6 +157,7 @@ jobs:
 
       - name: Install dependencies
         run: |
+          brew uninstall --ignore-dependencies berkeley-db
           brew install berkeley-db@4 boost openssl
 
       - name: Cache build dependencies
