@@ -1,0 +1,109 @@
+name: fix-Mac-Build
+on:
+  push:
+    branches:
+      - fix-Mac-Build
+
+jobs:
+  # ==========================================================================
+  # Create Github tag/release and export short SHA of current HEAD
+  prepareRelease:
+    runs-on: ubuntu-latest
+    outputs:
+      upload_url: ${{ steps.create_release.outputs.url }}
+      github_sha_short: ${{ steps.slug.outputs.sha8 }}
+      alias_release: ${{ steps.determine_release.outputs.alias_release }}
+    steps:
+      - uses: actions/checkout@v1
+      - name: Get short SHA
+        id: slug
+        run: echo "::set-output name=sha8::$(echo ${GITHUB_SHA} | cut -c1-8)"
+      - name: Get current date
+        id: date
+        run: echo "::set-output name=date::$(date +'%Y-%m-%d %H:%M:%S')"
+      - name: Set Alias release/tag name
+        id: determine_release
+        run: |
+          echo "::set-output name=alias_release::MacBuild${{ github.run_number }}"
+
+      # First create the plain release, so the upload URL could be exported
+      - name: Create release
+        id: create_release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ steps.determine_release.outputs.alias_release }}
+          draft: false
+          prerelease: false
+          target_commitish: "fix-Mac-Build"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Releasenotes from Develop
+        id: create_release_develop
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ steps.determine_release.outputs.alias_release }}
+          name: "Continuous build #${{ github.run_number }}"
+          body: |
+            Build #${{ github.run_number }} from ${{ steps.date.outputs.date }}
+            - To verify checksums see dedicated checksum files for each download
+          draft: false
+          prerelease: true
+          target_commitish: "fix-Mac-Build"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  # ==========================================================================
+  # Build MacOS version
+  buildMacOS:
+    runs-on: macos-11
+    needs: prepareRelease
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+
+      - uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: '12.5.1'
+
+      - name: Install Qt
+        uses: jurplel/install-qt-action@v2
+        with:
+          version: '5.12.11'
+          modules: 'qtwebengine'
+
+      - name: Install dependencies
+        run: |
+          brew uninstall --ignore-dependencies berkeley-db
+          brew install berkeley-db@4 boost openssl
+
+      - name: Build MacOS binaries
+        run: ./scripts/cmake-build-mac.sh -g
+        env:
+          MAC_QT_DIR: ${{ env.Qt5_DIR }}
+
+      - name: Create MacOS dmg sha256 checksum file
+        run: |
+          shasum -a 256 ${{ github.workspace }}/cmake-build-cmdline-mac/aliaswallet/Alias.dmg | awk '{ print $1 }' > ${{ github.workspace }}/cmake-build-cmdline-mac/aliaswallet/Alias.sha256
+          cat ${{ github.workspace }}/cmake-build-cmdline-mac/aliaswallet/Alias.sha256
+
+      - name: Upload MacOS Build
+        id: upload-release-asset
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: ${{ github.workspace }}/cmake-build-cmdline-mac/aliaswallet/Alias.dmg
+          asset_name: Alias-${{ needs.prepareRelease.outputs.alias_release }}-${{ needs.prepareRelease.outputs.github_sha_short }}-Mac.dmg
+          tag: ${{ needs.prepareRelease.outputs.alias_release }}
+          overwrite: true
+
+      - name: Upload MacOS checksum file
+        id: upload-release-checksum
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: ${{ github.workspace }}/cmake-build-cmdline-mac/aliaswallet/Alias.sha256
+          asset_name: Alias-${{ needs.prepareRelease.outputs.alias_release }}-${{ needs.prepareRelease.outputs.github_sha_short }}-Mac.sha256
+          tag: ${{ needs.prepareRelease.outputs.alias_release }}
+          overwrite: true
