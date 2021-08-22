@@ -1,6 +1,8 @@
 # Alias
-[![GitHub version](https://badge.fury.io/gh/aliascash%2Falias-wallet.svg)](https://badge.fury.io/gh/aliascash%2Falias-wallet)
-[![HitCount](http://hits.dwyl.com/aliascash/alias-wallet.svg)](http://hits.dwyl.com/aliascash/alias-wallet)
+[![Latest release](https://img.shields.io/github/v/release/aliascash/alias-wallet?label=Release&color=%2300bf00)](https://github.com/aliascash/alias-wallet/releases/latest)
+[![Latest develop build](https://img.shields.io/github/v/release/aliascash/alias-wallet?include_prereleases&label=Develop-Build)](https://github.com/aliascash/alias-wallet/releases)
+[![Discord](https://img.shields.io/discord/426769724018524161?logo=discord)](https://discord.gg/ckkrb8m)
+[![Reddit](https://img.shields.io/badge/reddit-join-orange?logo=reddit)](https://www.reddit.com/r/AliasCash/)
 [![Build Status Master](https://github.com/aliascash/alias-wallet/actions/workflows/build-master.yml/badge.svg)](https://github.com/aliascash/alias-wallet/actions)
 [![Build Status Develop](https://github.com/aliascash/alias-wallet/actions/workflows/build-develop.yml/badge.svg)](https://github.com/aliascash/alias-wallet/actions)
 

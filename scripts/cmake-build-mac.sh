@@ -31,11 +31,6 @@ MAC_QT_LIBRARYDIR=${MAC_QT_DIR}/lib
 
 ##### ### # Boost # ### #####################################################
 # Trying to find required Homebrew Boost libs
-if [[ -z "${BOOST_VERSION_MAC}" ]]; then
-    BOOST_VERSION_MAC=1.73.0
-fi
-BOOST_INCLUDEDIR=/usr/local/Cellar/boost/${BOOST_VERSION_MAC}/include
-BOOST_LIBRARYDIR=/usr/local/Cellar/boost/${BOOST_VERSION_MAC}/lib
 BOOST_REQUIRED_LIBS='chrono filesystem iostreams program_options system thread regex date_time atomic'
 # regex date_time atomic
 
@@ -43,17 +38,6 @@ BOOST_REQUIRED_LIBS='chrono filesystem iostreams program_options system thread r
 # Location of Qt will be resolved by trying to find required Qt libs
 QT_ARCHIVE_LOCATION=${ARCHIVES_ROOT_DIR}/Qt
 QT_REQUIRED_LIBS='Core Widgets WebView WebChannel WebSockets QuickWidgets Quick Gui Qml Network'
-
-##### ### # BerkeleyDB # ### ################################################
-# Location of archive will be resolved like this:
-# ${BERKELEYDB_ARCHIVE_LOCATION}/db-${BERKELEYDB_BUILD_VERSION}.tar.gz
-BERKELEYDB_ARCHIVE_LOCATION=${ARCHIVES_ROOT_DIR}/BerkeleyDB
-
-##### ### # OpenSSL # ### ###################################################
-# Location of archive will be resolved like this:
-# ${OPENSSL_ARCHIVE_LOCATION}/openssl-${OPENSSL_BUILD_VERSION}.tar.gz
-#OPENSSL_ARCHIVE_LOCATION=https://mirror.viaduck.org/openssl
-OPENSSL_ARCHIVE_LOCATION=${ARCHIVES_ROOT_DIR}/OpenSSL
 
 ##### ### # EventLib # ### ##################################################
 # Location of archive will be resolved like this:
@@ -130,8 +114,8 @@ checkHomebrew() {
         info " -> Found ${homebrewVersion/$'\n'*/}"
     else
         error " -> Homebrew not found!"
-        error "    You need to install homebrew and after that BerkeleyDB v4 and Boost:"
-        error "    brew install berkeley-db@4 boost"
+        error "    You need to install homebrew and after that BerkeleyDB v4, Boost and OpenSSL:"
+        error "    brew install berkeley-db@4 boost openssl"
         error ""
         die 40 "Stopping build because of missing Homebrew"
     fi
@@ -141,87 +125,21 @@ checkHomebrew() {
 # ============================================================================
 
 # ===== Start of openssl functions ===========================================
-checkOpenSSLArchive() {
-    if [[ -e "${OPENSSL_ARCHIVE_LOCATION}/openssl-${OPENSSL_BUILD_VERSION}.tar.gz" ]]; then
-        info " -> Using OpenSSL archive ${OPENSSL_ARCHIVE_LOCATION}/openssl-${OPENSSL_BUILD_VERSION}.tar.gz"
-    else
-        OPENSSL_ARCHIVE_URL=https://mirror.viaduck.org/openssl/openssl-${OPENSSL_BUILD_VERSION}.tar.gz
-        info " -> Downloading OpenSSL archive ${OPENSSL_ARCHIVE_URL}"
-        if [[ ! -e ${OPENSSL_ARCHIVE_LOCATION} ]]; then
-            mkdir -p ${OPENSSL_ARCHIVE_LOCATION}
-        fi
-        cd ${OPENSSL_ARCHIVE_LOCATION}
-        wget ${OPENSSL_ARCHIVE_URL}
-        cd - >/dev/null
-    fi
-}
-
-# For OpenSSL we're using a fork of https://github.com/viaduck/openssl-cmake
-# with some slight modifications for Alias
-checkOpenSSLClone() {
-    local currentDir=$(pwd)
-    cd ${ownLocation}/../external
-    if [[ -d openssl-cmake ]]; then
-        info " -> Updating openssl-cmake clone"
-        cd openssl-cmake
-        git pull --prune
-    else
-        info " -> Cloning openssl-cmake"
-        git clone --branch alias https://github.com/aliascash/openssl-cmake.git openssl-cmake
-    fi
-    cd "${currentDir}"
-}
-
-checkOpenSSLBuild() {
-    mkdir -p ${DEPENDENCIES_BUILD_DIR}/${BUILD_DIR}/openssl
-    cd ${DEPENDENCIES_BUILD_DIR}/${BUILD_DIR}/openssl || die 1 "Unable to cd into ${DEPENDENCIES_BUILD_DIR}/${BUILD_DIR}/openssl"
-
-    info " -> Generating build configuration"
-    read -r -d '' cmd <<EOM
-cmake \
-    -DBUILD_OPENSSL=ON \
-    -DOPENSSL_ARCHIVE_LOCATION=${OPENSSL_ARCHIVE_LOCATION} \
-    -DOPENSSL_BUILD_VERSION=${OPENSSL_BUILD_VERSION} \
-    -DOPENSSL_API_COMPAT=0x00908000L \
-    -DOPENSSL_ARCHIVE_HASH=${OPENSSL_ARCHIVE_HASH} \
-    ${ownLocation}/../external/openssl-cmake
-EOM
-
-    echo "=============================================================================="
-    echo "Executing the following CMake cmd:"
-    echo "${cmd}"
-    echo "=============================================================================="
-    #    read a
-    ${cmd}
-    #    read a
-
-    info ""
-    info " -> Building with ${CORES_TO_USE} cores:"
-    CORES_TO_USE=${CORES_TO_USE} cmake \
-        --build . \
-        -- \
-        -j "${CORES_TO_USE}"
-
-    rtc=$?
-    info ""
-    if [[ ${rtc} = 0 ]]; then
-        info " -> Finished openssl build and install"
-    else
-        die ${rtc} " => OpenSSL build failed with return code ${rtc}"
-    fi
-
-    cd - >/dev/null
-}
-
 checkOpenSSL() {
     info ""
     info "OpenSSL:"
-    if [[ -f ${DEPENDENCIES_BUILD_DIR}/${BUILD_DIR}/usr/local/lib/libssl.a ]]; then
-        info " -> Found ${DEPENDENCIES_BUILD_DIR}/${BUILD_DIR}/usr/local/lib/libssl.a, skip build"
+    info " -> Searching required Homebrew OpenSSL package"
+    opensslVersion=$(brew ls --versions openssl)
+    if [ $? -eq 0 ] ; then
+        info " -> Found ${opensslVersion}"
+        OPENSSL_VERSION_MAC=$(echo ${opensslVersion#* } | xargs)
+        OPENSSL_FOLDERNAME=$(echo ${opensslVersion% *} | xargs)
     else
-        checkOpenSSLArchive
-        checkOpenSSLClone
-        checkOpenSSLBuild
+        error " -> Required OpenSSL dependency not found!"
+        error "    You need to install homebrew and install OpenSSL:"
+        error "    brew install openssl"
+        error ""
+        die 41 "Stopping build because of missing OpenSSL"
     fi
 }
 # ===== End of openssl functions =============================================
@@ -241,7 +159,7 @@ checkBerkeleyDB() {
         error "    You need to install homebrew and install BerkeleyDB v4:"
         error "    brew install berkeley-db@4"
         error ""
-        die 41 "Stopping build because of missing Boost"
+        die 41 "Stopping build because of missing BerkeleyDB"
     fi
 }
 # ===== End of berkeleydb functions ==========================================
@@ -256,6 +174,10 @@ checkBoost() {
     boostVersion=$(brew ls --versions boost)
     if [ $? -eq 0 ] ; then
         info " -> Found ${boostVersion}"
+        if [[ -z "${BOOST_VERSION_MAC}" ]]; then
+            # Use only version from "boost 1.2.3" and trim potential whitespaces
+            BOOST_VERSION_MAC=$(echo ${boostVersion#* } | xargs)
+        fi
     else
         error " -> Required Boost dependencies not found!"
         error "    You need to install homebrew and install Boost:"
@@ -263,6 +185,8 @@ checkBoost() {
         error ""
         die 42 "Stopping build because of missing Boost"
     fi
+    BOOST_INCLUDEDIR=/usr/local/Cellar/boost/${BOOST_VERSION_MAC}/include
+    BOOST_LIBRARYDIR=/usr/local/Cellar/boost/${BOOST_VERSION_MAC}/lib
 }
 # ===== End of boost functions ===============================================
 
@@ -435,7 +359,7 @@ EOM
     rtc=$?
     info ""
     if [[ ${rtc} = 0 ]]; then
-        info " -> Finished libevent build, installing..."
+        info " -> Finished libleveldb build, installing..."
         make install || die $? "Error during installation of libleveldb"
     else
         die ${rtc} " => libleveldb build failed with return code ${rtc}"
@@ -455,6 +379,26 @@ checkLevelDB() {
     fi
 }
 # ===== End of leveldb functions =============================================
+
+# ============================================================================
+
+# ===== Start of wget functions ===========================================
+checkWget() {
+    info ""
+    info "Wget:"
+    info " -> Searching required Homebrew wget package"
+    wgetVersion=$(brew ls --versions wget)
+    if [ $? -eq 0 ] ; then
+        info " -> Found ${wgetVersion}"
+    else
+        error " -> Required wget dependency not found!"
+        error "    You need to install homebrew and install wget:"
+        error "    brew install wget"
+        error ""
+        die 41 "Stopping build because of missing wget"
+    fi
+}
+# ===== End of wget functions =============================================
 
 # ============================================================================
 
@@ -797,6 +741,7 @@ checkBoost
 checkBerkeleyDB
 checkLevelDB
 checkOpenSSL
+checkWget
 if ${WITH_TOR}; then
     checkXZLib
     checkZStdLib
@@ -857,7 +802,7 @@ cmake \
     -Dleveldb_DIR=${DEPENDENCIES_BUILD_DIR}/${BUILD_DIR}/local/lib/cmake/leveldb \
     -DLEVELDB_INCLUDE_DIR=${DEPENDENCIES_BUILD_DIR}/${BUILD_DIR}/local/include \
     \
-    -DOPENSSL_ROOT_DIR=${DEPENDENCIES_BUILD_DIR}/${BUILD_DIR}/usr/local/lib;${DEPENDENCIES_BUILD_DIR}/${BUILD_DIR}/usr/local/include \
+    -DOPENSSL_ROOT_DIR=/usr/local/Cellar/${OPENSSL_FOLDERNAME}/${OPENSSL_VERSION_MAC}/lib;/usr/local/Cellar/${OPENSSL_FOLDERNAME}/${OPENSSL_VERSION_MAC}/include \
     \
     -DTOR_ARCHIVE=${TOR_ARCHIVE_LOCATION}/${TOR_RESOURCE_ARCHIVE}
 EOM

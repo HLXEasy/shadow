@@ -861,7 +861,7 @@ Dies bedeutet eine Gebühr von min %2 ist benötigt</translation>
     <message>
         <location filename="../setupwalletwizard.cpp" line="846"/>
         <source>Wallet Encryption</source>
-        <translation>Wallet-Verschlüsselung</translation>
+        <translation>Verschlüsselung</translation>
     </message>
     <message>
         <location filename="../setupwalletwizard.cpp" line="847"/>
