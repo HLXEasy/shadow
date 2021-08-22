@@ -2870,7 +2870,7 @@ Dies bedeutet eine Gebühr von min %2 ist benötigt</translation>
     <message>
         <location filename="../aliasbridgestrings.h" line="53"/>
         <source>Blockchain Info</source>
-        <translation>Blockchain-Information</translation>
+        <translation>Blockchain Info</translation>
     </message>
     <message>
         <location filename="../aliasbridgestrings.h" line="54"/>
