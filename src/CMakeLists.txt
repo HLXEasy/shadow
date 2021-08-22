@@ -315,7 +315,6 @@ if (ENABLE_GUI)
             ${CMAKE_CURRENT_SOURCE_DIR}/qt/locale/alias_bg.ts
             ${CMAKE_CURRENT_SOURCE_DIR}/qt/locale/alias_bs.ts
             ${CMAKE_CURRENT_SOURCE_DIR}/qt/locale/alias_ca.ts
-            ${CMAKE_CURRENT_SOURCE_DIR}/qt/locale/alias_ca@valencia.ts
             ${CMAKE_CURRENT_SOURCE_DIR}/qt/locale/alias_ca_ES.ts
             ${CMAKE_CURRENT_SOURCE_DIR}/qt/locale/alias_cs.ts
             ${CMAKE_CURRENT_SOURCE_DIR}/qt/locale/alias_cy.ts
@@ -325,10 +324,7 @@ if (ENABLE_GUI)
             ${CMAKE_CURRENT_SOURCE_DIR}/qt/locale/alias_el_GR.ts
             ${CMAKE_CURRENT_SOURCE_DIR}/qt/locale/alias_eo.ts
             ${CMAKE_CURRENT_SOURCE_DIR}/qt/locale/alias_es.ts
-            ${CMAKE_CURRENT_SOURCE_DIR}/qt/locale/alias_es_CL.ts
-            ${CMAKE_CURRENT_SOURCE_DIR}/qt/locale/alias_es_DO.ts
             ${CMAKE_CURRENT_SOURCE_DIR}/qt/locale/alias_es_MX.ts
-            ${CMAKE_CURRENT_SOURCE_DIR}/qt/locale/alias_es_UY.ts
             ${CMAKE_CURRENT_SOURCE_DIR}/qt/locale/alias_et.ts
             ${CMAKE_CURRENT_SOURCE_DIR}/qt/locale/alias_eu_ES.ts
             ${CMAKE_CURRENT_SOURCE_DIR}/qt/locale/alias_fa.ts
@@ -354,13 +350,11 @@ if (ENABLE_GUI)
             ${CMAKE_CURRENT_SOURCE_DIR}/qt/locale/alias_ms_MY.ts
             ${CMAKE_CURRENT_SOURCE_DIR}/qt/locale/alias_nb.ts
             ${CMAKE_CURRENT_SOURCE_DIR}/qt/locale/alias_nl.ts
-            ${CMAKE_CURRENT_SOURCE_DIR}/qt/locale/alias_pam.ts
             ${CMAKE_CURRENT_SOURCE_DIR}/qt/locale/alias_pl.ts
             ${CMAKE_CURRENT_SOURCE_DIR}/qt/locale/alias_pt_BR.ts
             ${CMAKE_CURRENT_SOURCE_DIR}/qt/locale/alias_pt_PT.ts
             ${CMAKE_CURRENT_SOURCE_DIR}/qt/locale/alias_ro_RO.ts
             ${CMAKE_CURRENT_SOURCE_DIR}/qt/locale/alias_ru.ts
-            ${CMAKE_CURRENT_SOURCE_DIR}/qt/locale/alias_sah.ts
             ${CMAKE_CURRENT_SOURCE_DIR}/qt/locale/alias_sk.ts
             ${CMAKE_CURRENT_SOURCE_DIR}/qt/locale/alias_sl_SI.ts
             ${CMAKE_CURRENT_SOURCE_DIR}/qt/locale/alias_sq.ts

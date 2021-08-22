@@ -10,7 +10,6 @@
         <file alias="bs">src/alias_bs.qm</file>
         <file alias="ca_ES">src/alias_ca_ES.qm</file>
         <file alias="ca">src/alias_ca.qm</file>
-        <file alias="ca@valencia">src/alias_ca@valencia.qm</file>
         <file alias="cs">src/alias_cs.qm</file>
         <file alias="cy">src/alias_cy.qm</file>
         <file alias="da">src/alias_da.qm</file>
@@ -19,11 +18,8 @@
         <file alias="el">src/alias_el.qm</file>
         <file alias="en">src/alias_en.qm</file>
         <file alias="eo">src/alias_eo.qm</file>
-        <file alias="es_CL">src/alias_es_CL.qm</file>
-        <file alias="es_DO">src/alias_es_DO.qm</file>
         <file alias="es_MX">src/alias_es_MX.qm</file>
         <file alias="es">src/alias_es.qm</file>
-        <file alias="es_UY">src/alias_es_UY.qm</file>
         <file alias="et">src/alias_et.qm</file>
         <file alias="eu_ES">src/alias_eu_ES.qm</file>
         <file alias="fa_IR">src/alias_fa_IR.qm</file>
@@ -49,13 +45,11 @@
         <file alias="ms_MY">src/alias_ms_MY.qm</file>
         <file alias="nb">src/alias_nb.qm</file>
         <file alias="nl">src/alias_nl.qm</file>
-        <file alias="pam">src/alias_pam.qm</file>
         <file alias="pl">src/alias_pl.qm</file>
         <file alias="pt_BR">src/alias_pt_BR.qm</file>
         <file alias="pt_PT">src/alias_pt_PT.qm</file>
         <file alias="ro_RO">src/alias_ro_RO.qm</file>
         <file alias="ru">src/alias_ru.qm</file>
-        <file alias="sah">src/alias_sah.qm</file>
         <file alias="sk">src/alias_sk.qm</file>
         <file alias="sl_SI">src/alias_sl_SI.qm</file>
         <file alias="sq">src/alias_sq.qm</file>
