@@ -1,4 +1,4 @@
-name: Android-Develop
+name: Android
 on:
   push:
     branches:
@@ -47,6 +47,7 @@ jobs:
           tag_name: ${{ steps.determine_release.outputs.alias_release }}
           draft: false
           prerelease: false
+          target_commitish: "${{ steps.extract_branch.outputs.branch }}"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -61,7 +62,7 @@ jobs:
           body_path: ${{ github.workspace }}/ReleaseNotes_Android.md
           draft: false
           prerelease: false
-          target_commitish: "develop"
+          target_commitish: "${{ steps.extract_branch.outputs.branch }}"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -78,7 +79,7 @@ jobs:
             - To verify checksums see dedicated checksum files for each download
           draft: false
           prerelease: true
-          target_commitish: "develop"
+          target_commitish: "${{ steps.extract_branch.outputs.branch }}"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
