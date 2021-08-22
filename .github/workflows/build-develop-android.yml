@@ -61,6 +61,7 @@ jobs:
           body_path: ${{ github.workspace }}/ReleaseNotes_Android.md
           draft: false
           prerelease: false
+          target_commitish: "develop"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -77,6 +78,7 @@ jobs:
             - To verify checksums see dedicated checksum files for each download
           draft: false
           prerelease: true
+          target_commitish: "develop"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
