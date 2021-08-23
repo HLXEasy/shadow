@@ -1,4 +1,6 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="en" version="2.1">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="en">
 <context>
     <name>AboutDialog</name>
     <message>
@@ -344,6 +346,26 @@ This product includes software developed by the OpenSSL Project for use in the O
         <location filename="../clientmodel.cpp" line="121"/>
         <source>last sync %1 %2 %3.</source>
         <translation>last sync %1 %2 %3.</translation>
+    </message>
+    <message>
+        <location filename="../clientmodel.cpp" line="123"/>
+        <source>Power Saving (sync hourly)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../clientmodel.cpp" line="131"/>
+        <source>No network connection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../clientmodel.cpp" line="132"/>
+        <source>Alias is not connected to any node.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../clientmodel.cpp" line="139"/>
+        <source>Importing!</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../clientmodel.cpp" line="150"/>
@@ -2058,7 +2080,10 @@ This label turns red, if the priority is smaller than &quot;medium&quot;.
     <message numerus="yes">
         <location filename="../spectregui.cpp" line="631"/>
         <source>%n active connection(s) to Alias network</source>
-        <translation><numerusform>%n active connection(s) to Alias network</numerusform><numerusform>%n active connection(s) to Alias network</numerusform></translation>
+        <translation>
+            <numerusform>%n active connection(s) to Alias network</numerusform>
+            <numerusform>%n active connection(s) to Alias network</numerusform>
+        </translation>
     </message>
     <message>
         <location filename="../spectregui.cpp" line="657"/>
@@ -2104,7 +2129,10 @@ This label turns red, if the priority is smaller than &quot;medium&quot;.
     <message numerus="yes">
         <location filename="../spectregui.cpp" line="695"/>
         <source>~%n block(s) remaining</source>
-        <translation><numerusform>~%n block(s) remaining</numerusform><numerusform>~%n block(s) remaining</numerusform></translation>
+        <translation>
+            <numerusform>~%n block(s) remaining</numerusform>
+            <numerusform>~%n block(s) remaining</numerusform>
+        </translation>
     </message>
     <message>
         <location filename="../spectregui.cpp" line="709"/>
@@ -2119,32 +2147,50 @@ This label turns red, if the priority is smaller than &quot;medium&quot;.
     <message numerus="yes">
         <location filename="../spectregui.cpp" line="713"/>
         <source>Imported %n block(s) of transaction history.</source>
-        <translation><numerusform>Imported %n block(s) of transaction history.</numerusform><numerusform>Imported %n block(s) of transaction history.</numerusform></translation>
+        <translation>
+            <numerusform>Imported %n block(s) of transaction history.</numerusform>
+            <numerusform>Imported %n block(s) of transaction history.</numerusform>
+        </translation>
     </message>
     <message numerus="yes">
         <location filename="../spectregui.cpp" line="713"/>
         <source>Downloaded %n block(s) of transaction history.</source>
-        <translation><numerusform>Downloaded %n block(s) of transaction history.</numerusform><numerusform>Downloaded %n block(s) of transaction history.</numerusform></translation>
+        <translation>
+            <numerusform>Downloaded %n block(s) of transaction history.</numerusform>
+            <numerusform>Downloaded %n block(s) of transaction history.</numerusform>
+        </translation>
     </message>
     <message numerus="yes">
         <location filename="../spectregui.cpp" line="731"/>
         <source>%n second(s) ago</source>
-        <translation><numerusform>%n second(s) ago</numerusform><numerusform>%n second(s) ago</numerusform></translation>
+        <translation>
+            <numerusform>%n second(s) ago</numerusform>
+            <numerusform>%n second(s) ago</numerusform>
+        </translation>
     </message>
     <message numerus="yes">
         <location filename="../spectregui.cpp" line="735"/>
         <source>%n minute(s) ago</source>
-        <translation><numerusform>%n minute(s) ago</numerusform><numerusform>%n minute(s) ago</numerusform></translation>
+        <translation>
+            <numerusform>%n minute(s) ago</numerusform>
+            <numerusform>%n minute(s) ago</numerusform>
+        </translation>
     </message>
     <message numerus="yes">
         <location filename="../spectregui.cpp" line="739"/>
         <source>%n hour(s) ago</source>
-        <translation><numerusform>%n hour(s) ago</numerusform><numerusform>%n hour(s) ago</numerusform></translation>
+        <translation>
+            <numerusform>%n hour(s) ago</numerusform>
+            <numerusform>%n hour(s) ago</numerusform>
+        </translation>
     </message>
     <message numerus="yes">
         <location filename="../spectregui.cpp" line="742"/>
         <source>%n day(s) ago</source>
-        <translation><numerusform>%n day(s) ago</numerusform><numerusform>%n day(s) ago</numerusform></translation>
+        <translation>
+            <numerusform>%n day(s) ago</numerusform>
+            <numerusform>%n day(s) ago</numerusform>
+        </translation>
     </message>
     <message>
         <location filename="../spectregui.cpp" line="749"/>
@@ -2358,7 +2404,10 @@ This label turns red, if the priority is smaller than &quot;medium&quot;.
     <message numerus="yes">
         <location filename="../transactiondesc.cpp" line="44"/>
         <source>Open for %n block(s)</source>
-        <translation><numerusform>Open for %n block(s)</numerusform><numerusform>Open for %n block(s)</numerusform></translation>
+        <translation>
+            <numerusform>Open for %n block(s)</numerusform>
+            <numerusform>Open for %n block(s)</numerusform>
+        </translation>
     </message>
     <message>
         <location filename="../transactiondesc.cpp" line="46"/>
@@ -2408,7 +2457,10 @@ This label turns red, if the priority is smaller than &quot;medium&quot;.
     <message numerus="yes">
         <location filename="../transactiondesc.cpp" line="92"/>
         <source>, broadcast through %n node(s)</source>
-        <translation><numerusform>, broadcast through %n node(s)</numerusform><numerusform>, broadcast through %n node(s)</numerusform></translation>
+        <translation>
+            <numerusform>, broadcast through %n node(s)</numerusform>
+            <numerusform>, broadcast through %n node(s)</numerusform>
+        </translation>
     </message>
     <message>
         <location filename="../transactiondesc.cpp" line="97"/>
@@ -2434,7 +2486,10 @@ This label turns red, if the priority is smaller than &quot;medium&quot;.
     <message numerus="yes">
         <location filename="../transactiondesc.cpp" line="117"/>
         <source>matures in %n more block(s)</source>
-        <translation><numerusform>matures in %n more block(s)</numerusform><numerusform>matures in %n more block(s)</numerusform></translation>
+        <translation>
+            <numerusform>matures in %n more block(s)</numerusform>
+            <numerusform>matures in %n more block(s)</numerusform>
+        </translation>
     </message>
     <message>
         <location filename="../transactiondesc.cpp" line="120"/>
@@ -2587,7 +2642,10 @@ This label turns red, if the priority is smaller than &quot;medium&quot;.
     <message numerus="yes">
         <location filename="../transactiontablemodel.cpp" line="328"/>
         <source>Open for %n more block(s)</source>
-        <translation><numerusform>Open for %n more block(s)</numerusform><numerusform>Open for %n more block(s)</numerusform></translation>
+        <translation>
+            <numerusform>Open for %n more block(s)</numerusform>
+            <numerusform>Open for %n more block(s)</numerusform>
+        </translation>
     </message>
     <message>
         <location filename="../transactiontablemodel.cpp" line="331"/>

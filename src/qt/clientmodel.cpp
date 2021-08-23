@@ -120,7 +120,7 @@ void ClientModel::updateServiceStatus()
     {
         msg = tr("last sync %1 %2 %3.").arg(lastBlockDate.addSecs(-1 * blockInfo.nTimeOffset()).toLocalTime().toString(Qt::DefaultLocaleShortDate)).arg(sBlockType).arg(count);
         QtAndroid::androidService().callMethod<void>("updateNotification", "(Ljava/lang/String;Ljava/lang/String;I)V",
-                                                     QAndroidJniObject::fromString("Power Saving (sync hourly)").object<jstring>(),
+                                                     QAndroidJniObject::fromString(tr("Power Saving (sync hourly)")).object<jstring>(),
                                                      QAndroidJniObject::fromString(msg).object<jstring>(),
                                                      8);
         return;
@@ -128,15 +128,15 @@ void ClientModel::updateServiceStatus()
     if (numConnections() == 0)
     {
         QtAndroid::androidService().callMethod<void>("updateNotification", "(Ljava/lang/String;Ljava/lang/String;I)V",
-                                                     QAndroidJniObject::fromString("No network connection").object<jstring>(),
-                                                     QAndroidJniObject::fromString("Alias is not connected to any node.").object<jstring>(),
+                                                     QAndroidJniObject::fromString(tr("No network connection")).object<jstring>(),
+                                                     QAndroidJniObject::fromString(tr("Alias is not connected to any node.")).object<jstring>(),
                                                      2);
         return;
     }
     if (isImporting())
     {
         QtAndroid::androidService().callMethod<void>("updateNotification", "(Ljava/lang/String;Ljava/lang/String;I)V",
-                                                     QAndroidJniObject::fromString("Importing!").object<jstring>(),
+                                                     QAndroidJniObject::fromString(tr("Importing!")).object<jstring>(),
                                                      QAndroidJniObject::fromString("...").object<jstring>(),
                                                      3);
         return;
