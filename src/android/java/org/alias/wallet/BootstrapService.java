@@ -119,8 +119,8 @@ public class BootstrapService extends Service {
         stopAction = new Notification.Action.Builder(Icon.createWithResource(this, R.drawable.baseline_stop_black_24), "Abort", stopPendingIntent).build();
 
         notificationBuilder = new Notification.Builder(this, AliasService.CHANNEL_ID_SERVICE)
-                .setContentTitle("Blockchain Bootstrap")//getText(R.string.notification_title))
-                .setContentText("Downloading...")//getText(R.string.notification_message))
+                .setContentTitle(R.string.blockchain_bootstrap)//getText(R.string.notification_title))
+                .setContentText(R.string.downloading)//getText(R.string.notification_message))
                 .setOnlyAlertOnce(true)
                 .setSmallIcon(R.drawable.ic_alias_app_white)
                 .setColor(getColor(R.color.primary))
@@ -228,7 +228,7 @@ public class BootstrapService extends Service {
                 Log.e(TAG, "BootstrapTask: Failed with exception: " + e.getMessage(), e);
                 String errorText = "Failed!";
                 if (e.getMessage() != null && e.getMessage().contains(ERROR_MSG_ENOSPC)) {
-                    errorText += " No space left on device.";
+                    errorText += " " + R.string.no_space_left_on_device;
                     if (e instanceof ZipException) {
                         errorCode = ERROR_NOSPACE_EXTRACTION;
                     }
@@ -237,20 +237,20 @@ public class BootstrapService extends Service {
                     }
                 }
                 else if (e instanceof ZipException) {
-                    errorText += " Bootstrap archive extraction error.";
+                    errorText += " " + R.string.bootstrap_extraction_error;
                     errorCode = ERROR_EXTRACTION;
                     cleanupDirectory(bootstrapTmpPath);
                 }
                 else if (e.getMessage() != null && e.getMessage().contains(ERROR_BOOTSTRAP_HASH.name())) {
-                    errorText += " Bootstrap hash mismatch.";
+                    errorText += " " + R.string.bootstrap_hash_mismatch;
                     errorCode = ERROR_BOOTSTRAP_HASH;
                 }
                 else if (e.getMessage() != null && e.getMessage().contains(ERROR_BOOTSTRAP_INDEX_404.name())) {
-                    errorText += " Bootstrap index file missing on server.";
+                    errorText += " " + R.string.bootstrap_index_file_missing;
                     errorCode = ERROR_BOOTSTRAP_INDEX_404;
                 }
                 else if (e.getMessage() != null && e.getMessage().contains(ERROR_BOOTSTRAP_FILE_404.name())) {
-                    errorText += " Bootstrap file missing on server.";
+                    errorText += " " + R.string.bootstrap_file_missing;
                     errorCode = ERROR_BOOTSTRAP_FILE_404;
                     cleanupDirectory(bootstrapTmpPath);
                 }
@@ -345,7 +345,7 @@ public class BootstrapService extends Service {
                 // this will be useful so that you can show a typical 0-100% progress bar
                 int fileLength = connection.getContentLength();
                 if (fileLength == -1) {
-                    updateProgress(notificationManager, true, STATE_DOWNLOAD, 0, 0, fileIndex, totalFiles, true, "Downloading... ("+ (fileIndex+1) + "/" + totalFiles +")");
+                    updateProgress(notificationManager, true, STATE_DOWNLOAD, 0, 0, fileIndex, totalFiles, true, R.string.downloading + " ("+ (fileIndex+1) + "/" + totalFiles +")");
                 }
 
                 MessageDigest md = MessageDigest.getInstance("SHA-256");
@@ -366,7 +366,7 @@ public class BootstrapService extends Service {
                         currentTime = SystemClock.uptimeMillis();
                         if (lastProgress != progress) {
                             boolean updateNotification = currentTime - lastTime >= 250;
-                            updateProgress(notificationManager, updateNotification, STATE_DOWNLOAD, 0, progress, fileIndex, totalFiles,false, "Downloading... ("+ (fileIndex+1) + "/" + totalFiles +")");
+                            updateProgress(notificationManager, updateNotification, STATE_DOWNLOAD, 0, progress, fileIndex, totalFiles,false, R.string.downloading + " ("+ (fileIndex+1) + "/" + totalFiles +")");
                             lastProgress = progress;
                             if (updateNotification) {
                                 lastTime = currentTime;
