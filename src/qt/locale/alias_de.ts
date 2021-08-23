@@ -346,6 +346,26 @@ This product includes software developed by the OpenSSL Project for use in the O
         <translation>Letzter Sync %1 %2 %3.</translation>
     </message>
     <message>
+        <location filename="../clientmodel.cpp" line="123"/>
+        <source>Power Saving (sync hourly)</source>
+        <translation>Stromsparmodus (stündliche Synchronisierung)</translation>
+    </message>
+    <message>
+        <location filename="../clientmodel.cpp" line="131"/>
+        <source>No network connection</source>
+        <translation>Keine Netzwerkverbindung</translation>
+    </message>
+    <message>
+        <location filename="../clientmodel.cpp" line="132"/>
+        <source>Alias is not connected to any node.</source>
+        <translation>Alias is mit keinem Knoten verbunden.</translation>
+    </message>
+    <message>
+        <location filename="../clientmodel.cpp" line="139"/>
+        <source>Importing!</source>
+        <translation>Importiere</translation>
+    </message>
+    <message>
         <location filename="../clientmodel.cpp" line="150"/>
         <source>%1% done.</source>
         <translation>%1% erledigt.</translation>
