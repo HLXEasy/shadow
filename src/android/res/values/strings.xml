@@ -19,6 +19,7 @@
     <string name="setup_biometric_wallet_unlock">Setup Biometric Wallet Unlock</string>
     <string name="alternative_for_wallet_password">Alternative for wallet password</string>
     <string name="cancel">Cancel</string>
+    <string name="abort">Abort</string>
     <string name="unlock_alias_wallet_password">Unlock Alias Wallet Password</string>
     <string name="enter_password">Enter Password</string>
     <string name="blockchain_bootstrap">Blockchain Bootstrap</string>

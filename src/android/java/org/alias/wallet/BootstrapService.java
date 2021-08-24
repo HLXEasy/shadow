@@ -116,7 +116,7 @@ public class BootstrapService extends Service {
         Intent stopIntent = new Intent(this, BootstrapService.class);
         stopIntent.setAction(ACTION_STOP);
         PendingIntent stopPendingIntent = PendingIntent.getService(this, 0, stopIntent, 0);
-        stopAction = new Notification.Action.Builder(Icon.createWithResource(this, R.drawable.baseline_stop_black_24), "Abort", stopPendingIntent).build();
+        stopAction = new Notification.Action.Builder(Icon.createWithResource(this, R.drawable.baseline_stop_black_24), getString(R.string.abort), stopPendingIntent).build();
 
         notificationBuilder = new Notification.Builder(this, AliasService.CHANNEL_ID_SERVICE)
                 .setContentTitle(getText(R.string.blockchain_bootstrap))//getText(R.string.notification_title))

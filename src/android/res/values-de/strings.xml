@@ -19,6 +19,7 @@
     <string name="setup_biometric_wallet_unlock">Biometrisches Entsperren einrichten</string>
     <string name="alternative_for_wallet_password">Alternative zum Wallet-Passwort</string>
     <string name="cancel">Abbrechen</string>
+    <string name="abort">Abbrechen</string>
     <string name="unlock_alias_wallet_password">Password zum Wallet entsperren</string>
     <string name="enter_password">Password eingeben</string>
     <string name="blockchain_bootstrap">Blockchain Bootstrap</string>
