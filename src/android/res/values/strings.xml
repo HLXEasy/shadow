@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- SPDX-FileCopyrightText: © 2020 Alias Developers -->
+<!-- SPDX-License-Identifier: MIT -->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="shutdown">Shutdown</string>
+    <string name="turn_powersave_off">Turn power save off</string>
+    <string name="turn_powersave_on">Turn power save on</string>
+    <string name="core_service">Core Service</string>
+    <string name="running">Running...</string>
+    <string name="wallet_notifications">Wallet Notifications</string>
+    <string name="wallet_notifications_help">Shows notifications regarding your wallet like incoming transactions.</string>
+<!--    <string name="background_service">Background Service</string>-->
+<!--    <string name="background_service_help">The permanent notification which shows you the state of the Alias service.</string>-->
+    <string name="alias_shutdown">Alias is shutting down...</string>
+    <string name="biometric_setup_successful">Biometric setup successful!</string>
+    <string name="biometric_setup_failed">Biometric setup failed: </string>
+    <string name="biometric_unlock_failed">Biometric unlock failed: </string>
+    <string name="back_again_to_exit">Press back again to exit</string>
+    <string name="setup_biometric_wallet_unlock">Setup Biometric Wallet Unlock</string>
+    <string name="alternative_for_wallet_password">Alternative for wallet password</string>
+    <string name="cancel">Cancel</string>
+    <string name="abort">Abort</string>
+    <string name="unlock_alias_wallet_password">Unlock Alias Wallet Password</string>
+    <string name="enter_password">Enter Password</string>
+    <string name="blockchain_bootstrap">Blockchain Bootstrap</string>
+    <string name="downloading">Downloading...</string>
+    <string name="no_space_left_on_device">No space left on device.</string>
+    <string name="bootstrap_extraction_error">Bootstrap archive extraction error.</string>
+    <string name="bootstrap_hash_mismatch">Bootstrap hash mismatch.</string>
+    <string name="bootstrap_index_file_missing">Bootstrap index file missing on server.</string>
+    <string name="bootstrap_file_missing">Bootstrap file missing on server.</string>
+</resources>
