@@ -115,8 +115,8 @@ public class AliasService extends QtService {
         NotificationManager notificationManager = service.getSystemService(NotificationManager.class);
 
         // Create the NotificationChannel for the permanent notification
-        CharSequence serviceNotificationName = getString(R.string.background_service); //getString(R.string.channel_name);
-        String serviceNotificationDescription = getString(R.string.background_service_help); //getString(R.string.channel_description);
+        CharSequence serviceNotificationName = "Background Service"; //getString(R.string.channel_name);
+        String serviceNotificationDescription = "The permanent notification which shows you the state of the Alias service."; //getString(R.string.channel_description);
         NotificationChannel channelSevice = new NotificationChannel(CHANNEL_ID_SERVICE, serviceNotificationName, NotificationManager.IMPORTANCE_LOW);
         channelSevice.setShowBadge(false);
         channelSevice.setDescription(serviceNotificationDescription);

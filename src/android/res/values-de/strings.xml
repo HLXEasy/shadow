@@ -9,8 +9,8 @@
     <string name="running">Läuft...</string>
     <string name="wallet_notifications">Wallet-Benachrichtigungen</string>
     <string name="wallet_notifications_help">Zeigt Benachrichtigungen wie bspw. eingehende Transaktionen an.</string>
-    <string name="background_service">Hintergrund-Dienst</string>
-    <string name="background_service_help">Dauerhafte Benachrichtigung über den Status des Alias-Dienstes.</string>
+<!--    <string name="background_service">Hintergrund-Dienst</string>-->
+<!--    <string name="background_service_help">Dauerhafte Benachrichtigung über den Status des Alias-Dienstes.</string>-->
     <string name="alias_shutdown">Alias wird beendet...</string>
     <string name="biometric_setup_successful">Biometrisches Setup erfolgreich!</string>
     <string name="biometric_setup_failed">Biometrisches Setup fehlgeschlagen: </string>
