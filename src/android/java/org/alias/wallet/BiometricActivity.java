@@ -288,15 +288,15 @@ public class BiometricActivity extends FragmentActivity {
         });
 
         promptSetupInfo = new BiometricPrompt.PromptInfo.Builder()
-                .setTitle(R.string.setup_biometric_wallet_unlock)
-                .setSubtitle(R.string.alternative_for_wallet_password)
-                .setNegativeButtonText(R.string.cancel)
+                .setTitle(getText(R.string.setup_biometric_wallet_unlock))
+                .setSubtitle(getText(R.string.alternative_for_wallet_password))
+                .setNegativeButtonText(getText(R.string.cancel))
                 .setDeviceCredentialAllowed(false)
                 .build();
 
         promptUnlockInfo = new BiometricPrompt.PromptInfo.Builder()
-                .setTitle(R.string.unlock_alias_wallet_password)
-                .setNegativeButtonText(R.string.enter_password)
+                .setTitle(getText(R.string.unlock_alias_wallet_password))
+                .setNegativeButtonText(getText(R.string.enter_password))
                 .setDeviceCredentialAllowed(false)
                 .build();
 

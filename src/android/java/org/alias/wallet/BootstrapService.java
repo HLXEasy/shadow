@@ -119,8 +119,8 @@ public class BootstrapService extends Service {
         stopAction = new Notification.Action.Builder(Icon.createWithResource(this, R.drawable.baseline_stop_black_24), "Abort", stopPendingIntent).build();
 
         notificationBuilder = new Notification.Builder(this, AliasService.CHANNEL_ID_SERVICE)
-                .setContentTitle(R.string.blockchain_bootstrap)//getText(R.string.notification_title))
-                .setContentText(R.string.downloading)//getText(R.string.notification_message))
+                .setContentTitle(getText(R.string.blockchain_bootstrap))//getText(R.string.notification_title))
+                .setContentText(getText(R.string.downloading))//getText(R.string.notification_message))
                 .setOnlyAlertOnce(true)
                 .setSmallIcon(R.drawable.ic_alias_app_white)
                 .setColor(getColor(R.color.primary))
