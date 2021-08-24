@@ -362,7 +362,7 @@ public class AliasService extends QtService {
     }
 
     private void handleShutdown() {
-        updateNotification(getText(R.string.alias_shutdown), "", ServiceNotificationType.SHUTDOWN.ordinal());
+        updateNotification(getString(R.string.alias_shutdown), "", ServiceNotificationType.SHUTDOWN.ordinal());
         serviceIsStopping = true;
         stopForeground(false);
         this.stopService(new Intent(this, AliasService.class));
