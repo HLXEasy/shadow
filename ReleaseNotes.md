@@ -52,7 +52,7 @@ SPDX-License-Identifier: MIT
 - Update of minimal Mac version to 10.14 (Mojave)
 - Update used Boost version to 1.75.0
 - Replaced old Tor v2 seednode addresses with new v3 addresses. For details see [v2 deprecation timeline](https://blog.torproject.org/v2-deprecation-timeline).
-- [#3](https://github.com/aliascash/alias-wallet/issues/3) 32Bit Windows version
+- [#3](https://github.com/aliascash/alias-wallet/issues/3) 32Bit Windows (x86) version available now
 - [#27](https://github.com/aliascash/alias-wallet/issues/27) Fixed thread safety issue which leads to wallet crash during heavy load on the RPC interface. Thx @Gandalf for the finding!
 
 ## 4.3.1 (released 2020-12-08)
