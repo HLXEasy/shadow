@@ -44,10 +44,9 @@ updated will not be able to create transactions on the Alias V3 network.
 SPDX-License-Identifier: MIT
 
 ### Changelog
-## 4.4.0 (released 2021-??-??)
-- [#14](https://github.com/aliascash/alias-wallet-archive/issues/14)
-  Localization of main wallet
-- Localization of installer and Shell-UI
+## 4.4.0 (released 2021-08-25)
+- [#14](https://github.com/aliascash/alias-wallet-archive/issues/14) Localization of main wallet
+- Localization of Windows installer and Shell-UI
 - [#280](https://github.com/aliascash/alias-wallet-archive/issues/280) Fixed cmdline option `-help` (`-h`)
 - Update of Fedora build to Fedora 33
 - Update of minimal Mac version to 10.14 (Mojave)
