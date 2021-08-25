@@ -105,7 +105,7 @@ static void InitMessage(const std::string &message)
  */
 static std::string Translate(const char* psz)
 {
-    return QCoreApplication::translate("bitcoin-core", psz).toStdString();
+    return QCoreApplication::translate("alias-core", psz).toStdString();
 }
 
 /* Handle runaway exceptions. Shows a message box with the problem and quits the program.
@@ -238,7 +238,7 @@ int main(int argc, char *argv[])
 
     // Show help message immediately after parsing command-line options (for "-lang") and setting locale,
     // but before showing splash screen.
-    if (mapArgs.count("-?") || mapArgs.count("--help"))
+    if (mapArgs.count("-?") || mapArgs.count("-h") || mapArgs.count("-help"))
     {
         GUIUtil::HelpMessageBox help;
         help.showOrPrint();
@@ -326,7 +326,7 @@ int main(int argc, char *argv[])
                 window.setClientModel(&clientModel);
                 window.setWalletModel(&walletModel);
 
-                InitMessage("Update balance...");
+                InitMessage(_("Update balance..."));
 
                 // Manually create a blockChangedEvent to set initial values for the UI
                 BlockChangedEvent blockChangedEvent = { nBestHeight, GetNumBlocksOfPeers(), IsInitialBlockDownload(), nNodeMode == NT_FULL ?
@@ -340,14 +340,14 @@ int main(int argc, char *argv[])
                     WalletModel::UnlockContext unlockContext = walletModel.requestUnlock(WalletModel::UnlockMode::login);
                     if (!unlockContext.isValid())
                     {
-                        InitMessage("Shutdown...");
+                        InitMessage(_("Shutdown..."));
                         StartShutdown();
                     }
                 }
 
                 if (!ShutdownRequested())
                 {
-                    InitMessage("...Start UI...");
+                    InitMessage(_("...Start UI..."));
                     window.loadIndex(webSocketToken);
 
                     // Now that initialization/startup is done, process any command-line

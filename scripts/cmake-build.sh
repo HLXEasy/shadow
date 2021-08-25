@@ -391,9 +391,19 @@ checkBoostArchive() {
     cd ${BOOST_ARCHIVE_LOCATION} || die 1 "Unable to cd into ${BOOST_ARCHIVE_LOCATION}"
     if [[ ! -e "boost_${BOOST_VERSION//./_}.tar.gz" ]]; then
         info " -> Downloading Boost archive"
-        wget https://dl.bintray.com/boostorg/release/${BOOST_VERSION}/source/boost_${BOOST_VERSION//./_}.tar.gz
+        wget https://boostorg.jfrog.io/artifactory/main/release/${BOOST_VERSION}/source/boost_${BOOST_VERSION//./_}.tar.gz
     else
         info " -> Using existing Boost archive"
+    fi
+
+    info " -> Verifying Boost archive checksum"
+    determinedChecksum=$(sha256sum boost_${BOOST_VERSION//./_}.tar.gz | awk '{ print $1 }')
+    info "    Expected checksum:   ${BOOST_ARCHIVE_HASH}"
+    info "    Determined checksum: ${determinedChecksum}"
+    if [[ "${BOOST_ARCHIVE_HASH}" != "${determinedChecksum}" ]] ; then
+        die 2 " => Checksum of downloaded Boost archive not matching expected value!"
+    else
+        info " -> Checksum OK"
     fi
 }
 
@@ -408,7 +418,10 @@ buildBoost() {
     cd boost_${BOOST_VERSION//./_} || die 1 "Unable to cd into boost_${BOOST_VERSION//./_}"
     ./bootstrap.sh --with-libraries="${BOOST_REQUIRED_LIBS// /,}"
     #        ./bootstrap.sh
-    ./b2 -j"${CORES_TO_USE}"
+    ./b2 \
+        -j"${CORES_TO_USE}" \
+        --layout=tagged \
+        --build-type=complete
     cd "${currentDir}" || die 1 "Unable to cd into ${currentDir}"
 }
 
@@ -421,7 +434,7 @@ checkBoost() {
     boostBuildRequired=false
     if [[ -d ${BOOST_LIBRARYDIR} ]]; then
         for currentBoostDependency in ${BOOST_REQUIRED_LIBS}; do
-            if [[ -e ${BOOST_LIBRARYDIR}/libboost_${currentBoostDependency}.a ]]; then
+            if [[ -e ${BOOST_LIBRARYDIR}/libboost_${currentBoostDependency}-mt-${LIB_ARCH_SUFFIX}.a ]]; then
                 info " -> ${currentBoostDependency}: OK"
             else
                 warning " => ${currentBoostDependency}: Not found!"
@@ -883,6 +896,11 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
 #    CORES_TO_USE=1
 else
     CORES_TO_USE=1
+fi
+# Determine arch
+LIB_ARCH_SUFFIX=x64
+if [ "$(uname -m)" = "aarch64" ] ; then
+    LIB_ARCH_SUFFIX=a64
 fi
 
 FULLBUILD=false

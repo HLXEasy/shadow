@@ -10,10 +10,12 @@ project(Alias
         C
         )
 
+message(STATUS "")
+message(STATUS "=== Setting defaults =======================================================")
 # The version number.
 set(CLIENT_VERSION_MAJOR 4)
-set(CLIENT_VERSION_MINOR 3)
-set(CLIENT_VERSION_REVISION 1)
+set(CLIENT_VERSION_MINOR 4)
+set(CLIENT_VERSION_REVISION 0)
 set(CLIENT_VERSION_BUILD 0)
 set(CLIENT_VERSION_GIT_SHA1 "---")
 set(VERSION_STRING "${CLIENT_VERSION_MAJOR}.${CLIENT_VERSION_MINOR}.${CLIENT_VERSION_REVISION}.${CLIENT_VERSION_BUILD}")
@@ -22,6 +24,12 @@ set(CMAKE_VERBOSE_MAKEFILE OFF)
 
 #set(ANDROID 1)
 set(ANDROID_PACKAGE_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/src/android")
+
+set(TOR_ARCHIVE_MAC_HASH "733380c234c8a4796d6bfefec536afd6469f8d7d")
+set(TOR_ARCHIVE_WIN64_HASH "36ab45ca414795560a4c946fcb49848b919569bf")
+set(TOR_ARCHIVE_WIN32_HASH "66cef46b02d6e788840899baca11e2a2f9f5241a")
+set(VCRUNTIME_ARCHIVE_WIN64_HASH "85cffbf41e957dcc9c5dd528af84c03474e76b8c")
+set(VCRUNTIME_ARCHIVE_WIN32_HASH "9af511350e0772bf1f543abd375304af2e616273")
 
 # Compiler flags
 set(CMAKE_CXX_STANDARD 17)
@@ -77,7 +85,8 @@ elseif (CMAKE_SYSTEM_NAME STREQUAL "Darwin")
     endif()
 
     # Handle direct access linker warnings with Boost
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -frtti -fvisibility-inlines-hidden -fvisibility=hidden")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -frtti -fvisibility-inlines-hidden -fvisibility=hidden -Wno-deprecated-declarations")
+
 elseif (CMAKE_SYSTEM_NAME STREQUAL "Windows")
     message(STATUS "Configuring on/for Windows")
     #    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /EHc-")
@@ -89,8 +98,12 @@ elseif (CMAKE_SYSTEM_NAME STREQUAL "Windows")
     # Handle build type
     if("${CMAKE_BUILD_TYPE}" STREQUAL "Debug")
         set(DEPLOY_QT_BINARY_TYPE_OPTION "--debug")
+        set(WINDEPLOYQT_TARGET_FOLDER "Debug")
+        set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG "${CMAKE_BINARY_DIR}/delivery/${WINDEPLOYQT_TARGET_FOLDER}")
     else()
         set(DEPLOY_QT_BINARY_TYPE_OPTION "--release")
+        set(WINDEPLOYQT_TARGET_FOLDER "Release")
+        set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE "${CMAKE_BINARY_DIR}/delivery/${WINDEPLOYQT_TARGET_FOLDER}")
     endif()
 
     # Check if unzip is installed
@@ -111,6 +124,7 @@ endif ()
 message(STATUS "CMAKE_CXX_FLAGS: ${CMAKE_CXX_FLAGS}")
 
 # ============================================================================================
+message(STATUS "")
 message(STATUS "=== Helper functions =======================================================")
 # Include own cmake modules
 set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake" ${CMAKE_MODULE_PATH})
@@ -127,6 +141,7 @@ message(STATUS "Building in '${CMAKE_BUILD_TYPE}' mode")
 
 # ============================================================================================
 # Env var BOOST_ROOT should point to local Boost installation
+message(STATUS "")
 message(STATUS "=== Boost ==================================================================")
 if(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
     message(STATUS "Using dynamic Boost libs on Mac")
@@ -134,11 +149,29 @@ else()
     set(Boost_USE_STATIC_LIBS ON)
     set(Boost_USE_STATIC_RUNTIME ON)
 endif()
-set(Boost_USE_DEBUG_LIBS OFF) # ignore debug libs and
-set(Boost_USE_RELEASE_LIBS ON)  # only find release libs
+if("${CMAKE_BUILD_TYPE}" STREQUAL "Debug")
+    set(Boost_USE_DEBUG_LIBS ON)    # only find debug libs and
+    set(Boost_USE_RELEASE_LIBS OFF) # ignore release libs
+else()
+    set(Boost_USE_DEBUG_LIBS OFF)   # ignore debug libs and
+    set(Boost_USE_RELEASE_LIBS ON)  # only find release libs
+endif()
 set(Boost_USE_MULTITHREADED ON)
 set(Boost_NO_SYSTEM_PATHS ON)
-find_package(Boost 1.65.1 REQUIRED COMPONENTS
+#set(Boost_DEBUG ON)
+
+set(Boost_ARCHITECTURE -x64)
+if (CMAKE_SYSTEM_NAME STREQUAL "Linux")
+    execute_process(COMMAND uname -m OUTPUT_VARIABLE USED_ARCH)
+#    message(STATUS "Used arch: ${USED_ARCH}")
+    if (USED_ARCH MATCHES "aarch64")
+        # We're compiling for ARMv8 like Raspberry Pi
+        message(STATUS "Found aarch64, setting Boost architecture to -a64")
+        set(Boost_ARCHITECTURE -a64)
+    endif()
+endif()
+
+find_package(Boost 1.72.0 REQUIRED COMPONENTS
         atomic
         chrono
         date_time
@@ -154,8 +187,10 @@ message(STATUS "Boost_INCLUDE_DIRS: ${Boost_INCLUDE_DIRS}")
 message(STATUS "Boost_LIBRARY_DIRS: ${Boost_LIBRARY_DIRS}")
 message(STATUS "Boost_LIBRARIES:    ${Boost_LIBRARIES}")
 
+add_compile_definitions(BOOST_SPIRIT_THREADSAFE)
 
 # ============================================================================================
+message(STATUS "")
 message(STATUS "=== Qt =====================================================================")
 if (ENABLE_GUI)
     if ("${QT_CMAKE_MODULE_PATH}" STREQUAL "")
@@ -177,6 +212,7 @@ if (ENABLE_GUI)
         set(Qt5Qml_DIR "${QT_CMAKE_MODULE_PATH}/Qt5Qml")
         set(Qt5Network_DIR "${QT_CMAKE_MODULE_PATH}/Qt5Network")
         set(Qt5QmlModels_DIR "${QT_CMAKE_MODULE_PATH}/Qt5QmlModels")
+        set(Qt5LinguistTools_DIR "${QT_CMAKE_MODULE_PATH}/Qt5LinguistTools")
     endif()
 
     # Find includes in corresponding build directories
@@ -229,6 +265,9 @@ if (ENABLE_GUI)
     message(STATUS "Qt5Concurrent version: ${Qt5Concurrent_VERSION}")
     get_target_property(QtConcurrent_location Qt5::Concurrent LOCATION)
 
+    find_package(Qt5LinguistTools)
+    message(STATUS "Qt5LinguistTools version: ${Qt5LinguistTools_VERSION}")
+
     if(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
         # Retrieve the absolute path to qmake and then use that path
         # to find the macdeployqt binary
@@ -254,25 +293,49 @@ else()
     message(STATUS "Building without UI, skipping Qt detection")
 endif ()
 
+message(STATUS "")
 if(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
     message(STATUS "=== Tor binary archive =====================================================")
     if (NOT TOR_ARCHIVE)
         include(DownloadFile)
         set(TOR_ARCHIVE "${CMAKE_BINARY_DIR}/Tor.libraries.MacOS.zip")
-        download_file(https://github.com/aliascash/resources/raw/master/resources/Tor.libraries.MacOS.zip ${TOR_ARCHIVE} SHA1 0be391e0cad9e93d33c226d6bff719f568b56093)
+        download_file(https://github.com/aliascash/resources/raw/master/resources/Tor.libraries.MacOS.zip ${TOR_ARCHIVE} SHA1 ${TOR_ARCHIVE_MAC_HASH})
     endif ()
 elseif(CMAKE_SYSTEM_NAME STREQUAL "Windows")
-    message(STATUS "=== Tor binary archive =====================================================")
+    message(STATUS "=== Tor and VCRuntime binary archives ======================================")
+    if (CMAKE_CL_64)
+        message(STATUS "Using x64 archives")
+        set(WINDOWS_ARCH_SUFFIX "Win64")
+        set(WINDOWS_TOR_ARCHIVE_HASH "${TOR_ARCHIVE_WIN64_HASH}")
+        set(WINDOWS_VCRUNTIME_ARCHIVE_HASH "${VCRUNTIME_ARCHIVE_WIN64_HASH}")
+    else()
+        message(STATUS "Using x86 archives")
+        set(WINDOWS_ARCH_SUFFIX "Win32")
+        set(WINDOWS_TOR_ARCHIVE_HASH "${TOR_ARCHIVE_WIN32_HASH}")
+        set(WINDOWS_VCRUNTIME_ARCHIVE_HASH "${VCRUNTIME_ARCHIVE_WIN32_HASH}")
+    endif()
     if (NOT TOR_ARCHIVE)
+        message(STATUS "Downloading Tor archive")
         include(DownloadFile)
-        set(TOR_ARCHIVE "${CMAKE_BINARY_DIR}/Tor.libraries.Win64.zip")
-        download_file(https://github.com/aliascash/resources/raw/master/resources/Tor.libraries.Win64.zip ${TOR_ARCHIVE} SHA1 ac40fae3eee1040d7ffab64b9b7b7356ca75b37c)
+        set(TOR_ARCHIVE "${CMAKE_BINARY_DIR}/Tor.libraries.${WINDOWS_ARCH_SUFFIX}.zip")
+        download_file(https://github.com/aliascash/resources/raw/master/resources/Tor.libraries.${WINDOWS_ARCH_SUFFIX}.zip ${TOR_ARCHIVE} SHA1 ${WINDOWS_TOR_ARCHIVE_HASH})
+    else()
+        message(STATUS "Using Tor archive from given path")
+    endif()
+    if (NOT VCRUNTIME_ARCHIVE)
+        message(STATUS "Downloading VCRuntime archive")
+        include(DownloadFile)
+        set(VCRUNTIME_ARCHIVE "${CMAKE_BINARY_DIR}/VCRuntime.libraries.${WINDOWS_ARCH_SUFFIX}.zip")
+        download_file(https://github.com/aliascash/resources/raw/master/resources/VCRuntime.libraries.${WINDOWS_ARCH_SUFFIX}.zip ${VCRUNTIME_ARCHIVE} SHA1 ${WINDOWS_VCRUNTIME_ARCHIVE_HASH})
+    else()
+        message(STATUS "Using VCRuntime archive from given path")
     endif()
 endif()
 
 # ============================================================================================
 # Requires lib and include dir at once, separated by ";":
 #     -DOPENSSL_ROOT_DIR=${BUILD_DIR}/usr/local/lib;${BUILD_DIR}/usr/local/include
+message(STATUS "")
 message(STATUS "=== OpenSSL ================================================================")
 set(OPENSSL_USE_STATIC_LIBS TRUE)
 find_package(OpenSSL)
@@ -288,18 +351,21 @@ message(STATUS "OPENSSL_VERSION: ${OPENSSL_VERSION}")
 # Requires:
 #     -DBerkeleyDB_ROOT_DIR=${BUILD_DIR}/libdb/libdb-install
 #     -DBERKELEYDB_INCLUDE_DIR=${BUILD_DIR}/libdb/libdb-install/include
+message(STATUS "")
 message(STATUS "=== Berkeley DB ============================================================")
-find_package(BerkeleyDB)
+find_package(BerkeleyDB 4)
 
 # ============================================================================================
 # Requires:
 #     -Dleveldb_DIR=${BUILD_DIR}/usr/local/lib/cmake/leveldb
+message(STATUS "")
 message(STATUS "=== LevelDB ================================================================")
 find_package(leveldb)
 message(STATUS "LevelDB directory: ${leveldb_DIR}")
 message(STATUS "LevelDB version: ${leveldb_VERSION}")
 
 # ============================================================================================
+message(STATUS "")
 message(STATUS "=== Dive into subdirs... ===================================================")
 add_subdirectory(src)
 
