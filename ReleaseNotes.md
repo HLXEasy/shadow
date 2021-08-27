@@ -44,16 +44,15 @@ updated will not be able to create transactions on the Alias V3 network.
 SPDX-License-Identifier: MIT
 
 ### Changelog
-## 4.4.0 (released 2021-??-??)
-- [#14](https://github.com/aliascash/alias-wallet-archive/issues/14)
-  Localization of main wallet
-- Localization of installer and Shell-UI
+## 4.4.0 (released 2021-08-25)
+- [#14](https://github.com/aliascash/alias-wallet-archive/issues/14) Localization of main wallet
+- Localization of Windows installer and Shell-UI
 - [#280](https://github.com/aliascash/alias-wallet-archive/issues/280) Fixed cmdline option `-help` (`-h`)
 - Update of Fedora build to Fedora 33
 - Update of minimal Mac version to 10.14 (Mojave)
 - Update used Boost version to 1.75.0
 - Replaced old Tor v2 seednode addresses with new v3 addresses. For details see [v2 deprecation timeline](https://blog.torproject.org/v2-deprecation-timeline).
-- [#3](https://github.com/aliascash/alias-wallet/issues/3) 32Bit Windows version
+- [#3](https://github.com/aliascash/alias-wallet/issues/3) 32Bit Windows (x86) version available now
 - [#27](https://github.com/aliascash/alias-wallet/issues/27) Fixed thread safety issue which leads to wallet crash during heavy load on the RPC interface. Thx @Gandalf for the finding!
 
 ## 4.3.1 (released 2020-12-08)

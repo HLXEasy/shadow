@@ -148,11 +148,12 @@ jobs:
       - name: Install Qt
         uses: jurplel/install-qt-action@v2
         with:
-          version: '5.15.2'
+          version: '5.12.10'
           modules: 'qtwebengine'
 
       - name: Install dependencies
         run: |
+          brew uninstall --ignore-dependencies berkeley-db
           brew install berkeley-db@4 boost openssl
 
       - name: Cache build dependencies
