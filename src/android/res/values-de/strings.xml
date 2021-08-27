@@ -3,8 +3,8 @@
 <!-- SPDX-License-Identifier: MIT -->
 <resources>
     <string name="shutdown">Beenden</string>
-    <string name="turn_powersave_off">Stromsparmodus aus</string>
-    <string name="turn_powersave_on">Stromsparmodus an</string>
+    <string name="turn_powersave_off">Stromsparmodus ausschalten</string>
+    <string name="turn_powersave_on">Stromsparmodus einschalten</string>
     <string name="core_service">Kern-Dienst</string>
     <string name="running">Läuft...</string>
     <string name="wallet_notifications">Wallet-Benachrichtigungen</string>
