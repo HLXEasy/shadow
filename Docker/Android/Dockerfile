@@ -4,7 +4,7 @@
 # SPDX-License-Identifier: MIT
 
 ### At first perform source build ###
-FROM aliascash/alias-wallet-builder-android:platform29 as build
+FROM aliascash/alias-wallet-builder-android:1.1 as build
 MAINTAINER HLXEasy <hlxeasy@gmail.com>
 
 # Build parameters

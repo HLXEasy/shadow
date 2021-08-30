@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- SPDX-FileCopyrightText: © 2020 Alias Developers -->
+<!-- SPDX-License-Identifier: MIT -->
+<resources>
+    <string name="shutdown">Extinction</string>
+    <string name="turn_powersave_off">Eteindre économie d\'énergie</string>
+    <string name="turn_powersave_on">Allumer économie d\'énergie</string>
+    <string name="core_service">Service noyau</string>
+    <string name="running">En cours d\'éxecution...</string>
+    <string name="wallet_notifications">Notifications portefeuille</string>
+    <string name="wallet_notifications_help">Affiche les notifications de votre portefeuille, telles que nouvelles transactions</string>
+    <string name="alias_shutdown">Alias est en cours d\'extinction</string>
+    <string name="biometric_setup_successful">Biométrie correctement configurée!</string>
+    <string name="biometric_setup_failed">Erreur de configuration biométrie</string>
+    <string name="biometric_unlock_failed">Echec déverrouillage biométrique:</string>
+    <string name="back_again_to_exit">Appuyez retour à nouveau pour sortir</string>
+    <string name="setup_biometric_wallet_unlock">Configurer déverrouillage biométrique</string>
+    <string name="alternative_for_wallet_password">Alternative pour mot de passe portefeuille</string>
+    <string name="cancel">Annuler</string>
+    <string name="abort">Stopper</string>
+    <string name="unlock_alias_wallet_password">Mot de passe déverrouillage portefeuille Alias</string>
+    <string name="enter_password">Entrer mot de passe</string>
+    <string name="blockchain_bootstrap">Bootstrap de la blockchaine</string>
+    <string name="downloading">Téléchargement...</string>
+    <string name="no_space_left_on_device">Pas d\'espace disponible sur le périphérique.</string>
+    <string name="bootstrap_extraction_error">Erreur d\'extraction de l\'archive de bootstrap.</string>
+    <string name="bootstrap_hash_mismatch">Incohérence du hash de bootstrap</string>
+    <string name="bootstrap_index_file_missing">Fichier index du bootstrap absent du serveur.</string>
+    <string name="bootstrap_file_missing">Fichier bootstrap absent du serveur.</string>
+</resources>

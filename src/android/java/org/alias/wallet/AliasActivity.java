@@ -140,10 +140,10 @@ public class AliasActivity extends QtActivity {
         Log.d(TAG, "handleOnActivityResult() requestCode=" + requestCode);
         if (requestCode == BiometricActivity.BiometricAction.ACTION_SETUP.ordinal()) {
             if (resultCode == RESULT_OK) {
-                Toast.makeText(this, "Biometric setup successful!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, R.string.biometric_setup_successful, Toast.LENGTH_SHORT).show();
             }
             else if (resultCode == BiometricActivity.RESULT_ERROR) {
-                Toast.makeText(this, "Biometric setup failed: " + data.getStringExtra("error"), Toast.LENGTH_LONG).show();
+                Toast.makeText(this, R.string.biometric_setup_failed + data.getStringExtra("error"), Toast.LENGTH_LONG).show();
             }
         }
         else if (requestCode == BiometricActivity.BiometricAction.ACTION_UNLOCK.ordinal()) {
@@ -151,7 +151,7 @@ public class AliasActivity extends QtActivity {
                 serveWalletPassword(data.getStringExtra("walletPassword"));
             }
             else if (resultCode == BiometricActivity.RESULT_ERROR) {
-                Toast.makeText(this, "Biometric unlock failed: " + data.getStringExtra("error"), Toast.LENGTH_LONG).show();
+                Toast.makeText(this, R.string.biometric_unlock_failed + data.getStringExtra("error"), Toast.LENGTH_LONG).show();
             }
         }
     }
@@ -162,7 +162,7 @@ public class AliasActivity extends QtActivity {
                 backToast.cancel();
                 finish();
             } else {
-                backToast = Toast.makeText(getBaseContext(), "Press back again to exit", Toast.LENGTH_SHORT);
+                backToast = Toast.makeText(getBaseContext(), R.string.back_again_to_exit, Toast.LENGTH_SHORT);
                 backToast.show();
                 backPressedTime = System.currentTimeMillis();
             }

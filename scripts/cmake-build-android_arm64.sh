@@ -28,7 +28,7 @@ ANDROID_NDK_ROOT=${ANDROID_NDK_ARCHIVE_LOCATION}/android-ndk-${ANDROID_NDK_VERSI
 ANDROID_TOOLCHAIN_CMAKE=${ANDROID_NDK_ROOT}/build/cmake/android.toolchain.cmake
 ANDROID_ARCH=arm64
 ANDROID_ABI=arm64-v8a
-ANDROID_API=26
+ANDROID_API=${ANDROID_API_ARM64}
 
 ##### ### # Android Qt # ### ################################################
 ANDROID_QT_DIR=${QT_INSTALLATION_PATH}/${QT_VERSION_ANDROID}/android
@@ -308,9 +308,19 @@ checkBoostArchive() {
     cd ${BOOST_ARCHIVE_LOCATION} || die 1 "Unable to cd into ${BOOST_ARCHIVE_LOCATION}"
     if [[ ! -e "boost_${BOOST_VERSION//./_}.tar.gz" ]]; then
         info " -> Downloading Boost archive"
-        wget https://dl.bintray.com/boostorg/release/${BOOST_VERSION}/source/boost_${BOOST_VERSION//./_}.tar.gz
+        wget https://boostorg.jfrog.io/artifactory/main/release/${BOOST_VERSION}/source/boost_${BOOST_VERSION//./_}.tar.gz
     else
         info " -> Using existing Boost archive"
+    fi
+
+    info " -> Verifying Boost archive checksum"
+    determinedChecksum=$(sha256sum boost_${BOOST_VERSION//./_}.tar.gz | awk '{ print $1 }')
+    info "    Expected checksum:   ${BOOST_ARCHIVE_HASH}"
+    info "    Determined checksum: ${determinedChecksum}"
+    if [[ "${BOOST_ARCHIVE_HASH}" != "${determinedChecksum}" ]] ; then
+        die 2 " => Checksum of downloaded Boost archive not matching expected value!"
+    else
+        info " -> Checksum OK"
     fi
 }
 

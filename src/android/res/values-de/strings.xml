@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- SPDX-FileCopyrightText: © 2020 Alias Developers -->
+<!-- SPDX-License-Identifier: MIT -->
+<resources>
+    <string name="shutdown">Beenden</string>
+    <string name="turn_powersave_off">Stromsparmodus ausschalten</string>
+    <string name="turn_powersave_on">Stromsparmodus einschalten</string>
+    <string name="core_service">Kern-Dienst</string>
+    <string name="running">Läuft...</string>
+    <string name="wallet_notifications">Wallet-Benachrichtigungen</string>
+    <string name="wallet_notifications_help">Zeigt Benachrichtigungen wie bspw. eingehende Transaktionen an.</string>
+    <string name="alias_shutdown">Alias wird beendet...</string>
+    <string name="biometric_setup_successful">Biometrisches Setup erfolgreich!</string>
+    <string name="biometric_setup_failed">Biometrisches Setup fehlgeschlagen: </string>
+    <string name="biometric_unlock_failed">Biometrisches Entsperren fehlgeschlagen: </string>
+    <string name="back_again_to_exit">Zum Beenden Zurück erneut betätigen</string>
+    <string name="setup_biometric_wallet_unlock">Biometrisches Entsperren einrichten</string>
+    <string name="alternative_for_wallet_password">Alternative zum Wallet-Passwort</string>
+    <string name="cancel">Abbrechen</string>
+    <string name="abort">Abbrechen</string>
+    <string name="unlock_alias_wallet_password">Password zum Wallet entsperren</string>
+    <string name="enter_password">Password eingeben</string>
+    <string name="blockchain_bootstrap">Blockchain Bootstrap</string>
+    <string name="downloading">Herunterladen...</string>
+    <string name="no_space_left_on_device">Kein freier Platz mehr auf dem Gerät.</string>
+    <string name="bootstrap_extraction_error">Fehler beim entpacken des Bootstrap-Archives.</string>
+    <string name="bootstrap_hash_mismatch">Bootstrap-Hash stimmt nicht überein.</string>
+    <string name="bootstrap_index_file_missing">Bootstrap Indexdatei auf dem Server nicht gefunden.</string>
+    <string name="bootstrap_file_missing">Bootstrap-Datei auf dem Server nicht gefunden.</string>
+</resources>

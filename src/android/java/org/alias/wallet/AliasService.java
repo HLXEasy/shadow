@@ -139,8 +139,8 @@ public class AliasService extends QtService {
         createServiceNotificationChannel(this);
 
         // Create the NotificationChannel for notifications
-        CharSequence walletNotificationName = "Wallet Notifications"; //getString(R.string.channel_name);
-        String walletNotificationDescription = "Shows notifications regarding your wallet like incoming transactions."; //getString(R.string.channel_description);
+        CharSequence walletNotificationName = getString(R.string.wallet_notifications); //getString(R.string.channel_name);
+        String walletNotificationDescription = getString(R.string.wallet_notifications_help); //getString(R.string.channel_description);
         NotificationChannel channelWallet = new NotificationChannel(CHANNEL_ID_WALLET, walletNotificationName, NotificationManager.IMPORTANCE_DEFAULT);
         channelWallet.setDescription(walletNotificationDescription);
         notificationManager.createNotificationChannel(channelWallet);
@@ -151,21 +151,21 @@ public class AliasService extends QtService {
         Intent stopIntent = new Intent(this, AliasService.class);
         stopIntent.setAction(ServiceAction.ACTION_STOP.name());
         PendingIntent stopPendingIntent = PendingIntent.getService(this, 0, stopIntent, 0);
-        stopAction = new Notification.Action.Builder(Icon.createWithResource(this, R.drawable.baseline_stop_black_24), "Shutdown", stopPendingIntent).build();
+        stopAction = new Notification.Action.Builder(Icon.createWithResource(this, R.drawable.baseline_stop_black_24), getString(R.string.shutdown), stopPendingIntent).build();
 
         Intent turnOffPowerSaveIntent = new Intent(this, AliasService.class);
         turnOffPowerSaveIntent.setAction(ServiceAction.ACTION_TURN_OFF_BATTERY_SAVE.name());
         PendingIntent turnOffPowerSavePendingIntent = PendingIntent.getService(this, 0, turnOffPowerSaveIntent, 0);
-        turnOffBatterySaveAction = new Notification.Action.Builder(Icon.createWithResource(this, R.drawable.ic_battery_off), "Turn power save off", turnOffPowerSavePendingIntent).build();
+        turnOffBatterySaveAction = new Notification.Action.Builder(Icon.createWithResource(this, R.drawable.ic_battery_off), getString(R.string.turn_powersave_off), turnOffPowerSavePendingIntent).build();
 
         Intent turnOnPowerSaveIntent = new Intent(this, AliasService.class);
         turnOnPowerSaveIntent.setAction(ServiceAction.ACTION_TURN_ON_BATTERY_SAVE.name());
         PendingIntent turnOnPowerSavePendingIntent = PendingIntent.getService(this, 0, turnOnPowerSaveIntent, 0);
-        turnOnBatterySaveAction = new Notification.Action.Builder(Icon.createWithResource(this, R.drawable.ic_battery_on), "Turn power save on", turnOnPowerSavePendingIntent).build();
+        turnOnBatterySaveAction = new Notification.Action.Builder(Icon.createWithResource(this, R.drawable.ic_battery_on), getString(R.string.turn_powersave_on), turnOnPowerSavePendingIntent).build();
 
         notificationBuilder = new Notification.Builder(this, CHANNEL_ID_SERVICE)
-                        .setContentTitle("Core Service")//getText(R.string.notification_title))
-                        .setContentText("Running...")//getText(R.string.notification_message))
+                        .setContentTitle(getText(R.string.core_service))//getText(R.string.notification_title))
+                        .setContentText(getText(R.string.running))//getText(R.string.notification_message))
                         .setOnlyAlertOnce(true)
                         .setSmallIcon(R.drawable.ic_alias_app_white)
                         .setColor(getColor(R.color.primary))
@@ -362,7 +362,7 @@ public class AliasService extends QtService {
     }
 
     private void handleShutdown() {
-        updateNotification("Alias is shutting down...", "", ServiceNotificationType.SHUTDOWN.ordinal());
+        updateNotification(getString(R.string.alias_shutdown), "", ServiceNotificationType.SHUTDOWN.ordinal());
         serviceIsStopping = true;
         stopForeground(false);
         this.stopService(new Intent(this, AliasService.class));

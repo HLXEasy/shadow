@@ -21,6 +21,9 @@ SPDX-License-Identifier: MIT
 This releasenotes document covers only the Android relevant changes. For full
 releasenotes please head over to [the latest release on Github](https://github.com/aliascash/alias-wallet/releases/latest).
 
+#### 4.4.0.16 Android (released 2021-08-27)
+- Localization of setup wizards
+
 #### 4.3.1.15 Android (released 2020-12-24)
 - Mnemonic seed word autocompletion
 
