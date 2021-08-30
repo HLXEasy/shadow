@@ -11,7 +11,7 @@ project(Alias
         )
 
 # ANDROID_VERSION_CODE must be increased with every PlayStore release!
-set(ANDROID_VERSION_CODE 16)
+set(ANDROID_VERSION_CODE 17)
 set(ANDROID_SDK_VERSION 29)
 
 message(STATUS "")
