@@ -19,7 +19,7 @@ message(STATUS "=== Setting defaults ===========================================
 # The version number.
 set(CLIENT_VERSION_MAJOR 4)
 set(CLIENT_VERSION_MINOR 4)
-set(CLIENT_VERSION_REVISION 0)
+set(CLIENT_VERSION_REVISION 1)
 if (ANDROID)
     set(CLIENT_VERSION_BUILD ${ANDROID_VERSION_CODE})
 else()
