@@ -466,11 +466,14 @@ checkEventLibClone() {
     if [[ -d libevent ]]; then
         info " -> Updating libevent clone"
         cd libevent
+        git checkout master
         git pull --prune
     else
         info " -> Cloning libevent"
         git clone https://github.com/libevent/libevent.git libevent
+        cd libevent
     fi
+    git checkout ${LIBEVENT_COMMIT_HASH}
     cd "${currentDir}"
 }
 
@@ -831,7 +834,7 @@ cmake \
     \
     -DTOR_ARCHIVE_LOCATION=${TOR_ARCHIVE_LOCATION} \
     -DTOR_BUILD_VERSION=${TOR_BUILD_VERSION_ANDROID} \
-    -DTOR_BUILD_VERSION_SHORT=${TOR_BUILD_VERSION%.*} \
+    -DTOR_BUILD_VERSION_SHORT=${TOR_BUILD_VERSION_ANDROID%.*} \
     -DTOR_ARCHIVE_HASH=${TOR_ARCHIVE_HASH_ANDROID} \
     ${ownLocation}/../external/tor-cmake
 EOM
