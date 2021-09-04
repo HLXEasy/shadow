@@ -21,6 +21,9 @@ SPDX-License-Identifier: MIT
 This releasenotes document covers only the Android relevant changes. For full
 releasenotes please head over to [the latest release on Github](https://github.com/aliascash/alias-wallet/releases/latest).
 
+#### 4.4.1.17 Android (released 2021-09-04)
+- Downgrade of used Boost version to 1.73 as with 1.75 app is crashing on Android 10 and below
+
 #### 4.4.0.16 Android (released 2021-08-27)
 - Localization of setup wizards
 

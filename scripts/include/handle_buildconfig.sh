@@ -39,8 +39,10 @@ ANDROID_API_ARMV7=26
 ANDROID_API_X86_64=26
 
 ##### ### # Boost # ### #####################################################
-BOOST_VERSION=1.75.0
-BOOST_ARCHIVE_HASH=aeb26f80e80945e82ee93e5939baebdca47b9dee80a07d3144be1e1a6a66dd6a
+#BOOST_VERSION=1.75.0
+#BOOST_ARCHIVE_HASH=aeb26f80e80945e82ee93e5939baebdca47b9dee80a07d3144be1e1a6a66dd6a
+BOOST_VERSION=1.73.0
+BOOST_ARCHIVE_HASH=9995e192e68528793755692917f9eb6422f3052a53c5e13ba278a228af6c7acf
 
 ##### ### # Qt # ### ########################################################
 # Path to the folder which contains the Qt installation
