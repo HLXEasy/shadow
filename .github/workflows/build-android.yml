@@ -29,7 +29,7 @@ jobs:
       - name: Set Alias release/tag name
         id: determine_release
         run: |
-          if [[ ${{ steps.extract_branch.outputs.branch }} = master ]] ; then
+          if [[ ${{ steps.extract_branch.outputs.branch }} = master_android ]] ; then
               majorVersion=$(grep CLIENT_VERSION_MAJOR ${{ github.workspace }}/CMakeLists.txt     | head -n1 | cut -d ' ' -f2 | sed 's/)//g' | tr -d '\\n' | tr -d '\\r' | sed 's/ //g')
               minorVersion=$(grep CLIENT_VERSION_MINOR ${{ github.workspace }}/CMakeLists.txt     | head -n1 | cut -d ' ' -f2 | sed 's/)//g' | tr -d '\\n' | tr -d '\\r' | sed 's/ //g')
               bugfixVersion=$(grep CLIENT_VERSION_REVISION ${{ github.workspace }}/CMakeLists.txt | head -n1 | cut -d ' ' -f2 | sed 's/)//g' | tr -d '\\n' | tr -d '\\r' | sed 's/ //g')

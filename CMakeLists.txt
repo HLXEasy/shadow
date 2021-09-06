@@ -11,7 +11,7 @@ project(Alias
         )
 
 # ANDROID_VERSION_CODE must be increased with every PlayStore release!
-set(ANDROID_VERSION_CODE 16)
+set(ANDROID_VERSION_CODE 17)
 set(ANDROID_SDK_VERSION 29)
 
 message(STATUS "")
@@ -19,7 +19,7 @@ message(STATUS "=== Setting defaults ===========================================
 # The version number.
 set(CLIENT_VERSION_MAJOR 4)
 set(CLIENT_VERSION_MINOR 4)
-set(CLIENT_VERSION_REVISION 0)
+set(CLIENT_VERSION_REVISION 1)
 if (ANDROID)
     set(CLIENT_VERSION_BUILD ${ANDROID_VERSION_CODE})
 else()
