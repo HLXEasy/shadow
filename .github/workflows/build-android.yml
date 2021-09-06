@@ -33,7 +33,7 @@ jobs:
               majorVersion=$(grep CLIENT_VERSION_MAJOR ${{ github.workspace }}/CMakeLists.txt     | head -n1 | cut -d ' ' -f2 | sed 's/)//g' | tr -d '\\n' | tr -d '\\r' | sed 's/ //g')
               minorVersion=$(grep CLIENT_VERSION_MINOR ${{ github.workspace }}/CMakeLists.txt     | head -n1 | cut -d ' ' -f2 | sed 's/)//g' | tr -d '\\n' | tr -d '\\r' | sed 's/ //g')
               bugfixVersion=$(grep CLIENT_VERSION_REVISION ${{ github.workspace }}/CMakeLists.txt | head -n1 | cut -d ' ' -f2 | sed 's/)//g' | tr -d '\\n' | tr -d '\\r' | sed 's/ //g')
-              codeVersion=$(grep ANDROID_VERSION_CODE ${{ github.workspace }}/CMakeLists.txt      | head -n1 | cut -d ' ' -f2 | sed 's/)//g' | tr -d '\\n' | tr -d '\\r' | sed 's/ //g')
+              codeVersion=$(grep ANDROID_VERSION_CODE ${{ github.workspace }}/CMakeLists.txt      | head -n1 | tail -n1 | cut -d ' ' -f2 | sed 's/)//g' | tr -d '\\n' | tr -d '\\r' | sed 's/ //g')
               echo "::set-output name=alias_release::$(printf '%s.%s.%s.%s-Android' $majorVersion $minorVersion $bugfixVersion $codeVersion)"
           else
               echo "::set-output name=alias_release::Build${{ github.run_number }}-Android"
