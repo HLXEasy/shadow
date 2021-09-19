@@ -41,7 +41,8 @@ struct TestingSetup {
         
         LoadBlockIndex(true);
         pwalletMain = new CWallet("walletUT.dat");
-        pwalletMain->LoadWallet();
+        int oldWalletVersion;
+        pwalletMain->LoadWallet(oldWalletVersion, nullptr);
         RegisterWallet(pwalletMain);
     }
     ~TestingSetup()
