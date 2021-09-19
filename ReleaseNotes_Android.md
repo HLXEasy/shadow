@@ -21,6 +21,9 @@ SPDX-License-Identifier: MIT
 This releasenotes document covers only the Android relevant changes. For full
 releasenotes please head over to [the latest release on Github](https://github.com/aliascash/alias-wallet/releases/latest).
 
+#### 4.4.1.18 Android (released 2021-09-19)
+- Fixed UI flaw on transaction list
+
 #### 4.4.1.17 Android (released 2021-09-05)
 - Downgrade of used Boost version to 1.73 as with 1.75 app is crashing on Android 10 and below
 - Included Tor version updated to 0.4.5.9
