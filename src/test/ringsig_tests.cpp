@@ -125,12 +125,12 @@ void testRingSigABs(int nRingSize)
     BOOST_REQUIRE(0 == generateKeyImage(pkSpend, sSpend, keyImage));
 
     start = clock();
-    BOOST_REQUIRE(0 == generateRingSignatureAB(keyImage, preimage, nRingSize, iSender, sSpend, pPubkeys, pSigC, pSigS));
+    BOOST_REQUIRE(0 == generateRingSignatureAB(keyImage, nRingSize, iSender, sSpend, pPubkeys, pSigC, pSigS));
     stop = clock();
     totalGenerate += stop - start;
 
     start = clock();
-    BOOST_REQUIRE(0 == verifyRingSignatureAB(keyImage, preimage, nRingSize, pPubkeys, pSigC, pSigS));
+    BOOST_REQUIRE(0 == verifyRingSignatureAB(keyImage, nRingSize, pPubkeys, pSigC, pSigS));
     stop = clock();
     totalVerify += stop - start;
 
