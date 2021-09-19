@@ -31,7 +31,6 @@ struct TestingSetup {
         mapArgs["-datadir"] = pathTemp.string();
         
         fDebug = true;
-        fDebugSmsg = true;
         fDebugChain = true;
         fDebugRingSig = true;
         fDebugPoS = true;
