@@ -235,6 +235,8 @@ jobs:
       - run: |
           $VCPKG_ROOT/vcpkg install berkeleydb boost leveldb openssl
         shell: bash
+        with:
+          vcpkgTriplet: x64-windows
 
       - name: Build Windows binaries
         run: ./scripts/cmake-build-win.bat
@@ -307,6 +309,8 @@ jobs:
       - run: |
           $VCPKG_ROOT/vcpkg install berkeleydb boost leveldb openssl
         shell: bash
+        with:
+          vcpkgTriplet: x64-windows
 
       - name: Build Windows binaries
         run: ./scripts/cmake-build-win-x86.bat
