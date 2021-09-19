@@ -105,7 +105,7 @@ jobs:
           setupOnly: true
           vcpkgTriplet: x64-windows
           vcpkgDirectory: ${{ runner.workspace }}/vcpkg/
-          vcpkgGitCommitId: 7bc5b8cdfaf35329c1520b2af8d368e2b1cb78e6
+          vcpkgGitCommitId: 761c81d43335a5d5ccc2ec8ad90bd7e2cbba734e
       # Now that vcpkg is installed, it is being used to run with the desired arguments.
       - run: |
           $VCPKG_ROOT/vcpkg install berkeleydb boost leveldb openssl
@@ -144,7 +144,7 @@ jobs:
           setupOnly: true
           vcpkgTriplet: x86-windows
           vcpkgDirectory: ${{ runner.workspace }}/vcpkg/
-          vcpkgGitCommitId: 7bc5b8cdfaf35329c1520b2af8d368e2b1cb78e6
+          vcpkgGitCommitId: 761c81d43335a5d5ccc2ec8ad90bd7e2cbba734e
       # Now that vcpkg is installed, it is being used to run with the desired arguments.
       - run: |
           $VCPKG_ROOT/vcpkg install berkeleydb boost leveldb openssl
