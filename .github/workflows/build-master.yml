@@ -218,21 +218,13 @@ jobs:
           setup-python: 'false'
           modules: 'qtwebengine'
 
-      # Restore from cache the previously built ports. If cache-miss, download and build vcpkg (aka "bootstrap vcpkg").
-      - name: Restore from cache and install vcpkg
-        # Download and build vcpkg, without installing any port. If content is cached already, it is a no-op.
+      - name: Setup vcpkg
         uses: lukka/run-vcpkg@v7
         with:
-          setupOnly: true
+          vcpkgArguments: berkeleydb:x64-windows boost:x64-windows leveldb:x64-windows openssl:x64-windows
           vcpkgTriplet: x64-windows
           vcpkgDirectory: ${{ runner.workspace }}/vcpkg/
           vcpkgGitCommitId: 761c81d43335a5d5ccc2ec8ad90bd7e2cbba734e
-      # Now that vcpkg is installed, it is being used to run with the desired arguments.
-      - run: |
-          $VCPKG_ROOT/vcpkg install berkeleydb boost leveldb openssl
-        shell: bash
-        with:
-          vcpkgTriplet: x64-windows
 
       - name: Build Windows binaries
         run: ./scripts/cmake-build-win.bat
@@ -292,21 +284,13 @@ jobs:
           modules: 'qtwebengine'
           arch: 'win32_msvc2017'
 
-      # Restore from cache the previously built ports. If cache-miss, download and build vcpkg (aka "bootstrap vcpkg").
-      - name: Restore from cache and install vcpkg
-        # Download and build vcpkg, without installing any port. If content is cached already, it is a no-op.
+      - name: Setup vcpkg
         uses: lukka/run-vcpkg@v7
         with:
-          setupOnly: true
+          vcpkgArguments: berkeleydb:x86-windows boost:x86-windows leveldb:x86-windows openssl:x86-windows
           vcpkgTriplet: x86-windows
           vcpkgDirectory: ${{ runner.workspace }}/vcpkg/
           vcpkgGitCommitId: 761c81d43335a5d5ccc2ec8ad90bd7e2cbba734e
-      # Now that vcpkg is installed, it is being used to run with the desired arguments.
-      - run: |
-          $VCPKG_ROOT/vcpkg install berkeleydb boost leveldb openssl
-        shell: bash
-        with:
-          vcpkgTriplet: x64-windows
 
       - name: Build Windows binaries
         run: ./scripts/cmake-build-win-x86.bat
