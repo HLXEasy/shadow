@@ -218,12 +218,17 @@ jobs:
           setup-python: 'false'
           modules: 'qtwebengine'
 
-      - name: Install vcpkg and packages with cache
-        uses: lukka/run-vcpkg@v6
+      # Restore from cache the previously built ports. If cache-miss, download and build vcpkg (aka "bootstrap vcpkg").
+      - name: Restore from cache and install vcpkg
+        # Download and build vcpkg, without installing any port. If content is cached already, it is a no-op.
+        uses: lukka/run-vcpkg@v7
         with:
-          vcpkgArguments: 'berkeleydb boost leveldb openssl'
-          vcpkgGitCommitId: a037d826492039db9d58af47a1e1248037d15f40
+          setupOnly: true
           vcpkgTriplet: x64-windows
+      # Now that vcpkg is installed, it is being used to run with the desired arguments.
+      - run: |
+          $VCPKG_ROOT/vcpkg install berkeleydb boost leveldb openssl
+        shell: bash
 
       - name: Build Windows binaries
         run: ./scripts/cmake-build-win.bat
@@ -283,12 +288,17 @@ jobs:
           modules: 'qtwebengine'
           arch: 'win32_msvc2017'
 
-      - name: Install vcpkg and packages with cache
-        uses: lukka/run-vcpkg@v6
+      # Restore from cache the previously built ports. If cache-miss, download and build vcpkg (aka "bootstrap vcpkg").
+      - name: Restore from cache and install vcpkg
+        # Download and build vcpkg, without installing any port. If content is cached already, it is a no-op.
+        uses: lukka/run-vcpkg@v7
         with:
-          vcpkgArguments: 'berkeleydb boost leveldb openssl'
-          vcpkgGitCommitId: a037d826492039db9d58af47a1e1248037d15f40
+          setupOnly: true
           vcpkgTriplet: x86-windows
+      # Now that vcpkg is installed, it is being used to run with the desired arguments.
+      - run: |
+          $VCPKG_ROOT/vcpkg install berkeleydb boost leveldb openssl
+        shell: bash
 
       - name: Build Windows binaries
         run: ./scripts/cmake-build-win-x86.bat
