@@ -535,6 +535,10 @@ if (ENABLE_GUI)
                     )
         endif()
     endif()
+
+    if (UNIT_TESTS)
+        add_subdirectory(qt/test)
+    endif ()
 endif ()
 
 #message(STATUS "BERKELEYDB_INCLUDE_PATH: ${BERKELEYDB_INCLUDE_PATH}")

@@ -7,12 +7,12 @@
 #include <QTest>
 #include <QObject>
 
-#define BOOST_TEST_MODULE Spectre_tests
+#define BOOST_TEST_MODULE Alias QT Tests
 #include <boost/test/unit_test.hpp>
 
 #include "uritests.h"
 
-#ifdef SPECTRE_QT_TEST
+#ifdef ALIAS_QT_TEST
 // This is all you need to run all the tests
 int RunQtTests()
 {

@@ -214,6 +214,7 @@ if (ENABLE_GUI)
         set(Qt5Network_DIR "${QT_CMAKE_MODULE_PATH}/Qt5Network")
         set(Qt5QmlModels_DIR "${QT_CMAKE_MODULE_PATH}/Qt5QmlModels")
         set(Qt5LinguistTools_DIR "${QT_CMAKE_MODULE_PATH}/Qt5LinguistTools")
+        set(Qt5Test_DIR "${QT_CMAKE_MODULE_PATH}/Qt5Test")
     endif()
 
     # Find includes in corresponding build directories
@@ -265,6 +266,10 @@ if (ENABLE_GUI)
     find_package(Qt5Concurrent)
     message(STATUS "Qt5Concurrent version: ${Qt5Concurrent_VERSION}")
     get_target_property(QtConcurrent_location Qt5::Concurrent LOCATION)
+
+    find_package(Qt5Test)
+    message(STATUS "Qt5Test version: ${Qt5Test_VERSION}")
+    get_target_property(QtTest_location Qt5::Test LOCATION)
 
     find_package(Qt5LinguistTools)
     message(STATUS "Qt5LinguistTools version: ${Qt5LinguistTools_VERSION}")
