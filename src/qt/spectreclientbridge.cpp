@@ -227,7 +227,7 @@ void SpectreClientBridge::sendCoins(bool fUseCoinControl, QString sChangeAddr)
     else
         sendResultPendingReply = window->walletModel->sendCoins(0, recipients, coins);
 
-    if (!sendResultPendingReply.waitForFinished())
+    if (!sendResultPendingReply.waitForFinished(180000))
          return abortSendCoins(tr("Core not responding."));
 
     sendResult = sendResultPendingReply.returnValue();
@@ -246,7 +246,7 @@ void SpectreClientBridge::sendCoins(bool fUseCoinControl, QString sChangeAddr)
                 sendResultPendingReply = window->walletModel->sendCoinsAnon(sendResult.fee(), recipients, coins);
             else
                 sendResultPendingReply = window->walletModel->sendCoins(sendResult.fee(), recipients, coins);
-            if (!sendResultPendingReply.waitForFinished())
+            if (!sendResultPendingReply.waitForFinished(180000))
                 return abortSendCoins(tr("Core not responding."));
             sendResult = sendResultPendingReply.returnValue();
             sendCoinsStatus = sendResult.status();
