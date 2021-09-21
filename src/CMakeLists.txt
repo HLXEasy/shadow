@@ -123,7 +123,6 @@ target_sources(aliaswallet_lib
         ${CMAKE_CURRENT_LIST_DIR}/eckey.cpp
         ${CMAKE_CURRENT_LIST_DIR}/extkey.cpp
         ${CMAKE_CURRENT_LIST_DIR}/hash.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/init.cpp
         ${CMAKE_CURRENT_LIST_DIR}/kernel.cpp
         ${CMAKE_CURRENT_LIST_DIR}/key.cpp
         ${CMAKE_CURRENT_LIST_DIR}/keystore.cpp
@@ -158,8 +157,13 @@ target_sources(aliaswallet_lib
         ${CMAKE_CURRENT_LIST_DIR}/version.cpp
         ${CMAKE_CURRENT_LIST_DIR}/wallet.cpp
         ${CMAKE_CURRENT_LIST_DIR}/walletdb.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/shutdown.cpp
         )
+
+# redefined by unit tests
+set(ALIAS_MAIN_FILES
+    ${CMAKE_CURRENT_LIST_DIR}/init.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/shutdown.cpp
+)
 
 add_subdirectory(json)
 add_subdirectory(lz4)
@@ -183,7 +187,10 @@ elseif(CMAKE_SYSTEM_NAME STREQUAL "Windows")
     message(STATUS "No daemon build on Windows")
 else()
     # The daemon
-    add_executable(Aliaswalletd ${CMAKE_CURRENT_LIST_DIR}/spectrecoind.cpp)
+    add_executable(Aliaswalletd
+        ${CMAKE_CURRENT_LIST_DIR}/spectrecoind.cpp
+        ${ALIAS_MAIN_FILES}
+    )
 
     # Link the daemon as static binary
     target_link_libraries(Aliaswalletd
@@ -446,6 +453,7 @@ if (ENABLE_GUI)
                 )
         target_sources(Aliaswallet
             PRIVATE
+            ${ALIAS_MAIN_FILES}
             ${ALIAS_QT_SOURCES}
         )
 
