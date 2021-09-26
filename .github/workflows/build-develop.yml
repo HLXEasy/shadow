@@ -228,7 +228,7 @@ jobs:
           vcpkgArguments: berkeleydb:x64-windows boost:x64-windows leveldb:x64-windows openssl:x64-windows
           vcpkgTriplet: x64-windows
           vcpkgDirectory: ${{ runner.workspace }}/vcpkg/
-          vcpkgGitCommitId: 761c81d43335a5d5ccc2ec8ad90bd7e2cbba734e
+          vcpkgGitCommitId: 35312384e7701760ed7855961eff41a63f9cc379
 
       - name: Build Windows binaries
         run: ./scripts/cmake-build-win.bat
@@ -294,7 +294,7 @@ jobs:
           vcpkgArguments: berkeleydb:x86-windows boost:x86-windows leveldb:x86-windows openssl:x86-windows
           vcpkgTriplet: x86-windows
           vcpkgDirectory: ${{ runner.workspace }}/vcpkg/
-          vcpkgGitCommitId: 761c81d43335a5d5ccc2ec8ad90bd7e2cbba734e
+          vcpkgGitCommitId: 35312384e7701760ed7855961eff41a63f9cc379
 
       - name: Build Windows binaries
         run: ./scripts/cmake-build-win-x86.bat
