@@ -3,7 +3,7 @@
 //
 // SPDX-License-Identifier: MIT
 
-#define BOOST_TEST_MODULE Spectre Test Suite
+#define BOOST_TEST_MODULE Alias Test Suite
 #include <boost/test/unit_test.hpp>
 #include <boost/filesystem.hpp>
 
@@ -25,8 +25,8 @@ struct TestingSetup {
     TestingSetup() {
         //fPrintToDebugLog = false; // don't want to write to debug.log file
         
-        //pathTemp = GetTempPath() / strprintf("test_spectre_%lu_%i", (unsigned long)GetTime(), (int)(GetRand(100000)));
-        pathTemp = GetTempPath() / "test_spectre";
+        //pathTemp = GetTempPath() / strprintf("test_alias_%lu_%i", (unsigned long)GetTime(), (int)(GetRand(100000)));
+        pathTemp = GetTempPath() / "test_alias";
         //printf("pathTemp %s\n", pathTemp.string().c_str());
         boost::filesystem::create_directories(pathTemp);
         mapArgs["-datadir"] = pathTemp.string();
