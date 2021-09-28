@@ -168,7 +168,9 @@ add_subdirectory(xxhash)
 if(CMAKE_SYSTEM_NAME STREQUAL "Windows")
     add_subdirectory(win)
 endif ()
-
+if (UNIT_TESTS)
+    add_subdirectory(test)
+endif ()
 
 
 ##############################################################################

@@ -2,7 +2,17 @@
 # SPDX-FileCopyrightText: © 2019 SpectreCoin Developers
 # SPDX-License-Identifier: MIT
 
-target_sources(Spectre
+add_compile_definitions(TEST_DATA_DIR=${CMAKE_CURRENT_LIST_DIR}/data)
+
+add_executable(test_alias ${CMAKE_CURRENT_LIST_DIR}/test_alias.cpp)
+target_link_libraries(test_alias
+    aliaswallet_lib
+    Boost::unit_test_framework
+)
+
+include_directories(${PROJECT_SOURCE_DIR}/src)
+
+target_sources(test_alias
         PRIVATE
             "${CMAKE_CURRENT_LIST_DIR}/accounting_tests.cpp"
             "${CMAKE_CURRENT_LIST_DIR}/allocator_tests.cpp"
@@ -27,11 +37,13 @@ target_sources(Spectre
             "${CMAKE_CURRENT_LIST_DIR}/script_P2SH_tests.cpp"
             "${CMAKE_CURRENT_LIST_DIR}/script_tests.cpp"
             "${CMAKE_CURRENT_LIST_DIR}/sigopcount_tests.cpp"
-            "${CMAKE_CURRENT_LIST_DIR}/smsg_tests.cpp"
             "${CMAKE_CURRENT_LIST_DIR}/stealth_tests.cpp"
-            "${CMAKE_CURRENT_LIST_DIR}/test_shadow.cpp"
             "${CMAKE_CURRENT_LIST_DIR}/uint160_tests.cpp"
             "${CMAKE_CURRENT_LIST_DIR}/uint256_tests.cpp"
             "${CMAKE_CURRENT_LIST_DIR}/util_tests.cpp"
             "${CMAKE_CURRENT_LIST_DIR}/wallet_tests.cpp"
+
+            "${CMAKE_CURRENT_LIST_DIR}/other/DoS_tests.cpp"
+            "${CMAKE_CURRENT_LIST_DIR}/other/miner_tests.cpp"
+            "${CMAKE_CURRENT_LIST_DIR}/other/transaction_tests.cpp"
         )

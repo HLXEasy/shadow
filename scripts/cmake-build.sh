@@ -26,7 +26,7 @@ _init
 ##### ### # Boost # ### #####################################################
 # Location of Boost will be resolved by trying to find required Boost libs
 BOOST_ARCHIVE_LOCATION=${ARCHIVES_ROOT_DIR}/Boost
-BOOST_REQUIRED_LIBS='chrono filesystem iostreams program_options system thread regex date_time atomic'
+BOOST_REQUIRED_LIBS='chrono filesystem iostreams program_options system thread regex date_time atomic test'
 # regex date_time atomic
 
 ##### ### # BerkeleyDB # ### ################################################
@@ -101,6 +101,7 @@ helpMe() {
         Git clone.
     -s  Use Qt from system
     -t  Build with included Tor
+    -u  Build unit tests
     -h  Show this help
 
     "
@@ -428,7 +429,7 @@ checkBoost() {
     BOOST_LIBRARYDIR=${DEPENDENCIES_BUILD_DIR}/${BUILD_DIR}/boost_${BOOST_VERSION//./_}/stage/lib
     boostBuildRequired=false
     if [[ -d ${BOOST_LIBRARYDIR} ]]; then
-        for currentBoostDependency in ${BOOST_REQUIRED_LIBS}; do
+        for currentBoostDependency in ${BOOST_REQUIRED_LIBS//test/unit_test_framework}; do
             if [[ -e ${BOOST_LIBRARYDIR}/libboost_${currentBoostDependency}-mt-${LIB_ARCH_SUFFIX}.a ]]; then
                 info " -> ${currentBoostDependency}: OK"
             else
@@ -903,6 +904,7 @@ ENABLE_GUI=false
 ENABLE_GUI_PARAMETERS='OFF'
 BUILD_ONLY_ALIAS=false
 BUILD_ONLY_DEPENDENCIES=false
+BUILD_UNIT_TESTS=false
 WITH_TOR=false
 SYSTEM_QT=false
 LIB_LEVELDB_LOCATION=''
@@ -910,7 +912,7 @@ GIVEN_DEPENDENCIES_BUILD_DIR=''
 
 defineQtVersionForCurrentDistribution
 
-while getopts c:dfgop:sth? option; do
+while getopts c:dfgop:stuh? option; do
     case ${option} in
     c) CORES_TO_USE="${OPTARG}" ;;
     d) BUILD_ONLY_DEPENDENCIES=true ;;
@@ -920,6 +922,7 @@ while getopts c:dfgop:sth? option; do
     p) GIVEN_DEPENDENCIES_BUILD_DIR="${OPTARG}" ;;
     s) SYSTEM_QT=true ;;
     t) WITH_TOR=true ;;
+    u) BUILD_UNIT_TESTS=true ;;
     h | ?) helpMe && exit 0 ;;
     *) die 90 "invalid option \"${OPTARG}\"" ;;
     esac
@@ -1054,13 +1057,12 @@ cmake \
 EOM
 
 # Insert additional parameters
-# Not used for now
-#if ${WITH_TOR} ; then
-#    read -r -d '' cmd << EOM
-#${cmd} \
-#    -DWITH_TOR=ON
-#EOM
-#fi
+if ${BUILD_UNIT_TESTS} ; then
+    read -r -d '' cmd << EOM
+${cmd} \
+    -DUNIT_TESTS="ON"
+EOM
+fi
 
 # Finalize build cmd
 read -r -d '' cmd <<EOM
