@@ -419,6 +419,7 @@ buildBoost() {
     ./bootstrap.sh --with-libraries="${BOOST_REQUIRED_LIBS// /,}"
     #        ./bootstrap.sh
     ./b2 \
+        variant=release \
         -j"${CORES_TO_USE}" \
         --layout=tagged \
         --build-type=complete
@@ -901,6 +902,8 @@ fi
 LIB_ARCH_SUFFIX=x64
 if [ "$(uname -m)" = "aarch64" ] ; then
     LIB_ARCH_SUFFIX=a64
+elif [ "$(uname -m)" = "armv7l" ] ; then
+    LIB_ARCH_SUFFIX=a32
 fi
 
 FULLBUILD=false
