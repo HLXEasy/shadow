@@ -168,6 +168,10 @@ if (CMAKE_SYSTEM_NAME STREQUAL "Linux")
         # We're compiling for ARMv8 like Raspberry Pi
         message(STATUS "Found aarch64, setting Boost architecture to -a64")
         set(Boost_ARCHITECTURE -a64)
+    elseif (USED_ARCH MATCHES "armv7l")
+        # We're compiling for ARMv7 like ODroid
+        message(STATUS "Found armv7l, setting Boost architecture to -a32")
+        set(Boost_ARCHITECTURE -a32)
     endif()
 endif()
 
