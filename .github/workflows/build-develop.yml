@@ -227,8 +227,8 @@ jobs:
         with:
           vcpkgArguments: berkeleydb:x64-windows boost:x64-windows leveldb:x64-windows openssl:x64-windows
           vcpkgTriplet: x64-windows
-          vcpkgDirectory: ${{ runner.workspace }}/vcpkg/
-          vcpkgGitCommitId: 35312384e7701760ed7855961eff41a63f9cc379
+          vcpkgDirectory: 'C:\vcpkg'
+          vcpkgGitCommitId: aa028e94d733b03852ea441b2474468f43d94c5b
 
       - name: Build Windows binaries
         run: ./scripts/cmake-build-win.bat
@@ -237,7 +237,7 @@ jobs:
           QTDIR: ${{ env.Qt5_Dir }}
           VSDIR: 'C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise'
           CMAKEDIR: 'C:\Program Files\CMake\bin'
-          VCPKGDIR: ${{ github.workspace }}/vcpkg
+          VCPKGDIR: 'C:\vcpkg'
 
       - name: Create zip archive and sha256 checksum
         run: |
@@ -293,8 +293,8 @@ jobs:
         with:
           vcpkgArguments: berkeleydb:x86-windows boost:x86-windows leveldb:x86-windows openssl:x86-windows
           vcpkgTriplet: x86-windows
-          vcpkgDirectory: ${{ runner.workspace }}/vcpkg/
-          vcpkgGitCommitId: 35312384e7701760ed7855961eff41a63f9cc379
+          vcpkgDirectory: 'C:\vcpkg'
+          vcpkgGitCommitId: aa028e94d733b03852ea441b2474468f43d94c5b
 
       - name: Build Windows binaries
         run: ./scripts/cmake-build-win-x86.bat
@@ -303,7 +303,7 @@ jobs:
           QTDIR_x86: ${{ env.Qt5_Dir }}
           VSDIR: 'C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise'
           CMAKEDIR_x86: 'C:\Program Files\CMake\bin'
-          VCPKGDIR: ${{ github.workspace }}/vcpkg
+          VCPKGDIR: 'C:\vcpkg'
 
       - name: Create zip archive and sha256 checksum
         run: |
