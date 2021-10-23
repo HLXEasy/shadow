@@ -171,7 +171,7 @@ if (CMAKE_SYSTEM_NAME STREQUAL "Linux")
     endif()
 endif()
 
-find_package(Boost 1.72.0 REQUIRED COMPONENTS
+find_package(Boost 1.75.0 REQUIRED COMPONENTS
         atomic
         chrono
         date_time
