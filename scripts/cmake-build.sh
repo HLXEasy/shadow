@@ -135,18 +135,13 @@ defineQtVersionForCurrentDistribution() {
             "10")
                 releaseName='BUSTER'
                 ;;
+            "11")
+                releaseName='BULLSEYE'
+                ;;
             *)
-                case ${PRETTY_NAME} in
-                *"bullseye"*)
-                    echo "Detected ${PRETTY_NAME}, installing Buster binaries"
-                    releaseName='BUSTER'
-                    ;;
-                *)
-                    echo "Unsupported operating system ID=${ID}, VERSION_ID=${VERSION_ID}"
-                    cat /etc/os-release
-                    exit 1
-                    ;;
-                esac
+                echo "Unsupported operating system ID=${ID}, VERSION_ID=${VERSION_ID}"
+                cat /etc/os-release
+                exit 1
                 ;;
             esac
             ;;
