@@ -15,10 +15,10 @@
 
 using namespace std;
 
-static const string strSecret1     ("7QRR3XwvHW963ERsAQQi2JScqv2PgNDcrwMXwAcmJ3g9byEbRqN");
-static const string strSecret2     ("7RexmM8ERicLWvtNVZE3aQnViZLr2gqq1dShPDcSdmgf3MjNx64");
-static const string strSecret1C    ("VGNm8BbQBqchErGkQWKe4jz5Cu396kehHQudY5SrWEonyL9d9dhs");
-static const string strSecret2C    ("VMpZ8jpvG6ey96qjs3EaNTyokRkbQSrWumrRF4fS9JE2uPQ8a1xR");
+static const string strSecret1     ("72m1N1Mo6BHFrqHkUW9JcWPg2mrZgqCoNx1TrhZ3GMARFy4AmLA");
+static const string strSecret2     ("72C74MTaHZX99pHJLaUUMyeHWXqzJwbKLKDMN4bZJhnc4berDwP");
+static const string strSecret1C    ("TcmEbianRrNkax8vtPdejij5GpymGom5hso3YMzQzjza4uf9uk6a");
+static const string strSecret2C    ("TaG1joJHv6Y2yugwXQkFmb1ZsM9DxBxTvFPWsxsXb92HkTuA9PU8");
 static const string strAddressBad  ("SY3js2kVjZii2awydqsnpF8FL9gaKpPcf9");
 
 
@@ -55,10 +55,10 @@ BOOST_AUTO_TEST_SUITE(key_tests)
 BOOST_AUTO_TEST_CASE(key_test1)
 {
     // Params() needs to be initialised before CBitcoinAddress::SetString
-    CBitcoinAddress addr1 ("SkYqsCFMoSkgZh5gqzses71yRWZsvBTYTA");
-    CBitcoinAddress addr2 ("SbNy74rQ5yGkWw6LiagR8Nnch3TNyMGvd4");
-    CBitcoinAddress addr1C("Sj6Jtef2gkNXBW5MqxS8qUmsWJeewfKuan");
-    CBitcoinAddress addr2C("SYij48kVjZiiWawysqsnpF8FL9gaKpPNf9");
+    CBitcoinAddress addr1 ("SYaA1ZPdNCu4UdogqCGf7FNXYAXULR4vGW");
+    CBitcoinAddress addr2 ("SVdMsvZFRwgN1upNf9MHhW5g5cKrFy8ZsR");
+    CBitcoinAddress addr1C("SipgaAtH7ANWPUFqZRRCyV4PcCb6DSbyjt");
+    CBitcoinAddress addr2C("SfqsRwgTkd9zfBAkaz4XJPCgBTuMZmYSK6");
     
     CBitcoinSecret bsecret1, bsecret2, bsecret1C, bsecret2C, baddress1;
     BOOST_CHECK( bsecret1.SetString (strSecret1));
@@ -68,7 +68,6 @@ BOOST_AUTO_TEST_CASE(key_test1)
     BOOST_CHECK(!baddress1.SetString(strAddressBad));
     
     CKey key1  = bsecret1.GetKey();
-    
     BOOST_CHECK(key1.IsCompressed() == false);
     CKey key2  = bsecret2.GetKey();
     BOOST_CHECK(key2.IsCompressed() == false);
