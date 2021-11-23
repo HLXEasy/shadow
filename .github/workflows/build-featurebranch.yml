@@ -7,3 +7,60 @@ on:
       - '*android*'
 
 jobs:
+  # ==========================================================================
+  # Create Windows x64 installer
+  # Based on the content of https://github.com/aliascash/installer
+  createWindowsInstaller:
+    runs-on: windows-latest
+#    needs: buildWindows
+    steps:
+      # Get installer repo content
+      - uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+          repository: aliascash/installer
+
+      # Download installable content...
+      - name: Download content to install
+        uses: carlosperate/download-file-action@v1.0.3
+        with:
+          file-url: https://github.com/aliascash/alias-wallet/releases/download/4.4.0/Alias-4.4.0-f1d56b63-Win64.zip
+          file-name: Alias.zip
+          location: ${{ github.workspace }}
+
+      # ... and extract it
+      - name: Extract content to install
+        run: 7z x -o"${{ github.workspace }}/windows/content" "${{ github.workspace }}/Alias.zip"
+
+      # Create installer
+      - name: Create Windows installer
+        run: |
+          cd ${{ github.workspace }}/windows/
+          iscc.exe Alias.iss
+
+      - name: Create installer checksum file
+        run: |
+          powershell "(Get-FileHash ${{ github.workspace }}/windows/Output/Alias-Installer.exe).Hash > ${{ github.workspace }}/windows/Output/Alias-Installer.sha256"
+          powershell "(Get-Content ${{ github.workspace }}/windows/Output/Alias-Installer.sha256) | Out-File ${{ github.workspace }}/windows/Output/Alias-Installer.sha256 -Encoding ascii"
+          type ${{ github.workspace }}/windows/Output/Alias-Installer.sha256
+
+      # Upload the installer to Github
+#      - name: Upload installer
+#        id: upload-release-asset
+#        uses: svenstaro/upload-release-action@v2
+#        with:
+#          repo_token: ${{ secrets.GITHUB_TOKEN }}
+#          file: ${{ github.workspace }}/windows/Output/Alias-Installer.exe
+#          asset_name: Alias-${{ needs.buildWindows.outputs.alias_release }}-${{ needs.buildWindows.outputs.github_sha_short }}-Win64-Installer.exe
+#          tag: ${{ needs.buildWindows.outputs.alias_release }}
+#          overwrite: true
+#
+#      - name: Upload installer checksum
+#        id: upload-release-checksum
+#        uses: svenstaro/upload-release-action@v2
+#        with:
+#          repo_token: ${{ secrets.GITHUB_TOKEN }}
+#          file: ${{ github.workspace }}/windows/Output/Alias-Installer.sha256
+#          asset_name: Alias-${{ needs.buildWindows.outputs.alias_release }}-${{ needs.buildWindows.outputs.github_sha_short }}-Win64-Installer.sha256
+#          tag: ${{ needs.buildWindows.outputs.alias_release }}
+#          overwrite: true
