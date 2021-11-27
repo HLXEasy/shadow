@@ -222,12 +222,13 @@ jobs:
           setup-python: 'false'
           modules: 'qtwebengine'
 
-      - name: Install vcpkg and packages with cache
-        uses: lukka/run-vcpkg@v6
+      - name: Setup vcpkg
+        uses: lukka/run-vcpkg@v7
         with:
-          vcpkgArguments: 'berkeleydb boost leveldb openssl'
-          vcpkgGitCommitId: a037d826492039db9d58af47a1e1248037d15f40
+          vcpkgArguments: berkeleydb:x64-windows boost:x64-windows leveldb:x64-windows openssl:x64-windows
           vcpkgTriplet: x64-windows
+          vcpkgDirectory: 'C:\vcpkg'
+          vcpkgGitCommitId: aa028e94d733b03852ea441b2474468f43d94c5b
 
       - name: Build Windows binaries
         run: ./scripts/cmake-build-win.bat
@@ -236,7 +237,7 @@ jobs:
           QTDIR: ${{ env.Qt5_Dir }}
           VSDIR: 'C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise'
           CMAKEDIR: 'C:\Program Files\CMake\bin'
-          VCPKGDIR: ${{ github.workspace }}/vcpkg
+          VCPKGDIR: 'C:\vcpkg'
 
       - name: Create zip archive and sha256 checksum
         run: |
@@ -287,12 +288,13 @@ jobs:
           modules: 'qtwebengine'
           arch: 'win32_msvc2017'
 
-      - name: Install vcpkg and packages with cache
-        uses: lukka/run-vcpkg@v6
+      - name: Setup vcpkg
+        uses: lukka/run-vcpkg@v7
         with:
-          vcpkgArguments: 'berkeleydb boost leveldb openssl'
-          vcpkgGitCommitId: a037d826492039db9d58af47a1e1248037d15f40
+          vcpkgArguments: berkeleydb:x86-windows boost:x86-windows leveldb:x86-windows openssl:x86-windows
           vcpkgTriplet: x86-windows
+          vcpkgDirectory: 'C:\vcpkg'
+          vcpkgGitCommitId: aa028e94d733b03852ea441b2474468f43d94c5b
 
       - name: Build Windows binaries
         run: ./scripts/cmake-build-win-x86.bat
@@ -301,7 +303,7 @@ jobs:
           QTDIR_x86: ${{ env.Qt5_Dir }}
           VSDIR: 'C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise'
           CMAKEDIR_x86: 'C:\Program Files\CMake\bin'
-          VCPKGDIR: ${{ github.workspace }}/vcpkg
+          VCPKGDIR: 'C:\vcpkg'
 
       - name: Create zip archive and sha256 checksum
         run: |
@@ -357,17 +359,15 @@ jobs:
 
       # Create installer
       - name: Create Windows installer
-        uses: joncloud/makensis-action@v3.4
-        with:
-          arguments: "/V4"
-          additional-plugin-paths: "${{ github.workspace }}/windows/plugins"
-          script-file: "windows/Alias.nsi"
+        run: |
+          cd ${{ github.workspace }}/windows/
+          iscc.exe Alias.iss
 
       - name: Create installer checksum file
         run: |
-          powershell "(Get-FileHash ${{ github.workspace }}/windows/Alias-Installer.exe).Hash > ${{ github.workspace }}/windows/Alias-Installer.sha256"
-          powershell "(Get-Content ${{ github.workspace }}/windows/Alias-Installer.sha256) | Out-File ${{ github.workspace }}/windows/Alias-Installer.sha256 -Encoding ascii"
-          type ${{ github.workspace }}/windows/Alias-Installer.sha256
+          powershell "(Get-FileHash ${{ github.workspace }}/windows/Output/Alias-Installer.exe).Hash > ${{ github.workspace }}/windows/Output/Alias-Installer.sha256"
+          powershell "(Get-Content ${{ github.workspace }}/windows/Output/Alias-Installer.sha256) | Out-File ${{ github.workspace }}/windows/Output/Alias-Installer.sha256 -Encoding ascii"
+          type ${{ github.workspace }}/windows/Output/Alias-Installer.sha256
 
       # Upload the installer to Github
       - name: Upload installer
@@ -375,7 +375,7 @@ jobs:
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: ${{ github.workspace }}/windows/Alias-Installer.exe
+          file: ${{ github.workspace }}/windows/Output/Alias-Installer.exe
           asset_name: Alias-${{ needs.buildWindows.outputs.alias_release }}-${{ needs.buildWindows.outputs.github_sha_short }}-Win64-Installer.exe
           tag: ${{ needs.buildWindows.outputs.alias_release }}
           overwrite: true
@@ -385,7 +385,7 @@ jobs:
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: ${{ github.workspace }}/windows/Alias-Installer.sha256
+          file: ${{ github.workspace }}/windows/Output/Alias-Installer.sha256
           asset_name: Alias-${{ needs.buildWindows.outputs.alias_release }}-${{ needs.buildWindows.outputs.github_sha_short }}-Win64-Installer.sha256
           tag: ${{ needs.buildWindows.outputs.alias_release }}
           overwrite: true
@@ -417,17 +417,15 @@ jobs:
 
       # Create installer
       - name: Create Windows installer
-        uses: joncloud/makensis-action@v3.4
-        with:
-          arguments: "/V4"
-          additional-plugin-paths: "${{ github.workspace }}/windows/plugins"
-          script-file: "windows/Alias.nsi"
+        run: |
+          cd ${{ github.workspace }}/windows/
+          iscc.exe Alias.iss
 
       - name: Create installer checksum file
         run: |
-          powershell "(Get-FileHash ${{ github.workspace }}/windows/Alias-Installer.exe).Hash > ${{ github.workspace }}/windows/Alias-Installer.sha256"
-          powershell "(Get-Content ${{ github.workspace }}/windows/Alias-Installer.sha256) | Out-File ${{ github.workspace }}/windows/Alias-Installer.sha256 -Encoding ascii"
-          type ${{ github.workspace }}/windows/Alias-Installer.sha256
+          powershell "(Get-FileHash ${{ github.workspace }}/windows/Output/Alias-Installer.exe).Hash > ${{ github.workspace }}/windows/Output/Alias-Installer.sha256"
+          powershell "(Get-Content ${{ github.workspace }}/windows/Output/Alias-Installer.sha256) | Out-File ${{ github.workspace }}/windows/Output/Alias-Installer.sha256 -Encoding ascii"
+          type ${{ github.workspace }}/windows/Output/Alias-Installer.sha256
 
       # Upload the installer to Github
       - name: Upload installer
@@ -435,7 +433,7 @@ jobs:
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: ${{ github.workspace }}/windows/Alias-Installer.exe
+          file: ${{ github.workspace }}/windows/Output/Alias-Installer.exe
           asset_name: Alias-${{ needs.buildWindowsX86.outputs.alias_release }}-${{ needs.buildWindowsX86.outputs.github_sha_short }}-Win32-Installer.exe
           tag: ${{ needs.buildWindowsX86.outputs.alias_release }}
           overwrite: true
@@ -445,7 +443,7 @@ jobs:
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: ${{ github.workspace }}/windows/Alias-Installer.sha256
+          file: ${{ github.workspace }}/windows/Output/Alias-Installer.sha256
           asset_name: Alias-${{ needs.buildWindowsX86.outputs.alias_release }}-${{ needs.buildWindowsX86.outputs.github_sha_short }}-Win32-Installer.sha256
           tag: ${{ needs.buildWindowsX86.outputs.alias_release }}
           overwrite: true
