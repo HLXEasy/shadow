@@ -1,9 +1,10 @@
 # Alias
-[![GitHub version](https://badge.fury.io/gh/aliascash%2Falias-wallet.svg)](https://badge.fury.io/gh/aliascash%2Falias-wallet) [![HitCount](http://hits.dwyl.io/aliascash/https://github.com/aliascash/alias-wallet.svg)](http://hits.dwyl.io/aliascash/https://github.com/aliascash/alias-wallet)
-[![Build Status ARM](https://github.com/aliascash/alias-wallet/actions/workflows/develop-build-arm.yml/badge.svg/)](https://github.com/aliascash/alias-wallet/actions)
-[![Build Status MacOS](https://github.com/aliascash/alias-wallet/actions/workflows/develop-build-macos.yml/badge.svg/)](https://github.com/aliascash/alias-wallet/actions)
-[![Build Status Win](https://github.com/aliascash/alias-wallet/actions/workflows/develop-build-windows.yml/badge.svg/)](https://github.com/aliascash/alias-wallet/actions)
-[![Build Status Linux](https://github.com/aliascash/alias-wallet/actions/workflows/develop-build-x64.yml/badge.svg/)](https://github.com/aliascash/alias-wallet/actions)
+[![Latest release](https://img.shields.io/github/v/release/aliascash/alias-wallet?label=Release&color=%2300bf00)](https://github.com/aliascash/alias-wallet/releases/latest)
+[![Latest develop build](https://img.shields.io/github/v/release/aliascash/alias-wallet?include_prereleases&label=Develop-Build)](https://github.com/aliascash/alias-wallet/releases)
+[![Discord](https://img.shields.io/discord/426769724018524161?logo=discord)](https://discord.gg/ckkrb8m)
+[![Reddit](https://img.shields.io/badge/reddit-join-orange?logo=reddit)](https://www.reddit.com/r/AliasCash/)
+[![Build Status Master](https://github.com/aliascash/alias-wallet/actions/workflows/build-master.yml/badge.svg)](https://github.com/aliascash/alias-wallet/actions)
+[![Build Status Develop](https://github.com/aliascash/alias-wallet/actions/workflows/build-develop.yml/badge.svg)](https://github.com/aliascash/alias-wallet/actions)
 
 Alias is a Secure Proof-of-Stake (PoSv3) Network with Anonymous Transaction Capability.
 
@@ -52,7 +53,7 @@ therefore protected at all times.
 <tr><td>Funding Coin Supply</td><td>3,000,000 ALIAS</td></tr>
 <tr><td>Max Coin Supply (PoS Phase)</td><td>3 private or 2 public coins reward per block, depending on what you're staking</td></tr>
 <tr><td>Min Stake Maturity</td><td>450 blocks (~12 hours)</td></tr>
-<tr><td>Min SPECTRE Confirmations</td><td>10 blocks</td></tr>
+<tr><td>Min ALIAS Confirmations</td><td>10 blocks</td></tr>
 <tr><td>Base Fee</td><td>0.0001 ALIAS</td></tr>
 <tr><td>Max Anon Output</td><td>1000</td></tr>
 <tr><td>Ring Size</td><td>fix 10</td></tr>

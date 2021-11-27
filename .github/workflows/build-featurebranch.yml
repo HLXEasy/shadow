@@ -18,7 +18,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           persist-credentials: false
-      - name: Build docker images
+      - name: Build binaries
         run: docker build -t local -f Docker/${{ matrix.distro }}_noUpload --build-arg BUILD_THREADS=2 .
         env:
           GITHUB_CI_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -27,9 +27,6 @@ jobs:
   # Build aarch64 version (Raspberry PI ARMv8)
   buildARM:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        distro: [ RaspberryPi/Dockerfile_Buster]
     steps:
       - uses: actions/checkout@v2
         with:
@@ -40,37 +37,39 @@ jobs:
         with:
           image: tonistiigi/binfmt:latest
           platforms: arm64
-      - name: Build docker images
-        run: docker build -t local -f Docker/${{ matrix.distro }}_noUpload --build-arg BUILD_THREADS=2 .
+      - name: Build binaries
+        run: docker build -t local -f Docker/RaspberryPi/Dockerfile_Buster_noUpload --build-arg BUILD_THREADS=2 .
         env:
           GITHUB_CI_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   # ==========================================================================
   # Build MacOS version
   buildMacOS:
-    runs-on: macos-latest
+    runs-on: macos-11
     steps:
       - uses: actions/checkout@v2
         with:
           persist-credentials: false
 
+      - uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: '12.5.1'
+
       - name: Install Qt
         uses: jurplel/install-qt-action@v2
         with:
           version: '5.12.10'
-          setup-python: 'false'
           modules: 'qtwebengine'
 
       - name: Install dependencies
         run: |
-          curl -L https://bintray.com/homebrew/bottles/download_file?file_path=boost-1.74.0.high_sierra.bottle.tar.gz -o boost-1.74.0.high_sierra.bottle.tar.gz
-          brew install -f boost-1.74.0.high_sierra.bottle.tar.gz
-          brew install berkeley-db@4
+          brew uninstall --ignore-dependencies berkeley-db
+          brew install berkeley-db@4 boost openssl
 
       - name: Cache build dependencies
         uses: actions/cache@v2
         env:
-          cache-name: cache-build-dependencies-mac
+          cache-name: cache-build-dependencies-mac-v3
         with:
           path: |
             ${{ github.workspace }}/cmake-build-cmdline-mac/*
@@ -82,28 +81,31 @@ jobs:
         run: ./scripts/cmake-build-mac.sh -g
         env:
           MAC_QT_DIR: ${{ env.Qt5_DIR }}
-          BOOST_VERSION_MAC: 1.74.0
 
   # ==========================================================================
-  # Build Windows version
+  # Build Windows x64 version
   buildWindows:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v2
         with:
           persist-credentials: false
+
       - name: Install Qt
         uses: jurplel/install-qt-action@v2
         with:
           version: '5.12.9'
           setup-python: 'false'
           modules: 'qtwebengine'
-      - name: Install vcpkg and packages with cache
-        uses: lukka/run-vcpkg@v6
+
+      - name: Setup vcpkg
+        uses: lukka/run-vcpkg@v7
         with:
-          vcpkgArguments: 'berkeleydb boost leveldb openssl'
-          vcpkgGitCommitId: a037d826492039db9d58af47a1e1248037d15f40
+          vcpkgArguments: berkeleydb:x64-windows boost:x64-windows leveldb:x64-windows openssl:x64-windows
           vcpkgTriplet: x64-windows
+          vcpkgDirectory: 'C:\vcpkg'
+          vcpkgGitCommitId: aa028e94d733b03852ea441b2474468f43d94c5b
+
       - name: Build Windows binaries
         run: ./scripts/cmake-build-win.bat
         env:
@@ -111,4 +113,38 @@ jobs:
           QTDIR: ${{ env.Qt5_Dir }}
           VSDIR: 'C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise'
           CMAKEDIR: 'C:\Program Files\CMake\bin'
-          VCPKGDIR: ${{ github.workspace }}/vcpkg
+          VCPKGDIR: 'C:\vcpkg'
+
+  # ==========================================================================
+  # Build Windows x86 version
+  buildWindowsX86:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+
+      - name: Install Qt
+        uses: jurplel/install-qt-action@v2
+        with:
+          version: '5.12.9'
+          setup-python: 'false'
+          modules: 'qtwebengine'
+          arch: 'win32_msvc2017'
+
+      - name: Setup vcpkg
+        uses: lukka/run-vcpkg@v7
+        with:
+          vcpkgArguments: berkeleydb:x86-windows boost:x86-windows leveldb:x86-windows openssl:x86-windows
+          vcpkgTriplet: x86-windows
+          vcpkgDirectory: 'C:\vcpkg'
+          vcpkgGitCommitId: aa028e94d733b03852ea441b2474468f43d94c5b
+
+      - name: Build Windows binaries
+        run: ./scripts/cmake-build-win-x86.bat
+        env:
+          VCPKG_DEFAULT_TRIPLET: x86-windows
+          QTDIR_x86: ${{ env.Qt5_Dir }}
+          VSDIR: 'C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise'
+          CMAKEDIR_x86: 'C:\Program Files\CMake\bin'
+          VCPKGDIR: 'C:\vcpkg'

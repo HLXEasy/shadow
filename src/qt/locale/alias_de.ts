@@ -601,7 +601,7 @@ Dies bedeutet eine Gebühr von min %2 ist benötigt</translation>
     <message>
         <location filename="../setupwalletwizard.cpp" line="605"/>
         <source>Wallet Encryption</source>
-        <translation>Wallet-Verschlüsselung</translation>
+        <translation>Verschlüsselung</translation>
     </message>
     <message>
         <location filename="../setupwalletwizard.cpp" line="606"/>
@@ -3159,7 +3159,7 @@ Bemerkung: %2
     <message>
         <location filename="../aliasbridgestrings.h" line="53"/>
         <source>Blockchain Info</source>
-        <translation>Blockchain-Information</translation>
+        <translation>Blockchain Info</translation>
     </message>
     <message>
         <location filename="../aliasbridgestrings.h" line="93"/>
