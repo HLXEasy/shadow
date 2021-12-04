@@ -140,9 +140,18 @@ defineQtVersionForCurrentDistribution() {
                 releaseName='BULLSEYE'
                 ;;
             *)
-                echo "Unsupported operating system ID=${ID}, VERSION_ID=${VERSION_ID}"
-                cat /etc/os-release
-                exit 1
+                case ${PRETTY_NAME} in
+                *"bullseye"*)
+                    # This case happens on the legacy Stretch builder image!
+                    echo "Detected ${PRETTY_NAME}, installing Buster binaries"
+                    releaseName='BUSTER'
+                    ;;
+                *)
+                    echo "Unsupported operating system ID=${ID}, VERSION_ID=${VERSION_ID}"
+                    cat /etc/os-release
+                    exit 1
+                    ;;
+                esac
                 ;;
             esac
             ;;
