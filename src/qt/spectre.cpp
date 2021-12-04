@@ -117,7 +117,7 @@ static void handleRunawayException(std::exception *e)
     exit(1);
 }
 
-#ifndef SPECTRE_QT_TEST
+#ifndef ALIAS_QT_TEST
 int main(int argc, char *argv[])
 {
     qDebug() << "App start in main.cpp";
@@ -392,4 +392,4 @@ int main(int argc, char *argv[])
     }
     return 0;
 }
-#endif // SPECTRE_QT_TEST
+#endif // ALIAS_QT_TEST

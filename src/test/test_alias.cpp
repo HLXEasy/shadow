@@ -3,7 +3,7 @@
 //
 // SPDX-License-Identifier: MIT
 
-#define BOOST_TEST_MODULE Spectre Test Suite
+#define BOOST_TEST_MODULE Alias Test Suite
 #include <boost/test/unit_test.hpp>
 #include <boost/filesystem.hpp>
 
@@ -23,16 +23,14 @@ boost::filesystem::path pathTemp;
 
 struct TestingSetup {
     TestingSetup() {
-        //fPrintToDebugLog = false; // don't want to write to debug.log file
+        fPrintToDebugLog = false; // don't want to write to debug.log file
         
-        //pathTemp = GetTempPath() / strprintf("test_spectre_%lu_%i", (unsigned long)GetTime(), (int)(GetRand(100000)));
-        pathTemp = GetTempPath() / "test_spectre";
-        //printf("pathTemp %s\n", pathTemp.string().c_str());
+        pathTemp = GetTempPath() / strprintf("test_alias_%lu_%i", (unsigned long)GetTime(), (int)(GetRand(100000)));
+        printf("pathTemp %s\n", pathTemp.string().c_str());
         boost::filesystem::create_directories(pathTemp);
         mapArgs["-datadir"] = pathTemp.string();
         
         fDebug = true;
-        fDebugSmsg = true;
         fDebugChain = true;
         fDebugRingSig = true;
         fDebugPoS = true;
@@ -42,7 +40,8 @@ struct TestingSetup {
         
         LoadBlockIndex(true);
         pwalletMain = new CWallet("walletUT.dat");
-        pwalletMain->LoadWallet();
+        int oldWalletVersion;
+        pwalletMain->LoadWallet(oldWalletVersion, nullptr);
         RegisterWallet(pwalletMain);
     }
     ~TestingSetup()

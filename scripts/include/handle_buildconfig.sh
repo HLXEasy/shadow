@@ -31,7 +31,7 @@ BOOST_ARCHIVE_HASH=aeb26f80e80945e82ee93e5939baebdca47b9dee80a07d3144be1e1a6a66d
 # aka version folder to use
 QT_INSTALLATION_PATH=${HOME}/Qt
 
-QT_REQUIRED_LIBS='Core Widgets WebView WebChannel WebSockets QuickWidgets Quick Gui Qml Network'
+QT_REQUIRED_LIBS='Core Widgets WebView WebChannel WebSockets QuickWidgets Quick Gui Qml Network Test'
 
 # Qt version to use. In fact the folder right below ${QT_INSTALLATION_PATH}
 #QT_VERSION=5.11.3

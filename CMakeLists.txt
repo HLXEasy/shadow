@@ -171,7 +171,7 @@ if (CMAKE_SYSTEM_NAME STREQUAL "Linux")
     endif()
 endif()
 
-find_package(Boost 1.72.0 REQUIRED COMPONENTS
+find_package(Boost 1.75.0 REQUIRED COMPONENTS
         atomic
         chrono
         date_time
@@ -181,6 +181,7 @@ find_package(Boost 1.72.0 REQUIRED COMPONENTS
         regex
         system
         thread
+        unit_test_framework
         )
 message(STATUS "Boost_VERSION:      ${Boost_VERSION}")
 message(STATUS "Boost_INCLUDE_DIRS: ${Boost_INCLUDE_DIRS}")
@@ -213,6 +214,7 @@ if (ENABLE_GUI)
         set(Qt5Network_DIR "${QT_CMAKE_MODULE_PATH}/Qt5Network")
         set(Qt5QmlModels_DIR "${QT_CMAKE_MODULE_PATH}/Qt5QmlModels")
         set(Qt5LinguistTools_DIR "${QT_CMAKE_MODULE_PATH}/Qt5LinguistTools")
+        set(Qt5Test_DIR "${QT_CMAKE_MODULE_PATH}/Qt5Test")
     endif()
 
     # Find includes in corresponding build directories
@@ -264,6 +266,10 @@ if (ENABLE_GUI)
     find_package(Qt5Concurrent)
     message(STATUS "Qt5Concurrent version: ${Qt5Concurrent_VERSION}")
     get_target_property(QtConcurrent_location Qt5::Concurrent LOCATION)
+
+    find_package(Qt5Test)
+    message(STATUS "Qt5Test version: ${Qt5Test_VERSION}")
+    get_target_property(QtTest_location Qt5::Test LOCATION)
 
     find_package(Qt5LinguistTools)
     message(STATUS "Qt5LinguistTools version: ${Qt5LinguistTools_VERSION}")

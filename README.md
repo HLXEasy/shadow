@@ -77,3 +77,12 @@ The following files where maintained on the separate Git repository
 * spectre.qrc
 
 **Do not modify them here!**
+
+## Testing
+
+To compile unit tests, append "-u" to the `cmake-build.sh` call.
+
+To run unit tests, either run:
+* `./cmake-build-cmdline/aliaswallet/src/test/test_alias` (to run all tests)
+* `./cmake-build-cmdline/aliaswallet/src/test/test_alias --log_level=all` (extended logging)
+* `./cmake-build-cmdline/aliaswallet/src/test/test_alias --run_test=base58_tests/base58_keys_valid_gen` to run only the test case `base58_keys_valid_gen`, for example.

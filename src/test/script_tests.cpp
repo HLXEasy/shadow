@@ -114,7 +114,7 @@ read_json(const std::string& filename)
     if (!read_stream(ifs, v))
     {
         if (ifs.fail())
-            BOOST_ERROR("Cound not find/open " << filename);
+            BOOST_ERROR("Could not find/open " << filename);
         else
             BOOST_ERROR("JSON syntax error in " << filename);
         return Array();
@@ -337,7 +337,7 @@ BOOST_AUTO_TEST_CASE(script_CHECKMULTISIG23)
     keys.clear(); // Must have signatures
     CScript badsig6 = sign_multisig(scriptPubKey23, keys, txTo23);
     BOOST_CHECK(!VerifyScript(badsig6, scriptPubKey23, txTo23, 0, flags, 0));
-}    
+}
 
 BOOST_AUTO_TEST_CASE(script_combineSigs)
 {
@@ -358,7 +358,7 @@ BOOST_AUTO_TEST_CASE(script_combineSigs)
     txFrom.vout.resize(1);
     txFrom.vout[0].scriptPubKey.SetDestination(keys[0].GetPubKey().GetID());
     CScript& scriptPubKey = txFrom.vout[0].scriptPubKey;
-    
+
     CTransaction txTo;
     txTo.vin.resize(1);
     txTo.vout.resize(1);
@@ -370,7 +370,7 @@ BOOST_AUTO_TEST_CASE(script_combineSigs)
     CScript empty;
     CScript combined = CombineSignatures(scriptPubKey, txTo, 0, empty, empty);
     BOOST_CHECK(combined.empty());
-    
+
     // Single signature case:
     SignSignature(keystore, txFrom, txTo, 0); // changes scriptSig
     combined = CombineSignatures(scriptPubKey, txTo, 0, scriptSig, empty);
@@ -382,19 +382,19 @@ BOOST_AUTO_TEST_CASE(script_combineSigs)
     SignSignature(keystore, txFrom, txTo, 0);
     combined = CombineSignatures(scriptPubKey, txTo, 0, scriptSigCopy, scriptSig);
     BOOST_CHECK(combined == scriptSigCopy || combined == scriptSig);
-    
+
     // P2SH, single-signature case:
     CScript pkSingle; pkSingle << keys[0].GetPubKey() << OP_CHECKSIG;
     keystore.AddCScript(pkSingle);
     scriptPubKey.SetDestination(pkSingle.GetID());
     SignSignature(keystore, txFrom, txTo, 0);
-    
+
     combined = CombineSignatures(scriptPubKey, txTo, 0, scriptSig, empty);
     BOOST_CHECK(combined == scriptSig);
     combined = CombineSignatures(scriptPubKey, txTo, 0, empty, scriptSig);
     BOOST_CHECK(combined == scriptSig);
     scriptSigCopy = scriptSig;
-    
+
     SignSignature(keystore, txFrom, txTo, 0);
     combined = CombineSignatures(scriptPubKey, txTo, 0, scriptSigCopy, scriptSig);
     BOOST_CHECK(combined == scriptSigCopy || combined == scriptSig);
@@ -404,7 +404,7 @@ BOOST_AUTO_TEST_CASE(script_combineSigs)
     BOOST_CHECK(combined == scriptSig);
     combined = CombineSignatures(scriptPubKey, txTo, 0, scriptSig, scriptSigCopy);
     BOOST_CHECK(combined == scriptSig);
-    
+
     // Hardest case:  Multisig 2-of-3
     scriptPubKey = GetScriptForMultisig(2, pubkeys);
     keystore.AddCScript(scriptPubKey);

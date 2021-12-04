@@ -156,7 +156,9 @@ public:
     DeriveTestData(uint32_t _nDerives, std::string _vKey58, std::string _pKey58) : nDerives(_nDerives), vKey58(_vKey58), pKey58(_pKey58) { };
 
     uint32_t nDerives;
+    // private key
     std::string vKey58;
+    // public key
     std::string pKey58;
 };
 
@@ -221,33 +223,32 @@ void RunDeriveTest(std::vector<DeriveTestData> &vData)
 void RunDeriveTests()
 {
     /*
-        Must be able to derive deeper than the arbitrary ndepth field (255)
+        Must be able to derive deeper than the arbitrary nDepth field (255)
     */
 
     std::vector<DeriveTestData> vMainNetPairs = {
         DeriveTestData(0,
-            std::string("specvmnKmFxG9k6UnN3wyLpTv83G1wgYEz1m21rZTUUimoDrYYMrZXUycudse21EZJTmkBBPN3k6Qhfzx5td8xzd9W893YhNozA3bZW3yVLVdrZU2"),
-            std::string("specpmphCJNSUos9rNqn6FNi3ztvMW1wft1PVbifvBrwhm6JnhD9yk8rSNFTGfozGbmBsr8vZv9mGYSTfmEMpbfTTMb8TQfj7JRABmvBFKgA2xG8J")),
+            std::string("AQhQmof7ALfFfPQWxY9USpAk3s76VuBwEoNm7XzmgM1693xyDGP5XhbWrgJ3AzA1X6Ly29VhqZNZqpgWjJa6rHUewfaHCzLAPb5eGtEU3ErcC3tT"),
+            std::string("AQfxPcJcoZDPtpVGjjdUdXXr1dHNwripBSqFVWjovbCYMLY8fW8vfY9YTfwE6Z4aMqX5PH3pESWTNFtS5BvAaEa1XxbvsDwHLg8759PmhmdUPYtR")),
         DeriveTestData(1,
-            std::string("specvmnMjfkum2tHDUJ9dJVLw6pitrnbvAHwQrxoukwSxU1zm9H3iEsx2a9R8J1ZncvjwZFdYd9QN33zUX7WvqEUzXUWKumZYnAB4Vgo4zD8jsyYq"),
-            std::string("specpmpjAiB666exHV5ykD3b4ygPER81M4HZtSpvNUKftRtT1J8M8TXpr2kzkwpJr3awQ1XaEYVSC1FTVEAxJV3rah692fvg9MpKNpwsRVfTnZVvh")),
-
+            std::string("AQhQmohNaLNYz916yZiV4CjdSqaXFFSNeTmWCRvW4ym6gAfk2rvpSAryT9ixvo7WG4ErhiTA4gURuZdT3XRD4edjoiqTff5Yv1kTU4Hx8eGVRsq5"),
+            std::string("AQfxPcLtDYvhDa5rkmCVEv6jQbkohCyFb7DzaQfYKDxYtTEuV6gfa1R149N9rN3kdr47Xp1YkogL1FHqEmpeTsYzeizCqyD6ugFTeehgPD7wbes8")),
         DeriveTestData(350,
-            std::string("specvmqPip8zYeR3ofPsSajfM5QtRqa8iZk6Z2bskpAJ7fiysxCAdqkG7fYHzNc5zReSHpYZgxtJ5GKTvcRqZW6a8rhurBuXCTqXfANNy5p7qTemf"),
-            std::string("specpmsm9rZAsiBisgBhZVHuUxGYmPuY9Tjj2cTzDXYX3dbS873U44Q8w89sd2QriazFKyFGwTTcizkeNvaksc2gLpTVmpzcGxmBGeSNbRwykttFP")),
+            std::string("AQhQmrj2CNpBMFMDXwudziLZvNWKLDnug4rumnAJJA6qf7dX2DrmjhV7aakf99GGtmGNMPa7XFwHGNWTms87vHAJ7z1oWWh9eY2hJ3BvuNEZTSi6"),
+            std::string("AQfxPfNXqbNKagRyK9PeBRhft8gbnBKnciKQ9kuLYQJHsQCgUTccsY39BaPr4i9QD3sTstufRnavUqPAqKzQTm6NMNJpjCXdnPSQvTpBN1LFijY4")),
     };
 
     std::vector<DeriveTestData> vTestNetPairs = {
         DeriveTestData(0,
-            std::string("SPECVTZWtnQrSZ1LBHScXxi5amgw4Q1zGaRuAy5S12NAttbx3Bmsm1jDYh1B5P5qTPZaWpUZZ5mmubGTYjXPB1cQ9btJmhDoBLHZnwAGUBVH42gB3"),
-            std::string("SPECPTTad968GGU17vZThYUhb4WKgaLQ22ffBVjTnZGGCAcU1vfVFcJEroz4QeZjFZLs5a1dkpZxsKfB2Adnun1axAGuzrfBweXWSxuXu2Wj3AaGp")),
+            std::string("SDCVTZWtnQrSZ1LBHTik3cZFUn4ynqci2nFQXde9GnJmCQ3XeYUKrdyV7ZrJdY6Wevp4UdNxvca5RE5ZP3pVCUdZixz1xHReX38X3takPc1MDVnJ"),
+            std::string("SDCPTTad968GGU17vaZudPBFmbTbyA2TV21R4HfvogQ4UQZWPS5pTCzoEYjdu219WULUqhQuq4jrSm35ofoTZ5E589Kzx1TiXFxANyfBa2oHXDzA")),
         DeriveTestData(1,
-            std::string("SPECVTZYsCDW3qo8cPgpBvNxbkUPwK83wki5ZpBgTJpu5ZQ6Fnh4uj8BxMWiZf6Agi2YiCYojfB5rveT5AkGxsrFzdEg44Hyv8HhFsM1ZgN1keP5r"),
-            std::string("SPECPTTcbYtmsZFoZ2ofMW9ac3HnZVSThCwqaLqiEqizNqQcEXagQKhDGUVbtva3q1AcbjQHRSudnnUAqdaPPfPz5Vmva7v8yhvfe1wE5CW1VbMPQ")),
+            std::string("SDCVTZZACQZjskvmJVHkf188skYQYBs9SSe9cXZsfR4mjWkJU924m7Ewi3HEPM41PthxACLR9jfwUy2VhGfbQqneb2FCQxB33ToLF4eEV1Q3VAzb"),
+            std::string("SDCPTTctZ5qZbDbhwc8vEmk9AZw2iWGttgQA9BbfCKA51XGHD2dZMgGFq2AZepzKnUsWzENeMRuj5kSUyFhwSiD4EuiGvkjY6G5WxUy6FUCM5fSJ")),
 
         DeriveTestData(350,
-            std::string("SPECVTcarLbaqTKuCanY1CdH1j4ZUHuakAAEhypkJN3kEm75NbcBqKzW3SubRjggtWkF4Tqjszuya9uvXG4bbYiM8xU5aLRwZoy3rY2bTmxwvGxui"),
-            std::string("SPECPTWeahGrfAna9DuPAnPu21sx6UDzVcPziWUn5twqY37bMLVoKvZXMZtUm1AbhYZvXh7z8MspKmyMjKzBxnNoqd9HKGz57JsXXqRjF8nXws6C5")),
+            std::string("SDCVTcaopT1NEsGsrsUubWj5MHUCdADgU3jZBsoftbQWiTi5TVx24ds5qUJvbhCn2bjTosTNcK8nqmuWRcNWGUKCuHRYFondmz5a53YDFjMMqopV"),
+            std::string("SDCPTWeYB8HBxKwpVzL5BHM5e6rpoUdRvHVZiXqTRVVozUE4CPZWfCtPxTCFsB5yMggsLKGm2QpKZLXpZoshSbkRwZ2toz44xyGUEJ5bEGXc5jDr")),
     };
     CBitcoinExtKey extKey58;
 
@@ -321,7 +322,7 @@ void RunSerialiseTests()
     CStoredExtKey skInvalid, skInvalid_;
 
     CExtKey58 eKey58;
-    BOOST_CHECK(0 == eKey58.Set58("specvmnKmFxG9k6UnN3wyLpTv83G1wgYEz1m21rZTUUimoDrYYMrZXUycudse21EZJTmkBBPN3k6Qhfzx5td8xzd9W893YhNozA3bZW3yVLVdrZU2"));
+    BOOST_CHECK(0 == eKey58.Set58("AQhQmof7ALfFfPQWxY9USpAk3s76VuBwEoNm7XzmgM1693xyDGP5XhbWrgJ3AzA1X6Ly29VhqZNZqpgWjJa6rHUewfaHCzLAPb5eGtEU3ErcC3tT"));
 
     sk.kp = eKey58.GetKey();
     sk.sLabel = "sk label";
@@ -330,11 +331,10 @@ void RunSerialiseTests()
     sk.mapValue[EKVT_CREATED_AT] = SetCompressedInt64(v, nTest8);
 
     eKey58.SetKey(sk.kp, CChainParams::EXT_PUBLIC_KEY);
-    BOOST_CHECK(eKey58.ToString() == "specpmphCJNSUos9rNqn6FNi3ztvMW1wft1PVbifvBrwhm6JnhD9yk8rSNFTGfozGbmBsr8vZv9mGYSTfmEMpbfTTMb8TQfj7JRABmvBFKgA2xG8J");
+    BOOST_CHECK(eKey58.ToString() == "AQfxPcJcoZDPtpVGjjdUdXXr1dHNwripBSqFVWjovbCYMLY8fW8vfY9YTfwE6Z4aMqX5PH3pESWTNFtS5BvAaEa1XxbvsDwHLg8759PmhmdUPYtR");
 
     eKey58.SetKeyV(sk.kp);
-    BOOST_CHECK(eKey58.ToString() == "specvmnKmFxG9k6UnN3wyLpTv83G1wgYEz1m21rZTUUimoDrYYMrZXUycudse21EZJTmkBBPN3k6Qhfzx5td8xzd9W893YhNozA3bZW3yVLVdrZU2");
-
+    BOOST_CHECK(eKey58.ToString() == "AQhQmof7ALfFfPQWxY9USpAk3s76VuBwEoNm7XzmgM1693xyDGP5XhbWrgJ3AzA1X6Ly29VhqZNZqpgWjJa6rHUewfaHCzLAPb5eGtEU3ErcC3tT");
 
     CDataStream ss(SER_NETWORK, PROTOCOL_VERSION);
     ss << sk << skInvalid;
