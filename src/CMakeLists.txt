@@ -173,6 +173,7 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Windows")
     add_subdirectory(win)
 endif ()
 if (UNIT_TESTS)
+    enable_testing()
     add_subdirectory(test)
 endif ()
 

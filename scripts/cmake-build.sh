@@ -1101,4 +1101,10 @@ if [[ ${rtc} = 0 ]]; then
 else
     error " => Finished with return code ${rtc}"
 fi
+
+if ${BUILD_UNIT_TESTS} ; then
+    info "Running tests:"
+    cd ${ALIAS_BUILD_DIR}/src/test
+    ctest -V .
+fi
 cd "${callDir}" || die 1 "Unable to cd back to where we came from (${callDir})"

@@ -5,6 +5,11 @@
 add_compile_definitions(TEST_DATA_DIR=${CMAKE_CURRENT_LIST_DIR}/data)
 
 add_executable(test_alias ${CMAKE_CURRENT_LIST_DIR}/test_alias.cpp)
+add_test(
+        NAME performAliasTests
+        COMMAND test_alias
+        )
+
 target_link_libraries(test_alias
     aliaswallet_lib
     Boost::unit_test_framework
