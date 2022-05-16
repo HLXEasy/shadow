@@ -24,7 +24,7 @@ jobs:
           modules: 'qtwebengine'
 
       - name: Setup vcpkg
-        uses: lukka/run-vcpkg@v7
+        uses: lukka/run-vcpkg@v10.2
         with:
           vcpkgArguments: berkeleydb:x64-windows boost:x64-windows leveldb:x64-windows openssl:x64-windows
           vcpkgTriplet: x64-windows
