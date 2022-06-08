@@ -23,13 +23,26 @@ jobs:
           setup-python: 'false'
           modules: 'qtwebengine'
 
+      # Install latest CMake.
+      - uses: lukka/get-cmake@latest
+
       - name: Setup vcpkg
         uses: lukka/run-vcpkg@v10.2
         with:
+          runVcpkgInstall: true
           vcpkgArguments: berkeleydb:x64-windows boost:x64-windows leveldb:x64-windows openssl:x64-windows
-          vcpkgTriplet: x64-windows
           vcpkgDirectory: 'C:\vcpkg'
           vcpkgGitCommitId: aa028e94d733b03852ea441b2474468f43d94c5b
+        env:
+          VCPKG_DEFAULT_TRIPLET: x64-windows
+
+      - name: Run CMake consuming CMakePreset.json and vcpkg.json by mean of vcpkg.
+        uses: lukka/run-cmake@v10
+        with:
+          configurePreset: 'ninja-multi-vcpkg'
+          buildPreset: 'ninja-multi-vcpkg'
+        env:
+          VCPKG_DEFAULT_TRIPLET: x64-windows
 
       - name: Build Windows binaries
         run: ./scripts/cmake-build-win.bat
